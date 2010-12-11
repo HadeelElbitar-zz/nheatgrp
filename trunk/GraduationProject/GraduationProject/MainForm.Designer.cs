@@ -83,25 +83,25 @@
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.SegmentationToolsGroupBox = new System.Windows.Forms.GroupBox();
-            this.MovieGroupBox = new System.Windows.Forms.GroupBox();
+            this.MagicWandGroupBox = new System.Windows.Forms.GroupBox();
             this.MagicWandButton = new System.Windows.Forms.Button();
-            this.RectangularButton = new System.Windows.Forms.Button();
-            this.MarqueeToolGroupBox = new System.Windows.Forms.GroupBox();
-            this.ElipticalButton = new System.Windows.Forms.Button();
-            this.SingleRowButton = new System.Windows.Forms.Button();
-            this.SingleColumnButton = new System.Windows.Forms.Button();
             this.LassotToolGroupBox = new System.Windows.Forms.GroupBox();
             this.MagneticLassoButton = new System.Windows.Forms.Button();
             this.PolygonalLassoButton = new System.Windows.Forms.Button();
             this.LassoToolButton = new System.Windows.Forms.Button();
-            this.MagicWandGroupBox = new System.Windows.Forms.GroupBox();
+            this.MarqueeToolGroupBox = new System.Windows.Forms.GroupBox();
+            this.SingleColumnButton = new System.Windows.Forms.Button();
+            this.SingleRowButton = new System.Windows.Forms.Button();
+            this.ElipticalButton = new System.Windows.Forms.Button();
+            this.RectangularButton = new System.Windows.Forms.Button();
+            this.MovieGroupBox = new System.Windows.Forms.GroupBox();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SegmentationToolsGroupBox.SuspendLayout();
-            this.MarqueeToolGroupBox.SuspendLayout();
-            this.LassotToolGroupBox.SuspendLayout();
             this.MagicWandGroupBox.SuspendLayout();
+            this.LassotToolGroupBox.SuspendLayout();
+            this.MarqueeToolGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -555,72 +555,24 @@
             this.SegmentationToolsGroupBox.TabStop = false;
             this.SegmentationToolsGroupBox.Text = "Segmentation Tools";
             // 
-            // MovieGroupBox
+            // MagicWandGroupBox
             // 
-            this.MovieGroupBox.Location = new System.Drawing.Point(182, 63);
-            this.MovieGroupBox.Name = "MovieGroupBox";
-            this.MovieGroupBox.Size = new System.Drawing.Size(588, 361);
-            this.MovieGroupBox.TabIndex = 5;
-            this.MovieGroupBox.TabStop = false;
-            this.MovieGroupBox.Text = "Initial Video Frame";
+            this.MagicWandGroupBox.Controls.Add(this.MagicWandButton);
+            this.MagicWandGroupBox.Location = new System.Drawing.Point(15, 20);
+            this.MagicWandGroupBox.Name = "MagicWandGroupBox";
+            this.MagicWandGroupBox.Size = new System.Drawing.Size(119, 57);
+            this.MagicWandGroupBox.TabIndex = 6;
+            this.MagicWandGroupBox.TabStop = false;
+            this.MagicWandGroupBox.Text = "Magic Wand";
             // 
             // MagicWandButton
             // 
-            this.MagicWandButton.Location = new System.Drawing.Point(12, 19);
+            this.MagicWandButton.Location = new System.Drawing.Point(12, 21);
             this.MagicWandButton.Name = "MagicWandButton";
             this.MagicWandButton.Size = new System.Drawing.Size(96, 23);
             this.MagicWandButton.TabIndex = 0;
             this.MagicWandButton.Text = "Magic Wand";
             this.MagicWandButton.UseVisualStyleBackColor = true;
-            // 
-            // RectangularButton
-            // 
-            this.RectangularButton.Location = new System.Drawing.Point(12, 23);
-            this.RectangularButton.Name = "RectangularButton";
-            this.RectangularButton.Size = new System.Drawing.Size(96, 23);
-            this.RectangularButton.TabIndex = 1;
-            this.RectangularButton.Text = "Rectangular";
-            this.RectangularButton.UseVisualStyleBackColor = true;
-            // 
-            // MarqueeToolGroupBox
-            // 
-            this.MarqueeToolGroupBox.Controls.Add(this.SingleColumnButton);
-            this.MarqueeToolGroupBox.Controls.Add(this.SingleRowButton);
-            this.MarqueeToolGroupBox.Controls.Add(this.ElipticalButton);
-            this.MarqueeToolGroupBox.Controls.Add(this.RectangularButton);
-            this.MarqueeToolGroupBox.Location = new System.Drawing.Point(14, 202);
-            this.MarqueeToolGroupBox.Name = "MarqueeToolGroupBox";
-            this.MarqueeToolGroupBox.Size = new System.Drawing.Size(120, 142);
-            this.MarqueeToolGroupBox.TabIndex = 2;
-            this.MarqueeToolGroupBox.TabStop = false;
-            this.MarqueeToolGroupBox.Text = "Marquee Tool";
-            // 
-            // ElipticalButton
-            // 
-            this.ElipticalButton.Location = new System.Drawing.Point(12, 50);
-            this.ElipticalButton.Name = "ElipticalButton";
-            this.ElipticalButton.Size = new System.Drawing.Size(96, 23);
-            this.ElipticalButton.TabIndex = 2;
-            this.ElipticalButton.Text = "Eliptical";
-            this.ElipticalButton.UseVisualStyleBackColor = true;
-            // 
-            // SingleRowButton
-            // 
-            this.SingleRowButton.Location = new System.Drawing.Point(12, 79);
-            this.SingleRowButton.Name = "SingleRowButton";
-            this.SingleRowButton.Size = new System.Drawing.Size(96, 23);
-            this.SingleRowButton.TabIndex = 3;
-            this.SingleRowButton.Text = "Single Row";
-            this.SingleRowButton.UseVisualStyleBackColor = true;
-            // 
-            // SingleColumnButton
-            // 
-            this.SingleColumnButton.Location = new System.Drawing.Point(12, 108);
-            this.SingleColumnButton.Name = "SingleColumnButton";
-            this.SingleColumnButton.Size = new System.Drawing.Size(96, 23);
-            this.SingleColumnButton.TabIndex = 4;
-            this.SingleColumnButton.Text = "Single Column";
-            this.SingleColumnButton.UseVisualStyleBackColor = true;
             // 
             // LassotToolGroupBox
             // 
@@ -661,15 +613,63 @@
             this.LassoToolButton.Text = "Lasso Tool";
             this.LassoToolButton.UseVisualStyleBackColor = true;
             // 
-            // MagicWandGroupBox
+            // MarqueeToolGroupBox
             // 
-            this.MagicWandGroupBox.Controls.Add(this.MagicWandButton);
-            this.MagicWandGroupBox.Location = new System.Drawing.Point(15, 20);
-            this.MagicWandGroupBox.Name = "MagicWandGroupBox";
-            this.MagicWandGroupBox.Size = new System.Drawing.Size(119, 57);
-            this.MagicWandGroupBox.TabIndex = 6;
-            this.MagicWandGroupBox.TabStop = false;
-            this.MagicWandGroupBox.Text = "Magic Wand";
+            this.MarqueeToolGroupBox.Controls.Add(this.SingleColumnButton);
+            this.MarqueeToolGroupBox.Controls.Add(this.SingleRowButton);
+            this.MarqueeToolGroupBox.Controls.Add(this.ElipticalButton);
+            this.MarqueeToolGroupBox.Controls.Add(this.RectangularButton);
+            this.MarqueeToolGroupBox.Location = new System.Drawing.Point(14, 202);
+            this.MarqueeToolGroupBox.Name = "MarqueeToolGroupBox";
+            this.MarqueeToolGroupBox.Size = new System.Drawing.Size(120, 142);
+            this.MarqueeToolGroupBox.TabIndex = 2;
+            this.MarqueeToolGroupBox.TabStop = false;
+            this.MarqueeToolGroupBox.Text = "Marquee Tool";
+            // 
+            // SingleColumnButton
+            // 
+            this.SingleColumnButton.Location = new System.Drawing.Point(12, 108);
+            this.SingleColumnButton.Name = "SingleColumnButton";
+            this.SingleColumnButton.Size = new System.Drawing.Size(96, 23);
+            this.SingleColumnButton.TabIndex = 4;
+            this.SingleColumnButton.Text = "Single Column";
+            this.SingleColumnButton.UseVisualStyleBackColor = true;
+            // 
+            // SingleRowButton
+            // 
+            this.SingleRowButton.Location = new System.Drawing.Point(12, 79);
+            this.SingleRowButton.Name = "SingleRowButton";
+            this.SingleRowButton.Size = new System.Drawing.Size(96, 23);
+            this.SingleRowButton.TabIndex = 3;
+            this.SingleRowButton.Text = "Single Row";
+            this.SingleRowButton.UseVisualStyleBackColor = true;
+            // 
+            // ElipticalButton
+            // 
+            this.ElipticalButton.Location = new System.Drawing.Point(12, 50);
+            this.ElipticalButton.Name = "ElipticalButton";
+            this.ElipticalButton.Size = new System.Drawing.Size(96, 23);
+            this.ElipticalButton.TabIndex = 2;
+            this.ElipticalButton.Text = "Eliptical";
+            this.ElipticalButton.UseVisualStyleBackColor = true;
+            // 
+            // RectangularButton
+            // 
+            this.RectangularButton.Location = new System.Drawing.Point(12, 23);
+            this.RectangularButton.Name = "RectangularButton";
+            this.RectangularButton.Size = new System.Drawing.Size(96, 23);
+            this.RectangularButton.TabIndex = 1;
+            this.RectangularButton.Text = "Rectangular";
+            this.RectangularButton.UseVisualStyleBackColor = true;
+            // 
+            // MovieGroupBox
+            // 
+            this.MovieGroupBox.Location = new System.Drawing.Point(182, 63);
+            this.MovieGroupBox.Name = "MovieGroupBox";
+            this.MovieGroupBox.Size = new System.Drawing.Size(588, 361);
+            this.MovieGroupBox.TabIndex = 5;
+            this.MovieGroupBox.TabStop = false;
+            this.MovieGroupBox.Text = "Initial Video Frame";
             // 
             // MainForm
             // 
@@ -692,9 +692,9 @@
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
             this.SegmentationToolsGroupBox.ResumeLayout(false);
-            this.MarqueeToolGroupBox.ResumeLayout(false);
-            this.LassotToolGroupBox.ResumeLayout(false);
             this.MagicWandGroupBox.ResumeLayout(false);
+            this.LassotToolGroupBox.ResumeLayout(false);
+            this.MarqueeToolGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
