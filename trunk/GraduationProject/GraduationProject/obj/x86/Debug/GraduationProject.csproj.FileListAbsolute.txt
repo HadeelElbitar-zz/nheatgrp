@@ -16,3 +16,12 @@ E:\Projects\Graduation Project\GraduationProject\GraduationProject\obj\x86\Debug
 E:\Projects\Graduation Project\GraduationProject\GraduationProject\obj\x86\Debug\GraduationProject.Properties.Resources.resources
 E:\Projects\Graduation Project\GraduationProject\GraduationProject\obj\x86\Debug\GenerateResource.read.1.tlog
 E:\Projects\Graduation Project\GraduationProject\GraduationProject\obj\x86\Debug\GenerateResource.write.1.tlog
+D:\gp\GraduationProject\GraduationProject\obj\x86\Debug\GraduationProject.exe
+D:\gp\GraduationProject\GraduationProject\obj\x86\Debug\GraduationProject.pdb
+D:\gp\GraduationProject\GraduationProject\bin\Debug\GraduationProject.exe
+D:\gp\GraduationProject\GraduationProject\bin\Debug\GraduationProject.pdb
+D:\gp\GraduationProject\GraduationProject\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\gp\GraduationProject\GraduationProject\obj\x86\Debug\GraduationProject.MainForm.resources
+D:\gp\GraduationProject\GraduationProject\obj\x86\Debug\GraduationProject.Properties.Resources.resources
+D:\gp\GraduationProject\GraduationProject\obj\x86\Debug\GenerateResource.read.1.tlog
+D:\gp\GraduationProject\GraduationProject\obj\x86\Debug\GenerateResource.write.1.tlog
