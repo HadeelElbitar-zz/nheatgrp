@@ -12,7 +12,7 @@ namespace GraduationProject
     class FrameFunctions
     {
         public FrameFunctions() { }
-        public void DisplayFrame(FrameInfo pic , PictureBox Box)
+        public void DisplayFrame(Frame pic , PictureBox Box)
         {
             int width = pic.width;
             int height = pic.height;

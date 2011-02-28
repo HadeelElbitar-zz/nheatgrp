@@ -76,7 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FrameFunctions.cs" />
-    <Compile Include="FrameInfo.cs" />
+    <Compile Include="Frame.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

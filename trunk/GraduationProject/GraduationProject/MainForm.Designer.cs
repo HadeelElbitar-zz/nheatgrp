@@ -83,6 +83,7 @@
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.SegmentationToolsGroupBox = new System.Windows.Forms.GroupBox();
+            this.LoadImageButton = new System.Windows.Forms.Button();
             this.MagicWandGroupBox = new System.Windows.Forms.GroupBox();
             this.MagicWandButton = new System.Windows.Forms.Button();
             this.LassotToolGroupBox = new System.Windows.Forms.GroupBox();
@@ -153,7 +154,7 @@
             this.newToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Black;
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.newToolStripMenuItem.Text = "&New";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.ShowNewForm);
             // 
@@ -163,14 +164,14 @@
             this.openToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Black;
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.openToolStripMenuItem.Text = "&Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.OpenFile);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(143, 6);
             // 
             // saveToolStripMenuItem
             // 
@@ -178,20 +179,20 @@
             this.saveToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Black;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.saveToolStripMenuItem.Text = "&Save";
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.saveAsToolStripMenuItem.Text = "Save &As";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.SaveAsToolStripMenuItem_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(143, 6);
             // 
             // printToolStripMenuItem
             // 
@@ -199,7 +200,7 @@
             this.printToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Black;
             this.printToolStripMenuItem.Name = "printToolStripMenuItem";
             this.printToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.printToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.printToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.printToolStripMenuItem.Text = "&Print";
             // 
             // printPreviewToolStripMenuItem
@@ -207,24 +208,24 @@
             this.printPreviewToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("printPreviewToolStripMenuItem.Image")));
             this.printPreviewToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Black;
             this.printPreviewToolStripMenuItem.Name = "printPreviewToolStripMenuItem";
-            this.printPreviewToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.printPreviewToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.printPreviewToolStripMenuItem.Text = "Print Pre&view";
             // 
             // printSetupToolStripMenuItem
             // 
             this.printSetupToolStripMenuItem.Name = "printSetupToolStripMenuItem";
-            this.printSetupToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.printSetupToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.printSetupToolStripMenuItem.Text = "Print Setup";
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(143, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolsStripMenuItem_Click);
             // 
@@ -553,15 +554,26 @@
             // 
             // SegmentationToolsGroupBox
             // 
+            this.SegmentationToolsGroupBox.Controls.Add(this.LoadImageButton);
             this.SegmentationToolsGroupBox.Controls.Add(this.MagicWandGroupBox);
             this.SegmentationToolsGroupBox.Controls.Add(this.LassotToolGroupBox);
             this.SegmentationToolsGroupBox.Controls.Add(this.MarqueeToolGroupBox);
             this.SegmentationToolsGroupBox.Location = new System.Drawing.Point(12, 63);
             this.SegmentationToolsGroupBox.Name = "SegmentationToolsGroupBox";
-            this.SegmentationToolsGroupBox.Size = new System.Drawing.Size(150, 361);
+            this.SegmentationToolsGroupBox.Size = new System.Drawing.Size(150, 390);
             this.SegmentationToolsGroupBox.TabIndex = 4;
             this.SegmentationToolsGroupBox.TabStop = false;
             this.SegmentationToolsGroupBox.Text = "Segmentation Tools";
+            // 
+            // LoadImageButton
+            // 
+            this.LoadImageButton.Location = new System.Drawing.Point(26, 354);
+            this.LoadImageButton.Name = "LoadImageButton";
+            this.LoadImageButton.Size = new System.Drawing.Size(96, 23);
+            this.LoadImageButton.TabIndex = 7;
+            this.LoadImageButton.Text = "Load Image";
+            this.LoadImageButton.UseVisualStyleBackColor = true;
+            this.LoadImageButton.Click += new System.EventHandler(this.LoadImageButton_Click);
             // 
             // MagicWandGroupBox
             // 
@@ -714,7 +726,7 @@
             this.FrameNumberLBL.AutoSize = true;
             this.FrameNumberLBL.Location = new System.Drawing.Point(429, 435);
             this.FrameNumberLBL.Name = "FrameNumberLBL";
-            this.FrameNumberLBL.Size = new System.Drawing.Size(18, 13);
+            this.FrameNumberLBL.Size = new System.Drawing.Size(17, 13);
             this.FrameNumberLBL.TabIndex = 9;
             this.FrameNumberLBL.Text = "1/";
             // 
@@ -723,7 +735,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(327, 466);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(82, 13);
+            this.label1.Size = new System.Drawing.Size(83, 13);
             this.label1.TabIndex = 10;
             this.label1.Text = "Go To Frame #:";
             // 
@@ -754,6 +766,7 @@
             this.MainMenuStrip = this.menuStrip;
             this.Name = "MainForm";
             this.Text = "Movie Clipper";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.toolStrip.ResumeLayout(false);
@@ -844,6 +857,7 @@
         private System.Windows.Forms.Label FrameNumberLBL;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox FrameNumTBox;
+        private System.Windows.Forms.Button LoadImageButton;
     }
 }
 

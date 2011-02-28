@@ -6,22 +6,25 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Drawing.Imaging;
 
 namespace GraduationProject
 {
     public partial class MainForm : Form
     {
+        #region Initializations
         private int childFormNumber = 0;
         private int FrameIndix = 0;
-        List<FrameInfo> Frames;
+        List<Frame> Frames;
         VideoFunctions VFn = new VideoFunctions();
         FrameFunctions FFn = new FrameFunctions();
-
         public MainForm()
         {
             InitializeComponent();
         }
+        #endregion
 
+        #region Menus
         private void ShowNewForm(object sender, EventArgs e)
         {
             Form childForm = new Form();
@@ -29,7 +32,6 @@ namespace GraduationProject
             childForm.Text = "Window " + childFormNumber++;
             childForm.Show();
         }
-
         private void OpenFile(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -41,10 +43,9 @@ namespace GraduationProject
                 FileName = openFileDialog.FileName;
             }
             Frames = VFn.LoadVideoFrames(FileName);
-            FFn.DisplayFrame(Frames[FrameIndix] , FBox);
+            FFn.DisplayFrame(Frames[FrameIndix], FBox);
             FrameNumberLBL.Text += Frames.Count.ToString();
         }
-
         private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -55,54 +56,19 @@ namespace GraduationProject
                 string FileName = saveFileDialog.FileName;
             }
         }
-
         private void ExitToolsStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
         private void CutToolStripMenuItem_Click(object sender, EventArgs e)
         {
         }
-
         private void CopyToolStripMenuItem_Click(object sender, EventArgs e)
         {
         }
-
         private void PasteToolStripMenuItem_Click(object sender, EventArgs e)
         {
         }
-
-        private void ToolBarToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            toolStrip.Visible = toolBarToolStripMenuItem.Checked;
-        }
-
-        private void StatusBarToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            statusStrip.Visible = statusBarToolStripMenuItem.Checked;
-        }
-
-        private void CascadeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            LayoutMdi(MdiLayout.Cascade);
-        }
-
-        private void TileVerticalToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            LayoutMdi(MdiLayout.TileVertical);
-        }
-
-        private void TileHorizontalToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            LayoutMdi(MdiLayout.TileHorizontal);
-        }
-
-        private void ArrangeIconsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            LayoutMdi(MdiLayout.ArrangeIcons);
-        }
-
         private void CloseAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
             foreach (Form childForm in MdiChildren)
@@ -111,6 +77,43 @@ namespace GraduationProject
             }
         }
 
+        #endregion
+
+        #region MDI Related
+        private void ToolBarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            toolStrip.Visible = toolBarToolStripMenuItem.Checked;
+        }
+        private void StatusBarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            statusStrip.Visible = statusBarToolStripMenuItem.Checked;
+        }
+        private void CascadeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LayoutMdi(MdiLayout.Cascade);
+        }
+        private void TileVerticalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LayoutMdi(MdiLayout.TileVertical);
+        }
+        private void TileHorizontalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LayoutMdi(MdiLayout.TileHorizontal);
+        }
+        private void ArrangeIconsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LayoutMdi(MdiLayout.ArrangeIcons);
+        }
+        #endregion
+
+        #region FormLoad
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            Frames = new List<Frame>();
+        }
+        #endregion
+
+        #region Surf Frames
         private void NextFrameBTN_Click(object sender, EventArgs e)
         {
             FFn.DisplayFrame(Frames[++FrameIndix], FBox);
@@ -119,7 +122,6 @@ namespace GraduationProject
             PreviousFrameBTN.Visible = true;
             FrameNumberLBL.Text = (FrameIndix + 1).ToString() + " / " + Frames.Count;
         }
-
         private void PreviousFrameBTN_Click(object sender, EventArgs e)
         {
             FFn.DisplayFrame(Frames[--FrameIndix], FBox);
@@ -128,7 +130,6 @@ namespace GraduationProject
             NextFrameBTN.Visible = true;
             FrameNumberLBL.Text = (FrameIndix + 1).ToString() + " / " + Frames.Count;
         }
-
         private void FrameNumTBox_TextChanged(object sender, EventArgs e)
         {
             try
@@ -143,12 +144,67 @@ namespace GraduationProject
                     FrameNumberLBL.Text = (FrameIndix + 1).ToString() + " / " + Frames.Count;
                 }
             }
-            catch 
+            catch
             {
                 FrameIndix = 0;
                 FFn.DisplayFrame(Frames[FrameIndix], FBox);
                 FrameNumberLBL.Text = (FrameIndix + 1).ToString() + " / " + Frames.Count;
             }
         }
+        #endregion
+
+        #region FrameOperations
+        private void LoadImageButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string[] PicturePath = new string[20];
+                OpenFileDialog Picture = new OpenFileDialog();
+                Picture.Filter = "All Files (*.*)|*.*";
+                Picture.Multiselect = true;
+                if (Picture.ShowDialog() == DialogResult.OK)
+                    PicturePath = Picture.FileNames;
+                int count = PicturePath.Count();
+                for (int k = 0; k < count; k++)
+                {
+                    Frame newPictureItem = new Frame();
+                    PictureBox picBox = new PictureBox();
+                    string PictureName = PicturePath[k].Substring(PicturePath[k].LastIndexOf('\\') + 1);
+                    int offset = PictureName.LastIndexOf('.') + 1;
+                    string type = PictureName.Substring(offset, PictureName.Length - offset);
+                    newPictureItem.OpenFrame(PicturePath[k], picBox);
+                    Frames.Add(newPictureItem);
+                    int index = Frames.Count - 1;
+                    DisplayFrame(Frames[index]);
+                }
+            }
+            catch { }
+        }
+        private void DisplayFrame(Frame frame)
+        {
+            int width = frame.width;
+            int height = frame.height;
+            Bitmap bmp = new Bitmap(width, height, PixelFormat.Format24bppRgb);
+            BitmapData bmpData = bmp.LockBits(new Rectangle(0, 0, width, height), System.Drawing.Imaging.ImageLockMode.ReadWrite, bmp.PixelFormat);
+            unsafe
+            {
+                byte* p = (byte*)bmpData.Scan0;
+                int space = bmpData.Stride - width * 3;
+                for (int i = 0; i < height; i++)
+                {
+                    for (int j = 0; j < width; j++)
+                    {
+                        p[0] = frame.bluePixels[i, j];
+                        p[1] = frame.greenPixels[i, j];
+                        p[2] = frame.redPixels[i, j];
+                        p += 3;
+                    }
+                    p += space;
+                }
+            }
+            bmp.UnlockBits(bmpData);
+            FBox.Image = bmp;
+        }
+        #endregion
     }
 }

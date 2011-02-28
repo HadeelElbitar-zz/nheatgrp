@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 using Emgu.CV;
 using Emgu.CV.Structure;
 using openCV;
@@ -13,16 +12,16 @@ namespace GraduationProject
     class VideoFunctions
     {
         public VideoFunctions() { }
-        public List<FrameInfo> LoadVideoFrames(string Path)
+        public List<Frame> LoadVideoFrames(string Path)
         {
-            List<FrameInfo> Frames = new List<FrameInfo>();
+            List<Frame> Frames = new List<Frame>();
             Capture Video = new Capture(Path);
             Image<Bgr, byte> TempFrame; //= //new Image<Bgr,byte>();
             try
             {
                 while (true)
                 {
-                    FrameInfo Frame = new FrameInfo();
+                    Frame Frame = new Frame();
                     TempFrame = Video.QueryFrame();
                     Frame.width = TempFrame.Cols;
                     Frame.height = TempFrame.Rows;
