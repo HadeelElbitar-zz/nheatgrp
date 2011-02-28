@@ -20,7 +20,7 @@ namespace TesTOpenCV
 {
     public partial class Form1 : Form
     {
-        
+
         public Form1()
         {
             InitializeComponent();
@@ -33,21 +33,20 @@ namespace TesTOpenCV
         private void timer1_Tick(object sender, EventArgs e)
         {
         }
- 
+
         private void button1_Click(object sender, EventArgs e)
         {
             int levels = 1;
             CvSeq p = new CvSeq();
             GCHandle h;
             IntPtr contours = cvtools.ConvertStructureToPtr(p, out h);
-            
 
             CvMemStorage storage = cvlib.CvCreateMemStorage(0);
-         
+
             IplImage img;
-            img = cvlib.CvLoadImage("C:\\Capture.bmp", cvlib.CV_LOAD_IMAGE_GRAYSCALE);
+            img = cvlib.CvLoadImage("D:\\GP\\capture.bmp", cvlib.CV_LOAD_IMAGE_GRAYSCALE);
             cvlib.CvNamedWindow("image", cvlib.CV_WINDOW_AUTOSIZE);
-            cvlib.CvShowImage("image", ref img);;
+            cvlib.CvShowImage("image", ref img); ;
 
             cvlib.CvFindContours(ref img, ref storage, ref contours, Marshal.SizeOf(typeof(CvContour)), cvlib.CV_RETR_TREE, cvlib.CV_CHAIN_APPROX_SIMPLE, cvlib.CvPoint(0, 0));
 
@@ -58,9 +57,18 @@ namespace TesTOpenCV
             p = (CvSeq)cvtools.ConvertPtrToStructure(contours, typeof(CvSeq));
             cvlib.CvDrawContours(ref cnt_img, ref p, cvlib.CV_RGB(255, 0, 0), cvlib.CV_RGB(0, 255, 0), levels, 3, cvlib.CV_AA, cvlib.CvPoint(0, 0));
 
+            Emgu.CV.Structure.MCvSeqReader reader = new MCvSeqReader();
+            CvPoint point;
+            for (; !p.Equals(null); p = (CvSeq)cvtools.ConvertPtrToStructure(p.h_next, typeof(CvSeq)))
+            {
+                CvInvoke.cvStartReadSeq(contours,ref reader, false);
+                for (int i = 0; i < p.total; i++)
+                {
+                   point = CvInvoke.CV_READ_SEQ_ELEM<CvPoint>(ref reader);
+                }
+            }
 
-            cvlib.CvShowImage("contours",ref cnt_img);
-
+            cvlib.CvShowImage("contours", ref cnt_img);
         }
     }
 }
