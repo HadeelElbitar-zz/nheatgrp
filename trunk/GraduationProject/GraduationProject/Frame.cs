@@ -13,6 +13,7 @@ namespace GraduationProject
         #region Variables
         public int width;
         public int height;
+        public string Path;
         public PictureBox FrameBox;
         public byte[,] redPixels;
         public byte[,] greenPixels;
@@ -27,8 +28,9 @@ namespace GraduationProject
         {
 
         }
-        public Frame(int _width, int _height, PictureBox _frameBox, byte[,] _redPixels, byte[,] _greenPixels, byte[,] _bluePixels, double[,] _L, double[,] _A, double[,] _B)
+        public Frame(int _width, int _height, PictureBox _frameBox, byte[,] _redPixels, byte[,] _greenPixels, byte[,] _bluePixels, double[,] _L, double[,] _A, double[,] _B, string _Path)
         {
+            Path = _Path;
             width = _width;
             height = _height;
             FrameBox = _frameBox;
@@ -68,6 +70,7 @@ namespace GraduationProject
             Bitmap Bmp = new Bitmap(PicturePath);
             width = Bmp.Width;
             height = Bmp.Height;
+            Path = PicturePath;
             redPixels = new byte[height, width];
             greenPixels = new byte[height, width];
             bluePixels = new byte[height, width];

@@ -18,6 +18,7 @@ namespace GraduationProject
         List<Frame> Frames;
         VideoFunctions VFn = new VideoFunctions();
         FrameFunctions FFn = new FrameFunctions();
+        ContourFunctions CFn = new ContourFunctions();
         public MainForm()
         {
             InitializeComponent();
@@ -168,42 +169,18 @@ namespace GraduationProject
                 for (int k = 0; k < count; k++)
                 {
                     Frame newPictureItem = new Frame();
+                    Frame Result;
                     PictureBox picBox = new PictureBox();
                     string PictureName = PicturePath[k].Substring(PicturePath[k].LastIndexOf('\\') + 1);
                     int offset = PictureName.LastIndexOf('.') + 1;
                     string type = PictureName.Substring(offset, PictureName.Length - offset);
                     newPictureItem.OpenFrame(PicturePath[k], picBox);
-                    Frames.Add(newPictureItem);
-                    int index = Frames.Count - 1;
-                    DisplayFrame(Frames[index]);
+                   // FFn.DisplayFrame(newPictureItem, FBox);
+                    Result = CFn.GetContour(newPictureItem);
+                    FFn.DisplayFrame(Result, FBox);
                 }
             }
             catch { }
-        }
-        private void DisplayFrame(Frame frame)
-        {
-            int width = frame.width;
-            int height = frame.height;
-            Bitmap bmp = new Bitmap(width, height, PixelFormat.Format24bppRgb);
-            BitmapData bmpData = bmp.LockBits(new Rectangle(0, 0, width, height), System.Drawing.Imaging.ImageLockMode.ReadWrite, bmp.PixelFormat);
-            unsafe
-            {
-                byte* p = (byte*)bmpData.Scan0;
-                int space = bmpData.Stride - width * 3;
-                for (int i = 0; i < height; i++)
-                {
-                    for (int j = 0; j < width; j++)
-                    {
-                        p[0] = frame.bluePixels[i, j];
-                        p[1] = frame.greenPixels[i, j];
-                        p[2] = frame.redPixels[i, j];
-                        p += 3;
-                    }
-                    p += space;
-                }
-            }
-            bmp.UnlockBits(bmpData);
-            FBox.Image = bmp;
         }
         #endregion
     }

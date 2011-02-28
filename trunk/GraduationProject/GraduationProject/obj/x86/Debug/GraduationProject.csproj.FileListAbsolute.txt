@@ -43,3 +43,12 @@ C:\Users\dydy\Downloads\Graduation Project\GraduationProject\GraduationProject\o
 C:\Users\dydy\Downloads\Graduation Project\GraduationProject\GraduationProject\obj\x86\Debug\GraduationProject.Properties.Resources.resources
 C:\Users\dydy\Downloads\Graduation Project\GraduationProject\GraduationProject\obj\x86\Debug\GenerateResource.read.1.tlog
 C:\Users\dydy\Downloads\Graduation Project\GraduationProject\GraduationProject\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\My Files\FCIS\Seniors\GP\Code\GraduationProject\GraduationProject\obj\x86\Debug\GraduationProject.exe
+C:\My Files\FCIS\Seniors\GP\Code\GraduationProject\GraduationProject\obj\x86\Debug\GraduationProject.pdb
+C:\My Files\FCIS\Seniors\GP\Code\GraduationProject\GraduationProject\bin\Debug\GraduationProject.exe
+C:\My Files\FCIS\Seniors\GP\Code\GraduationProject\GraduationProject\bin\Debug\GraduationProject.pdb
+C:\My Files\FCIS\Seniors\GP\Code\GraduationProject\GraduationProject\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\My Files\FCIS\Seniors\GP\Code\GraduationProject\GraduationProject\obj\x86\Debug\GraduationProject.MainForm.resources
+C:\My Files\FCIS\Seniors\GP\Code\GraduationProject\GraduationProject\obj\x86\Debug\GraduationProject.Properties.Resources.resources
+C:\My Files\FCIS\Seniors\GP\Code\GraduationProject\GraduationProject\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\My Files\FCIS\Seniors\GP\Code\GraduationProject\GraduationProject\obj\x86\Debug\GenerateResource.write.1.tlog
