@@ -12,7 +12,14 @@ namespace GraduationProject
 {
     class ContourFunctions
     {
-        public ContourFunctions() { }
+        private List<CvPoint> ContourPoints = new List<CvPoint>();
+        public List<Window> WindowList = new List<Window>();
+        private int WindowWidth, WindowHeight;
+        public ContourFunctions(int _WindowWidth, int _WindowHeight) 
+        {
+            WindowWidth = _WindowWidth;
+            WindowHeight = _WindowHeight;
+        }
         public Frame GetContour(Frame _Frame)
         {
             Frame NewImage = new Frame();
@@ -40,9 +47,79 @@ namespace GraduationProject
             Sequence = (CvSeq)cvtools.ConvertPtrToStructure(contours, typeof(CvSeq));
             cvlib.CvDrawContours(ref cnt_img, ref Sequence, cvlib.CV_RGB(110, 230, 120), cvlib.CV_RGB(0, 255, 0), levels, 1, cvlib.CV_AA, cvlib.CvPoint(0, 0));
             //cvlib.CvShowImage("contours", ref cnt_img);
+            #region Convert to Points
+            CvPoint point;
+            IntPtr currSeqPtr = contours;
+            for (; currSeqPtr != IntPtr.Zero; currSeqPtr = Sequence.h_next)
+            {
+                Sequence = (CvSeq)cvtools.ConvertPtrToStructure(currSeqPtr, typeof(CvSeq));
+                for (int i = 0; i < Sequence.total; i++)
+                {
+                    IntPtr pointPtr = CvInvoke.cvGetSeqElem(currSeqPtr, i);
+                    point = (CvPoint)cvtools.ConvertPtrToStructure(pointPtr, typeof(CvPoint));
+                    ContourPoints.Add(point);
+                }
+            }
+            #endregion
             FrameFunctions FFn = new FrameFunctions();
             FFn.CopyFrameData(cnt_img, ref NewImage);
+            SetWindows(_Frame);
             return NewImage;
+        }
+        public List<CvPoint> _ContourPoints
+        {
+            get
+            {
+                return ContourPoints;
+            }
+        }
+        private void SetWindows(Frame _Frame)
+        {
+            Window Win;
+            WindowList.Add(Win = new Window(WindowWidth, WindowHeight, _Frame, ContourPoints[0]));
+            int WinSize, OverLappingArea, newIndex, index = 0;
+            CvPoint newPoint;
+            while (true)
+            {
+                WinSize = WindowWidth;
+                OverLappingArea = (int)Math.Ceiling((double)(WinSize / 3));
+                newPoint = new CvPoint(ContourPoints[index].x + WinSize - OverLappingArea, ContourPoints[index].y);
+                newIndex = ContourPoints.IndexOf(newPoint);
+                if (newIndex == -1) //not on the same y
+                {
+                    WinSize = WindowHeight;
+                    OverLappingArea = (int)Math.Ceiling((double)(WinSize / 3));
+                    newPoint = new CvPoint(ContourPoints[index].x, ContourPoints[index].y + WinSize - OverLappingArea);
+                    newIndex = ContourPoints.IndexOf(newPoint);
+                    if (newIndex == -1)  //not on the same x
+                    {
+                        WinSize = 2 * (int)(Math.Sqrt(Math.Pow(WindowHeight / 2, 2) + Math.Pow(WindowWidth / 2, 2)));
+                        OverLappingArea = (int)Math.Ceiling((double)(WinSize / 3));
+                        newPoint = new CvPoint(ContourPoints[index].x + WinSize - OverLappingArea, ContourPoints[index].y + WinSize - OverLappingArea);
+                        newIndex = ContourPoints.IndexOf(newPoint);
+                        if (newIndex == -1)
+                        {
+                            newPoint = new CvPoint(ContourPoints[index].x - (WinSize - OverLappingArea), ContourPoints[index].y - (WinSize - OverLappingArea));
+                            newIndex = ContourPoints.IndexOf(newPoint);
+                            if (newIndex == -1)
+                            {
+                                newPoint = new CvPoint(ContourPoints[index].x - (WinSize - OverLappingArea), ContourPoints[index].y + WinSize - OverLappingArea);
+                                newIndex = ContourPoints.IndexOf(newPoint);
+                                if (newIndex == -1)
+                                {
+                                    newPoint = new CvPoint(ContourPoints[index].x + WinSize - OverLappingArea, ContourPoints[index].y - (WinSize - OverLappingArea));
+                                    newIndex = ContourPoints.IndexOf(newPoint);
+                                }
+                            }
+                        }
+                    }
+                }
+                Win = new Window(WindowWidth, WindowHeight, _Frame, ContourPoints[newIndex]);
+                if (WindowList.Contains(Win))
+                    break;
+                WindowList.Add(Win);
+                index = newIndex;
+            }
         }
     }
 }

@@ -18,7 +18,7 @@ namespace GraduationProject
         List<Frame> Frames;
         VideoFunctions VFn = new VideoFunctions();
         FrameFunctions FFn = new FrameFunctions();
-        ContourFunctions CFn = new ContourFunctions();
+        ContourFunctions CFn = new ContourFunctions(30,30);
         public MainForm()
         {
             InitializeComponent();

@@ -58,7 +58,7 @@ namespace TesTOpenCV
             p = (CvSeq)cvtools.ConvertPtrToStructure(currSeqPtr, typeof(CvSeq));
             
             cvlib.CvDrawContours(ref cnt_img, ref p, cvlib.CV_RGB(255, 0, 0), cvlib.CV_RGB(0, 255, 0), levels, 3, cvlib.CV_AA, cvlib.CvPoint(0, 0));
-
+            
             //Emgu.CV.Structure.MCvSeqReader reader = new MCvSeqReader();
             CvPoint point;
             for (; currSeqPtr != IntPtr.Zero; currSeqPtr = p.h_next)
