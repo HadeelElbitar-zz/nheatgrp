@@ -34,7 +34,7 @@ namespace TesTOpenCV
         {
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private unsafe void button1_Click(object sender, EventArgs e)
         {
             int levels = 1;
             CvSeq p = new CvSeq();
@@ -54,19 +54,27 @@ namespace TesTOpenCV
 
             IplImage cnt_img = cvlib.CvCreateImage(cvlib.CvSize(500, 500), 8, 3);
 
-            p = (CvSeq)cvtools.ConvertPtrToStructure(contours, typeof(CvSeq));
+            IntPtr currSeqPtr = contours;
+            p = (CvSeq)cvtools.ConvertPtrToStructure(currSeqPtr, typeof(CvSeq));
+            
             cvlib.CvDrawContours(ref cnt_img, ref p, cvlib.CV_RGB(255, 0, 0), cvlib.CV_RGB(0, 255, 0), levels, 3, cvlib.CV_AA, cvlib.CvPoint(0, 0));
 
-            Emgu.CV.Structure.MCvSeqReader reader = new MCvSeqReader();
+            //Emgu.CV.Structure.MCvSeqReader reader = new MCvSeqReader();
             CvPoint point;
-            for (; !p.Equals(null); p = (CvSeq)cvtools.ConvertPtrToStructure(p.h_next, typeof(CvSeq)))
+            for (; currSeqPtr != IntPtr.Zero; currSeqPtr = p.h_next)
             {
-                CvInvoke.cvStartReadSeq(contours,ref reader, false);
+                p = (CvSeq)cvtools.ConvertPtrToStructure(currSeqPtr, typeof(CvSeq));
+                //CvInvoke.cvStartReadSeq(contours,ref reader, false);
                 for (int i = 0; i < p.total; i++)
                 {
-                   point = CvInvoke.CV_READ_SEQ_ELEM<CvPoint>(ref reader);
+                    IntPtr pointPtr = CvInvoke.cvGetSeqElem(currSeqPtr, i);//CvInvoke.CV_READ_SEQ_ELEM<CvPoint>(ref reader);
+                    point = (CvPoint)cvtools.ConvertPtrToStructure(pointPtr, typeof(CvPoint));
+                   //CvInvoke.CV_NEXT_SEQ_ELEM(sizeof(CvPoint), ref reader);
                 }
             }
+            //CvInvoke.cvCvtSeqToArray(
+           // p.
+            
 
             cvlib.CvShowImage("contours", ref cnt_img);
         }
