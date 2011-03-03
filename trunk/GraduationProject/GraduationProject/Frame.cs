@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Drawing.Imaging;
+using openCV;
 
 namespace GraduationProject
 {
@@ -18,9 +19,7 @@ namespace GraduationProject
         public byte[,] redPixels;
         public byte[,] greenPixels;
         public byte[,] bluePixels;
-        public double[,] L;
-        public double[,] A;
-        public double[,] B;
+        IplImage Lab;
         #endregion
 
         #region Constructors
@@ -28,7 +27,7 @@ namespace GraduationProject
         {
 
         }
-        public Frame(int _width, int _height, PictureBox _frameBox, byte[,] _redPixels, byte[,] _greenPixels, byte[,] _bluePixels, double[,] _L, double[,] _A, double[,] _B, string _Path)
+        public Frame(int _width, int _height, PictureBox _frameBox, byte[,] _redPixels, byte[,] _greenPixels, byte[,] _bluePixels, IplImage _Lab, string _Path)
         {
             Path = _Path;
             width = _width;
@@ -37,9 +36,7 @@ namespace GraduationProject
             redPixels = _redPixels;
             greenPixels = _greenPixels;
             bluePixels = _bluePixels;
-            L = _L;
-            A = _A;
-            B = _B;
+            Lab = _Lab;
         }
         public Frame(Frame pic)
         {
@@ -56,11 +53,9 @@ namespace GraduationProject
                     redPixels[i, j] = pic.redPixels[i, j];
                     greenPixels[i, j] = pic.greenPixels[i, j];
                     bluePixels[i, j] = pic.bluePixels[i, j];
-                    L[i, j] = pic.L[i, j];
-                    A[i, j] = pic.A[i, j];
-                    B[i, j] = pic.B[i, j];
                 }
             }
+            Lab = pic.Lab;
         }
         #endregion
 
@@ -74,9 +69,6 @@ namespace GraduationProject
             redPixels = new byte[height, width];
             greenPixels = new byte[height, width];
             bluePixels = new byte[height, width];
-            L = new double[height, width];
-            A = new double[height, width];
-            B = new double[height, width];
             BitmapData bmpData = Bmp.LockBits(new Rectangle(0, 0, width, height), System.Drawing.Imaging.ImageLockMode.ReadOnly, Bmp.PixelFormat);
 
             #region RGB
@@ -187,50 +179,33 @@ namespace GraduationProject
                     }
                 }
             }
-            Bmp.UnlockBits(bmpData); 
-            #endregion
-
-            #region LAB
-
-            for (int i = 0; i < height; i++)
-            {
-                for (int j = 0; j < width; j++)
-                {
-                    double r = (int)redPixels[i, j] / 255;
-                    double g = (int)greenPixels[i, j] / 255;
-                    double b = (int)bluePixels[i, j] / 255;
-
-                    if (r > 0.04045)
-                        r = Math.Pow(((r + 0.055) / 1.055), 2.4);
-                    else
-                        r /= 12.92;
-
-                    if (g > 0.04045)
-                        g = Math.Pow(((g + 0.055) / 1.055), 2.4);
-                    else
-                        g /= 12.92;
-
-                    if (b > 0.04045)
-                        b = Math.Pow(((b + 0.055) / 1.055), 2.4);
-                    else
-                        b = b / 12.92;
-
-                    r *= 100;
-                    g *= 100;
-                    b *= 100;
-
-                    //Observer. = 2°, Illuminant = D65
-                    double X = r * 0.4124 + g * 0.3576 + b * 0.1805;
-                    double Y = r * 0.2126 + g * 0.7152 + b * 0.0722;
-                    double Z = r * 0.0193 + g * 0.1192 + b * 0.9505;
-
-                    L[i, j] = 10 * (Math.Sqrt(Y));
-                    A[i, j] = 17.5 * (((1.02 * X) - Y) / (Math.Sqrt(Y)));
-                    B[i, j] = 7 * ((Y - (0.847 * Z)) / (Math.Sqrt(Y)));
-                }
-            } 
+            Bmp.UnlockBits(bmpData);
             #endregion
         }
         #endregion
+
+        #region Color Space Conversion
+        public void RGB2Lab(string PicturePath)
+        {
+            unsafe
+            {
+                IplImage dest = new IplImage();
+                IplImage src = cvlib.CvLoadImage(PicturePath, cvlib.CV_LOAD_IMAGE_UNCHANGED);
+                cvlib.CvCvtColor(ref src, ref dest, cvlib.CV_RGB2Lab);
+                cvlib.CvCopy(ref dest, ref Lab);
+            }
+        }
+        public void Lab2RGB(string PicturePath)
+        {
+            unsafe
+            {
+                IplImage dest = new IplImage();
+                IplImage src = new IplImage();
+                cvlib.CvCopy(ref Lab, ref src);
+                cvlib.CvCvtColor(ref src, ref dest, cvlib.CV_Lab2RGB);
+            }
+        }
+        #endregion
     }
+
 }
