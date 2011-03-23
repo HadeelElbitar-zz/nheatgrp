@@ -18,6 +18,7 @@ namespace GraduationProject
         public Frame WinFrame;
         public Classifier WinClassifier;
         static int Counter = 0;
+        public int[,] AfterCalcPointClass;
         public Window(int _width , int _height, Frame _Frame, CvPoint _CenterPoint) 
         {
             WinFrame = new Frame();
@@ -32,7 +33,7 @@ namespace GraduationProject
             WinFrame.redPixels = new byte[WinFrame.height, WinFrame.width];
             WinFrame.greenPixels = new byte[WinFrame.height, WinFrame.width];
             WinFrame.bluePixels = new byte[WinFrame.height, WinFrame.width];
-
+            AfterCalcPointClass = new int[WinFrame.height, WinFrame.width];
            // WinFrame.Lab = 
 
             int M = (WinFrame.width - 1) / 2, N = (WinFrame.height - 1) / 2;
@@ -48,15 +49,6 @@ namespace GraduationProject
                 }
             }
             WinFrame.BmpImage = new Bitmap(WinFrame.width, WinFrame.height);
-            
-            WinFrame.RgbImage = new Image<Bgr, byte>(WinFrame.BmpImage);
-            WinFrame.LabImage = WinFrame.RgbImage.Convert<Lab, byte>();
-            WinFrame.RGB = (IplImage)cvtools.ConvertPtrToStructure(WinFrame.RgbImage.Ptr, typeof(IplImage));
-            WinFrame.Lab = (IplImage)cvtools.ConvertPtrToStructure(WinFrame.LabImage.Ptr, typeof(IplImage));
-
-            string Nw = "FrameTest" + Counter.ToString() + ".bmp";
-            Counter++;
-            string Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\" + Nw;
             BitmapData bmpData = WinFrame.BmpImage.LockBits(new Rectangle(0, 0, WinFrame.width, WinFrame.height), System.Drawing.Imaging.ImageLockMode.ReadWrite, WinFrame.BmpImage.PixelFormat);
             unsafe
             {
@@ -70,14 +62,24 @@ namespace GraduationProject
                         p[1] = WinFrame.greenPixels[i, j];
                         p[2] = WinFrame.redPixels[i, j];
                         p += 3;
-                   }
+                    }
                     p += space;
                 }
             }
             WinFrame.BmpImage.UnlockBits(bmpData);
+
+            WinFrame.RgbImage = new Image<Bgr, byte>(WinFrame.BmpImage);
+            WinFrame.LabImage = WinFrame.RgbImage.Convert<Lab, byte>();
+            WinFrame.RGB = (IplImage)cvtools.ConvertPtrToStructure(WinFrame.RgbImage.Ptr, typeof(IplImage));
+            WinFrame.Lab = (IplImage)cvtools.ConvertPtrToStructure(WinFrame.LabImage.Ptr, typeof(IplImage));
+
+            string Nw = "FrameTest" + Counter.ToString() + ".bmp";
+            Counter++;
+            string Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\" + Nw;
+
             WinFrame.BmpImage.Save(Pw, ImageFormat.Bmp);
-        //    WinClassifier = new Classifier();
-         //   WinClassifier.TrainClassifier(this);
+            WinClassifier = new Classifier();
+            WinClassifier.TrainClassifier(this);
         }
     }
 }

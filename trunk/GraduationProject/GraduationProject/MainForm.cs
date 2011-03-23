@@ -122,7 +122,7 @@ namespace GraduationProject
                 FFn.DisplayFrame(_Frame , FBox);
                 FrameIndix++;
                 SIFT S = new SIFT();
-                S.GetSIFTpoints(VideoFunctions.Frames[0], VideoFunctions.Frames[1]);
+                FBox.Image = S.GetSIFTpoints(VideoFunctions.Frames[0], VideoFunctions.Frames[1]);
             }
             catch { }
             FrameNumberLBL.Text = (FrameIndix + 1).ToString();
@@ -155,8 +155,8 @@ namespace GraduationProject
                     newPictureItem.OpenFrame(PicturePath[k], FBox);
                     Result = CFn.GetContour(newPictureItem);
                     FFn.DisplayFrame(Result, FBox);
-                    SIFT S = new SIFT();
-                    FBox.Image = S.GetSIFTpoints(Result, newPictureItem);
+                    //SIFT S = new SIFT();
+                    //FBox.Image = S.GetSIFTpoints(Result, newPictureItem);
                 }
             //}
             //catch { }

@@ -20,8 +20,6 @@ namespace GraduationProject
         public VideoFunctions() { }
         public Frame LoadVideoFrames(string Path)
         {
-
-
             Frames = new List<Frame>();
             Video = new Capture(Path);
             Frame Frame = new Frame();
@@ -43,7 +41,6 @@ namespace GraduationProject
                     Frame.bluePixels[i, j] = Frame.RgbImage.Data[i, j, 2];
                 }
             }
-                    
             Frame.BmpImage = new Bitmap(Frame.width, Frame.height, PixelFormat.Format24bppRgb);
             BitmapData bmpData = Frame.BmpImage.LockBits(new Rectangle(0, 0, Frame.width, Frame.height), System.Drawing.Imaging.ImageLockMode.ReadWrite, Frame.BmpImage.PixelFormat);
             unsafe
