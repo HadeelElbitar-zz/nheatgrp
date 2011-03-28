@@ -16,7 +16,7 @@ namespace GraduationProject
     {
         public int Center_X, Center_Y;
         public Frame WinFrame;
-        public Classifier WinClassifier;
+    //    public Classifier WinClassifier;
         static int Counter = 0;
         public int[,] AfterCalcPointClass;
         public Window(int _width , int _height, Frame _Frame, CvPoint _CenterPoint) 
@@ -78,8 +78,8 @@ namespace GraduationProject
             string Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\" + Nw;
 
             WinFrame.BmpImage.Save(Pw, ImageFormat.Bmp);
-            WinClassifier = new Classifier();
-            WinClassifier.TrainClassifier(this);
+            //WinClassifier = new Classifier();
+            //WinClassifier.TrainClassifier(this);
         }
     }
 }
