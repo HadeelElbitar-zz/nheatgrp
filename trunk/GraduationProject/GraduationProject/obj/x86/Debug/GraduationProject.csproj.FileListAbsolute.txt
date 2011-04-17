@@ -150,3 +150,16 @@ C:\My Files\FCIS\Seniors\GP\Source Code\GraduationProject\GraduationProject\obj\
 C:\My Files\FCIS\Seniors\GP\Source Code\GraduationProject\GraduationProject\obj\x86\Debug\GraduationProject.pdb
 D:\Fourth year\GP\code\GraduationProject\GraduationProject\bin\Debug\GraduationProject.exe.config
 D:\Fourth year\GP\code\GraduationProject\GraduationProject\bin\Debug\AForge.MachineLearning.xml
+E:\Projects\GP\GraduationProject\GraduationProject\bin\Debug\GraduationProject.exe.config
+E:\Projects\GP\GraduationProject\GraduationProject\obj\x86\Debug\GraduationProject.exe
+E:\Projects\GP\GraduationProject\GraduationProject\obj\x86\Debug\GraduationProject.pdb
+E:\Projects\GP\GraduationProject\GraduationProject\obj\x86\Debug\ResolveAssemblyReference.cache
+E:\Projects\GP\GraduationProject\GraduationProject\obj\x86\Debug\GraduationProject.MainForm.resources
+E:\Projects\GP\GraduationProject\GraduationProject\obj\x86\Debug\GraduationProject.Properties.Resources.resources
+E:\Projects\GP\GraduationProject\GraduationProject\obj\x86\Debug\GenerateResource.read.1.tlog
+E:\Projects\GP\GraduationProject\GraduationProject\obj\x86\Debug\GenerateResource.write.1.tlog
+E:\Projects\GP\GraduationProject\GraduationProject\bin\Debug\GraduationProject.exe
+E:\Projects\GP\GraduationProject\GraduationProject\bin\Debug\GraduationProject.pdb
+E:\Projects\GP\GraduationProject\GraduationProject\bin\Debug\AForge.xml
+E:\Projects\GP\GraduationProject\GraduationProject\bin\Debug\AForge.MachineLearning.xml
+E:\Projects\GP\GraduationProject\GraduationProject\bin\Debug\AForge.Math.xml

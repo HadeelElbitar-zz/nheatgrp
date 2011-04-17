@@ -12,13 +12,15 @@ namespace GraduationProject
 {
     public partial class MainForm : Form
     {
-        #region Initializations
+        #region Variables
         private int childFormNumber = 0;
         private int FrameIndix = 0;
         Frame Frame;
-        VideoFunctions VFn = new VideoFunctions();
-        FrameFunctions FFn = new FrameFunctions();
-        ContourFunctions CFn = new ContourFunctions(30,30);
+        VideoFunctions VFn;
+        FrameFunctions FFn;
+        ContourFunctions CFn;
+        List<Point> ContourPositions;
+
         public MainForm()
         {
             InitializeComponent();
@@ -45,7 +47,7 @@ namespace GraduationProject
             }
             Frame = VFn.LoadVideoFrames(FileName);
             FFn.DisplayFrame(Frame, FBox);
-            FrameNumberLBL.Text = (FrameIndix+1).ToString();
+            FrameNumberLBL.Text = (FrameIndix + 1).ToString();
         }
         private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -110,6 +112,10 @@ namespace GraduationProject
         private void MainForm_Load(object sender, EventArgs e)
         {
             Frame = new Frame();
+            VideoFunctions VFn = new VideoFunctions();
+            FrameFunctions FFn = new FrameFunctions();
+            ContourFunctions CFn = new ContourFunctions(30, 30);
+            ContourPositions = new List<Point>();
         }
         #endregion
 
@@ -119,11 +125,11 @@ namespace GraduationProject
             try
             {
                 Frame _Frame = VFn.GetNextFrame();
-                FFn.DisplayFrame(_Frame , FBox);
+                FFn.DisplayFrame(_Frame, FBox);
                 FrameIndix++;
                 SIFT S = new SIFT();
-                ContourFunctions CFn = new ContourFunctions(_Frame.width , _Frame.height);
-               // FBox.Image = S.GetSIFTpoints(VideoFunctions.Frames[0], VideoFunctions.Frames[1]);
+                ContourFunctions CFn = new ContourFunctions(_Frame.width, _Frame.height);
+                // FBox.Image = S.GetSIFTpoints(VideoFunctions.Frames[0], VideoFunctions.Frames[1]);
                 FBox.Image = CFn.GetContour(_Frame).BmpImage;
             }
             catch { }
@@ -131,7 +137,7 @@ namespace GraduationProject
         }
         private void PreviousFrameBTN_Click(object sender, EventArgs e)
         {
-            FFn.DisplayFrame(VideoFunctions.Frames[FrameIndix-1], FBox);
+            FFn.DisplayFrame(VideoFunctions.Frames[FrameIndix - 1], FBox);
             FrameNumberLBL.Text = (FrameIndix - 1).ToString();
         }
         #endregion
@@ -140,28 +146,42 @@ namespace GraduationProject
         {
             //try
             //{
-                string[] PicturePath = new string[20];
-                OpenFileDialog Picture = new OpenFileDialog();
-                Picture.Filter = "All Files (*.*)|*.*";
-                Picture.Multiselect = true;
-                if (Picture.ShowDialog() == DialogResult.OK)
-                    PicturePath = Picture.FileNames;
-                int count = PicturePath.Count();
-                for (int k = 0; k < count; k++)
-                {
-                    Frame newPictureItem = new Frame();
-                    Frame Result;
-                    string PictureName = PicturePath[k].Substring(PicturePath[k].LastIndexOf('\\') + 1);
-                    int offset = PictureName.LastIndexOf('.') + 1;
-                    string type = PictureName.Substring(offset, PictureName.Length - offset);
-                    newPictureItem.OpenFrame(PicturePath[k], FBox);
-                    Result = CFn.GetContour(newPictureItem);
-                    FFn.DisplayFrame(Result, FBox);
-                    SIFT S = new SIFT();
-                    FBox.Image = S.GetSIFTpoints(Result, newPictureItem);
-                }
+            string[] PicturePath = new string[20];
+            OpenFileDialog Picture = new OpenFileDialog();
+            Picture.Filter = "All Files (*.*)|*.*";
+            Picture.Multiselect = true;
+            if (Picture.ShowDialog() == DialogResult.OK)
+                PicturePath = Picture.FileNames;
+            int count = PicturePath.Count();
+            for (int k = 0; k < count; k++)
+            {
+                Frame newPictureItem = new Frame();
+                Frame Result;
+                string PictureName = PicturePath[k].Substring(PicturePath[k].LastIndexOf('\\') + 1);
+                int offset = PictureName.LastIndexOf('.') + 1;
+                string type = PictureName.Substring(offset, PictureName.Length - offset);
+                newPictureItem.OpenFrame(PicturePath[k], FBox);
+                Result = CFn.GetContour(newPictureItem);
+                FFn.DisplayFrame(Result, FBox);
+                SIFT S = new SIFT();
+                FBox.Image = S.GetSIFTpoints(Result, newPictureItem);
+            }
             //}
             //catch { }
+        }
+
+        private void FBox_MouseClick(object sender, MouseEventArgs e)
+        {
+            ContourPositions.Add(new Point(e.X, e.Y));
+            int count = ContourPositions.Count;
+            if (count != 1)
+            {
+                Pen myPen = new System.Drawing.Pen(System.Drawing.Color.Red);
+                Graphics formGraphics = FBox.CreateGraphics();
+                formGraphics.DrawLine(myPen, ContourPositions[count - 2].X, ContourPositions[count - 2].Y, e.X, e.Y);
+                myPen.Dispose();
+                formGraphics.Dispose();
+            }
         }
     }
 }

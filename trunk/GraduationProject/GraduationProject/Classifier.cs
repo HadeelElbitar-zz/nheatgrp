@@ -17,8 +17,8 @@ namespace GraduationProject
         MCvBGStatModel yy;
         MCvFGDStatModelParams ii;
 
-        Matrix<int> em = new Matrix<int>(1, 1);
-        EMParams em = new EMParams();
+        //Matrix<int> em = new Matrix<int>(1, 1);
+        //EMParams em = new EMParams();
         public Classifier() { }
         public void TrainClassifier(Window _Window)
         {
