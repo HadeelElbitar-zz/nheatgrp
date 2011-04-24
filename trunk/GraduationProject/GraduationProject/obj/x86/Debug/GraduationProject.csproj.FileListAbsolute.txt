@@ -132,22 +132,6 @@ C:\Users\Eman Fateen\Desktop\by3ml surf\GraduationProject\bin\Debug\zh-CN\Emgu.C
 C:\Users\dydy\Downloads\by3ml surf\GraduationProject\bin\Debug\GraduationProject.exe.config
 C:\Users\dydy\Downloads\by3ml surf\GraduationProject\obj\x86\Debug\GraduationProject.exe
 C:\Users\dydy\Downloads\by3ml surf\GraduationProject\obj\x86\Debug\GraduationProject.pdb
-C:\My Files\FCIS\Seniors\GP\Source Code\GraduationProject\GraduationProject\bin\Debug\GraduationProject.exe.config
-C:\My Files\FCIS\Seniors\GP\Source Code\GraduationProject\GraduationProject\bin\Debug\GraduationProject.exe
-C:\My Files\FCIS\Seniors\GP\Source Code\GraduationProject\GraduationProject\bin\Debug\GraduationProject.pdb
-C:\My Files\FCIS\Seniors\GP\Source Code\GraduationProject\GraduationProject\bin\Debug\AForge.dll
-C:\My Files\FCIS\Seniors\GP\Source Code\GraduationProject\GraduationProject\bin\Debug\AForge.MachineLearning.dll
-C:\My Files\FCIS\Seniors\GP\Source Code\GraduationProject\GraduationProject\bin\Debug\AForge.Math.dll
-C:\My Files\FCIS\Seniors\GP\Source Code\GraduationProject\GraduationProject\bin\Debug\AForge.xml
-C:\My Files\FCIS\Seniors\GP\Source Code\GraduationProject\GraduationProject\bin\Debug\AForge.MachineLearning.xml
-C:\My Files\FCIS\Seniors\GP\Source Code\GraduationProject\GraduationProject\bin\Debug\AForge.Math.xml
-C:\My Files\FCIS\Seniors\GP\Source Code\GraduationProject\GraduationProject\obj\x86\Debug\ResolveAssemblyReference.cache
-C:\My Files\FCIS\Seniors\GP\Source Code\GraduationProject\GraduationProject\obj\x86\Debug\GraduationProject.MainForm.resources
-C:\My Files\FCIS\Seniors\GP\Source Code\GraduationProject\GraduationProject\obj\x86\Debug\GraduationProject.Properties.Resources.resources
-C:\My Files\FCIS\Seniors\GP\Source Code\GraduationProject\GraduationProject\obj\x86\Debug\GenerateResource.read.1.tlog
-C:\My Files\FCIS\Seniors\GP\Source Code\GraduationProject\GraduationProject\obj\x86\Debug\GenerateResource.write.1.tlog
-C:\My Files\FCIS\Seniors\GP\Source Code\GraduationProject\GraduationProject\obj\x86\Debug\GraduationProject.exe
-C:\My Files\FCIS\Seniors\GP\Source Code\GraduationProject\GraduationProject\obj\x86\Debug\GraduationProject.pdb
 D:\Fourth year\GP\code\GraduationProject\GraduationProject\bin\Debug\GraduationProject.exe.config
 D:\Fourth year\GP\code\GraduationProject\GraduationProject\bin\Debug\AForge.MachineLearning.xml
 E:\Projects\GP\GraduationProject\GraduationProject\bin\Debug\GraduationProject.exe.config
@@ -164,3 +148,13 @@ E:\Projects\GP\GraduationProject\GraduationProject\bin\Debug\AForge.xml
 E:\Projects\GP\GraduationProject\GraduationProject\bin\Debug\AForge.MachineLearning.xml
 E:\Projects\GP\GraduationProject\GraduationProject\bin\Debug\AForge.Math.xml
 D:\Fourth year\GP\Source Code\GraduationProject\GraduationProject\bin\Debug\GraduationProject.exe.config
+C:\My Files\FCIS\Seniors\GP\Source Code\GraduationProject\GraduationProject\bin\Debug\GraduationProject.exe.config
+C:\My Files\FCIS\Seniors\GP\Source Code\GraduationProject\GraduationProject\bin\Debug\GraduationProject.exe
+C:\My Files\FCIS\Seniors\GP\Source Code\GraduationProject\GraduationProject\bin\Debug\GraduationProject.pdb
+C:\My Files\FCIS\Seniors\GP\Source Code\GraduationProject\GraduationProject\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\My Files\FCIS\Seniors\GP\Source Code\GraduationProject\GraduationProject\obj\x86\Debug\GraduationProject.MainForm.resources
+C:\My Files\FCIS\Seniors\GP\Source Code\GraduationProject\GraduationProject\obj\x86\Debug\GraduationProject.Properties.Resources.resources
+C:\My Files\FCIS\Seniors\GP\Source Code\GraduationProject\GraduationProject\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\My Files\FCIS\Seniors\GP\Source Code\GraduationProject\GraduationProject\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\My Files\FCIS\Seniors\GP\Source Code\GraduationProject\GraduationProject\obj\x86\Debug\GraduationProject.exe
+C:\My Files\FCIS\Seniors\GP\Source Code\GraduationProject\GraduationProject\obj\x86\Debug\GraduationProject.pdb
