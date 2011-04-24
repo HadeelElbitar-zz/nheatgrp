@@ -1,0 +1,114 @@
+C:\Users\Eman Fateen\Documents\Visual Studio 2008\Projects\TesTOpenCV\TesTOpenCV\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Eman Fateen\Documents\Visual Studio 2008\Projects\TesTOpenCV\TesTOpenCV\obj\Debug\TesTOpenCV.Form1.resources
+C:\Users\Eman Fateen\Documents\Visual Studio 2008\Projects\TesTOpenCV\TesTOpenCV\obj\Debug\TesTOpenCV.Properties.Resources.resources
+C:\Users\Eman Fateen\Documents\Visual Studio 2008\Projects\TesTOpenCV\TesTOpenCV\obj\Debug\TesTOpenCV.csproj.GenerateResource.Cache
+C:\Users\Eman Fateen\Documents\Visual Studio 2008\Projects\TesTOpenCV\TesTOpenCV\bin\Debug\TesTOpenCV.exe
+C:\Users\Eman Fateen\Documents\Visual Studio 2008\Projects\TesTOpenCV\TesTOpenCV\bin\Debug\TesTOpenCV.pdb
+C:\Users\Eman Fateen\Documents\Visual Studio 2008\Projects\TesTOpenCV\TesTOpenCV\bin\Debug\Emgu.CV.dll
+C:\Users\Eman Fateen\Documents\Visual Studio 2008\Projects\TesTOpenCV\TesTOpenCV\bin\Debug\Emgu.CV.ML.dll
+C:\Users\Eman Fateen\Documents\Visual Studio 2008\Projects\TesTOpenCV\TesTOpenCV\bin\Debug\Emgu.CV.UI.dll
+C:\Users\Eman Fateen\Documents\Visual Studio 2008\Projects\TesTOpenCV\TesTOpenCV\bin\Debug\Emgu.Util.dll
+C:\Users\Eman Fateen\Documents\Visual Studio 2008\Projects\TesTOpenCV\TesTOpenCV\bin\Debug\openCV.dll
+C:\Users\Eman Fateen\Documents\Visual Studio 2008\Projects\TesTOpenCV\TesTOpenCV\bin\Debug\ZedGraph.dll
+C:\Users\Eman Fateen\Documents\Visual Studio 2008\Projects\TesTOpenCV\TesTOpenCV\bin\Debug\zlib.net.dll
+C:\Users\Eman Fateen\Documents\Visual Studio 2008\Projects\TesTOpenCV\TesTOpenCV\bin\Debug\Emgu.Util.xml
+C:\Users\Eman Fateen\Documents\Visual Studio 2008\Projects\TesTOpenCV\TesTOpenCV\bin\Debug\Emgu.CV.xml
+C:\Users\Eman Fateen\Documents\Visual Studio 2008\Projects\TesTOpenCV\TesTOpenCV\bin\Debug\Emgu.CV.ML.xml
+C:\Users\Eman Fateen\Documents\Visual Studio 2008\Projects\TesTOpenCV\TesTOpenCV\bin\Debug\ZedGraph.xml
+C:\Users\Eman Fateen\Documents\Visual Studio 2008\Projects\TesTOpenCV\TesTOpenCV\bin\Debug\Emgu.CV.UI.xml
+C:\Users\Eman Fateen\Documents\Visual Studio 2008\Projects\TesTOpenCV\TesTOpenCV\obj\Debug\TesTOpenCV.exe
+C:\Users\Eman Fateen\Documents\Visual Studio 2008\Projects\TesTOpenCV\TesTOpenCV\obj\Debug\TesTOpenCV.pdb
+C:\Users\dydy\Desktop\TesTOpenCV\TesTOpenCV\obj\Debug\TesTOpenCV.exe
+C:\Users\dydy\Desktop\TesTOpenCV\TesTOpenCV\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\dydy\Desktop\TesTOpenCV\TesTOpenCV\obj\Debug\TesTOpenCV.Form1.resources
+C:\Users\dydy\Desktop\TesTOpenCV\TesTOpenCV\obj\Debug\TesTOpenCV.Properties.Resources.resources
+C:\Users\dydy\Desktop\TesTOpenCV\TesTOpenCV\obj\Debug\ResGen.read.1.tlog
+C:\Users\dydy\Desktop\TesTOpenCV\TesTOpenCV\obj\Debug\ResGen.write.1.tlog
+C:\Users\dydy\Desktop\TesTOpenCV\TesTOpenCV\bin\Debug\TesTOpenCV.exe
+C:\Users\dydy\Desktop\TesTOpenCV\TesTOpenCV\bin\Debug\TesTOpenCV.pdb
+C:\Users\dydy\Desktop\TesTOpenCV\TesTOpenCV\bin\Debug\zlib.net.dll
+C:\Users\dydy\Desktop\TesTOpenCV\TesTOpenCV\bin\Debug\ZedGraph.dll
+C:\Users\dydy\Desktop\TesTOpenCV\TesTOpenCV\bin\Debug\Emgu.CV.xml
+C:\Users\dydy\Desktop\TesTOpenCV\TesTOpenCV\bin\Debug\Emgu.CV.ML.xml
+C:\Users\dydy\Desktop\TesTOpenCV\TesTOpenCV\bin\Debug\Emgu.CV.UI.xml
+C:\Users\dydy\Desktop\TesTOpenCV\TesTOpenCV\bin\Debug\Emgu.Util.xml
+C:\Users\dydy\Desktop\TesTOpenCV\TesTOpenCV\bin\Debug\ZedGraph.xml
+C:\Users\dydy\Desktop\TesTOpenCV\TesTOpenCV\obj\Debug\TesTOpenCV.pdb
+D:\Fourth year\GP\TesTOpenCV\TesTOpenCV\obj\Debug\TesTOpenCV.exe
+D:\Fourth year\GP\TesTOpenCV\TesTOpenCV\obj\Debug\ResolveAssemblyReference.cache
+D:\Fourth year\GP\TesTOpenCV\TesTOpenCV\obj\Debug\TesTOpenCV.Form1.resources
+D:\Fourth year\GP\TesTOpenCV\TesTOpenCV\obj\Debug\TesTOpenCV.Properties.Resources.resources
+D:\Fourth year\GP\TesTOpenCV\TesTOpenCV\obj\Debug\GenerateResource-ResGen.read.1.tlog
+D:\Fourth year\GP\TesTOpenCV\TesTOpenCV\obj\Debug\ResGen.read.1.tlog
+D:\Fourth year\GP\TesTOpenCV\TesTOpenCV\obj\Debug\GenerateResource-ResGen.write.1.tlog
+D:\Fourth year\GP\TesTOpenCV\TesTOpenCV\obj\Debug\ResGen.write.1.tlog
+D:\Fourth year\GP\TesTOpenCV\TesTOpenCV\bin\Debug\TesTOpenCV.exe
+D:\Fourth year\GP\TesTOpenCV\TesTOpenCV\bin\Debug\TesTOpenCV.pdb
+D:\Fourth year\GP\TesTOpenCV\TesTOpenCV\bin\Debug\zlib.net.dll
+D:\Fourth year\GP\TesTOpenCV\TesTOpenCV\bin\Debug\ZedGraph.dll
+D:\Fourth year\GP\TesTOpenCV\TesTOpenCV\bin\Debug\Emgu.CV.xml
+D:\Fourth year\GP\TesTOpenCV\TesTOpenCV\bin\Debug\Emgu.CV.ML.xml
+D:\Fourth year\GP\TesTOpenCV\TesTOpenCV\bin\Debug\Emgu.CV.UI.xml
+D:\Fourth year\GP\TesTOpenCV\TesTOpenCV\bin\Debug\Emgu.Util.xml
+D:\Fourth year\GP\TesTOpenCV\TesTOpenCV\bin\Debug\ZedGraph.xml
+D:\Fourth year\GP\TesTOpenCV\TesTOpenCV\obj\Debug\TesTOpenCV.pdb
+C:\Users\dydy\Desktop\TesTOpenCV (eman)\TesTOpenCV\obj\Debug\TesTOpenCV.exe
+C:\Users\dydy\Desktop\TesTOpenCV (eman)\TesTOpenCV\obj\Debug\TesTOpenCV.pdb
+C:\Users\dydy\Desktop\TesTOpenCV (eman)\TesTOpenCV\bin\Debug\TesTOpenCV.exe
+C:\Users\dydy\Desktop\TesTOpenCV (eman)\TesTOpenCV\bin\Debug\TesTOpenCV.pdb
+C:\Users\dydy\Desktop\TesTOpenCV (eman)\TesTOpenCV\bin\Debug\Emgu.CV.dll
+C:\Users\dydy\Desktop\TesTOpenCV (eman)\TesTOpenCV\bin\Debug\Emgu.CV.ML.dll
+C:\Users\dydy\Desktop\TesTOpenCV (eman)\TesTOpenCV\bin\Debug\Emgu.CV.UI.dll
+C:\Users\dydy\Desktop\TesTOpenCV (eman)\TesTOpenCV\bin\Debug\Emgu.Util.dll
+C:\Users\dydy\Desktop\TesTOpenCV (eman)\TesTOpenCV\bin\Debug\openCV.dll
+C:\Users\dydy\Desktop\TesTOpenCV (eman)\TesTOpenCV\bin\Debug\zlib.net.dll
+C:\Users\dydy\Desktop\TesTOpenCV (eman)\TesTOpenCV\bin\Debug\ZedGraph.dll
+C:\Users\dydy\Desktop\TesTOpenCV (eman)\TesTOpenCV\bin\Debug\Emgu.CV.xml
+C:\Users\dydy\Desktop\TesTOpenCV (eman)\TesTOpenCV\bin\Debug\Emgu.CV.ML.xml
+C:\Users\dydy\Desktop\TesTOpenCV (eman)\TesTOpenCV\bin\Debug\Emgu.CV.UI.xml
+C:\Users\dydy\Desktop\TesTOpenCV (eman)\TesTOpenCV\bin\Debug\Emgu.Util.xml
+C:\Users\dydy\Desktop\TesTOpenCV (eman)\TesTOpenCV\bin\Debug\ZedGraph.xml
+C:\Users\dydy\Desktop\TesTOpenCV (eman)\TesTOpenCV\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\dydy\Desktop\TesTOpenCV (eman)\TesTOpenCV\obj\Debug\TesTOpenCV.Form1.resources
+C:\Users\dydy\Desktop\TesTOpenCV (eman)\TesTOpenCV\obj\Debug\TesTOpenCV.Properties.Resources.resources
+C:\Users\dydy\Desktop\TesTOpenCV (eman)\TesTOpenCV\obj\Debug\GenerateResource-ResGen.read.1.tlog
+C:\Users\dydy\Desktop\TesTOpenCV (eman)\TesTOpenCV\obj\Debug\ResGen.read.1.tlog
+C:\Users\dydy\Desktop\TesTOpenCV (eman)\TesTOpenCV\obj\Debug\GenerateResource-ResGen.write.1.tlog
+C:\Users\dydy\Desktop\TesTOpenCV (eman)\TesTOpenCV\obj\Debug\ResGen.write.1.tlog
+<<<<<<< .mine
+D:\GP\TesTOpenCV\TesTOpenCV\obj\Debug\TesTOpenCV.exe
+D:\GP\TesTOpenCV\TesTOpenCV\obj\Debug\TesTOpenCV.pdb
+D:\GP\TesTOpenCV\TesTOpenCV\bin\Debug\TesTOpenCV.exe
+D:\GP\TesTOpenCV\TesTOpenCV\bin\Debug\TesTOpenCV.pdb
+D:\GP\TesTOpenCV\TesTOpenCV\bin\Debug\zlib.net.dll
+D:\GP\TesTOpenCV\TesTOpenCV\bin\Debug\ZedGraph.dll
+D:\GP\TesTOpenCV\TesTOpenCV\bin\Debug\Emgu.CV.xml
+D:\GP\TesTOpenCV\TesTOpenCV\bin\Debug\Emgu.CV.ML.xml
+D:\GP\TesTOpenCV\TesTOpenCV\bin\Debug\Emgu.CV.UI.xml
+D:\GP\TesTOpenCV\TesTOpenCV\bin\Debug\Emgu.Util.xml
+D:\GP\TesTOpenCV\TesTOpenCV\bin\Debug\ZedGraph.xml
+D:\GP\TesTOpenCV\TesTOpenCV\obj\Debug\ResolveAssemblyReference.cache
+D:\GP\TesTOpenCV\TesTOpenCV\obj\Debug\TesTOpenCV.Form1.resources
+D:\GP\TesTOpenCV\TesTOpenCV\obj\Debug\TesTOpenCV.Properties.Resources.resources
+D:\GP\TesTOpenCV\TesTOpenCV\obj\Debug\GenerateResource-ResGen.read.1.tlog
+D:\GP\TesTOpenCV\TesTOpenCV\obj\Debug\GenerateResource-ResGen.write.1.tlog
+=======
+C:\My Files\FCIS\Seniors\GP\Code\TesTOpenCV\TesTOpenCV\obj\Debug\TesTOpenCV.exe
+C:\My Files\FCIS\Seniors\GP\Code\TesTOpenCV\TesTOpenCV\obj\Debug\TesTOpenCV.pdb
+C:\My Files\FCIS\Seniors\GP\Code\TesTOpenCV\TesTOpenCV\bin\Debug\TesTOpenCV.exe
+C:\My Files\FCIS\Seniors\GP\Code\TesTOpenCV\TesTOpenCV\bin\Debug\TesTOpenCV.pdb
+C:\My Files\FCIS\Seniors\GP\Code\TesTOpenCV\TesTOpenCV\bin\Debug\zlib.net.dll
+C:\My Files\FCIS\Seniors\GP\Code\TesTOpenCV\TesTOpenCV\bin\Debug\ZedGraph.dll
+C:\My Files\FCIS\Seniors\GP\Code\TesTOpenCV\TesTOpenCV\bin\Debug\Emgu.CV.xml
+C:\My Files\FCIS\Seniors\GP\Code\TesTOpenCV\TesTOpenCV\bin\Debug\Emgu.CV.ML.xml
+C:\My Files\FCIS\Seniors\GP\Code\TesTOpenCV\TesTOpenCV\bin\Debug\Emgu.CV.UI.xml
+C:\My Files\FCIS\Seniors\GP\Code\TesTOpenCV\TesTOpenCV\bin\Debug\Emgu.Util.xml
+C:\My Files\FCIS\Seniors\GP\Code\TesTOpenCV\TesTOpenCV\bin\Debug\ZedGraph.xml
+C:\My Files\FCIS\Seniors\GP\Code\TesTOpenCV\TesTOpenCV\obj\Debug\ResolveAssemblyReference.cache
+C:\My Files\FCIS\Seniors\GP\Code\TesTOpenCV\TesTOpenCV\obj\Debug\TesTOpenCV.Form1.resources
+C:\My Files\FCIS\Seniors\GP\Code\TesTOpenCV\TesTOpenCV\obj\Debug\TesTOpenCV.Properties.Resources.resources
+C:\My Files\FCIS\Seniors\GP\Code\TesTOpenCV\TesTOpenCV\obj\Debug\ResGen.read.1.tlog
+C:\My Files\FCIS\Seniors\GP\Code\TesTOpenCV\TesTOpenCV\obj\Debug\ResGen.write.1.tlog
+>>>>>>> .r15
+D:\GP\TesTOpenCV\TesTOpenCV\obj\Debug\ResGen.read.1.tlog
+D:\GP\TesTOpenCV\TesTOpenCV\obj\Debug\ResGen.write.1.tlog
