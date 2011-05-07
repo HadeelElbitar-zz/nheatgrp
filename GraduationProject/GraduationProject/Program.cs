@@ -16,6 +16,9 @@ namespace GraduationProject
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
+
+            Classifier c = new Classifier();
+            c.TrainClassifier();
         }
     }
 }
