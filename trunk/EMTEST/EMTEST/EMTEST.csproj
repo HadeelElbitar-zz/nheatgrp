@@ -33,21 +33,21 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Emgu.CV, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
+    <Reference Include="Emgu.CV, Version=1.5.0.1, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Downloads\Emgu.CV.Binary-1.5.0.1\Emgu.CV.Binary-1.5.0.1\Emgu.CV.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Users\DyDy\Desktop\Emgu.CV.Binary-1.5.0.1\Emgu.CV.dll</HintPath>
     </Reference>
     <Reference Include="Emgu.CV.ML, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a288bfcf2d37d93b, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Downloads\Emgu.CV.Binary-1.5.0.1\Emgu.CV.Binary-1.5.0.1\Emgu.CV.ML.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Users\DyDy\Desktop\Emgu.CV.Binary-1.5.0.1\Emgu.CV.ML.dll</HintPath>
     </Reference>
-    <Reference Include="Emgu.CV.UI, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
+    <Reference Include="Emgu.CV.UI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=987a5607bf4f198c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Downloads\Emgu.CV.Binary-1.5.0.1\Emgu.CV.Binary-1.5.0.1\Emgu.CV.UI.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Users\DyDy\Desktop\Emgu.CV.Binary-1.5.0.1\Emgu.CV.UI.dll</HintPath>
     </Reference>
-    <Reference Include="Emgu.Util, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
+    <Reference Include="Emgu.Util, Version=1.1.3345.35405, Culture=neutral, PublicKeyToken=9ce8ff41c3b3d7f5, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Downloads\Emgu.CV.Binary-1.5.0.1\Emgu.CV.Binary-1.5.0.1\Emgu.Util.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Users\DyDy\Desktop\Emgu.CV.Binary-1.5.0.1\Emgu.Util.dll</HintPath>
     </Reference>
     <Reference Include="openCV">
       <HintPath>..\..\..\..\..\..\..\My Files\FCIS\Seniors\GP\Source Code\GraduationProject\GraduationProject\bin\Debug\openCV.dll</HintPath>
