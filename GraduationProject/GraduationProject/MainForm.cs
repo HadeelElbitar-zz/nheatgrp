@@ -111,6 +111,7 @@ namespace GraduationProject
         #region FormLoad
         private void MainForm_Load(object sender, EventArgs e)
         {
+            
             Frame = new Frame();
             VideoFunctions VFn = new VideoFunctions();
             FrameFunctions FFn = new FrameFunctions();

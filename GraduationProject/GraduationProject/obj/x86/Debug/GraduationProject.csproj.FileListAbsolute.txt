@@ -158,3 +158,5 @@ C:\My Files\FCIS\Seniors\GP\Source Code\GraduationProject\GraduationProject\obj\
 C:\My Files\FCIS\Seniors\GP\Source Code\GraduationProject\GraduationProject\obj\x86\Debug\GenerateResource.write.1.tlog
 C:\My Files\FCIS\Seniors\GP\Source Code\GraduationProject\GraduationProject\obj\x86\Debug\GraduationProject.exe
 C:\My Files\FCIS\Seniors\GP\Source Code\GraduationProject\GraduationProject\obj\x86\Debug\GraduationProject.pdb
+C:\My Files\FCIS\Seniors\GP\Source Code\GraduationProject\GraduationProject\bin\Debug\Emgu.Util.dll
+C:\My Files\FCIS\Seniors\GP\Source Code\GraduationProject\GraduationProject\bin\Debug\Emgu.CV.dll
