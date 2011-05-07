@@ -37,23 +37,23 @@
   <ItemGroup>
     <Reference Include="Emgu.CV, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Emgu\Emgu CV\bin\Emgu.CV.dll</HintPath>
+      <HintPath>..\..\Emgu.CV.x86.BinaryOnly-2.0.0.0-alpha\Emgu.CV.Binary-2.0.0.0\Emgu.CV.dll</HintPath>
     </Reference>
     <Reference Include="Emgu.CV.DebuggerVisualizers, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\Emgu.CV.DebuggerVisualizers.dll</HintPath>
+      <HintPath>..\..\Emgu.CV.x86.BinaryOnly-2.0.0.0-alpha\Emgu.CV.Binary-2.0.0.0\Emgu.CV.DebuggerVisualizers.dll</HintPath>
     </Reference>
     <Reference Include="Emgu.CV.ML, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a288bfcf2d37d93b, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\Emgu.CV.ML.dll</HintPath>
+      <HintPath>..\..\Emgu.CV.x86.BinaryOnly-2.0.0.0-alpha\Emgu.CV.Binary-2.0.0.0\Emgu.CV.ML.dll</HintPath>
     </Reference>
     <Reference Include="Emgu.CV.UI, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\Emgu.CV.UI.dll</HintPath>
+      <HintPath>..\..\Emgu.CV.x86.BinaryOnly-2.0.0.0-alpha\Emgu.CV.Binary-2.0.0.0\Emgu.CV.UI.dll</HintPath>
     </Reference>
     <Reference Include="Emgu.Util, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Emgu\Emgu CV\bin\Emgu.Util.dll</HintPath>
+      <HintPath>..\..\Emgu.CV.x86.BinaryOnly-2.0.0.0-alpha\Emgu.CV.Binary-2.0.0.0\Emgu.Util.dll</HintPath>
     </Reference>
     <Reference Include="openCV, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -117,12 +117,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\EMTEST\EMTEST\EMTEST.csproj">
-      <Project>{E2A051F6-8006-413B-9AFC-F7E61585F681}</Project>
-      <Name>EMTEST</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
