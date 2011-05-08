@@ -35,24 +35,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Emgu.CV, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Emgu.CV">
       <HintPath>..\..\Emgu.CV.x86.BinaryOnly-2.0.0.0-alpha\Emgu.CV.Binary-2.0.0.0\Emgu.CV.dll</HintPath>
     </Reference>
-    <Reference Include="Emgu.CV.DebuggerVisualizers, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Emgu.CV.DebuggerVisualizers">
       <HintPath>..\..\Emgu.CV.x86.BinaryOnly-2.0.0.0-alpha\Emgu.CV.Binary-2.0.0.0\Emgu.CV.DebuggerVisualizers.dll</HintPath>
     </Reference>
-    <Reference Include="Emgu.CV.ML, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a288bfcf2d37d93b, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Emgu.CV.ML">
       <HintPath>..\..\Emgu.CV.x86.BinaryOnly-2.0.0.0-alpha\Emgu.CV.Binary-2.0.0.0\Emgu.CV.ML.dll</HintPath>
     </Reference>
-    <Reference Include="Emgu.CV.UI, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Emgu.CV.UI">
       <HintPath>..\..\Emgu.CV.x86.BinaryOnly-2.0.0.0-alpha\Emgu.CV.Binary-2.0.0.0\Emgu.CV.UI.dll</HintPath>
     </Reference>
-    <Reference Include="Emgu.Util, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Emgu.Util">
       <HintPath>..\..\Emgu.CV.x86.BinaryOnly-2.0.0.0-alpha\Emgu.CV.Binary-2.0.0.0\Emgu.Util.dll</HintPath>
     </Reference>
     <Reference Include="openCV, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
