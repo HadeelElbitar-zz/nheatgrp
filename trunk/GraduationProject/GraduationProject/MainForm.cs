@@ -7,6 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Drawing.Imaging;
+using Emgu.CV;
+using Emgu.CV.Structure;
+using System.Drawing.Imaging;
+using openCV;
+using Emgu.CV.UI;
+using System.Runtime.InteropServices;
+using System.Drawing;
 
 namespace GraduationProject
 {
@@ -18,15 +25,15 @@ namespace GraduationProject
         Frame Frame;
         VideoFunctions VFn = new VideoFunctions();
         FrameFunctions FFn= new FrameFunctions();
-        ContourFunctions CFn = new ContourFunctions();
-        List<Point> ContourPositions;
+        ContourFunctions CFn = new ContourFunctions(30,30);
+        List<CvPoint> ContourPositions;
 
         public MainForm()
         {
             InitializeComponent();
         }
         #endregion
-
+        Frame _Frame;
         #region Menus
         private void ShowNewForm(object sender, EventArgs e)
         {
@@ -111,12 +118,9 @@ namespace GraduationProject
         #region FormLoad
         private void MainForm_Load(object sender, EventArgs e)
         {
-            
             Frame = new Frame();
-            VideoFunctions VFn = new VideoFunctions();
-            FrameFunctions FFn = new FrameFunctions();
-            ContourFunctions CFn = new ContourFunctions(30, 30);
-            ContourPositions = new List<Point>();
+            
+            ContourPositions = new List<CvPoint>();
         }
         #endregion
 
@@ -125,16 +129,17 @@ namespace GraduationProject
         {
             try
             {
-                Frame _Frame = VFn.GetNextFrame();
+                _Frame = VFn.GetNextFrame();
                 FFn.DisplayFrame(_Frame, FBox);
                 FrameIndix++;
                 SIFT S = new SIFT();
                 ContourFunctions CFn = new ContourFunctions(_Frame.width, _Frame.height);
+                FrameNumberLBL.Text = (FrameIndix + 1).ToString();
                 // FBox.Image = S.GetSIFTpoints(VideoFunctions.Frames[0], VideoFunctions.Frames[1]);
-                FBox.Image = CFn.GetContour(_Frame).BmpImage;
+               // FBox.Image = CFn.GetContour(_Frame).BmpImage;
+               // FBox.Image = CFn.GetContour(_Frame).BmpImage;
             }
             catch { }
-            FrameNumberLBL.Text = (FrameIndix + 1).ToString();
         }
         private void PreviousFrameBTN_Click(object sender, EventArgs e)
         {
@@ -164,8 +169,8 @@ namespace GraduationProject
                 newPictureItem.OpenFrame(PicturePath[k], FBox);
                 Result = CFn.GetContour(newPictureItem);
                 FFn.DisplayFrame(Result, FBox);
-                SIFT S = new SIFT();
-                FBox.Image = S.GetSIFTpoints(Result, newPictureItem);
+                //SIFT S = new SIFT();
+                //FBox.Image = S.GetSIFTpoints(Result, newPictureItem);
             }
             //}
             //catch { }
@@ -173,16 +178,28 @@ namespace GraduationProject
 
         private void FBox_MouseClick(object sender, MouseEventArgs e)
         {
-            ContourPositions.Add(new Point(e.X, e.Y));
+            ContourPositions.Add(new CvPoint(e.X, e.Y));
             int count = ContourPositions.Count;
             if (count != 1)
             {
                 Pen myPen = new System.Drawing.Pen(System.Drawing.Color.Red);
                 Graphics formGraphics = FBox.CreateGraphics();
-                formGraphics.DrawLine(myPen, ContourPositions[count - 2].X, ContourPositions[count - 2].Y, e.X, e.Y);
+                formGraphics.DrawLine(myPen, ContourPositions[count - 2].x, ContourPositions[count - 2].y, e.X, e.Y);
                 myPen.Dispose();
                 formGraphics.Dispose();
             }
+        }
+
+        private void FinishContourButton_Click(object sender, EventArgs e)
+        {
+            //IplImage image = cvlib.ToIplImage((Bitmap)FBox.Image, true);
+            //CvPoint[] pts = ContourPositions.ToArray();
+            //cvlib.CvFillConvexPoly(ref image, ref pts[0], pts.Count(), cvlib.CV_RGB(255, 255, 255), cvlib.CV_AA, 0);
+            //FBox.Image = (Image)image;
+
+            //ContourFunctions CF = new ContourFunctions();
+            Frame frame = CFn.GetBlackAndWhiteContour(FBox.Image.Width, FBox.Image.Height, ContourPositions.ToArray());
+            FBox.Image = frame.BmpImage;
         }
     }
 }

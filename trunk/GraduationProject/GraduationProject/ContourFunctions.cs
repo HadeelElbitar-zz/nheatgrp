@@ -27,6 +27,65 @@ namespace GraduationProject
         {
             // TODO: Complete member initialization
         }
+        public Frame ConnectContour(List<Point> ClickList, Frame _Frame)
+        {
+            Frame NewImage = new Frame();
+            NewImage.width = _Frame.width;
+            NewImage.height = _Frame.height;
+            NewImage.redPixels = new byte[NewImage.height, NewImage.width];
+            NewImage.greenPixels = new byte[NewImage.height, NewImage.width];
+            NewImage.bluePixels = new byte[NewImage.height, NewImage.width];
+            IplImage cnt_img = cvlib.CvCreateImage(cvlib.CvSize(_Frame.width, _Frame.height), 8, 3);
+            CvSeq Sequence = new CvSeq();
+            CvMemStorage storage = cvlib.CvCreateMemStorage(0);
+            int Count = ClickList.Count;
+            List<CvPoint> List = new List<CvPoint>();
+            CvPoint[] AnotherList = new CvPoint[Count];
+            for (int i = 0; i < Count; i++)
+                List.Add(new CvPoint(ClickList[i].X, ClickList[i].Y));
+            NewImage.RGB = cvlib.CvCreateImage(new CvSize(_Frame.width, _Frame.height), 8, 1);
+            //Sequence = cvlib.CvCreateSeq(0, sizeof(CvPoint), ClickList.Count, ref ClickList);
+            
+            GCHandle Handel3;
+            IntPtr ww = new IntPtr();
+            foreach (CvPoint item in List)
+            {
+                ww = cvtools.ConvertStructureToPtr(item, out Handel3);
+                Sequence = (CvSeq)cvtools.ConvertPtrToStructure(ww, typeof(CvSeq));
+            }
+            cvlib.CvDrawContours(ref cnt_img, ref Sequence, cvlib.CV_RGB(110, 230, 120), cvlib.CV_RGB(0, 255, 0), 1, 1, cvlib.CV_AA, cvlib.CvPoint(0, 0));
+            #region ay 7aga
+            FrameFunctions FFn = new FrameFunctions();
+
+            FFn.CopyFrameData(cnt_img, ref NewImage);
+            NewImage.RGB = cvlib.CvCreateImage(new CvSize(_Frame.width, _Frame.height), 8, 3);
+            NewImage.RGB = cnt_img;
+            NewImage.BmpImage = new System.Drawing.Bitmap(_Frame.width, _Frame.height);
+            BitmapData bmpData = NewImage.BmpImage.LockBits(new Rectangle(0, 0, NewImage.width, NewImage.height), System.Drawing.Imaging.ImageLockMode.ReadOnly, NewImage.BmpImage.PixelFormat);
+            unsafe
+            {
+                byte* p = (byte*)bmpData.Scan0;
+                int space = bmpData.Stride - NewImage.width * 3;
+                for (int i = 0; i < NewImage.height; i++)
+                {
+                    for (int j = 0; j < NewImage.width; j++)
+                    {
+                        p[0] = NewImage.bluePixels[i, j];
+                        p[1] = NewImage.greenPixels[i, j];
+                        p[2] = NewImage.redPixels[i, j];
+                        p += 3;
+                    }
+                    p += space;
+                }
+            }
+            NewImage.BmpImage.UnlockBits(bmpData);
+            NewImage.RgbImage = new Image<Bgr, byte>(NewImage.BmpImage);
+            NewImage.LabImage = NewImage.RgbImage.Convert<Lab, byte>();
+            NewImage.RGB = (IplImage)cvtools.ConvertPtrToStructure(NewImage.RgbImage.Ptr, typeof(IplImage));
+            NewImage.Lab = (IplImage)cvtools.ConvertPtrToStructure(NewImage.LabImage.Ptr, typeof(IplImage));
+            return NewImage;
+            #endregion
+        }
         public Frame GetContour(Frame _Frame)
         {
             Frame NewImage = new Frame();
@@ -95,7 +154,7 @@ namespace GraduationProject
             NewImage.LabImage = NewImage.RgbImage.Convert<Lab, byte>();
             NewImage.RGB = (IplImage)cvtools.ConvertPtrToStructure(NewImage.RgbImage.Ptr, typeof(IplImage));
             NewImage.Lab = (IplImage)cvtools.ConvertPtrToStructure(NewImage.LabImage.Ptr, typeof(IplImage));
-            //SetWindows(_Frame);
+            SetWindows(_Frame);
             return NewImage;
         }
         public List<CvPoint> _ContourPoints
@@ -134,5 +193,34 @@ namespace GraduationProject
                 }
             }
         }
+        public Frame GetBlackAndWhiteContour(int width, int height, CvPoint[] pts)
+        {
+            #region White inside contour & black outside
+            IplImage image = cvlib.CvCreateImage(cvlib.CvSize(width, height), 8, 1);
+            cvlib.CvSetZero(ref image);
+            cvlib.CvFillConvexPoly(ref image, ref pts[0], pts.Count(), cvlib.CV_RGB(255, 0, 0), cvlib.CV_AA, 0);
+            #endregion
+
+            #region IplImage to Frame
+            Frame frame = new Frame();
+            frame.width = width;
+            frame.height = height;
+            FrameFunctions Fn = new FrameFunctions();
+            Fn.CopyFrameData(image, ref frame);
+            //for (int i = 0; i < height; i++)
+            //{
+            //    for (int j = 0; j < width; j++)
+            //    {
+            //        CvScalar vals;
+            //        vals = cvlib.CvGet2D(ref image, i, j);
+            //        frame.bluePixels[i, j] = (byte)vals.val1;
+            //        frame.greenPixels[i, j] = (byte)vals.val2;
+            //        frame.redPixels[i, j] = (byte)vals.val3;
+            //    }
+            //}
+            return frame;
+            #endregion
+        }
+
     }
 }

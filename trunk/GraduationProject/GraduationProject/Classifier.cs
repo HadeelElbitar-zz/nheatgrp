@@ -22,7 +22,7 @@ namespace GraduationProject
         //Matrix<int> em = new Matrix<int>(1, 1);
         //EMParams em = new EMParams();
         public Classifier() { }
-        public void TrainClassifier()
+        public void EM()
         {
             //EMTEST.EMTET Em = new EMTEST.EMTET();
             //Em.Trainn();
@@ -50,65 +50,67 @@ namespace GraduationProject
             unsafe
             {
                 double* PTR = (double*)Means;
-                 x = *PTR;
+                x = *PTR;
             }
             Matrix<double>[] Covariance = Em.GetCovariances();
         }
-        public void TrainClassifier(Window _Window)
+        public void Kmean(Window _Window)
         {
-            #region OLD
-            //int Classes = 2;
+            int Classes = 2;
 
             #region Get Random Centroids
-            //double[] centroids = new double[Classes];
-            //Random rand = new Random();
-            //for (int k = 0; k < Classes; k++)
-            //{
-            //    int i = rand.Next(0, _Window.WinFrame.height);
-            //    int j = rand.Next(0, _Window.WinFrame.width);
-            //    centroids[k] = (_Window.WinFrame.redPixels[i, j] + _Window.WinFrame.greenPixels[i, j] + _Window.WinFrame.bluePixels[i, j]) / 3;
-            //}
+            double[] centroids = new double[Classes];
+            Random rand = new Random();
+            for (int k = 0; k < Classes; k++)
+            {
+                int i = rand.Next(0, _Window.WinFrame.height);
+                int j = rand.Next(0, _Window.WinFrame.width);
+                centroids[k] = (_Window.WinFrame.redPixels[i, j] + _Window.WinFrame.greenPixels[i, j] + _Window.WinFrame.bluePixels[i, j]) / 3;
+            }
             #endregion
 
             #region Centroids Convergence
+            bool change = true;
+            while (change)
+            {
+                double[] CentroidAssignedValues = new double[Classes];
+                double[] CentroidAssignedFrequencies = new double[Classes];
 
-            //bool change = true;
-            //while (change)
-            //{
-            //    double[] CentroidAssignedValues = new double[Classes];
-            //    double[] CentroidAssignedFrequencies = new double[Classes];
+                for (int i = 0; i < _Window.WinFrame.height; i++)
+                {
+                    for (int j = 0; j < _Window.WinFrame.width; j++)
+                    {
+                        double Difference = Math.Abs(((double)(_Window.WinFrame.redPixels[i, j] + _Window.WinFrame.greenPixels[i, j] + _Window.WinFrame.bluePixels[i, j]) / 3) - centroids[0]);
+                        double Difference2 = Math.Abs(((double)(_Window.WinFrame.redPixels[i, j] + _Window.WinFrame.greenPixels[i, j] + _Window.WinFrame.bluePixels[i, j]) / 3) - centroids[1]);
+                        if (Difference < Difference2)
+                        {
+                            CentroidAssignedFrequencies[0]++;
+                            CentroidAssignedValues[0] += ((_Window.WinFrame.redPixels[i, j] + _Window.WinFrame.greenPixels[i, j] + _Window.WinFrame.bluePixels[i, j]) / 3);
+                            _Window.AfterCalcPointClass[i, j] = 1;
+                        }
+                        else
+                        {
+                            CentroidAssignedFrequencies[1]++;
+                            CentroidAssignedValues[1] += ((_Window.WinFrame.redPixels[i, j] + _Window.WinFrame.greenPixels[i, j] + _Window.WinFrame.bluePixels[i, j]) / 3);
+                            _Window.AfterCalcPointClass[i, j] = 2;
+                        }
+                    }
+                }
+                change = false;
+                for (int c = 0; c < Classes; c++)
+                {
+                    double temp = CentroidAssignedFrequencies[c] / (_Window.WinFrame.width * _Window.WinFrame.height);
+                    if (Math.Abs(temp - centroids[c]) != 0)
+                    {
+                        centroids[c] = temp;
+                        change = true;
+                    }
+                }
+            }
+            #endregion
 
-            //    for (int i = 0; i < _Window.WinFrame.height; i++)
-            //    {
-            //        for (int j = 0; j < _Window.WinFrame.width; j++)
-            //        {
-            //            double Min = double.MaxValue;
-            //            for (int r = 0; r < Classes; r++)
-            //            {
-            //                double Difference = Math.Abs(((_Window.WinFrame.redPixels[i, j] + _Window.WinFrame.greenPixels[i, j] + _Window.WinFrame.bluePixels[i, j]) / 3) - centroids[r]);
-            //                if (Difference < Min)
-            //                {
-            //                    Min = Difference;
-            //                    CentroidAssignedFrequencies[r]++;
-            //                    CentroidAssignedValues[r] += ((_Window.WinFrame.redPixels[i, j] + _Window.WinFrame.greenPixels[i, j] + _Window.WinFrame.bluePixels[i, j]) / 3);
-            //                    _Window.AfterCalcPointClass[i, j] = r + 1;
-            //                }
-            //            }
-            //        }
-            //    }
-            //    change = false;
-            //    for (int c = 0; c < Classes; c++)
-            //    {
-            //        double temp = CentroidAssignedValues[c] / CentroidAssignedFrequencies[c];
-            //        if (temp != centroids[c] && temp != double.NaN)
-            //        {
-            //            centroids[c] = temp;
-            //            change = true;
-            //        }
-            //    }
-            //}
-            #endregion
-            #endregion
+            double MuF = centroids[0];
+            double MuB = centroids[1];
         }
     }
 }

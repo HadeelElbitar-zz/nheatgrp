@@ -100,6 +100,7 @@
             this.PreviousFrameBTN = new System.Windows.Forms.Button();
             this.NextFrameBTN = new System.Windows.Forms.Button();
             this.FrameNumberLBL = new System.Windows.Forms.Label();
+            this.FinishContourButton = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -552,13 +553,14 @@
             // 
             // SegmentationToolsGroupBox
             // 
+            this.SegmentationToolsGroupBox.Controls.Add(this.FinishContourButton);
             this.SegmentationToolsGroupBox.Controls.Add(this.LoadImageButton);
             this.SegmentationToolsGroupBox.Controls.Add(this.MagicWandGroupBox);
             this.SegmentationToolsGroupBox.Controls.Add(this.LassotToolGroupBox);
             this.SegmentationToolsGroupBox.Controls.Add(this.MarqueeToolGroupBox);
             this.SegmentationToolsGroupBox.Location = new System.Drawing.Point(12, 63);
             this.SegmentationToolsGroupBox.Name = "SegmentationToolsGroupBox";
-            this.SegmentationToolsGroupBox.Size = new System.Drawing.Size(150, 390);
+            this.SegmentationToolsGroupBox.Size = new System.Drawing.Size(150, 413);
             this.SegmentationToolsGroupBox.TabIndex = 4;
             this.SegmentationToolsGroupBox.TabStop = false;
             this.SegmentationToolsGroupBox.Text = "Segmentation Tools";
@@ -729,6 +731,16 @@
             this.FrameNumberLBL.TabIndex = 9;
             this.FrameNumberLBL.Text = "1/";
             // 
+            // FinishContourButton
+            // 
+            this.FinishContourButton.Location = new System.Drawing.Point(27, 383);
+            this.FinishContourButton.Name = "FinishContourButton";
+            this.FinishContourButton.Size = new System.Drawing.Size(95, 23);
+            this.FinishContourButton.TabIndex = 11;
+            this.FinishContourButton.Text = "Finish Contour";
+            this.FinishContourButton.UseVisualStyleBackColor = true;
+            this.FinishContourButton.Click += new System.EventHandler(this.FinishContourButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -836,6 +848,7 @@
         private System.Windows.Forms.Button NextFrameBTN;
         private System.Windows.Forms.Label FrameNumberLBL;
         private System.Windows.Forms.Button LoadImageButton;
+        private System.Windows.Forms.Button FinishContourButton;
     }
 }
 

@@ -17,8 +17,8 @@ namespace GraduationProject
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
 
-            Classifier c = new Classifier();
-            c.TrainClassifier();
+            //Classifier c = new Classifier();
+            //c.TrainClassifier();
         }
     }
 }
