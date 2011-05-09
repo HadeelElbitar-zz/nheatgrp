@@ -33,6 +33,7 @@ namespace GraduationProject
         }
         #endregion
         Frame _Frame;
+        Frame newPictureItem;
         #region Menus
         private void ShowNewForm(object sender, EventArgs e)
         {
@@ -160,14 +161,15 @@ namespace GraduationProject
             int count = PicturePath.Count();
             for (int k = 0; k < count; k++)
             {
-                Frame newPictureItem = new Frame();
-                Frame Result ;//= new Frame();
+                newPictureItem = new Frame();
+                //Frame Result ;//= new Frame();
                 string PictureName = PicturePath[k].Substring(PicturePath[k].LastIndexOf('\\') + 1);
                 int offset = PictureName.LastIndexOf('.') + 1;
                 string type = PictureName.Substring(offset, PictureName.Length - offset);
                 newPictureItem.OpenFrame(PicturePath[k], FBox);
-                Result = CFn.GetContour(newPictureItem);
-                FFn.DisplayFrame(Result, FBox);
+                //newPictureItem.
+                //Result = CFn.GetContour(newPictureItem);
+                FFn.DisplayFrame(newPictureItem, FBox);
                 //SIFT S = new SIFT();
                 //FBox.Image = S.GetSIFTpoints(Result, newPictureItem);
             }
@@ -196,6 +198,8 @@ namespace GraduationProject
         {
             FrameState = 0;
             Frame frame = CFn.GetBlackAndWhiteContour(ContourPositions.ToArray(), (Bitmap)FBox.Image);
+            Frame Result = CFn.GetContour(frame, newPictureItem);
+            //FFn.DisplayFrame(newPictureItem, FBox);
             FBox.Image = (Image)frame.BmpImage;
         }
     }

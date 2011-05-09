@@ -85,7 +85,7 @@ namespace GraduationProject
             return NewImage;
             #endregion
         }
-        public Frame GetContour(Frame _Frame)
+        public Frame GetContour(Frame _Frame, Frame _coloredFrame)
         {
             Frame NewImage = new Frame();
             NewImage.width = _Frame.width;
@@ -153,7 +153,7 @@ namespace GraduationProject
             NewImage.LabImage = NewImage.RgbImage.Convert<Lab, byte>();
             NewImage.RGB = (IplImage)cvtools.ConvertPtrToStructure(NewImage.RgbImage.Ptr, typeof(IplImage));
             NewImage.Lab = (IplImage)cvtools.ConvertPtrToStructure(NewImage.LabImage.Ptr, typeof(IplImage));
-            SetWindows(_Frame);
+            SetWindows(_Frame, _coloredFrame);
             return NewImage;
         }
         public List<CvPoint> _ContourPoints
@@ -163,10 +163,10 @@ namespace GraduationProject
                 return ContourPoints;
             }
         }
-        private void SetWindows(Frame _Frame)
+        private void SetWindows(Frame _Frame, Frame _coloredFrame)
         {
             Window Win;
-            WindowList.Add(Win = new Window(WindowWidth, WindowHeight, _Frame,_Frame, ContourPoints[0])); //mo2ktab le7ad el binary :D
+            WindowList.Add(Win = new Window(WindowWidth, WindowHeight, _Frame,_coloredFrame,  ContourPoints[0])); //mo2ktab le7ad el binary :D
             int WinSize, OverLappingArea, newIndex = 0, index = 0;
             WinSize = WindowWidth;
             OverLappingArea = WinSize/3;
@@ -183,7 +183,7 @@ namespace GraduationProject
                     {
                         newIndex = ContourPoints.IndexOf(ContourPoints[i - 1]);
                         LoopCounter = ++i;
-                        Win = new Window(WindowWidth, WindowHeight, _Frame, _Frame, ContourPoints[newIndex]); //mo2ktab le7ad el binary :D
+                        Win = new Window(WindowWidth, WindowHeight, _Frame, _coloredFrame, ContourPoints[newIndex]); //mo2ktab le7ad el binary :D
                         WindowCount--;
                         WindowList.Add(Win);
                         index = newIndex;
@@ -201,6 +201,10 @@ namespace GraduationProject
             cvlib.CvFillConvexPoly(ref image, ref pts[0], pts.Count(), cvlib.CV_RGB(255, 255, 255), cvlib.CV_AA, 0);
             Frame frame = new Frame();
             frame.BmpToFrame(frame.BmpImage = (Bitmap)(image));
+            frame.RgbImage = new Image<Bgr, byte>(frame.BmpImage);
+            frame.LabImage = frame.RgbImage.Convert<Lab, byte>();
+            frame.RGB = (IplImage)cvtools.ConvertPtrToStructure(frame.RgbImage.Ptr, typeof(IplImage));
+            frame.Lab = (IplImage)cvtools.ConvertPtrToStructure(frame.LabImage.Ptr, typeof(IplImage));
             return frame;
         }
     }

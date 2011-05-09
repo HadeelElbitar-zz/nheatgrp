@@ -173,3 +173,8 @@ E:\Projects\GP\GraduationProject\GraduationProject\bin\Debug\Emgu.CV.xml
 E:\Projects\GP\GraduationProject\GraduationProject\bin\Debug\Emgu.CV.ML.xml
 E:\Projects\GP\GraduationProject\GraduationProject\bin\Debug\Emgu.CV.UI.xml
 E:\Projects\GP\GraduationProject\GraduationProject\bin\Debug\Emgu.Util.xml
+C:\My Files\FCIS\Seniors\GP\Source Code\GraduationProject\GraduationProject\bin\Debug\Accord.Core.dll
+C:\My Files\FCIS\Seniors\GP\Source Code\GraduationProject\GraduationProject\bin\Debug\Accord.MachineLearning.dll
+C:\My Files\FCIS\Seniors\GP\Source Code\GraduationProject\GraduationProject\bin\Debug\Accord.Math.dll
+C:\My Files\FCIS\Seniors\GP\Source Code\GraduationProject\GraduationProject\bin\Debug\Accord.Statistics.dll
+C:\My Files\FCIS\Seniors\GP\Source Code\GraduationProject\GraduationProject\bin\Debug\AForge.Math.dll

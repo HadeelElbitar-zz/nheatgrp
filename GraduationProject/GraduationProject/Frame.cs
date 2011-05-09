@@ -77,7 +77,8 @@ namespace GraduationProject
         public void OpenFrame(string PicturePath, PictureBox picBox)
         {
             FrameBox = picBox;
-            BmpToFrame(new Bitmap(PicturePath));
+            BmpImage = new Bitmap(PicturePath);
+            BmpToFrame(BmpImage);
             RgbImage = new Image<Bgr, byte>(BmpImage);
             LabImage = RgbImage.Convert<Lab, byte>();
             RGB = (IplImage)cvtools.ConvertPtrToStructure(RgbImage.Ptr, typeof(IplImage));

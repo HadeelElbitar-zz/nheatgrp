@@ -28,7 +28,7 @@ namespace GraduationProject
         double[] ForegroundRedPixels, ForegroundGreenPixels, ForegroundBluePixels;
         double[] BackgroundRedPixels, BackgroundGreenPixels, BackgroundBluePixels;
         double[] ForegroundKmean1, ForegroundKmean2, ForegroundKmean3, BackgroundKmean1, BackgroundKmean2, BackgroundKmean3;
-        double[,] BackgroundKmeanCovarinace1, BackgroundKmeanCovarinace2, BackgroundKmeanCovarinace3 ,
+        double[,] BackgroundKmeanCovarinace1, BackgroundKmeanCovarinace2, BackgroundKmeanCovarinace3,
              ForegroundKmeanCovarinace1, ForegroundKmeanCovarinace2, ForegroundKmeanCovarinace3;
         double[] BackgroundEMmean1, BackgroundEMmean2, BackgroundEMmean3, ForegroundEMmean1, ForegroundEMmean2, ForegroundEMmean3;
         #endregion
@@ -36,6 +36,7 @@ namespace GraduationProject
         #region Training Step
         public void TrainClassifier(Window _Window)
         {
+            DividData(_Window);
             ForegroundKmean();
             BackgroundKmean();
             BackgrounEM();
@@ -43,29 +44,48 @@ namespace GraduationProject
         void GMM()
         {
             double[][] DataMatrix;
-            
+
             GaussianMixtureModel Gmm = new GaussianMixtureModel(3);
 
             //Gmm.Compute(DataMatrix);
         }
         void DividData(Window _Window)
         {
-            int Width = _Window.WinFrame.width, Height = _Window.WinFrame.height;
+            int Width = _Window.WinFrame.width, Height = _Window.WinFrame.height, WhiteCount = 0, BlackCount = 0;
+            for (int i = 0; i < Width; i++)
+                for (int j = 0; j < Height; j++)
+                {
+                    if (_Window.BinaryWinFrame.redPixels[i, j] == 0)
+                        BlackCount++;
+                    else
+                        WhiteCount++;
+
+                }
+            BackgroundRedPixels = new double[BlackCount];
+            BackgroundGreenPixels = new double[BlackCount];
+            BackgroundBluePixels = new double[BlackCount];
+
+            ForegroundRedPixels = new double[WhiteCount];
+            ForegroundGreenPixels = new double[WhiteCount];
+            ForegroundBluePixels = new double[WhiteCount];
+            int F = 0, B = 0;
             for (int i = 0; i < Height; i++)
             {
-                for (int j = 0, c = 0; j < Width; j++, c++)
+                for (int j = 0; j < Width; j++)
                 {
                     if (_Window.BinaryWinFrame.redPixels[i, j] == 0)
                     {
-                        BackgroundRedPixels[c] = (double)_Window.WinFrame.redPixels[i, j];
-                        BackgroundGreenPixels[c] = (double)_Window.WinFrame.greenPixels[i, j];
-                        BackgroundBluePixels[c] = (double)_Window.WinFrame.bluePixels[i, j];
+                        BackgroundRedPixels[B] = (double)_Window.WinFrame.redPixels[i, j];
+                        BackgroundGreenPixels[B] = (double)_Window.WinFrame.greenPixels[i, j];
+                        BackgroundBluePixels[B] = (double)_Window.WinFrame.bluePixels[i, j];
+                        B++;
                     }
                     else
                     {
-                        ForegroundRedPixels[c] = (double)_Window.WinFrame.redPixels[i, j];
-                        ForegroundGreenPixels[c] = (double)_Window.WinFrame.greenPixels[i, j];
-                        ForegroundBluePixels[c] = (double)_Window.WinFrame.bluePixels[i, j];
+                        ForegroundRedPixels[F] = (double)_Window.WinFrame.redPixels[i, j];
+                        ForegroundGreenPixels[F] = (double)_Window.WinFrame.greenPixels[i, j];
+                        ForegroundBluePixels[F] = (double)_Window.WinFrame.bluePixels[i, j];
+                        F++;
                     }
                 }
             }
@@ -81,12 +101,12 @@ namespace GraduationProject
             Matrix<float> featuresM = new Matrix<float>(length, Dimention);
             int PatternCount = 0;
             for (int i = 0; i < length; i++)
-                {
-                    featuresM[PatternCount, 0] = (float)BackgroundRedPixels[i];
-                    featuresM[PatternCount, 1] = (float)BackgroundGreenPixels[i];
-                    featuresM[PatternCount, 2] = (float)BackgroundBluePixels[i];
-                    PatternCount++;
-                }
+            {
+                featuresM[PatternCount, 0] = (float)BackgroundRedPixels[i];
+                featuresM[PatternCount, 1] = (float)BackgroundGreenPixels[i];
+                featuresM[PatternCount, 2] = (float)BackgroundBluePixels[i];
+                PatternCount++;
+            }
 
             EMParams pars = new EMParams();
             Matrix<double>[] Covariances = new Matrix<double>[3];
@@ -108,7 +128,7 @@ namespace GraduationProject
 
             Em.Train(featuresM, null, pars, labels);
             IntPtr Means = Em.Means.MCvMat.data;
-            
+            BackgroundEMmean1 = new double[3];
             unsafe
             {
                 int i = -1;
@@ -141,7 +161,7 @@ namespace GraduationProject
             while (true)
             {
                 int[] isEqual = TestEqualCentroids(centroids);
-                if (isEqual[0] == 0 && isEqual[1] == 0 && isEqual[2] == 0)
+                if (isEqual[0] != 0 && isEqual[1] != 0 && isEqual[2] != 0)
                     break;
                 centroids.Clear();
                 for (int k = 0; k < Classes; k++)
@@ -321,7 +341,7 @@ namespace GraduationProject
         double[] FindNewMean(List<double[]> List)
         {
             double[] Result = new double[3];
-            
+
             foreach (double[] item in List)
             {
                 Result[0] += item[0];
