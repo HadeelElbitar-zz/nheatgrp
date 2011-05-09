@@ -43,7 +43,9 @@ namespace GraduationProject
         void GMM()
         {
             double[][] DataMatrix;
+            
             GaussianMixtureModel Gmm = new GaussianMixtureModel(3);
+
             //Gmm.Compute(DataMatrix);
         }
         void DividData(Window _Window)

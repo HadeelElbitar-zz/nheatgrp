@@ -22,7 +22,6 @@ namespace GraduationProject
             WindowWidth = _WindowWidth;
             WindowHeight = _WindowHeight;
         }
-
         public ContourFunctions()
         {
             // TODO: Complete member initialization
@@ -193,34 +192,16 @@ namespace GraduationProject
                 }
             }
         }
-        public Frame GetBlackAndWhiteContour(int width, int height, CvPoint[] pts)
+        public Frame GetBlackAndWhiteContour(CvPoint[] pts, Bitmap BmpImage)
         {
-            #region White inside contour & black outside
-            IplImage image = cvlib.CvCreateImage(cvlib.CvSize(width, height), 8, 1);
+            int width = BmpImage.Width;
+            int height = BmpImage.Height;
+            IplImage image = cvlib.ToIplImage((Bitmap)BmpImage, true);
             cvlib.CvSetZero(ref image);
-            cvlib.CvFillConvexPoly(ref image, ref pts[0], pts.Count(), cvlib.CV_RGB(255, 0, 0), cvlib.CV_AA, 0);
-            #endregion
-
-            #region IplImage to Frame
+            cvlib.CvFillConvexPoly(ref image, ref pts[0], pts.Count(), cvlib.CV_RGB(255, 255, 255), cvlib.CV_AA, 0);
             Frame frame = new Frame();
-            frame.width = width;
-            frame.height = height;
-            FrameFunctions Fn = new FrameFunctions();
-            Fn.CopyFrameData(image, ref frame);
-            //for (int i = 0; i < height; i++)
-            //{
-            //    for (int j = 0; j < width; j++)
-            //    {
-            //        CvScalar vals;
-            //        vals = cvlib.CvGet2D(ref image, i, j);
-            //        frame.bluePixels[i, j] = (byte)vals.val1;
-            //        frame.greenPixels[i, j] = (byte)vals.val2;
-            //        frame.redPixels[i, j] = (byte)vals.val3;
-            //    }
-            //}
+            frame.BmpToFrame(frame.BmpImage = (Bitmap)(image));
             return frame;
-            #endregion
         }
-
     }
 }
