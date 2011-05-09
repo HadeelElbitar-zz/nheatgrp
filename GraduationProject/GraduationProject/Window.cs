@@ -15,11 +15,11 @@ namespace GraduationProject
     class Window
     {
         public int Center_X, Center_Y;
-        public Frame WinFrame;
+        public Frame WinFrame, BinaryWinFrame;
         public Classifier WinClassifier;
         static int Counter = 0;
         public int[,] AfterCalcPointClass;
-        public Window(int _width , int _height, Frame _Frame, CvPoint _CenterPoint) 
+        public Window(int _width , int _height, Frame _Frame,Frame _FrameMask, CvPoint _CenterPoint) 
         {
             WinFrame = new Frame();
             WinFrame.height = _height;
@@ -27,12 +27,23 @@ namespace GraduationProject
             if (_width % 2 == 0) WinFrame.width++;
             if (_height % 2 == 0) WinFrame.height++;
 
+            BinaryWinFrame = new Frame();
+            BinaryWinFrame.height = _height;
+            BinaryWinFrame.width = _width;
+            if (_width % 2 == 0) BinaryWinFrame.width++;
+            if (_height % 2 == 0) BinaryWinFrame.height++;
+
             Center_X = _CenterPoint.x;
             Center_Y = _CenterPoint.y;
 
             WinFrame.redPixels = new byte[WinFrame.height, WinFrame.width];
             WinFrame.greenPixels = new byte[WinFrame.height, WinFrame.width];
             WinFrame.bluePixels = new byte[WinFrame.height, WinFrame.width];
+
+            BinaryWinFrame.redPixels = new byte[BinaryWinFrame.height, BinaryWinFrame.width];
+            BinaryWinFrame.greenPixels = new byte[BinaryWinFrame.height, BinaryWinFrame.width];
+            BinaryWinFrame.bluePixels = new byte[BinaryWinFrame.height, BinaryWinFrame.width];
+
             AfterCalcPointClass = new int[WinFrame.height, WinFrame.width];
            // WinFrame.Lab = 
 
@@ -46,6 +57,10 @@ namespace GraduationProject
                     WinFrame.redPixels[c, k] = _Frame.redPixels[i, j];
                     WinFrame.greenPixels[c, k] = _Frame.greenPixels[i, j];
                     WinFrame.bluePixels[c, k] = _Frame.bluePixels[i, j];
+
+                    //BinaryWinFrame.redPixels[c, k] = _FrameMask.redPixels[i, j];
+                    //BinaryWinFrame.greenPixels[c, k] = _FrameMask.greenPixels[i, j];
+                    //BinaryWinFrame.bluePixels[c, k] = _FrameMask.bluePixels[i, j];
                 }
             }
             WinFrame.BmpImage = new Bitmap(WinFrame.width, WinFrame.height);
@@ -79,7 +94,7 @@ namespace GraduationProject
 
             WinFrame.BmpImage.Save(Pw, ImageFormat.Bmp);
             WinClassifier = new Classifier();
-            WinClassifier.Kmean(this);
+            WinClassifier.TrainClassifier(this);
         }
     }
 }
