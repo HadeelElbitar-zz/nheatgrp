@@ -167,7 +167,7 @@ namespace GraduationProject
         private void SetWindows(Frame _Frame)
         {
             Window Win;
-            WindowList.Add(Win = new Window(WindowWidth, WindowHeight, _Frame, ContourPoints[0]));
+            WindowList.Add(Win = new Window(WindowWidth, WindowHeight, _Frame,_Frame, ContourPoints[0])); //mo2ktab le7ad el binary :D
             int WinSize, OverLappingArea, newIndex = 0, index = 0;
             WinSize = WindowWidth;
             OverLappingArea = WinSize/3;
@@ -184,7 +184,7 @@ namespace GraduationProject
                     {
                         newIndex = ContourPoints.IndexOf(ContourPoints[i - 1]);
                         LoopCounter = ++i;
-                        Win = new Window(WindowWidth, WindowHeight, _Frame, ContourPoints[newIndex]);
+                        Win = new Window(WindowWidth, WindowHeight, _Frame, _Frame, ContourPoints[newIndex]); //mo2ktab le7ad el binary :D
                         WindowCount--;
                         WindowList.Add(Win);
                         index = newIndex;
