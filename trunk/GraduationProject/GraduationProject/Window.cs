@@ -19,7 +19,7 @@ namespace GraduationProject
         public Classifier WinClassifier;
         static int Counter = 0;
         public int[,] AfterCalcPointClass;
-        public Window(int _width , int _height, Frame _Frame,Frame _FrameMask, CvPoint _CenterPoint) 
+        public Window(int _width, int _height, Frame _FrameMask, Frame _Frame, CvPoint _CenterPoint) 
         {
             WinFrame = new Frame();
             WinFrame.height = _height;
@@ -58,9 +58,9 @@ namespace GraduationProject
                     WinFrame.greenPixels[c, k] = _Frame.greenPixels[i, j];
                     WinFrame.bluePixels[c, k] = _Frame.bluePixels[i, j];
 
-                    //BinaryWinFrame.redPixels[c, k] = _FrameMask.redPixels[i, j];
-                    //BinaryWinFrame.greenPixels[c, k] = _FrameMask.greenPixels[i, j];
-                    //BinaryWinFrame.bluePixels[c, k] = _FrameMask.bluePixels[i, j];
+                    BinaryWinFrame.redPixels[c, k] = _FrameMask.redPixels[i, j];
+                    BinaryWinFrame.greenPixels[c, k] = _FrameMask.greenPixels[i, j];
+                    BinaryWinFrame.bluePixels[c, k] = _FrameMask.bluePixels[i, j];
                 }
             }
             WinFrame.BmpImage = new Bitmap(WinFrame.width, WinFrame.height);
