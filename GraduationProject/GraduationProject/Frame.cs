@@ -76,16 +76,25 @@ namespace GraduationProject
         #region OpenFrame
         public void OpenFrame(string PicturePath, PictureBox picBox)
         {
-            BmpImage = new Bitmap(PicturePath);
+            FrameBox = picBox;
+            BmpToFrame(new Bitmap(PicturePath));
+            RgbImage = new Image<Bgr, byte>(BmpImage);
+            LabImage = RgbImage.Convert<Lab, byte>();
+            RGB = (IplImage)cvtools.ConvertPtrToStructure(RgbImage.Ptr, typeof(IplImage));
+            Lab = (IplImage)cvtools.ConvertPtrToStructure(LabImage.Ptr, typeof(IplImage));
+        }
+        public void BmpToFrame(Bitmap BmpImage)
+        {
             width = BmpImage.Width;
             height = BmpImage.Height;
-            FrameBox = picBox;
             redPixels = new byte[height, width];
             greenPixels = new byte[height, width];
             bluePixels = new byte[height, width];
             BitmapData bmpData = BmpImage.LockBits(new Rectangle(0, 0, width, height), System.Drawing.Imaging.ImageLockMode.ReadOnly, BmpImage.PixelFormat);
-
-            #region RGB
+            FillFrameRGB(bmpData);
+        }
+        void FillFrameRGB(BitmapData bmpData)
+        {
             unsafe
             {
                 byte* p = (byte*)bmpData.Scan0;
@@ -194,12 +203,6 @@ namespace GraduationProject
                 }
             }
             BmpImage.UnlockBits(bmpData);
-            #endregion
-
-            RgbImage = new Image<Bgr, byte>(BmpImage);
-            LabImage = RgbImage.Convert<Lab, byte>();
-            RGB = (IplImage)cvtools.ConvertPtrToStructure(RgbImage.Ptr, typeof(IplImage));
-            Lab = (IplImage)cvtools.ConvertPtrToStructure(LabImage.Ptr, typeof(IplImage));
         }
         #endregion
 

@@ -9,11 +9,9 @@ using System.Windows.Forms;
 using System.Drawing.Imaging;
 using Emgu.CV;
 using Emgu.CV.Structure;
-using System.Drawing.Imaging;
 using openCV;
 using Emgu.CV.UI;
 using System.Runtime.InteropServices;
-using System.Drawing;
 
 namespace GraduationProject
 {
@@ -27,6 +25,7 @@ namespace GraduationProject
         FrameFunctions FFn= new FrameFunctions();
         ContourFunctions CFn = new ContourFunctions(30,30);
         List<CvPoint> ContourPositions;
+        int FrameState;
 
         public MainForm()
         {
@@ -45,7 +44,7 @@ namespace GraduationProject
         private void OpenFile(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+            //openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
             openFileDialog.Filter = "Text Files (*.avi)|*.avi|All Files (*.*)|*.*";
             string FileName = "";
             if (openFileDialog.ShowDialog(this) == DialogResult.OK)
@@ -119,8 +118,8 @@ namespace GraduationProject
         private void MainForm_Load(object sender, EventArgs e)
         {
             Frame = new Frame();
-            
             ContourPositions = new List<CvPoint>();
+            FrameState = 0;
         }
         #endregion
 
@@ -175,9 +174,13 @@ namespace GraduationProject
             //}
             //catch { }
         }
-
         private void FBox_MouseClick(object sender, MouseEventArgs e)
         {
+            if (FrameState == 0)
+            {
+                ContourPositions.Clear();
+                FrameState = 1;
+            }
             ContourPositions.Add(new CvPoint(e.X, e.Y));
             int count = ContourPositions.Count;
             if (count != 1)
@@ -189,17 +192,11 @@ namespace GraduationProject
                 formGraphics.Dispose();
             }
         }
-
         private void FinishContourButton_Click(object sender, EventArgs e)
         {
-            //IplImage image = cvlib.ToIplImage((Bitmap)FBox.Image, true);
-            //CvPoint[] pts = ContourPositions.ToArray();
-            //cvlib.CvFillConvexPoly(ref image, ref pts[0], pts.Count(), cvlib.CV_RGB(255, 255, 255), cvlib.CV_AA, 0);
-            //FBox.Image = (Image)image;
-
-            //ContourFunctions CF = new ContourFunctions();
-            Frame frame = CFn.GetBlackAndWhiteContour(FBox.Image.Width, FBox.Image.Height, ContourPositions.ToArray());
-            FBox.Image = frame.BmpImage;
+            FrameState = 0;
+            Frame frame = CFn.GetBlackAndWhiteContour(ContourPositions.ToArray(), (Bitmap)FBox.Image);
+            FBox.Image = (Image)frame.BmpImage;
         }
     }
 }
