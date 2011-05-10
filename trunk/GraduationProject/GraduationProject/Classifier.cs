@@ -37,17 +37,43 @@ namespace GraduationProject
         public void TrainClassifier(Window _Window)
         {
             DividData(_Window);
+            GMM();
             ForegroundKmean();
             BackgroundKmean();
             BackgrounEM();
         }
         void GMM()
         {
-            double[][] DataMatrix;
-
-            GaussianMixtureModel Gmm = new GaussianMixtureModel(3);
-
-            //Gmm.Compute(DataMatrix);
+            int Flength = ForegroundRedPixels.Length, Blength = BackgroundRedPixels.Length;
+            double[][] ForegroundDataMatrix = new double[Flength][];
+            double[][] BackgroundDataMatrix = new double[Blength][];
+            for (int i = 0; i < Flength; i++)
+            {
+                ForegroundDataMatrix[i] = new double[3];
+                ForegroundDataMatrix[i][0] = ForegroundRedPixels[i];
+                ForegroundDataMatrix[i][1] = ForegroundGreenPixels[i];
+                ForegroundDataMatrix[i][2] = ForegroundBluePixels[i];
+            }
+            for (int i = 0; i < Blength; i++)
+            {
+                BackgroundDataMatrix[i] = new double[3];
+                BackgroundDataMatrix[i][0] = BackgroundRedPixels[i];
+                BackgroundDataMatrix[i][1] = BackgroundGreenPixels[i];
+                BackgroundDataMatrix[i][2] = BackgroundBluePixels[i];
+            }
+            GaussianMixtureModel FGmm = new GaussianMixtureModel(3);
+            GaussianMixtureModel BGmm = new GaussianMixtureModel(3);
+            double FCompute = FGmm.Compute(ForegroundDataMatrix);
+            double BCompute = BGmm.Compute(BackgroundDataMatrix);
+            double[] Sample = new double[3];
+            double[] FResponse = new double[3];
+            double[] BResponse = new double[3];
+            Sample[0] = ForegroundRedPixels[4];
+            Sample[1] = ForegroundGreenPixels[4];
+            Sample[2] = ForegroundBluePixels[4];
+            int Fresult = FGmm.Classify(Sample, out FResponse);
+            int Bresult = FGmm.Classify(Sample, out BResponse);
+            double ProbabilityOfX = FResponse[Fresult] / (FResponse[Fresult] + BResponse[Bresult]);
         }
         void DividData(Window _Window)
         {
@@ -361,9 +387,9 @@ namespace GraduationProject
             int length = BluePixels.Length;
             for (int i = 0; i < length; i++)
             {
-                ReadMean += MeanMatrix[0] - RedPixels[i];
-                GreenMean += MeanMatrix[1] - GreenPixels[i];
-                BlueMean += MeanMatrix[2] - BluePixels[i];
+                ReadMean += Math.Pow((RedPixels[i] - MeanMatrix[0]), 2);
+                GreenMean += Math.Pow((GreenPixels[i] - MeanMatrix[1]), 2);
+                BlueMean += Math.Pow((BluePixels[i] - MeanMatrix[2]), 2);
             }
             CovarianceMatrix[0, 0] = ReadMean / length;
             CovarianceMatrix[1, 1] = GreenMean / length;
