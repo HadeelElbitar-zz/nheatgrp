@@ -123,6 +123,9 @@ namespace GraduationProject
             double Test2 = (BackGroundProbability[0] + BackGroundProbability[1] + BackGroundProbability[2]) /
                 (ForeGroundProbability[0] + ForeGroundProbability[1] + ForeGroundProbability[2] +
                 BackGroundProbability[0] + BackGroundProbability[1] + BackGroundProbability[2]);
+            #region Fc
+
+            #endregion 
         }
         double MultivariateNormalGaussian(double[] X, double[] Mu, double[,] Sigma)
         {

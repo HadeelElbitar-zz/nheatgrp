@@ -1,0 +1,9 @@
+C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\bin\Debug\VeditorGP.exe
+C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\bin\Debug\VeditorGP.pdb
+C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\obj\x86\Debug\VeditorGP.Properties.Resources.resources
+C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\obj\x86\Debug\VeditorGP.VeditorMainForm.resources
+C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\obj\x86\Debug\ResGen.read.1.tlog
+C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\obj\x86\Debug\ResGen.write.1.tlog
+C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\obj\x86\Debug\VeditorGP.exe
+C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\obj\x86\Debug\VeditorGP.pdb
