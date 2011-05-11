@@ -7,3 +7,5 @@ C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\obj\x86\Debug\ResGen
 C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\obj\x86\Debug\ResGen.write.1.tlog
 C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\obj\x86\Debug\VeditorGP.exe
 C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\obj\x86\Debug\VeditorGP.pdb
+E:\Projects\GP\VeditorGP\VeditorGP\obj\x86\Debug\VeditorGP.exe
+E:\Projects\GP\VeditorGP\VeditorGP\obj\x86\Debug\VeditorGP.pdb
