@@ -34,14 +34,11 @@
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.SegmentationToolsGroupBox = new System.Windows.Forms.GroupBox();
+            this.SegmentationBTN = new System.Windows.Forms.Button();
             this.CutObjectBTN = new System.Windows.Forms.Button();
-            this.MagicWandGroupBox = new System.Windows.Forms.GroupBox();
-            this.MovieGroupBox = new System.Windows.Forms.GroupBox();
-            this.FBox = new System.Windows.Forms.PictureBox();
             this.NextFrameBTN = new System.Windows.Forms.Button();
             this.PreviousFrameBTN = new System.Windows.Forms.Button();
             this.FrameNumberLBL = new System.Windows.Forms.Label();
-            this.SegmentationBTN = new System.Windows.Forms.Button();
             this.fileMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -91,13 +88,20 @@
             this.printPreviewToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.VideoTabControl = new System.Windows.Forms.TabControl();
+            this.PlayVideoTabPage = new System.Windows.Forms.TabPage();
+            this.ViewFramesTabPage = new System.Windows.Forms.TabPage();
+            this.TestVideoTabPage = new System.Windows.Forms.TabPage();
+            this.MovieGroupBox = new System.Windows.Forms.GroupBox();
+            this.FBox = new System.Windows.Forms.PictureBox();
             this.statusStrip.SuspendLayout();
             this.SegmentationToolsGroupBox.SuspendLayout();
-            this.MagicWandGroupBox.SuspendLayout();
-            this.MovieGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.FBox)).BeginInit();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
+            this.VideoTabControl.SuspendLayout();
+            this.TestVideoTabPage.SuspendLayout();
+            this.MovieGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.FBox)).BeginInit();
             this.SuspendLayout();
             // 
             // statusStrip
@@ -118,56 +122,36 @@
             // 
             // SegmentationToolsGroupBox
             // 
-            this.SegmentationToolsGroupBox.Controls.Add(this.MagicWandGroupBox);
+            this.SegmentationToolsGroupBox.Controls.Add(this.SegmentationBTN);
             this.SegmentationToolsGroupBox.Controls.Add(this.CutObjectBTN);
             this.SegmentationToolsGroupBox.Location = new System.Drawing.Point(12, 52);
             this.SegmentationToolsGroupBox.Name = "SegmentationToolsGroupBox";
-            this.SegmentationToolsGroupBox.Size = new System.Drawing.Size(150, 413);
+            this.SegmentationToolsGroupBox.Size = new System.Drawing.Size(130, 350);
             this.SegmentationToolsGroupBox.TabIndex = 13;
             this.SegmentationToolsGroupBox.TabStop = false;
             this.SegmentationToolsGroupBox.Text = "Segmentation Tools";
             // 
+            // SegmentationBTN
+            // 
+            this.SegmentationBTN.Location = new System.Drawing.Point(16, 22);
+            this.SegmentationBTN.Name = "SegmentationBTN";
+            this.SegmentationBTN.Size = new System.Drawing.Size(95, 23);
+            this.SegmentationBTN.TabIndex = 12;
+            this.SegmentationBTN.Text = "Start";
+            this.SegmentationBTN.UseVisualStyleBackColor = true;
+            // 
             // CutObjectBTN
             // 
-            this.CutObjectBTN.Location = new System.Drawing.Point(21, 150);
+            this.CutObjectBTN.Location = new System.Drawing.Point(16, 51);
             this.CutObjectBTN.Name = "CutObjectBTN";
             this.CutObjectBTN.Size = new System.Drawing.Size(95, 23);
             this.CutObjectBTN.TabIndex = 11;
             this.CutObjectBTN.Text = "Cut Object";
             this.CutObjectBTN.UseVisualStyleBackColor = true;
             // 
-            // MagicWandGroupBox
-            // 
-            this.MagicWandGroupBox.Controls.Add(this.SegmentationBTN);
-            this.MagicWandGroupBox.Location = new System.Drawing.Point(15, 20);
-            this.MagicWandGroupBox.Name = "MagicWandGroupBox";
-            this.MagicWandGroupBox.Size = new System.Drawing.Size(119, 83);
-            this.MagicWandGroupBox.TabIndex = 6;
-            this.MagicWandGroupBox.TabStop = false;
-            this.MagicWandGroupBox.Text = "Segmentation Tools";
-            // 
-            // MovieGroupBox
-            // 
-            this.MovieGroupBox.Controls.Add(this.FBox);
-            this.MovieGroupBox.Location = new System.Drawing.Point(168, 52);
-            this.MovieGroupBox.Name = "MovieGroupBox";
-            this.MovieGroupBox.Size = new System.Drawing.Size(588, 361);
-            this.MovieGroupBox.TabIndex = 14;
-            this.MovieGroupBox.TabStop = false;
-            this.MovieGroupBox.Text = "Initial Video Frame";
-            // 
-            // FBox
-            // 
-            this.FBox.Location = new System.Drawing.Point(12, 19);
-            this.FBox.Name = "FBox";
-            this.FBox.Size = new System.Drawing.Size(570, 335);
-            this.FBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.FBox.TabIndex = 0;
-            this.FBox.TabStop = false;
-            // 
             // NextFrameBTN
             // 
-            this.NextFrameBTN.Location = new System.Drawing.Point(475, 417);
+            this.NextFrameBTN.Location = new System.Drawing.Point(512, 417);
             this.NextFrameBTN.Name = "NextFrameBTN";
             this.NextFrameBTN.Size = new System.Drawing.Size(96, 23);
             this.NextFrameBTN.TabIndex = 16;
@@ -176,7 +160,7 @@
             // 
             // PreviousFrameBTN
             // 
-            this.PreviousFrameBTN.Location = new System.Drawing.Point(221, 417);
+            this.PreviousFrameBTN.Location = new System.Drawing.Point(252, 417);
             this.PreviousFrameBTN.Name = "PreviousFrameBTN";
             this.PreviousFrameBTN.Size = new System.Drawing.Size(96, 23);
             this.PreviousFrameBTN.TabIndex = 15;
@@ -186,20 +170,11 @@
             // FrameNumberLBL
             // 
             this.FrameNumberLBL.AutoSize = true;
-            this.FrameNumberLBL.Location = new System.Drawing.Point(370, 422);
+            this.FrameNumberLBL.Location = new System.Drawing.Point(408, 422);
             this.FrameNumberLBL.Name = "FrameNumberLBL";
             this.FrameNumberLBL.Size = new System.Drawing.Size(17, 13);
             this.FrameNumberLBL.TabIndex = 17;
             this.FrameNumberLBL.Text = "1/";
-            // 
-            // SegmentationBTN
-            // 
-            this.SegmentationBTN.Location = new System.Drawing.Point(6, 19);
-            this.SegmentationBTN.Name = "SegmentationBTN";
-            this.SegmentationBTN.Size = new System.Drawing.Size(95, 23);
-            this.SegmentationBTN.TabIndex = 12;
-            this.SegmentationBTN.Text = "Start";
-            this.SegmentationBTN.UseVisualStyleBackColor = true;
             // 
             // fileMenu
             // 
@@ -226,7 +201,7 @@
             this.newToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Black;
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.newToolStripMenuItem.Text = "&New";
             // 
             // openToolStripMenuItem
@@ -235,13 +210,13 @@
             this.openToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Black;
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openToolStripMenuItem.Text = "&Open";
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(143, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
             // 
             // saveToolStripMenuItem
             // 
@@ -249,19 +224,19 @@
             this.saveToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Black;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveToolStripMenuItem.Text = "&Save";
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveAsToolStripMenuItem.Text = "Save &As";
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(143, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(149, 6);
             // 
             // printToolStripMenuItem
             // 
@@ -269,7 +244,7 @@
             this.printToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Black;
             this.printToolStripMenuItem.Name = "printToolStripMenuItem";
             this.printToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.printToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.printToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.printToolStripMenuItem.Text = "&Print";
             // 
             // printPreviewToolStripMenuItem
@@ -277,24 +252,24 @@
             this.printPreviewToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("printPreviewToolStripMenuItem.Image")));
             this.printPreviewToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Black;
             this.printPreviewToolStripMenuItem.Name = "printPreviewToolStripMenuItem";
-            this.printPreviewToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.printPreviewToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.printPreviewToolStripMenuItem.Text = "Print Pre&view";
             // 
             // printSetupToolStripMenuItem
             // 
             this.printSetupToolStripMenuItem.Name = "printSetupToolStripMenuItem";
-            this.printSetupToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.printSetupToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.printSetupToolStripMenuItem.Text = "Print Setup";
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(143, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(149, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             // 
             // editMenu
@@ -389,7 +364,7 @@
             this.toolBarToolStripMenuItem.CheckOnClick = true;
             this.toolBarToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolBarToolStripMenuItem.Name = "toolBarToolStripMenuItem";
-            this.toolBarToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.toolBarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.toolBarToolStripMenuItem.Text = "&Toolbar";
             // 
             // statusBarToolStripMenuItem
@@ -398,7 +373,7 @@
             this.statusBarToolStripMenuItem.CheckOnClick = true;
             this.statusBarToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.statusBarToolStripMenuItem.Name = "statusBarToolStripMenuItem";
-            this.statusBarToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.statusBarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.statusBarToolStripMenuItem.Text = "&Status Bar";
             // 
             // toolsMenu
@@ -412,7 +387,7 @@
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.optionsToolStripMenuItem.Text = "&Options";
             // 
             // windowsMenu
@@ -431,37 +406,37 @@
             // newWindowToolStripMenuItem
             // 
             this.newWindowToolStripMenuItem.Name = "newWindowToolStripMenuItem";
-            this.newWindowToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.newWindowToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.newWindowToolStripMenuItem.Text = "&New Window";
             // 
             // cascadeToolStripMenuItem
             // 
             this.cascadeToolStripMenuItem.Name = "cascadeToolStripMenuItem";
-            this.cascadeToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.cascadeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.cascadeToolStripMenuItem.Text = "&Cascade";
             // 
             // tileVerticalToolStripMenuItem
             // 
             this.tileVerticalToolStripMenuItem.Name = "tileVerticalToolStripMenuItem";
-            this.tileVerticalToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.tileVerticalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.tileVerticalToolStripMenuItem.Text = "Tile &Vertical";
             // 
             // tileHorizontalToolStripMenuItem
             // 
             this.tileHorizontalToolStripMenuItem.Name = "tileHorizontalToolStripMenuItem";
-            this.tileHorizontalToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.tileHorizontalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.tileHorizontalToolStripMenuItem.Text = "Tile &Horizontal";
             // 
             // closeAllToolStripMenuItem
             // 
             this.closeAllToolStripMenuItem.Name = "closeAllToolStripMenuItem";
-            this.closeAllToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.closeAllToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.closeAllToolStripMenuItem.Text = "C&lose All";
             // 
             // arrangeIconsToolStripMenuItem
             // 
             this.arrangeIconsToolStripMenuItem.Name = "arrangeIconsToolStripMenuItem";
-            this.arrangeIconsToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.arrangeIconsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.arrangeIconsToolStripMenuItem.Text = "&Arrange Icons";
             // 
             // helpMenu
@@ -607,16 +582,78 @@
             this.helpToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.helpToolStripButton.Text = "Help";
             // 
+            // VideoTabControl
+            // 
+            this.VideoTabControl.Controls.Add(this.PlayVideoTabPage);
+            this.VideoTabControl.Controls.Add(this.ViewFramesTabPage);
+            this.VideoTabControl.Controls.Add(this.TestVideoTabPage);
+            this.VideoTabControl.Location = new System.Drawing.Point(168, 52);
+            this.VideoTabControl.Name = "VideoTabControl";
+            this.VideoTabControl.SelectedIndex = 0;
+            this.VideoTabControl.Size = new System.Drawing.Size(576, 350);
+            this.VideoTabControl.TabIndex = 1;
+            // 
+            // PlayVideoTabPage
+            // 
+            this.PlayVideoTabPage.Location = new System.Drawing.Point(4, 22);
+            this.PlayVideoTabPage.Name = "PlayVideoTabPage";
+            this.PlayVideoTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.PlayVideoTabPage.Size = new System.Drawing.Size(568, 324);
+            this.PlayVideoTabPage.TabIndex = 0;
+            this.PlayVideoTabPage.Text = "Play Video";
+            this.PlayVideoTabPage.UseVisualStyleBackColor = true;
+            // 
+            // ViewFramesTabPage
+            // 
+            this.ViewFramesTabPage.Location = new System.Drawing.Point(4, 22);
+            this.ViewFramesTabPage.Name = "ViewFramesTabPage";
+            this.ViewFramesTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.ViewFramesTabPage.Size = new System.Drawing.Size(568, 324);
+            this.ViewFramesTabPage.TabIndex = 1;
+            this.ViewFramesTabPage.Text = "View Frames";
+            this.ViewFramesTabPage.UseVisualStyleBackColor = true;
+            // 
+            // TestVideoTabPage
+            // 
+            this.TestVideoTabPage.Controls.Add(this.MovieGroupBox);
+            this.TestVideoTabPage.Location = new System.Drawing.Point(4, 22);
+            this.TestVideoTabPage.Name = "TestVideoTabPage";
+            this.TestVideoTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.TestVideoTabPage.Size = new System.Drawing.Size(568, 324);
+            this.TestVideoTabPage.TabIndex = 2;
+            this.TestVideoTabPage.Text = "Test Video";
+            this.TestVideoTabPage.UseVisualStyleBackColor = true;
+            // 
+            // MovieGroupBox
+            // 
+            this.MovieGroupBox.Controls.Add(this.FBox);
+            this.MovieGroupBox.Location = new System.Drawing.Point(6, 6);
+            this.MovieGroupBox.Name = "MovieGroupBox";
+            this.MovieGroupBox.Size = new System.Drawing.Size(556, 312);
+            this.MovieGroupBox.TabIndex = 15;
+            this.MovieGroupBox.TabStop = false;
+            this.MovieGroupBox.Text = "Initial Video Frame";
+            // 
+            // FBox
+            // 
+            this.FBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.FBox.Location = new System.Drawing.Point(3, 16);
+            this.FBox.Name = "FBox";
+            this.FBox.Size = new System.Drawing.Size(550, 293);
+            this.FBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.FBox.TabIndex = 0;
+            this.FBox.TabStop = false;
+            // 
             // VeditorMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(772, 493);
+            this.Controls.Add(this.VideoTabControl);
             this.Controls.Add(this.toolStrip);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.menuStrip);
             this.Controls.Add(this.SegmentationToolsGroupBox);
-            this.Controls.Add(this.MovieGroupBox);
             this.Controls.Add(this.NextFrameBTN);
             this.Controls.Add(this.PreviousFrameBTN);
             this.Controls.Add(this.FrameNumberLBL);
@@ -625,13 +662,14 @@
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
             this.SegmentationToolsGroupBox.ResumeLayout(false);
-            this.MagicWandGroupBox.ResumeLayout(false);
-            this.MovieGroupBox.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.FBox)).EndInit();
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.toolStrip.ResumeLayout(false);
             this.toolStrip.PerformLayout();
+            this.VideoTabControl.ResumeLayout(false);
+            this.TestVideoTabPage.ResumeLayout(false);
+            this.MovieGroupBox.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.FBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -644,9 +682,6 @@
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.GroupBox SegmentationToolsGroupBox;
         private System.Windows.Forms.Button CutObjectBTN;
-        private System.Windows.Forms.GroupBox MagicWandGroupBox;
-        private System.Windows.Forms.GroupBox MovieGroupBox;
-        private System.Windows.Forms.PictureBox FBox;
         private System.Windows.Forms.Button NextFrameBTN;
         private System.Windows.Forms.Button PreviousFrameBTN;
         private System.Windows.Forms.Label FrameNumberLBL;
@@ -700,6 +735,12 @@
         private System.Windows.Forms.ToolStripButton printPreviewToolStripButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton helpToolStripButton;
+        private System.Windows.Forms.TabControl VideoTabControl;
+        private System.Windows.Forms.TabPage PlayVideoTabPage;
+        private System.Windows.Forms.TabPage ViewFramesTabPage;
+        private System.Windows.Forms.TabPage TestVideoTabPage;
+        private System.Windows.Forms.GroupBox MovieGroupBox;
+        private System.Windows.Forms.PictureBox FBox;
     }
 }
 
