@@ -22,6 +22,7 @@ namespace VeditorGP
         public double[,] doubleRedPixels;
         public double[,] doubleGreenPixels;
         public double[,] doubleBluePixels;
+        
         public IplImage IplImageLab, IplImageRGB;
         public Image<Lab, byte> EmguLabImage;
         public Image<Bgr, byte> EmguRgbImage;
@@ -165,6 +166,53 @@ namespace VeditorGP
                 }
             }
             BmpImage.UnlockBits(bmpData);
+        }
+        public void ThresholdBinary()
+        {
+            for (int i = 0; i < height; i++)
+                for (int j = 0; j < width; j++)
+                {
+                    if (byteRedPixels[i, j] < 200 || byteGreenPixels[i, j] < 200 || byteBluePixels[i, j] < 200)
+                    {
+                        doubleRedPixels[i, j] = 0;
+                        doubleGreenPixels[i, j] = 0;
+                        doubleBluePixels[i, j] = 0;
+                        byteRedPixels[i, j] = 0;
+                        byteGreenPixels[i, j] = 0;
+                        byteBluePixels[i, j] = 0;
+                    }
+                    else
+                    {
+                        doubleRedPixels[i, j] = 255;
+                        doubleGreenPixels[i, j] = 255;
+                        doubleBluePixels[i, j] = 255;
+                        byteRedPixels[i, j] = 255;
+                        byteGreenPixels[i, j] = 255;
+                        byteBluePixels[i, j] = 255;
+                    }
+                }
+            BitmapData bmpData = BmpImage.LockBits(new Rectangle(0, 0, width, height), System.Drawing.Imaging.ImageLockMode.ReadWrite, BmpImage.PixelFormat);
+            unsafe
+            {
+                byte* p = (byte*)bmpData.Scan0;
+                int space = bmpData.Stride - width * 3;
+                for (int i = 0; i < height; i++)
+                {
+                    for (int j = 0; j < width; j++)
+                    {
+                        p[0] = byteRedPixels[i, j];
+                        p[1] = byteGreenPixels[i, j];
+                        p[2] = byteRedPixels[i, j];
+                        p += 3;
+                    }
+                    p += space;
+                }
+            }
+            BmpImage.UnlockBits(bmpData);
+            EmguRgbImage = new Image<Bgr, byte>(BmpImage);
+            EmguLabImage = EmguRgbImage.Convert<Lab, byte>();
+            IplImageRGB = (IplImage)cvtools.ConvertPtrToStructure(EmguRgbImage.Ptr, typeof(IplImage));
+            IplImageLab = (IplImage)cvtools.ConvertPtrToStructure(EmguLabImage.Ptr, typeof(IplImage));
         }
         #endregion
     }

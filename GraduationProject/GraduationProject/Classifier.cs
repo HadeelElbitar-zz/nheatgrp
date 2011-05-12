@@ -67,6 +67,7 @@ namespace GraduationProject
                 BackgroundDataMatrix[i][2] = BackgroundBluePixels[i];
             }
             List<KMeans> TempList = new List<KMeans>();
+            
             SortedDictionary<double, KMeans> FKmeans = new SortedDictionary<double, KMeans>();
             for (int i = 0; i < 400; i++)
                 TempList.Add(new KMeans(3));
