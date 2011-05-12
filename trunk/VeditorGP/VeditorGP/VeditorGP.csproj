@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -33,6 +34,39 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Accord.Core">
+      <HintPath>..\..\Accord\Accord.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Accord.MachineLearning">
+      <HintPath>..\..\Accord\Accord.MachineLearning.dll</HintPath>
+    </Reference>
+    <Reference Include="Accord.Math">
+      <HintPath>..\..\Accord\Accord.Math.dll</HintPath>
+    </Reference>
+    <Reference Include="Accord.Statistics">
+      <HintPath>..\..\Accord\Accord.Statistics.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Math">
+      <HintPath>..\..\Accord\AForge.Math.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV">
+      <HintPath>..\..\Emgu.CV.x86.BinaryOnly-2.0.0.0-alpha\Emgu.CV.Binary-2.0.0.0\Emgu.CV.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV.DebuggerVisualizers">
+      <HintPath>..\..\Emgu.CV.x86.BinaryOnly-2.0.0.0-alpha\Emgu.CV.Binary-2.0.0.0\Emgu.CV.DebuggerVisualizers.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV.ML">
+      <HintPath>..\..\Emgu.CV.x86.BinaryOnly-2.0.0.0-alpha\Emgu.CV.Binary-2.0.0.0\Emgu.CV.ML.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV.UI">
+      <HintPath>..\..\Emgu.CV.x86.BinaryOnly-2.0.0.0-alpha\Emgu.CV.Binary-2.0.0.0\Emgu.CV.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.Util">
+      <HintPath>..\..\Emgu.CV.x86.BinaryOnly-2.0.0.0-alpha\Emgu.CV.Binary-2.0.0.0\Emgu.Util.dll</HintPath>
+    </Reference>
+    <Reference Include="openCV">
+      <HintPath>..\..\GraduationProject\GraduationProject\bin\Debug\openCV.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -42,8 +76,17 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="ZedGraph">
+      <HintPath>..\..\Emgu.CV.x86.BinaryOnly-2.0.0.0-alpha\Emgu.CV.Binary-2.0.0.0\ZedGraph.dll</HintPath>
+    </Reference>
+    <Reference Include="zlib.net">
+      <HintPath>..\..\Emgu.CV.x86.BinaryOnly-2.0.0.0-alpha\Emgu.CV.Binary-2.0.0.0\zlib.net.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classifier.cs" />
+    <Compile Include="ContourFunctions.cs" />
+    <Compile Include="Frame.cs" />
     <Compile Include="VeditorMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -52,6 +95,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VideoFunctions.cs" />
+    <Compile Include="Window.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
