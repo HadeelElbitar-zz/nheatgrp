@@ -100,9 +100,10 @@ namespace VeditorGP
                 ContourFunctionsObject = new ContourFunctions();
                 Bitmap Temp = (Bitmap)FrameBox.Image;
                 VideoFunctionsObject.InitialSegmentationBinaryFrame = ContourFunctionsObject.GetBlackAndWhiteContour(ContourPositions.ToArray(), Temp);
-                VideoFunctionsObject.ConnectedContour = ContourFunctionsObject.GetConnectedContour(VideoFunctionsObject.InitialSegmentationBinaryFrame);
+                VideoFunctionsObject.ConnectedContour = ContourFunctionsObject.GetConnectedContour(VideoFunctionsObject.InitialSegmentationBinaryFrame, VideoFunctionsObject.InitialContourFrame = new Frame());
                 VideoFunctionsObject.SetInitialWindowsArroundContour();
-                //VideoFunctionsObject.TrainClassifiers();
+                VideoFunctionsObject.TrainClassifiers();
+                MessageBox.Show("Training Finished!");
             //}
             //catch
             //{
