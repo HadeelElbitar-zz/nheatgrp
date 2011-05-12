@@ -46,40 +46,6 @@ namespace VeditorGP
             ForegrounEM();
             BackgrounEM();
             OurGMM(); //P(x)
-            CalculateColorConfidence();
-        }
-        void CalculateColorConfidence()
-        {
-            int width = MyWindow.WindowFrame.width, height = MyWindow.WindowFrame.height, PointCount = MyWindow.WindowContourPoints.Count;
-            double SegmentationLabel = 0, Summation = 0.0, WeightsSummation = 0.0, SigmaCSquare = 202500.0;//sigma square
-            double Distance = double.MaxValue, Temp, inResult;
-            MyWindow.WeightingFunction = new double[height, width];
-            for (int i = 0; i < height; i++)
-            {
-                for (int j = 0; j < width; j++)
-                {
-                    foreach (Point  item in MyWindow.WindowContourPoints)
-                    {
-                        Temp = Math.Sqrt(Math.Pow((item.X - i), 2) + Math.Pow((item.Y - j), 2));
-                        if (Temp < Distance)
-                            Distance = Temp;
-                    }
-                    inResult = Math.Pow(Distance,2);
-                    inResult = -1 * inResult;
-                    inResult /= SigmaCSquare;
-                    MyWindow.WeightingFunction[i, j] = Math.Exp(inResult);
-                }
-            }
-            for (int i = 0; i < height; i++)
-                for (int j = 0; j < width; j++)
-                {
-                    if (MyWindow.WindowBinaryMask.byteRedPixels[i, j] == 255)
-                        SegmentationLabel = 1;
-                    Summation += (Math.Abs(SegmentationLabel - MyWindow.ForegroundProbability[i, j]) * MyWindow.WeightingFunction[i, j]);
-                    WeightsSummation += MyWindow.WeightingFunction[i, j];
-                }
-            MyWindow.ColorConfidence = Summation / WeightsSummation;
-            MyWindow.ColorConfidence = 1 - MyWindow.ColorConfidence;
         }
         void OurGMM()
         {

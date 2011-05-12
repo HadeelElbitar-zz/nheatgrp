@@ -16,8 +16,7 @@ namespace VeditorGP
         public Frame WindowFrame, WindowBinaryMask, WindowContour;
         public Classifier WindowClassifier;
         public double ColorConfidence;
-        public double[,] ForegroundProbability;
-        public double[,] WeightingFunction;
+        public double[,] ForegroundProbability, WeightingFunction, ShapeConfidence;
         public List<Point> WindowContourPoints;
         static int Counter = 0;
         public Window(int width, int height, Frame ColoredFrame, Frame BinaryMask, Point CenterPoint, Frame ContourFrame)
@@ -136,6 +135,44 @@ namespace VeditorGP
 
             //WindowFrame.BmpImage.Save(Pw, ImageFormat.Bmp);
             WindowClassifier = new Classifier(this);
+        }
+        public void CalculateModels()
+        {
+            int width = WindowFrame.width, height = WindowFrame.height, PointCount = WindowContourPoints.Count;
+            double SegmentationLabel = 0, Summation = 0.0, WeightsSummation = 0.0, SigmaCSquare = 202500.0;//sigma square
+            double SigmaS = 0.01;
+            double Distance = double.MaxValue, Temp, inResult, ShapeTemp;
+            WeightingFunction = new double[height, width];
+            ShapeConfidence = new double[height, width];
+            for (int i = 0; i < height; i++)
+            {
+                for (int j = 0; j < width; j++)
+                {
+                    foreach (Point item in WindowContourPoints)
+                    {
+                        Temp = Math.Sqrt(Math.Pow((item.X - i), 2) + Math.Pow((item.Y - j), 2));
+                        if (Temp < Distance)
+                            Distance = Temp;
+                    }
+                    inResult = Math.Pow(Distance, 2);
+                    inResult = -1 * inResult;
+                    ShapeTemp = Math.Pow(SigmaS, 2);
+                    ShapeTemp = inResult / ShapeTemp;
+                    ShapeConfidence[i, j] = 1 - Math.Exp(ShapeTemp);
+                    inResult /= SigmaCSquare;
+                    WeightingFunction[i, j] = Math.Exp(inResult);
+                }
+            }
+            for (int i = 0; i < height; i++)
+                for (int j = 0; j < width; j++)
+                {
+                    if (WindowBinaryMask.byteRedPixels[i, j] == 255)
+                        SegmentationLabel = 1;
+                    Summation += (Math.Abs(SegmentationLabel - ForegroundProbability[i, j]) * WeightingFunction[i, j]);
+                    WeightsSummation += WeightingFunction[i, j];
+                }
+            ColorConfidence = Summation / WeightsSummation;
+            ColorConfidence = 1 - ColorConfidence;
         }
     }
 }

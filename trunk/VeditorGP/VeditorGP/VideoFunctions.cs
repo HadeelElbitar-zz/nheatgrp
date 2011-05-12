@@ -105,7 +105,10 @@ namespace VeditorGP
         public void TrainClassifiers()
         {
             foreach (Window item in InitialFrame.FrameWindows)
+            {
                 item.WindowClassifier.Train();
+                item.CalculateModels();
+            }
         }
         #endregion
     }
