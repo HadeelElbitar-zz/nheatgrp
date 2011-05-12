@@ -45,7 +45,6 @@ namespace GraduationProject
         private void OpenFile(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            //openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
             openFileDialog.Filter = "Text Files (*.avi)|*.avi|All Files (*.*)|*.*";
             string FileName = "";
             if (openFileDialog.ShowDialog(this) == DialogResult.OK)
