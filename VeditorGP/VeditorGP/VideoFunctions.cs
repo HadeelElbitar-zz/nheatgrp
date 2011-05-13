@@ -14,13 +14,15 @@ namespace VeditorGP
     {
         #region Variables and Constructor
         Frame CurrentFrame, PreviousFrame;
-        public Frame InitialSegmentationBinaryFrame, InitialFrame, InitialContourFrame;
+        public double FramePerSecond;
+        public Frame InitialSegmentationBinaryFrame, InitialFrame, InitialContourFrame, FirstFrame;
         int WindowWidth = 30, WindowHeight = 30, WindowSize = 900;
         static Capture Video , DrMostafaVideo;
         public List<Point> ConnectedContour;
         SURF SurfObject;
         OurOpticalFlow OpticalFlowObject;
         Bitmap SurfResult;
+        string VideoPath;
         public VideoFunctions()
         {
 
@@ -31,19 +33,25 @@ namespace VeditorGP
         public Frame OpenVideo(string Path)
         {
             Video = new Capture(Path);
+            VideoPath = Path;
+            FramePerSecond = Video.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FPS);
             DrMostafaVideo = new Capture(Path);
             OpenFrame();
             return CurrentFrame;
         }
-        void OpenFrame()
+        int OpenFrame()
         {
+            Image<Bgr, byte> Temp = Video.QuerySmallFrame();
+            if (Temp == null)
+                return -1;
             CurrentFrame = new Frame();
-            CurrentFrame.EmguRgbImage = Video.QuerySmallFrame();
-            CurrentFrame.EmguLabImage = CurrentFrame.EmguRgbImage.Convert<Lab, byte>();
-            CurrentFrame.IplImageRGB = (IplImage)cvtools.ConvertPtrToStructure(CurrentFrame.EmguRgbImage.Ptr, typeof(IplImage));
-            CurrentFrame.IplImageLab = (IplImage)cvtools.ConvertPtrToStructure(CurrentFrame.EmguLabImage.Ptr, typeof(IplImage));
+            CurrentFrame.EmguRgbImage = Temp;
             CurrentFrame.width = CurrentFrame.EmguRgbImage.Cols;
             CurrentFrame.height = CurrentFrame.EmguRgbImage.Rows;
+            CurrentFrame.EmguLabImage = CurrentFrame.EmguRgbImage.Convert<Lab, byte>();
+            CurrentFrame.BmpImage = new Bitmap(CurrentFrame.width, CurrentFrame.height, PixelFormat.Format24bppRgb);
+            CurrentFrame.IplImageRGB = (IplImage)cvtools.ConvertPtrToStructure(CurrentFrame.EmguRgbImage.Ptr, typeof(IplImage));
+            CurrentFrame.IplImageLab = (IplImage)cvtools.ConvertPtrToStructure(CurrentFrame.EmguLabImage.Ptr, typeof(IplImage));
             CurrentFrame.byteRedPixels = new byte[CurrentFrame.height, CurrentFrame.width];
             CurrentFrame.byteGreenPixels = new byte[CurrentFrame.height, CurrentFrame.width];
             CurrentFrame.byteBluePixels = new byte[CurrentFrame.height, CurrentFrame.width];
@@ -62,7 +70,6 @@ namespace VeditorGP
                     CurrentFrame.doubleBluePixels[i, j] = CurrentFrame.EmguRgbImage.Data[i, j, 2];
                 }
             }
-            CurrentFrame.BmpImage = new Bitmap(CurrentFrame.width, CurrentFrame.height, PixelFormat.Format24bppRgb);
             BitmapData bmpData = CurrentFrame.BmpImage.LockBits(new Rectangle(0, 0, CurrentFrame.width, CurrentFrame.height), System.Drawing.Imaging.ImageLockMode.ReadWrite, CurrentFrame.BmpImage.PixelFormat);
             unsafe
             {
@@ -81,6 +88,7 @@ namespace VeditorGP
                 }
             }
             CurrentFrame.BmpImage.UnlockBits(bmpData);
+            return 0;
         }
         #endregion
 
@@ -123,7 +131,8 @@ namespace VeditorGP
         public Frame GetNextFrame()
         {
             PreviousFrame = CurrentFrame;
-            OpenFrame();
+            if (OpenFrame() == -1)
+                return null;
             return CurrentFrame;
         }
         public void PropagateFrame()

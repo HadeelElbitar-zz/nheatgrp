@@ -1,32 +1,5 @@
-C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\bin\Debug\VeditorGP.exe
-C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\bin\Debug\VeditorGP.pdb
-C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\obj\x86\Debug\ResolveAssemblyReference.cache
-C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\obj\x86\Debug\VeditorGP.Properties.Resources.resources
-C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\obj\x86\Debug\VeditorGP.VeditorMainForm.resources
-C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\obj\x86\Debug\ResGen.read.1.tlog
-C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\obj\x86\Debug\ResGen.write.1.tlog
-C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\obj\x86\Debug\VeditorGP.exe
-C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\obj\x86\Debug\VeditorGP.pdb
 E:\Projects\GP\VeditorGP\VeditorGP\obj\x86\Debug\VeditorGP.exe
 E:\Projects\GP\VeditorGP\VeditorGP\obj\x86\Debug\VeditorGP.pdb
-C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\bin\Debug\Accord.Core.dll
-C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\bin\Debug\Accord.MachineLearning.dll
-C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\bin\Debug\Accord.Math.dll
-C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\bin\Debug\Accord.Statistics.dll
-C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\bin\Debug\AForge.Math.dll
-C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\bin\Debug\Emgu.CV.DebuggerVisualizers.dll
-C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\bin\Debug\Emgu.CV.dll
-C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\bin\Debug\Emgu.CV.ML.dll
-C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\bin\Debug\Emgu.CV.UI.dll
-C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\bin\Debug\Emgu.Util.dll
-C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\bin\Debug\openCV.dll
-C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\bin\Debug\ZedGraph.dll
-C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\bin\Debug\zlib.net.dll
-C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\bin\Debug\Emgu.CV.xml
-C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\bin\Debug\Emgu.CV.ML.xml
-C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\bin\Debug\Emgu.CV.UI.xml
-C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\bin\Debug\Emgu.Util.xml
-C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\bin\Debug\ZedGraph.xml
 E:\Projects\GP\VeditorGP\VeditorGP\obj\x86\Debug\ResolveAssemblyReference.cache
 E:\Projects\GP\VeditorGP\VeditorGP\obj\x86\Debug\VeditorGP.Properties.Resources.resources
 E:\Projects\GP\VeditorGP\VeditorGP\obj\x86\Debug\VeditorGP.VeditorMainForm.resources
@@ -54,3 +27,30 @@ E:\Projects\GP\VeditorGP\VeditorGP\bin\Debug\Emgu.CV.ML.xml
 E:\Projects\GP\VeditorGP\VeditorGP\bin\Debug\Emgu.CV.UI.xml
 E:\Projects\GP\VeditorGP\VeditorGP\bin\Debug\Emgu.Util.xml
 E:\Projects\GP\VeditorGP\VeditorGP\bin\Debug\ZedGraph.xml
+C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\bin\Debug\VeditorGP.exe
+C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\bin\Debug\VeditorGP.pdb
+C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\bin\Debug\Accord.Core.dll
+C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\bin\Debug\Accord.MachineLearning.dll
+C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\bin\Debug\Accord.Math.dll
+C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\bin\Debug\Accord.Statistics.dll
+C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\bin\Debug\AForge.Math.dll
+C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\bin\Debug\Emgu.CV.DebuggerVisualizers.dll
+C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\bin\Debug\Emgu.CV.dll
+C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\bin\Debug\Emgu.CV.ML.dll
+C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\bin\Debug\Emgu.CV.UI.dll
+C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\bin\Debug\Emgu.Util.dll
+C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\bin\Debug\openCV.dll
+C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\bin\Debug\ZedGraph.dll
+C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\bin\Debug\zlib.net.dll
+C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\bin\Debug\Emgu.CV.xml
+C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\bin\Debug\Emgu.CV.ML.xml
+C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\bin\Debug\Emgu.CV.UI.xml
+C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\bin\Debug\Emgu.Util.xml
+C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\bin\Debug\ZedGraph.xml
+C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\obj\x86\Debug\VeditorGP.Properties.Resources.resources
+C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\obj\x86\Debug\VeditorGP.VeditorMainForm.resources
+C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\obj\x86\Debug\ResGen.read.1.tlog
+C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\obj\x86\Debug\ResGen.write.1.tlog
+C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\obj\x86\Debug\VeditorGP.exe
+C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\obj\x86\Debug\VeditorGP.pdb
