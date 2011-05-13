@@ -20,7 +20,8 @@ namespace VeditorGP
         List<CvPoint> ContourPositions;
         Frame CurrentDisplayedFrame;
         System.Timers.Timer MyTimer;
-
+        bool PlayMood = true;
+        string FileName = "";
 
         public VeditorMainForm()
         {
@@ -37,7 +38,6 @@ namespace VeditorGP
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Text Files (*.avi)|*.avi|All Files (*.*)|*.*";
-            string FileName = "";
             if (openFileDialog.ShowDialog(this) == DialogResult.OK)
                 FileName = openFileDialog.FileName;
             VideoFunctionsObject = new VideoFunctions();
@@ -193,10 +193,24 @@ namespace VeditorGP
         #region Play Video Controls
         private void PlayBTN_Click(object sender, EventArgs e)
         {
-            MyTimer = new System.Timers.Timer();
-            MyTimer.Elapsed += new System.Timers.ElapsedEventHandler(MyTimer_Elapsed);
-            MyTimer.Interval = 100;
-            MyTimer.Enabled = true;
+            if (PlayMood) // pause 
+            {
+                MyTimer = new System.Timers.Timer();
+                MyTimer.Elapsed += new System.Timers.ElapsedEventHandler(MyTimer_Elapsed);
+                MyTimer.Interval = VideoFunctionsObject.FramePerSecond;
+                MyTimer.Enabled = true;
+            }
+            else // stop 
+            {
+                VideoFunctionsObject = new VideoFunctions();
+                CurrentDisplayedFrame = VideoFunctionsObject.OpenVideo(FileName);
+                FrameBox.Image = CurrentDisplayedFrame.BmpImage;
+                MyTimer = new System.Timers.Timer();
+                MyTimer.Elapsed += new System.Timers.ElapsedEventHandler(MyTimer_Elapsed);
+                MyTimer.Interval = VideoFunctionsObject.FramePerSecond;
+                MyTimer.Enabled = true;
+                PlayMood = true; 
+            }
         }
 
         void MyTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -212,7 +226,9 @@ namespace VeditorGP
         private void StopBTN_Click(object sender, EventArgs e)
         {
             MyTimer.Enabled = false;
-            FrameBox.Image = VideoFunctionsObject.InitialFrame.BmpImage;
+            PlayMood = false;
+            Bitmap EmptyImage = new Bitmap(FrameBox.Image.Width, FrameBox.Image.Height);
+            FrameBox.Image = EmptyImage;
         }
         #endregion
     }
