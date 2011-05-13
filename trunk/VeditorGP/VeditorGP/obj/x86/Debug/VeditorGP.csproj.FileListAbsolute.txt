@@ -27,3 +27,30 @@ C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\bin\Debug\Emgu.CV.ML
 C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\bin\Debug\Emgu.CV.UI.xml
 C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\bin\Debug\Emgu.Util.xml
 C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\bin\Debug\ZedGraph.xml
+E:\Projects\GP\VeditorGP\VeditorGP\obj\x86\Debug\ResolveAssemblyReference.cache
+E:\Projects\GP\VeditorGP\VeditorGP\obj\x86\Debug\VeditorGP.Properties.Resources.resources
+E:\Projects\GP\VeditorGP\VeditorGP\obj\x86\Debug\VeditorGP.VeditorMainForm.resources
+E:\Projects\GP\VeditorGP\VeditorGP\obj\x86\Debug\GenerateResource-ResGen.read.1.tlog
+E:\Projects\GP\VeditorGP\VeditorGP\obj\x86\Debug\ResGen.read.1.tlog
+E:\Projects\GP\VeditorGP\VeditorGP\obj\x86\Debug\GenerateResource-ResGen.write.1.tlog
+E:\Projects\GP\VeditorGP\VeditorGP\obj\x86\Debug\ResGen.write.1.tlog
+E:\Projects\GP\VeditorGP\VeditorGP\bin\Debug\VeditorGP.exe
+E:\Projects\GP\VeditorGP\VeditorGP\bin\Debug\VeditorGP.pdb
+E:\Projects\GP\VeditorGP\VeditorGP\bin\Debug\Accord.Core.dll
+E:\Projects\GP\VeditorGP\VeditorGP\bin\Debug\Accord.MachineLearning.dll
+E:\Projects\GP\VeditorGP\VeditorGP\bin\Debug\Accord.Math.dll
+E:\Projects\GP\VeditorGP\VeditorGP\bin\Debug\Accord.Statistics.dll
+E:\Projects\GP\VeditorGP\VeditorGP\bin\Debug\AForge.Math.dll
+E:\Projects\GP\VeditorGP\VeditorGP\bin\Debug\Emgu.CV.DebuggerVisualizers.dll
+E:\Projects\GP\VeditorGP\VeditorGP\bin\Debug\Emgu.CV.dll
+E:\Projects\GP\VeditorGP\VeditorGP\bin\Debug\Emgu.CV.ML.dll
+E:\Projects\GP\VeditorGP\VeditorGP\bin\Debug\Emgu.CV.UI.dll
+E:\Projects\GP\VeditorGP\VeditorGP\bin\Debug\Emgu.Util.dll
+E:\Projects\GP\VeditorGP\VeditorGP\bin\Debug\openCV.dll
+E:\Projects\GP\VeditorGP\VeditorGP\bin\Debug\ZedGraph.dll
+E:\Projects\GP\VeditorGP\VeditorGP\bin\Debug\zlib.net.dll
+E:\Projects\GP\VeditorGP\VeditorGP\bin\Debug\Emgu.CV.xml
+E:\Projects\GP\VeditorGP\VeditorGP\bin\Debug\Emgu.CV.ML.xml
+E:\Projects\GP\VeditorGP\VeditorGP\bin\Debug\Emgu.CV.UI.xml
+E:\Projects\GP\VeditorGP\VeditorGP\bin\Debug\Emgu.Util.xml
+E:\Projects\GP\VeditorGP\VeditorGP\bin\Debug\ZedGraph.xml
