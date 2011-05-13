@@ -19,6 +19,9 @@ namespace VeditorGP
         int FrameState;
         List<CvPoint> ContourPositions;
         Frame CurrentDisplayedFrame;
+        System.Timers.Timer MyTimer;
+
+
         public VeditorMainForm()
         {
             InitializeComponent();
@@ -44,7 +47,7 @@ namespace VeditorGP
         private void openToolStripButton_Click(object sender, EventArgs e)
         {
             OpenVideo();
-        } 
+        }
         #endregion
 
         #region Segmentation
@@ -96,22 +99,22 @@ namespace VeditorGP
         {
             //try
             //{
-                FrameState = 0;
-                ContourFunctionsObject = new ContourFunctions();
-                Bitmap Temp = (Bitmap)FrameBox.Image;
-                VideoFunctionsObject.InitialSegmentationBinaryFrame = ContourFunctionsObject.GetBlackAndWhiteContour(ContourPositions.ToArray(), Temp);
-                VideoFunctionsObject.ConnectedContour = ContourFunctionsObject.GetConnectedContour(VideoFunctionsObject.InitialSegmentationBinaryFrame, VideoFunctionsObject.InitialContourFrame = new Frame());
-                VideoFunctionsObject.SetInitialWindowsArroundContour();
-                VideoFunctionsObject.TrainClassifiers();
-                VideoFunctionsObject.PropagateFrame();
-                MessageBox.Show("Training Finished!");
+            FrameState = 0;
+            ContourFunctionsObject = new ContourFunctions();
+            Bitmap Temp = (Bitmap)FrameBox.Image;
+            VideoFunctionsObject.InitialSegmentationBinaryFrame = ContourFunctionsObject.GetBlackAndWhiteContour(ContourPositions.ToArray(), Temp);
+            VideoFunctionsObject.ConnectedContour = ContourFunctionsObject.GetConnectedContour(VideoFunctionsObject.InitialSegmentationBinaryFrame, VideoFunctionsObject.InitialContourFrame = new Frame());
+            VideoFunctionsObject.SetInitialWindowsArroundContour();
+            VideoFunctionsObject.TrainClassifiers();
+            VideoFunctionsObject.PropagateFrame();
+            MessageBox.Show("Training Finished!");
             //}
             //catch
             //{
             //    MessageBox.Show("Please Import a video first!");
             //}
         }
-        #endregion  
+        #endregion
 
         #region Dr.Mostafa View Frames
         int Start = 0;
@@ -123,7 +126,7 @@ namespace VeditorGP
                 Start++;
                 DrMostafaNextBTN.Enabled = true;
             }
-            else if(Start == 0)
+            else if (Start == 0)
                 DrMostafaNextBTN.Enabled = false;
         }
         private void DrMostafaNextBTN_Click(object sender, EventArgs e)
@@ -184,6 +187,32 @@ namespace VeditorGP
                 DrMostafaPicBox6.Image = null;
                 DrMostafaNextBTN.Enabled = false;
             }
+        }
+        #endregion
+
+        #region Play Video Controls
+        private void PlayBTN_Click(object sender, EventArgs e)
+        {
+            MyTimer = new System.Timers.Timer();
+            MyTimer.Elapsed += new System.Timers.ElapsedEventHandler(MyTimer_Elapsed);
+            MyTimer.Interval = 100;
+            MyTimer.Enabled = true;
+        }
+
+        void MyTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            FrameBox.Image = VideoFunctionsObject.GetNextFrame().BmpImage;
+        }
+
+        private void PauseBTN_Click(object sender, EventArgs e)
+        {
+            MyTimer.Enabled = false;
+        }
+
+        private void StopBTN_Click(object sender, EventArgs e)
+        {
+            MyTimer.Enabled = false;
+            FrameBox.Image = VideoFunctionsObject.InitialFrame.BmpImage;
         }
         #endregion
     }
