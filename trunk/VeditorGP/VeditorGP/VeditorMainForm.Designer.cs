@@ -87,35 +87,52 @@
             this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.VideoTabControl = new System.Windows.Forms.TabControl();
             this.PlayVideoTabPage = new System.Windows.Forms.TabPage();
+            this.PauseBTN = new System.Windows.Forms.Button();
+            this.StopBTN = new System.Windows.Forms.Button();
+            this.PlayBTN = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.FrameBox = new System.Windows.Forms.PictureBox();
             this.ViewFramesTabPage = new System.Windows.Forms.TabPage();
             this.TestVideoTabPage = new System.Windows.Forms.TabPage();
             this.MovieGroupBox = new System.Windows.Forms.GroupBox();
             this.FBox = new System.Windows.Forms.PictureBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.FrameBox = new System.Windows.Forms.PictureBox();
-            this.PlayBTN = new System.Windows.Forms.Button();
-            this.StopBTN = new System.Windows.Forms.Button();
-            this.PauseBTN = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.DrMostafaNextBTN = new System.Windows.Forms.Button();
+            this.DrMostafaPreviousBTN = new System.Windows.Forms.Button();
+            this.DrMostafaPicBox1 = new System.Windows.Forms.PictureBox();
+            this.DrMostafaPicBox4 = new System.Windows.Forms.PictureBox();
+            this.DrMostafaPicBox5 = new System.Windows.Forms.PictureBox();
+            this.DrMostafaPicBox2 = new System.Windows.Forms.PictureBox();
+            this.DrMostafaPicBox6 = new System.Windows.Forms.PictureBox();
+            this.DrMostafaPicBox3 = new System.Windows.Forms.PictureBox();
             this.statusStrip.SuspendLayout();
             this.SegmentationToolsGroupBox.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.VideoTabControl.SuspendLayout();
             this.PlayVideoTabPage.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.FrameBox)).BeginInit();
+            this.ViewFramesTabPage.SuspendLayout();
             this.TestVideoTabPage.SuspendLayout();
             this.MovieGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.FBox)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.FrameBox)).BeginInit();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DrMostafaPicBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DrMostafaPicBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DrMostafaPicBox5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DrMostafaPicBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DrMostafaPicBox6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DrMostafaPicBox3)).BeginInit();
             this.SuspendLayout();
             // 
             // statusStrip
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel});
-            this.statusStrip.Location = new System.Drawing.Point(0, 459);
+            this.statusStrip.Location = new System.Drawing.Point(0, 662);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(929, 22);
+            this.statusStrip.Size = new System.Drawing.Size(1126, 22);
             this.statusStrip.TabIndex = 12;
             this.statusStrip.Text = "StatusStrip";
             // 
@@ -478,7 +495,7 @@
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.MdiWindowListItem = this.windowsMenu;
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(929, 24);
+            this.menuStrip.Size = new System.Drawing.Size(1126, 24);
             this.menuStrip.TabIndex = 10;
             this.menuStrip.Text = "MenuStrip";
             // 
@@ -495,7 +512,7 @@
             this.helpToolStripButton});
             this.toolStrip.Location = new System.Drawing.Point(0, 24);
             this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Size = new System.Drawing.Size(929, 25);
+            this.toolStrip.Size = new System.Drawing.Size(1126, 25);
             this.toolStrip.TabIndex = 18;
             this.toolStrip.Text = "ToolStrip";
             // 
@@ -572,8 +589,9 @@
             this.VideoTabControl.Location = new System.Drawing.Point(148, 52);
             this.VideoTabControl.Name = "VideoTabControl";
             this.VideoTabControl.SelectedIndex = 0;
-            this.VideoTabControl.Size = new System.Drawing.Size(769, 404);
+            this.VideoTabControl.Size = new System.Drawing.Size(966, 607);
             this.VideoTabControl.TabIndex = 1;
+            this.VideoTabControl.Selected += new System.Windows.Forms.TabControlEventHandler(this.VideoTabControl_Selected);
             // 
             // PlayVideoTabPage
             // 
@@ -584,17 +602,66 @@
             this.PlayVideoTabPage.Location = new System.Drawing.Point(4, 22);
             this.PlayVideoTabPage.Name = "PlayVideoTabPage";
             this.PlayVideoTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.PlayVideoTabPage.Size = new System.Drawing.Size(761, 378);
+            this.PlayVideoTabPage.Size = new System.Drawing.Size(958, 581);
             this.PlayVideoTabPage.TabIndex = 0;
             this.PlayVideoTabPage.Text = "Play Video";
             this.PlayVideoTabPage.UseVisualStyleBackColor = true;
             // 
+            // PauseBTN
+            // 
+            this.PauseBTN.Location = new System.Drawing.Point(93, 543);
+            this.PauseBTN.Name = "PauseBTN";
+            this.PauseBTN.Size = new System.Drawing.Size(75, 23);
+            this.PauseBTN.TabIndex = 3;
+            this.PauseBTN.Text = "Pause";
+            this.PauseBTN.UseVisualStyleBackColor = true;
+            // 
+            // StopBTN
+            // 
+            this.StopBTN.Location = new System.Drawing.Point(174, 543);
+            this.StopBTN.Name = "StopBTN";
+            this.StopBTN.Size = new System.Drawing.Size(75, 23);
+            this.StopBTN.TabIndex = 2;
+            this.StopBTN.Text = "Stop";
+            this.StopBTN.UseVisualStyleBackColor = true;
+            // 
+            // PlayBTN
+            // 
+            this.PlayBTN.Location = new System.Drawing.Point(12, 543);
+            this.PlayBTN.Name = "PlayBTN";
+            this.PlayBTN.Size = new System.Drawing.Size(75, 23);
+            this.PlayBTN.TabIndex = 1;
+            this.PlayBTN.Text = "Play";
+            this.PlayBTN.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.FrameBox);
+            this.groupBox1.Location = new System.Drawing.Point(6, 6);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(624, 519);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Loaded Video";
+            // 
+            // FrameBox
+            // 
+            this.FrameBox.Location = new System.Drawing.Point(6, 19);
+            this.FrameBox.Name = "FrameBox";
+            this.FrameBox.Size = new System.Drawing.Size(612, 494);
+            this.FrameBox.TabIndex = 0;
+            this.FrameBox.TabStop = false;
+            this.FrameBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.FrameBox_MouseClick);
+            // 
             // ViewFramesTabPage
             // 
+            this.ViewFramesTabPage.Controls.Add(this.DrMostafaPreviousBTN);
+            this.ViewFramesTabPage.Controls.Add(this.DrMostafaNextBTN);
+            this.ViewFramesTabPage.Controls.Add(this.groupBox2);
             this.ViewFramesTabPage.Location = new System.Drawing.Point(4, 22);
             this.ViewFramesTabPage.Name = "ViewFramesTabPage";
             this.ViewFramesTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.ViewFramesTabPage.Size = new System.Drawing.Size(568, 324);
+            this.ViewFramesTabPage.Size = new System.Drawing.Size(958, 581);
             this.ViewFramesTabPage.TabIndex = 1;
             this.ViewFramesTabPage.Text = "View Frames";
             this.ViewFramesTabPage.UseVisualStyleBackColor = true;
@@ -630,57 +697,102 @@
             this.FBox.TabIndex = 0;
             this.FBox.TabStop = false;
             // 
-            // groupBox1
+            // groupBox2
             // 
-            this.groupBox1.Controls.Add(this.FrameBox);
-            this.groupBox1.Location = new System.Drawing.Point(6, 6);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(412, 337);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Loaded Video";
+            this.groupBox2.Controls.Add(this.DrMostafaPicBox6);
+            this.groupBox2.Controls.Add(this.DrMostafaPicBox3);
+            this.groupBox2.Controls.Add(this.DrMostafaPicBox5);
+            this.groupBox2.Controls.Add(this.DrMostafaPicBox2);
+            this.groupBox2.Controls.Add(this.DrMostafaPicBox4);
+            this.groupBox2.Controls.Add(this.DrMostafaPicBox1);
+            this.groupBox2.Location = new System.Drawing.Point(6, 6);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(946, 477);
+            this.groupBox2.TabIndex = 0;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Frames";
             // 
-            // FrameBox
+            // DrMostafaNextBTN
             // 
-            this.FrameBox.Location = new System.Drawing.Point(6, 19);
-            this.FrameBox.Name = "FrameBox";
-            this.FrameBox.Size = new System.Drawing.Size(400, 312);
-            this.FrameBox.TabIndex = 0;
-            this.FrameBox.TabStop = false;
-            this.FrameBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.FrameBox_MouseClick);
+            this.DrMostafaNextBTN.Location = new System.Drawing.Point(515, 498);
+            this.DrMostafaNextBTN.Name = "DrMostafaNextBTN";
+            this.DrMostafaNextBTN.Size = new System.Drawing.Size(75, 23);
+            this.DrMostafaNextBTN.TabIndex = 1;
+            this.DrMostafaNextBTN.Text = "Next";
+            this.DrMostafaNextBTN.UseVisualStyleBackColor = true;
+            this.DrMostafaNextBTN.Click += new System.EventHandler(this.DrMostafaNextBTN_Click);
             // 
-            // PlayBTN
+            // DrMostafaPreviousBTN
             // 
-            this.PlayBTN.Location = new System.Drawing.Point(12, 349);
-            this.PlayBTN.Name = "PlayBTN";
-            this.PlayBTN.Size = new System.Drawing.Size(75, 23);
-            this.PlayBTN.TabIndex = 1;
-            this.PlayBTN.Text = "Play";
-            this.PlayBTN.UseVisualStyleBackColor = true;
+            this.DrMostafaPreviousBTN.Enabled = false;
+            this.DrMostafaPreviousBTN.Location = new System.Drawing.Point(326, 498);
+            this.DrMostafaPreviousBTN.Name = "DrMostafaPreviousBTN";
+            this.DrMostafaPreviousBTN.Size = new System.Drawing.Size(75, 23);
+            this.DrMostafaPreviousBTN.TabIndex = 2;
+            this.DrMostafaPreviousBTN.Text = "Previous";
+            this.DrMostafaPreviousBTN.UseVisualStyleBackColor = true;
             // 
-            // StopBTN
+            // DrMostafaPicBox1
             // 
-            this.StopBTN.Location = new System.Drawing.Point(174, 349);
-            this.StopBTN.Name = "StopBTN";
-            this.StopBTN.Size = new System.Drawing.Size(75, 23);
-            this.StopBTN.TabIndex = 2;
-            this.StopBTN.Text = "Stop";
-            this.StopBTN.UseVisualStyleBackColor = true;
+            this.DrMostafaPicBox1.Location = new System.Drawing.Point(6, 19);
+            this.DrMostafaPicBox1.Name = "DrMostafaPicBox1";
+            this.DrMostafaPicBox1.Size = new System.Drawing.Size(292, 208);
+            this.DrMostafaPicBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.DrMostafaPicBox1.TabIndex = 0;
+            this.DrMostafaPicBox1.TabStop = false;
             // 
-            // PauseBTN
+            // DrMostafaPicBox4
             // 
-            this.PauseBTN.Location = new System.Drawing.Point(93, 349);
-            this.PauseBTN.Name = "PauseBTN";
-            this.PauseBTN.Size = new System.Drawing.Size(75, 23);
-            this.PauseBTN.TabIndex = 3;
-            this.PauseBTN.Text = "Pause";
-            this.PauseBTN.UseVisualStyleBackColor = true;
+            this.DrMostafaPicBox4.Location = new System.Drawing.Point(6, 243);
+            this.DrMostafaPicBox4.Name = "DrMostafaPicBox4";
+            this.DrMostafaPicBox4.Size = new System.Drawing.Size(292, 208);
+            this.DrMostafaPicBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.DrMostafaPicBox4.TabIndex = 1;
+            this.DrMostafaPicBox4.TabStop = false;
+            // 
+            // DrMostafaPicBox5
+            // 
+            this.DrMostafaPicBox5.Location = new System.Drawing.Point(327, 243);
+            this.DrMostafaPicBox5.Name = "DrMostafaPicBox5";
+            this.DrMostafaPicBox5.Size = new System.Drawing.Size(292, 208);
+            this.DrMostafaPicBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.DrMostafaPicBox5.TabIndex = 3;
+            this.DrMostafaPicBox5.TabStop = false;
+            // 
+            // DrMostafaPicBox2
+            // 
+            this.DrMostafaPicBox2.Location = new System.Drawing.Point(327, 19);
+            this.DrMostafaPicBox2.Name = "DrMostafaPicBox2";
+            this.DrMostafaPicBox2.Size = new System.Drawing.Size(292, 208);
+            this.DrMostafaPicBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.DrMostafaPicBox2.TabIndex = 2;
+            this.DrMostafaPicBox2.TabStop = false;
+            // 
+            // DrMostafaPicBox6
+            // 
+            this.DrMostafaPicBox6.Location = new System.Drawing.Point(648, 243);
+            this.DrMostafaPicBox6.Name = "DrMostafaPicBox6";
+            this.DrMostafaPicBox6.Size = new System.Drawing.Size(292, 208);
+            this.DrMostafaPicBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.DrMostafaPicBox6.TabIndex = 5;
+            this.DrMostafaPicBox6.TabStop = false;
+            // 
+            // DrMostafaPicBox3
+            // 
+            this.DrMostafaPicBox3.Location = new System.Drawing.Point(648, 19);
+            this.DrMostafaPicBox3.Name = "DrMostafaPicBox3";
+            this.DrMostafaPicBox3.Size = new System.Drawing.Size(292, 208);
+            this.DrMostafaPicBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.DrMostafaPicBox3.TabIndex = 4;
+            this.DrMostafaPicBox3.TabStop = false;
             // 
             // VeditorMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(929, 481);
+            this.AutoScroll = true;
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(1126, 684);
             this.Controls.Add(this.VideoTabControl);
             this.Controls.Add(this.toolStrip);
             this.Controls.Add(this.statusStrip);
@@ -688,6 +800,7 @@
             this.Controls.Add(this.SegmentationToolsGroupBox);
             this.Name = "VeditorMainForm";
             this.Text = "Veditor";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
             this.SegmentationToolsGroupBox.ResumeLayout(false);
@@ -697,12 +810,20 @@
             this.toolStrip.PerformLayout();
             this.VideoTabControl.ResumeLayout(false);
             this.PlayVideoTabPage.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.FrameBox)).EndInit();
+            this.ViewFramesTabPage.ResumeLayout(false);
             this.TestVideoTabPage.ResumeLayout(false);
             this.MovieGroupBox.ResumeLayout(false);
             this.MovieGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.FBox)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.FrameBox)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.DrMostafaPicBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DrMostafaPicBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DrMostafaPicBox5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DrMostafaPicBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DrMostafaPicBox6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DrMostafaPicBox3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -776,6 +897,15 @@
         private System.Windows.Forms.Button PlayBTN;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.PictureBox FrameBox;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button DrMostafaPreviousBTN;
+        private System.Windows.Forms.Button DrMostafaNextBTN;
+        private System.Windows.Forms.PictureBox DrMostafaPicBox1;
+        private System.Windows.Forms.PictureBox DrMostafaPicBox6;
+        private System.Windows.Forms.PictureBox DrMostafaPicBox3;
+        private System.Windows.Forms.PictureBox DrMostafaPicBox5;
+        private System.Windows.Forms.PictureBox DrMostafaPicBox2;
+        private System.Windows.Forms.PictureBox DrMostafaPicBox4;
     }
 }
 

@@ -28,7 +28,6 @@ namespace GraduationProject
             int height = Dest.height;
             int width = Dest.width;
             for (int i = 0; i < height; i++)
-            {
                 for (int j = 0; j < width; j++)
                 {
                     CvScalar vals = cvlib.CvGet2D(ref Source, i, j);
@@ -36,7 +35,6 @@ namespace GraduationProject
                     Dest.greenPixels[i, j] = (byte)vals.val2;
                     Dest.redPixels[i, j] = (byte)vals.val3;
                 }
-            }
         }
     }
 }

@@ -16,8 +16,11 @@ namespace VeditorGP
         Frame CurrentFrame, PreviousFrame;
         public Frame InitialSegmentationBinaryFrame, InitialFrame, InitialContourFrame;
         int WindowWidth = 30, WindowHeight = 30, WindowSize = 900;
-        Capture Video;
+        static Capture Video , DrMostafaVideo;
         public List<Point> ConnectedContour;
+        SURF SurfObject;
+        OurOpticalFlow OpticalFlowObject;
+        Bitmap SurfResult;
         public VideoFunctions()
         {
 
@@ -28,6 +31,12 @@ namespace VeditorGP
         public Frame OpenVideo(string Path)
         {
             Video = new Capture(Path);
+            DrMostafaVideo = new Capture(Path);
+            OpenFrame();
+            return CurrentFrame;
+        }
+        void OpenFrame()
+        {
             CurrentFrame = new Frame();
             CurrentFrame.EmguRgbImage = Video.QuerySmallFrame();
             CurrentFrame.EmguLabImage = CurrentFrame.EmguRgbImage.Convert<Lab, byte>();
@@ -72,7 +81,6 @@ namespace VeditorGP
                 }
             }
             CurrentFrame.BmpImage.UnlockBits(bmpData);
-            return CurrentFrame;
         }
         #endregion
 
@@ -101,7 +109,6 @@ namespace VeditorGP
                     }
                 }
         }
-
         public void TrainClassifiers()
         {
             foreach (Window item in InitialFrame.FrameWindows)
@@ -109,6 +116,46 @@ namespace VeditorGP
                 item.WindowClassifier.Train();
                 item.CalculateModels();
             }
+        }
+        #endregion
+
+        #region Propagation
+        public Frame GetNextFrame()
+        {
+            PreviousFrame = CurrentFrame;
+            OpenFrame();
+            return CurrentFrame;
+        }
+        public void PropagateFrame()
+        {
+            GetNextFrame();
+            GetSurfPoints();
+            GetOpticalFlow();
+        }
+        void GetSurfPoints()
+        {
+            SurfObject = new SURF();
+            SurfResult = SurfObject.GetSIFTpoints(PreviousFrame, CurrentFrame);
+        }
+        void GetOpticalFlow()
+        {
+            OpticalFlowObject = new OurOpticalFlow();
+        }
+        #endregion
+
+        #region View Frames for Dr.Mostafa
+        public Bitmap GetNewFrame(ref int Success)
+        {
+            Bitmap Result;
+            Image<Bgr, byte> Frame = DrMostafaVideo.QueryFrame();
+            if (Frame == null)
+            {
+                Success = -1;
+                return null;
+            }
+            IplImage TempFrame = (IplImage)cvtools.ConvertPtrToStructure(Frame.Ptr, typeof(IplImage));
+            Result = (Bitmap)TempFrame;
+            return Result;
         }
         #endregion
     }

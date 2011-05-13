@@ -103,6 +103,7 @@ namespace VeditorGP
                 VideoFunctionsObject.ConnectedContour = ContourFunctionsObject.GetConnectedContour(VideoFunctionsObject.InitialSegmentationBinaryFrame, VideoFunctionsObject.InitialContourFrame = new Frame());
                 VideoFunctionsObject.SetInitialWindowsArroundContour();
                 VideoFunctionsObject.TrainClassifiers();
+                VideoFunctionsObject.PropagateFrame();
                 MessageBox.Show("Training Finished!");
             //}
             //catch
@@ -111,5 +112,79 @@ namespace VeditorGP
             //}
         }
         #endregion  
+
+        #region Dr.Mostafa View Frames
+        int Start = 0;
+        private void VideoTabControl_Selected(object sender, TabControlEventArgs e)
+        {
+            if (Start == 0 && VideoFunctionsObject != null)
+            {
+                DisplayNewFrames();
+                Start++;
+                DrMostafaNextBTN.Enabled = true;
+            }
+            else if(Start == 0)
+                DrMostafaNextBTN.Enabled = false;
+        }
+        private void DrMostafaNextBTN_Click(object sender, EventArgs e)
+        {
+            DisplayNewFrames();
+        }
+        void DisplayNewFrames()
+        {
+            int Success = 0;
+            DrMostafaPicBox1.Image = VideoFunctionsObject.GetNewFrame(ref Success);
+            if (Success == -1)
+            {
+                DrMostafaPicBox1.Image = null;
+                DrMostafaPicBox2.Image = null;
+                DrMostafaPicBox3.Image = null;
+                DrMostafaPicBox4.Image = null;
+                DrMostafaPicBox5.Image = null;
+                DrMostafaPicBox6.Image = null;
+                DrMostafaNextBTN.Enabled = false;
+            }
+            DrMostafaPicBox2.Image = VideoFunctionsObject.GetNewFrame(ref Success);
+            if (Success == -1)
+            {
+                DrMostafaPicBox2.Image = null;
+                DrMostafaPicBox3.Image = null;
+                DrMostafaPicBox4.Image = null;
+                DrMostafaPicBox5.Image = null;
+                DrMostafaPicBox6.Image = null;
+                DrMostafaNextBTN.Enabled = false;
+            }
+            DrMostafaPicBox3.Image = VideoFunctionsObject.GetNewFrame(ref Success);
+            if (Success == -1)
+            {
+                DrMostafaPicBox3.Image = null;
+                DrMostafaPicBox4.Image = null;
+                DrMostafaPicBox5.Image = null;
+                DrMostafaPicBox6.Image = null;
+                DrMostafaNextBTN.Enabled = false;
+            }
+            DrMostafaPicBox4.Image = VideoFunctionsObject.GetNewFrame(ref Success);
+            if (Success == -1)
+            {
+                DrMostafaPicBox4.Image = null;
+                DrMostafaPicBox5.Image = null;
+                DrMostafaPicBox6.Image = null;
+                DrMostafaNextBTN.Enabled = false;
+            }
+            DrMostafaPicBox5.Image = VideoFunctionsObject.GetNewFrame(ref Success);
+            if (Success == -1)
+            {
+                DrMostafaPicBox5.Image = null;
+                DrMostafaPicBox6.Image = null;
+                DrMostafaNextBTN.Enabled = false;
+            }
+            DrMostafaPicBox6.Image = VideoFunctionsObject.GetNewFrame(ref Success);
+            if (Success == -1)
+            {
+                DrMostafaPicBox6.Image = null;
+                DrMostafaNextBTN.Enabled = false;
+            }
+        }
+        #endregion
     }
 }
