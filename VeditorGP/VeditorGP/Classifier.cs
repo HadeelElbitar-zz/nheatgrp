@@ -3,23 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing;
+using Accord.Math;
+using System.Drawing.Imaging;
 using Emgu.CV;
-//using Emgu.CV.ML;
-//using Emgu.CV.Structure;
-//using Accord.Math;
-using Emgu.CV.UI;
-using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
 using Emgu.CV.ML;
-using Emgu.CV.ML.Structure;
-using Accord.MachineLearning;
-using Accord.Math;
-using Accord.Statistics.Distributions.Multivariate;
-using System.Drawing.Imaging;
+using openCV;
 
 namespace VeditorGP
 {
-    //MyWindow.WindowFrame.doubleRedPixels[BackgroundPoints[i].X, BackgroundPoints[i].Y];
     class Classifier
     {
         #region Variables and constructors
@@ -29,7 +21,8 @@ namespace VeditorGP
         }
         Window MyWindow;
         List<Point> ForegroundPoints, BackgroundPoints;
-        double[] FWeights , BWeights;
+        double TINY = 0.0000000001;
+        double[] FWeights, BWeights;
         double[] ForegroundKmean1, ForegroundKmean2, ForegroundKmean3, BackgroundKmean1, BackgroundKmean2, BackgroundKmean3;
         double[,] BackgroundKmeanCovarinace1, BackgroundKmeanCovarinace2, BackgroundKmeanCovarinace3,
              ForegroundKmeanCovarinace1, ForegroundKmeanCovarinace2, ForegroundKmeanCovarinace3
@@ -38,15 +31,21 @@ namespace VeditorGP
         double[] BackgroundEMmean1, BackgroundEMmean2, BackgroundEMmean3, ForegroundEMmean1, ForegroundEMmean2, ForegroundEMmean3
             , ForeGroundProbability, BackGroundProbability;
         #endregion
-
         #region Training Step
         public void Train()
         {
+            //double[] X = { 53.0, 2.0, 135.0 };
+            //double[] Mu = new double[3];
+            //double[,] Sigma = new double[3, 3];
+            //double Tet = MultivariateNormalGaussian(X, Mu, Sigma);
             DividData();
             ForegroundKmean();
             BackgroundKmean();
-            OurBackgroundEM();
-            OurForegroundEM();
+            OurBackgroundEM2();
+            OurForegroundEM2();
+            //BackgrounEM();
+            //OurBackgroundEM();
+            //OurForegroundEM();
             //ForegrounEM();
             //BackgrounEM();
             OurGMM(); //P(x)
@@ -86,30 +85,30 @@ namespace VeditorGP
                     #endregion
                     #region EM
                     ForeGroundProbability[0] = MultivariateNormalGaussian(Sample, ForegroundEMmean1, ForegroundEMCovariance1);
-                    ForeGroundProbability[0] *= FWeights[0];
-                    if (double.IsNaN(ForeGroundProbability[0]) || double.IsInfinity(ForeGroundProbability[0]))
-                        ForeGroundProbability[0] = 0;
+                    //ForeGroundProbability[0] *= FWeights[0];
+                    //if (double.IsNaN(ForeGroundProbability[0]) || double.IsInfinity(ForeGroundProbability[0]))
+                    //    ForeGroundProbability[0] = 0;
                     ForeGroundProbability[1] = MultivariateNormalGaussian(Sample, ForegroundEMmean2, ForegroundEMCovariance2);
-                    ForeGroundProbability[1] *= FWeights[1];
-                    if (double.IsNaN(ForeGroundProbability[1]) || double.IsInfinity(ForeGroundProbability[1]))
-                        ForeGroundProbability[1] = 0;
+                    //ForeGroundProbability[1] *= FWeights[1];
+                    //if (double.IsNaN(ForeGroundProbability[1]) || double.IsInfinity(ForeGroundProbability[1]))
+                    //    ForeGroundProbability[1] = 0;
                     ForeGroundProbability[2] = MultivariateNormalGaussian(Sample, ForegroundEMmean3, ForegroundEMCovariance3);
-                    ForeGroundProbability[2] *= FWeights[2];
-                    if (double.IsNaN(ForeGroundProbability[2]) || double.IsInfinity(ForeGroundProbability[2]))
-                        ForeGroundProbability[2] = 0;
+                    //ForeGroundProbability[2] *= FWeights[2];
+                    //if (double.IsNaN(ForeGroundProbability[2]) || double.IsInfinity(ForeGroundProbability[2]))
+                    //    ForeGroundProbability[2] = 0;
 
                     BackGroundProbability[0] = MultivariateNormalGaussian(Sample, BackgroundEMmean1, BackgroundEMCovariance1);
-                    BackGroundProbability[0] *= BWeights[0];
-                    if (double.IsNaN(BackGroundProbability[0]) || double.IsInfinity(BackGroundProbability[0]))
-                        BackGroundProbability[0] = 0;
+                    //BackGroundProbability[0] *= BWeights[0];
+                    //if (double.IsNaN(BackGroundProbability[0]) || double.IsInfinity(BackGroundProbability[0]))
+                    //    BackGroundProbability[0] = 0;
                     BackGroundProbability[1] = MultivariateNormalGaussian(Sample, BackgroundEMmean2, BackgroundEMCovariance2);
-                    BackGroundProbability[1] *= BWeights[1];
-                    if (double.IsNaN(BackGroundProbability[1]) || double.IsInfinity(BackGroundProbability[1]))
-                        BackGroundProbability[1] = 0;
+                    //BackGroundProbability[1] *= BWeights[1];
+                    //if (double.IsNaN(BackGroundProbability[1]) || double.IsInfinity(BackGroundProbability[1]))
+                    //    BackGroundProbability[1] = 0;
                     BackGroundProbability[2] = MultivariateNormalGaussian(Sample, BackgroundEMmean3, BackgroundEMCovariance3);
-                    BackGroundProbability[2] *= BWeights[2];
-                    if (double.IsNaN(BackGroundProbability[2]) || double.IsInfinity(BackGroundProbability[2]))
-                        BackGroundProbability[2] = 0;
+                    //BackGroundProbability[2] *= BWeights[2];
+                    //if (double.IsNaN(BackGroundProbability[2]) || double.IsInfinity(BackGroundProbability[2]))
+                    //    BackGroundProbability[2] = 0;
                     #endregion
 
                     MyWindow.ForegroundProbability[i, j] = (ForeGroundProbability[0] + ForeGroundProbability[1] + ForeGroundProbability[2]) /
@@ -186,15 +185,243 @@ namespace VeditorGP
 
             #endregion
         }
+        void OurBackgroundEM2()
+        {
+            #region Initialization and First Itiration
+            #region variables
+            List<double[]> Component1 = new List<double[]>();
+            List<double[]> Component2 = new List<double[]>();
+            List<double[]> Component3 = new List<double[]>();
+            double[] OldMu1, OldMu2, OldMu3, TempWeights = new double[3];
+            double[,] OldSigma1, OldSigma2, OldSigma3;
+            OldMu1 = BackgroundKmean1;
+            OldMu2 = BackgroundKmean2;
+            OldMu3 = BackgroundKmean3;
+            OldSigma1 = BackgroundKmeanCovarinace1;
+            OldSigma2 = BackgroundKmeanCovarinace2;
+            OldSigma3 = BackgroundKmeanCovarinace3;
+            BWeights = new double[3];
+            TempWeights[0] = 1.0 / 3.0;
+            TempWeights[1] = 1.0 / 3.0;
+            TempWeights[2] = 1.0 / 3.0;
+            int BackgroundCount = BackgroundPoints.Count;
+            double Prior1, Prior2, Prior3;
+            double[] Sample;
+            BackgroundEMmean1 = new double[3];
+            BackgroundEMmean2 = new double[3];
+            BackgroundEMmean3 = new double[3];
+            BackgroundEMCovariance1 = new double[3, 3];
+            BackgroundEMCovariance2 = new double[3, 3];
+            BackgroundEMCovariance3 = new double[3, 3];
+            #endregion
+            for (int i = 0; i < BackgroundCount; i++)
+            {
+                Sample = new double[3];
+                Sample[0] = MyWindow.WindowFrame.doubleRedPixels[BackgroundPoints[i].X, BackgroundPoints[i].Y];
+                Sample[1] = MyWindow.WindowFrame.doubleGreenPixels[BackgroundPoints[i].X, BackgroundPoints[i].Y];
+                Sample[2] = MyWindow.WindowFrame.doubleBluePixels[BackgroundPoints[i].X, BackgroundPoints[i].Y];
+                Prior1 = PriorProbability(0, Sample, OldMu1, OldMu2, OldMu3, OldSigma1, OldSigma2, OldSigma3, TempWeights);
+                Prior2 = PriorProbability(1, Sample, OldMu1, OldMu2, OldMu3, OldSigma1, OldSigma2, OldSigma3, TempWeights);
+                Prior3 = PriorProbability(2, Sample, OldMu1, OldMu2, OldMu3, OldSigma1, OldSigma2, OldSigma3, TempWeights);
+                double[] TET = new double[3];
+                Sample.CopyTo(TET, 0);
+                if (Prior1 > Prior2 && Prior1 > Prior3)
+                    Component1.Add(TET);
+                else if (Prior2 > Prior1 && Prior2 > Prior3)
+                    Component2.Add(TET);
+                else if (Prior3 > Prior2 && Prior3 > Prior1)
+                    Component3.Add(TET);
+            }
+            BackgroundEMmean1 = FindNewMean(Component1);
+            BackgroundEMmean2 = FindNewMean(Component2);
+            BackgroundEMmean3 = FindNewMean(Component3);
+            BackgroundEMCovariance1 = GetEmCovariance(BackgroundEMmean1, Component1);
+            BackgroundEMCovariance2 = GetEmCovariance(BackgroundEMmean2, Component2);
+            BackgroundEMCovariance3 = GetEmCovariance(BackgroundEMmean3, Component3);
+            #endregion
+            #region iterations
+            //Distance(OldMu1, BackgroundEMmean1) > 0.001 || Distance(OldMu2, BackgroundEMmean2) > 0.001 || Distance(OldMu3, BackgroundEMmean3) > 0.001
+            while (Distance(OldMu1, BackgroundEMmean1) > 0.0001 || Distance(OldMu2, BackgroundEMmean2) > 0.0001 || Distance(OldMu3, BackgroundEMmean3) > 0.0001)
+            {
+                OldMu1 = BackgroundEMmean1;
+                OldMu2 = BackgroundEMmean2;
+                OldMu3 = BackgroundEMmean3;
+                TempWeights = BWeights;
+                OldSigma1 = BackgroundEMCovariance1;
+                OldSigma2 = BackgroundEMCovariance2;
+                OldSigma3 = BackgroundEMCovariance3;
+                BackgroundEMmean1 = new double[3];
+                BackgroundEMmean2 = new double[3];
+                BackgroundEMmean3 = new double[3];
+                BackgroundEMCovariance1 = new double[3, 3];
+                BackgroundEMCovariance2 = new double[3, 3];
+                BackgroundEMCovariance3 = new double[3, 3];
+                for (int i = 0; i < BackgroundCount; i++)
+                {
+                    Sample = new double[3];
+                    Sample[0] = MyWindow.WindowFrame.doubleRedPixels[BackgroundPoints[i].X, BackgroundPoints[i].Y];
+                    Sample[1] = MyWindow.WindowFrame.doubleGreenPixels[BackgroundPoints[i].X, BackgroundPoints[i].Y];
+                    Sample[2] = MyWindow.WindowFrame.doubleBluePixels[BackgroundPoints[i].X, BackgroundPoints[i].Y];
+                    Prior1 = PriorProbability(0, Sample, OldMu1, OldMu2, OldMu3, OldSigma1, OldSigma2, OldSigma3, TempWeights);
+                    Prior2 = PriorProbability(1, Sample, OldMu1, OldMu2, OldMu3, OldSigma1, OldSigma2, OldSigma3, TempWeights);
+                    Prior3 = PriorProbability(2, Sample, OldMu1, OldMu2, OldMu3, OldSigma1, OldSigma2, OldSigma3, TempWeights);
+                    double[] TET = new double[3];
+                    Sample.CopyTo(TET, 0);
+                    if (Prior1 > Prior2 && Prior1 > Prior3)
+                        Component1.Add(TET);
+                    else if (Prior2 > Prior1 && Prior2 > Prior3)
+                        Component2.Add(TET);
+                    else if (Prior3 > Prior2 && Prior3 > Prior1)
+                        Component3.Add(TET);
+                }
+                BackgroundEMmean1 = FindNewMean(Component1);
+                BackgroundEMmean2 = FindNewMean(Component2);
+                BackgroundEMmean3 = FindNewMean(Component3);
+                BackgroundEMCovariance1 = GetEmCovariance(BackgroundEMmean1, Component1);
+                BackgroundEMCovariance2 = GetEmCovariance(BackgroundEMmean2, Component2);
+                BackgroundEMCovariance3 = GetEmCovariance(BackgroundEMmean3, Component3);
+            }
+            #endregion
+        }
+        void OurForegroundEM2()
+        {
+            #region Initialization and First Itiration
+            #region variables
+            List<double[]> Component1 = new List<double[]>();
+            List<double[]> Component2 = new List<double[]>();
+            List<double[]> Component3 = new List<double[]>();
+            double[] OldMu1, OldMu2, OldMu3, TempWeights = new double[3];
+            double[,] OldSigma1, OldSigma2, OldSigma3;
+            OldMu1 = ForegroundKmean1;
+            OldMu2 = ForegroundKmean2;
+            OldMu3 = ForegroundKmean3;
+            OldSigma1 = ForegroundKmeanCovarinace1;
+            OldSigma2 = ForegroundKmeanCovarinace2;
+            OldSigma3 = ForegroundKmeanCovarinace3;
+            FWeights = new double[3];
+            TempWeights[0] = 1.0 / 3.0;
+            TempWeights[1] = 1.0 / 3.0;
+            TempWeights[2] = 1.0 / 3.0;
+            int ForegroundCount = ForegroundPoints.Count;
+            double Prior1, Prior2, Prior3;
+            double[] Sample;
+            ForegroundEMmean1 = new double[3];
+            ForegroundEMmean2 = new double[3];
+            ForegroundEMmean3 = new double[3];
+            ForegroundEMCovariance1 = new double[3, 3];
+            ForegroundEMCovariance2 = new double[3, 3];
+            ForegroundEMCovariance3 = new double[3, 3];
+            #endregion
+            for (int i = 0; i < ForegroundCount; i++)
+            {
+                Sample = new double[3];
+                Sample[0] = MyWindow.WindowFrame.doubleRedPixels[ForegroundPoints[i].X, ForegroundPoints[i].Y];
+                Sample[1] = MyWindow.WindowFrame.doubleGreenPixels[ForegroundPoints[i].X, ForegroundPoints[i].Y];
+                Sample[2] = MyWindow.WindowFrame.doubleBluePixels[ForegroundPoints[i].X, ForegroundPoints[i].Y];
+                Prior1 = PriorProbability(0, Sample, OldMu1, OldMu2, OldMu3, OldSigma1, OldSigma2, OldSigma3, TempWeights);
+                Prior2 = PriorProbability(1, Sample, OldMu1, OldMu2, OldMu3, OldSigma1, OldSigma2, OldSigma3, TempWeights);
+                Prior3 = PriorProbability(2, Sample, OldMu1, OldMu2, OldMu3, OldSigma1, OldSigma2, OldSigma3, TempWeights);
+                double[] TET = new double[3];
+                Sample.CopyTo(TET, 0);
+                if (Prior1 > Prior2 && Prior1 > Prior3)
+                    Component1.Add(TET);
+                else if (Prior2 > Prior1 && Prior2 > Prior3)
+                    Component2.Add(TET);
+                else if (Prior3 > Prior2 && Prior3 > Prior1)
+                    Component3.Add(TET);
+            }
+            ForegroundEMmean1 = FindNewMean(Component1);
+            ForegroundEMmean2 = FindNewMean(Component2);
+            ForegroundEMmean3 = FindNewMean(Component3);
+            ForegroundEMCovariance1 = GetEmCovariance(ForegroundEMmean1, Component1);
+            ForegroundEMCovariance2 = GetEmCovariance(ForegroundEMmean2, Component2);
+            ForegroundEMCovariance3 = GetEmCovariance(ForegroundEMmean3, Component3);
+            #endregion
+            #region iterations
+            //Distance(OldMu1, ForegroundEMmean1) > 0.01 || Distance(OldMu2, ForegroundEMmean2) > 0.01 || Distance(OldMu3, ForegroundEMmean3) > 0.01
+            while (Distance(OldMu1, ForegroundEMmean1) > 0.0001 || Distance(OldMu2, ForegroundEMmean2) > 0.0001 || Distance(OldMu3, ForegroundEMmean3) > 0.0001)
+            {
+                TempWeights = new double[3];
+                FWeights.CopyTo(TempWeights, 0);
+                OldMu1 = new double[3];
+                OldMu2 = new double[3];
+                OldMu3 = new double[3];
+                OldSigma1 = new double[3, 3];
+                OldSigma2 = new double[3, 3];
+                OldSigma3 = new double[3, 3];
+                ForegroundEMmean1.CopyTo(OldMu1, 0);
+                ForegroundEMmean2.CopyTo(OldMu2, 0);
+                ForegroundEMmean3.CopyTo(OldMu3, 0);
+                OldSigma1 = ForegroundEMCovariance1;
+                OldSigma2 = ForegroundEMCovariance2;
+                OldSigma3 = ForegroundEMCovariance3;
+                ForegroundEMmean1 = new double[3];
+                ForegroundEMmean2 = new double[3];
+                ForegroundEMmean3 = new double[3];
+                ForegroundEMCovariance1 = new double[3, 3];
+                ForegroundEMCovariance2 = new double[3, 3];
+                ForegroundEMCovariance3 = new double[3, 3];
+                for (int i = 0; i < ForegroundCount; i++)
+                {
+                    Sample = new double[3];
+                    Sample[0] = MyWindow.WindowFrame.doubleRedPixels[ForegroundPoints[i].X, ForegroundPoints[i].Y];
+                    Sample[1] = MyWindow.WindowFrame.doubleGreenPixels[ForegroundPoints[i].X, ForegroundPoints[i].Y];
+                    Sample[2] = MyWindow.WindowFrame.doubleBluePixels[ForegroundPoints[i].X, ForegroundPoints[i].Y];
+                    Prior1 = PriorProbability(0, Sample, OldMu1, OldMu2, OldMu3, OldSigma1, OldSigma2, OldSigma3, TempWeights);
+                    Prior2 = PriorProbability(1, Sample, OldMu1, OldMu2, OldMu3, OldSigma1, OldSigma2, OldSigma3, TempWeights);
+                    Prior3 = PriorProbability(2, Sample, OldMu1, OldMu2, OldMu3, OldSigma1, OldSigma2, OldSigma3, TempWeights);
+                    double[] TET = new double[3];
+                    Sample.CopyTo(TET, 0);
+                    if (Prior1 > Prior2 && Prior1 > Prior3)
+                        Component1.Add(TET);
+                    else if (Prior2 > Prior1 && Prior2 > Prior3)
+                        Component2.Add(TET);
+                    else if (Prior3 > Prior2 && Prior3 > Prior1)
+                        Component3.Add(TET);
+                }
+                ForegroundEMmean1 = FindNewMean(Component1);
+                ForegroundEMmean2 = FindNewMean(Component2);
+                ForegroundEMmean3 = FindNewMean(Component3);
+                ForegroundEMCovariance1 = GetEmCovariance(ForegroundEMmean1, Component1);
+                ForegroundEMCovariance2 = GetEmCovariance(ForegroundEMmean2, Component2);
+                ForegroundEMCovariance3 = GetEmCovariance(ForegroundEMmean3, Component3);
+            }
+            #endregion
+        }
+        double[,] GetEmCovariance(double[] _MeanMatrix, List<double[]> DataSet)
+        {
+            double[,] CovarianceMatrix = new double[3, 3];
+            double ReadMean = 0, GreenMean = 0, BlueMean = 0;
+            int length;
+            length = DataSet.Count;
+            for (int i = 0; i < length; i++)
+            {
+                ReadMean += Math.Pow((DataSet[i][0] - _MeanMatrix[0]), 2);
+                GreenMean += Math.Pow((DataSet[i][1] - _MeanMatrix[1]), 2);
+                BlueMean += Math.Pow((DataSet[i][2] - _MeanMatrix[2]), 2);
+            }
+            CovarianceMatrix[0, 0] = ReadMean / length;
+            CovarianceMatrix[1, 1] = GreenMean / length;
+            CovarianceMatrix[2, 2] = BlueMean / length;
+            return CovarianceMatrix;
+        }
         double MultivariateNormalGaussian(double[] X, double[] Mu, double[,] Sigma)
         {
             double Result = 0.0;
             double Term = 1 / Math.Pow((2 * Math.PI), 3 / 2);
-            double Determ = MatrixDet(ForegroundKmeanCovarinace1);
+            double Determ = MatrixDet(Sigma);
             Term *= Math.Pow(Determ, 1 / 2);
+            if (Determ == 0.0)
+                Determ = TINY;
             double[] Difference = new double[3];
             for (int i = 0; i < 3; i++)
                 Difference[i] = X[i] - Mu[i];
+            if (Sigma[0, 0] < TINY )
+                Sigma[0, 0] = TINY;
+            if (Sigma[1, 1] < TINY)
+                Sigma[1, 1] = TINY;
+            if (Sigma[2, 2] < TINY)
+                Sigma[2, 2] = TINY;
             double[,] SigmaInverse = Matrix.Inverse(Sigma);
             double[] MulRes = new double[3];
             for (int i = 0; i < 3; i++)
@@ -206,6 +433,72 @@ namespace VeditorGP
             Temp *= -0.5;
             Result = Term * Math.Exp(Temp);
             return Result;
+        }
+        void BackgrounEM()
+        {
+            //Random r = new Random(DateTime.Now.Millisecond);
+            int length = BackgroundPoints.Count;//3adad el data set
+            int Dimention = 3;
+
+            EM Em = new EM();
+            EM Em2 = new EM();
+            Matrix<int> labels = new Matrix<int>(length, 1);
+            Matrix<float> featuresM = new Matrix<float>(length, Dimention);
+            int PatternCount = 0;
+            for (int i = 0; i < length; i++)
+            {
+                featuresM[PatternCount, 0] = (float)MyWindow.WindowFrame.doubleRedPixels[BackgroundPoints[i].X, BackgroundPoints[i].Y];
+                featuresM[PatternCount, 1] = (float)MyWindow.WindowFrame.doubleGreenPixels[BackgroundPoints[i].X, BackgroundPoints[i].Y];
+                featuresM[PatternCount, 2] = (float)MyWindow.WindowFrame.doubleBluePixels[BackgroundPoints[i].X, BackgroundPoints[i].Y];
+                PatternCount++;
+            }
+
+            EMParams pars = new EMParams();
+            EMParams pars2 = new EMParams();
+            Matrix<double>[] Covariances = new Matrix<double>[3];
+            pars.CovMatType = Emgu.CV.ML.MlEnum.EM_COVARIAN_MATRIX_TYPE.COV_MAT_DIAGONAL;
+            Covariances[0] = new Matrix<double>(BackgroundKmeanCovarinace1);
+            //Covariances[1] = new Matrix<double>(BackgroundKmeanCovarinace2);
+            //Covariances[2] = new Matrix<double>(BackgroundKmeanCovarinace3);
+            Covariances[1] = new Matrix<double>(BackgroundKmeanCovarinace2);
+            Covariances[2] = new Matrix<double>(BackgroundKmeanCovarinace3);
+            pars.Covs = Covariances;
+            double[,] OurKmeans = new double[3, 3];
+            for (int i = 0; i < 3; i++)
+            {
+                OurKmeans[0, i] = BackgroundKmean1[i];
+                OurKmeans[1, i] = BackgroundKmean2[i];
+                OurKmeans[2, i] = BackgroundKmean3[i];
+            }
+            pars.Means = new Matrix<double>(OurKmeans);
+            pars.Nclusters = 3;
+            pars.StartStep = Emgu.CV.ML.MlEnum.EM_INIT_STEP_TYPE.START_E_STEP;
+            pars.TermCrit = new MCvTermCriteria(100, 1.0e-6);
+            BWeights = new double[3];
+            BWeights[0] = 1.0 / 3.0;
+            BWeights[1] = 1.0 / 3.0;
+            BWeights[2] = 1.0 / 3.0;
+            pars.Weights = new Matrix<double>(BWeights);
+            Em.Train(featuresM, null, pars, labels);
+            byte[] Tet = new byte[6];
+            cvtools.ConvertPtrToArray(MlInvoke.CvEMGetMeans(Em.Ptr), Tet);
+            //IntPtr Means = Em.Means.MCvMat.data;
+            Matrix<double> NewWeights = pars.Weights;
+            Matrix<double> NewMeans = pars.Means;
+
+            BackgroundEMmean1 = new double[3];
+            BackgroundEMmean2 = new double[3];
+            BackgroundEMmean3 = new double[3];
+            for (int i = 0; i < 3; i++)
+            {
+                BackgroundEMmean1[i] = NewMeans.Data[0, i];
+                BackgroundEMmean2[i] = NewMeans.Data[1, i];
+                BackgroundEMmean3[i] = NewMeans.Data[2, i];
+            }
+            Matrix<double>[] Covariance = pars.Covs;
+            BackgroundEMCovariance1 = Covariance[0].Data;
+            BackgroundEMCovariance2 = Covariance[1].Data;
+            BackgroundEMCovariance3 = Covariance[2].Data;
         }
         double MatrixDet(double[,] SubMatrix)
         {
@@ -624,7 +917,7 @@ namespace VeditorGP
             #region iterations
             int x = 0;
             //Distance(OldMu1, BackgroundEMmean1) > 0.001 || Distance(OldMu2, BackgroundEMmean2) > 0.001 || Distance(OldMu3, BackgroundEMmean3) > 0.001
-            while (Distance(OldMu1, BackgroundEMmean1) > 0.001 || Distance(OldMu2, BackgroundEMmean2) > 0.001 || Distance(OldMu3, BackgroundEMmean3) > 0.001)
+            while (Distance(OldMu1, BackgroundEMmean1) > 0.01 || Distance(OldMu2, BackgroundEMmean2) > 0.01 || Distance(OldMu3, BackgroundEMmean3) > 0.01)
             {
                 x++;
                 OldMu1 = BackgroundEMmean1;
@@ -741,15 +1034,23 @@ namespace VeditorGP
         double PriorProbability(int ComponentNumber, double[] TestVector, double[] Mu1, double[] Mu2, double[] Mu3, double[,] Sigma1, double[,] Sigma2, double[,] Sigma3, double[] Weights)
         {
             double result = 0.0, Temp = 0.0;
+            int zeft;
             if (ComponentNumber == 0)
             {
+                zeft = 0;
                 Temp = Weights[0] * MultivariateNormalGaussian(TestVector, Mu1, Sigma1);
                 result += Temp;
+                double zeft2 = MultivariateNormalGaussian(TestVector, Mu1, Sigma1);
+                double zeft3 = MultivariateNormalGaussian(TestVector, Mu2, Sigma2);
+                double zeft4 = MultivariateNormalGaussian(TestVector, Mu3, Sigma3);
                 result += (Weights[1] * MultivariateNormalGaussian(TestVector, Mu2, Sigma2));
                 result += (Weights[2] * MultivariateNormalGaussian(TestVector, Mu3, Sigma3));
+                if (double.IsNaN(zeft2) || double.IsNaN(zeft3) || double.IsNaN(zeft4))
+                    return 0.0;
             }
             else if (ComponentNumber == 1)
             {
+                zeft = 1;
                 Temp = Weights[1] * MultivariateNormalGaussian(TestVector, Mu2, Sigma2);
                 result += (Weights[0] * MultivariateNormalGaussian(TestVector, Mu1, Sigma1));
                 result += Temp;
@@ -757,126 +1058,15 @@ namespace VeditorGP
             }
             else if (ComponentNumber == 2)
             {
+                zeft = 2;
                 Temp = Weights[2] * MultivariateNormalGaussian(TestVector, Mu3, Sigma3);
                 result += (Weights[0] * MultivariateNormalGaussian(TestVector, Mu1, Sigma1));
                 result += (Weights[1] * MultivariateNormalGaussian(TestVector, Mu2, Sigma2));
                 result += Temp;
             }
+            
             Temp /= result;
             return Temp;
-        }
-        void BackgrounEM()
-        {
-            Random r = new Random(DateTime.Now.Millisecond);
-            int length = BackgroundPoints.Count;//3adad el data set
-            int Dimention = 3;
-
-            EM Em = new EM();
-            Matrix<int> labels = new Matrix<int>(length, 1);
-            Matrix<float> featuresM = new Matrix<float>(length, Dimention);
-            int PatternCount = 0;
-            for (int i = 0; i < length; i++)
-            {
-                featuresM[PatternCount, 0] = (float)MyWindow.WindowFrame.doubleRedPixels[BackgroundPoints[i].X, BackgroundPoints[i].Y];
-                featuresM[PatternCount, 1] = (float)MyWindow.WindowFrame.doubleGreenPixels[BackgroundPoints[i].X, BackgroundPoints[i].Y];
-                featuresM[PatternCount, 2] = (float)MyWindow.WindowFrame.doubleBluePixels[BackgroundPoints[i].X, BackgroundPoints[i].Y];
-                PatternCount++;
-            }
-
-            EMParams pars = new EMParams();
-            Matrix<double>[] Covariances = new Matrix<double>[3];
-            Covariances[0] = new Matrix<double>(BackgroundKmeanCovarinace1);
-            Covariances[1] = new Matrix<double>(BackgroundKmeanCovarinace2);
-            Covariances[2] = new Matrix<double>(BackgroundKmeanCovarinace3);
-            pars.Covs = Covariances;
-            double[,] OurKmeans = new double[3, 3];
-            for (int i = 0; i < 3; i++)
-            {
-                OurKmeans[0, i] = BackgroundKmean1[i];
-                OurKmeans[1, i] = BackgroundKmean2[i];
-                OurKmeans[2, i] = BackgroundKmean3[i];
-            }
-            pars.Means = new Matrix<double>(OurKmeans);
-            pars.Nclusters = 3;
-            pars.StartStep = Emgu.CV.ML.MlEnum.EM_INIT_STEP_TYPE.START_AUTO_STEP;
-            pars.TermCrit = new MCvTermCriteria(100, 1.0e-6);
-
-            Em.Train(featuresM, null, pars, labels);
-            IntPtr Means = Em.Means.MCvMat.data;
-            Matrix<double> NewMeans = pars.Means;
-            BackgroundEMmean1 = new double[3];
-            BackgroundEMmean2 = new double[3];
-            BackgroundEMmean3 = new double[3];
-            for (int i = 0; i < 3; i++)
-            {
-                BackgroundEMmean1[i] = NewMeans.Data[0, i];
-                BackgroundEMmean2[i] = NewMeans.Data[1, i];
-                BackgroundEMmean3[i] = NewMeans.Data[2, i];
-            }
-            Matrix<double>[] Covariance = pars.Covs;
-            BackgroundEMCovariance1 = Covariance[0].Data;
-            BackgroundEMCovariance2 = Covariance[1].Data;
-            BackgroundEMCovariance3 = Covariance[2].Data;
-        }
-        void ForegrounEM()
-        {
-            Random r = new Random(DateTime.Now.Millisecond);
-            int length = ForegroundPoints.Count;//3adad el data set
-            int Dimention = 3;
-
-            EM Em = new EM();
-            Matrix<int> labels = new Matrix<int>(length, 1);
-            Matrix<float> featuresM = new Matrix<float>(length, Dimention);
-            int PatternCount = 0;
-            for (int i = 0; i < length; i++)
-            {
-                featuresM[PatternCount, 0] = (float)MyWindow.WindowFrame.doubleRedPixels[ForegroundPoints[i].X, ForegroundPoints[i].Y];
-                featuresM[PatternCount, 1] = (float)MyWindow.WindowFrame.doubleGreenPixels[ForegroundPoints[i].X, ForegroundPoints[i].Y];
-                featuresM[PatternCount, 2] = (float)MyWindow.WindowFrame.doubleBluePixels[ForegroundPoints[i].X, ForegroundPoints[i].Y];
-                PatternCount++;
-            }
-
-            EMParams pars = new EMParams();
-            Matrix<double>[] Covariances = new Matrix<double>[3];
-            Covariances[0] = new Matrix<double>(ForegroundKmeanCovarinace1);
-            Covariances[1] = new Matrix<double>(ForegroundKmeanCovarinace2);
-            Covariances[2] = new Matrix<double>(ForegroundKmeanCovarinace3);
-            pars.Covs = Covariances;
-            double[,] OurKmeans = new double[3, 3];
-            for (int i = 0; i < 3; i++)
-            {
-                OurKmeans[0, i] = ForegroundKmean1[i];
-                OurKmeans[1, i] = ForegroundKmean2[i];
-                OurKmeans[2, i] = ForegroundKmean3[i];
-            }
-            pars.Means = new Matrix<double>(OurKmeans);
-            pars.Nclusters = 3;
-            pars.StartStep = Emgu.CV.ML.MlEnum.EM_INIT_STEP_TYPE.START_AUTO_STEP;
-            pars.TermCrit = new MCvTermCriteria(100, 1.0e-6);
-            double[] ay7aga = new double[3];
-            ay7aga[0] = 1.0 / 3.0;
-            ay7aga[1] = 1.0 / 3.0;
-            ay7aga[2] = 1.0 / 3.0;
-            //Matrix<double> ForegroundW = new Matrix<double>(3);
-            
-            pars.Weights = new Matrix<double>(ay7aga); 
-            Em.Train(featuresM, null, pars, labels);
-            Matrix<double> ForegroundW = pars.Weights;
-            IntPtr Means = Em.Means.MCvMat.data;
-            Matrix<double> NewMeans = pars.Means;
-            ForegroundEMmean1 = new double[3];
-            ForegroundEMmean2 = new double[3];
-            ForegroundEMmean3 = new double[3];
-            for (int i = 0; i < 3; i++)
-            {
-                ForegroundEMmean1[i] = NewMeans.Data[0, i];
-                ForegroundEMmean2[i] = NewMeans.Data[1, i];
-                ForegroundEMmean3[i] = NewMeans.Data[2, i];
-            }
-            Matrix<double>[] Covariance = pars.Covs;
-            ForegroundEMCovariance1 = Covariance[0].Data;
-            ForegroundEMCovariance2 = Covariance[1].Data;
-            ForegroundEMCovariance3 = Covariance[2].Data;
         }
         void BackgroundKmean()
         {
