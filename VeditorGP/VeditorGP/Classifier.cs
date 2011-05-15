@@ -15,6 +15,7 @@ using Emgu.CV.ML.Structure;
 using Accord.MachineLearning;
 using Accord.Math;
 using Accord.Statistics.Distributions.Multivariate;
+using System.Drawing.Imaging;
 
 namespace VeditorGP
 {
@@ -56,17 +57,18 @@ namespace VeditorGP
             ForeGroundProbability = new double[3];
             BackGroundProbability = new double[3];
             int width = MyWindow.WindowFrame.width, height = MyWindow.WindowFrame.height;
+            byte[,] TempCalssify = new byte[height, width]; 
             MyWindow.ForegroundProbability = new double[height, width];
             for (int i = 0; i < height; i++)
             {
                 for (int j = 0; j < width; j++)
                 {
-                    //Sample[0] = MyWindow.WindowFrame.doubleRedPixels[i, j];
-                    //Sample[1] = MyWindow.WindowFrame.doubleGreenPixels[i, j];
-                    //Sample[2] = MyWindow.WindowFrame.doubleBluePixels[i, j];
-                    Sample[0] = MyWindow.WindowFrame.doubleRedPixels[BackgroundPoints[j].X, BackgroundPoints[j].Y];
-                    Sample[1] = MyWindow.WindowFrame.doubleGreenPixels[BackgroundPoints[j].X, BackgroundPoints[j].Y];
-                    Sample[2] = MyWindow.WindowFrame.doubleBluePixels[BackgroundPoints[j].X, BackgroundPoints[j].Y];
+                    Sample[0] = MyWindow.WindowFrame.doubleRedPixels[i, j];
+                    Sample[1] = MyWindow.WindowFrame.doubleGreenPixels[i, j];
+                    Sample[2] = MyWindow.WindowFrame.doubleBluePixels[i, j];
+                    //Sample[0] = MyWindow.WindowFrame.doubleRedPixels[BackgroundPoints[j].X, BackgroundPoints[j].Y];
+                    //Sample[1] = MyWindow.WindowFrame.doubleGreenPixels[BackgroundPoints[j].X, BackgroundPoints[j].Y];
+                    //Sample[2] = MyWindow.WindowFrame.doubleBluePixels[BackgroundPoints[j].X, BackgroundPoints[j].Y];
                     #region K-mean
                     //ForeGroundProbability[0] = MultivariateNormalGaussian(Sample, ForegroundKmean1, ForegroundKmeanCovarinace1);
                     //ForeGroundProbability[0] /= 3;
@@ -85,52 +87,101 @@ namespace VeditorGP
                     #region EM
                     ForeGroundProbability[0] = MultivariateNormalGaussian(Sample, ForegroundEMmean1, ForegroundEMCovariance1);
                     ForeGroundProbability[0] *= FWeights[0];
+                    if (double.IsNaN(ForeGroundProbability[0]) || double.IsInfinity(ForeGroundProbability[0]))
+                        ForeGroundProbability[0] = 0;
                     ForeGroundProbability[1] = MultivariateNormalGaussian(Sample, ForegroundEMmean2, ForegroundEMCovariance2);
                     ForeGroundProbability[1] *= FWeights[1];
+                    if (double.IsNaN(ForeGroundProbability[1]) || double.IsInfinity(ForeGroundProbability[1]))
+                        ForeGroundProbability[1] = 0;
                     ForeGroundProbability[2] = MultivariateNormalGaussian(Sample, ForegroundEMmean3, ForegroundEMCovariance3);
                     ForeGroundProbability[2] *= FWeights[2];
+                    if (double.IsNaN(ForeGroundProbability[2]) || double.IsInfinity(ForeGroundProbability[2]))
+                        ForeGroundProbability[2] = 0;
 
                     BackGroundProbability[0] = MultivariateNormalGaussian(Sample, BackgroundEMmean1, BackgroundEMCovariance1);
                     BackGroundProbability[0] *= BWeights[0];
+                    if (double.IsNaN(BackGroundProbability[0]) || double.IsInfinity(BackGroundProbability[0]))
+                        BackGroundProbability[0] = 0;
                     BackGroundProbability[1] = MultivariateNormalGaussian(Sample, BackgroundEMmean2, BackgroundEMCovariance2);
                     BackGroundProbability[1] *= BWeights[1];
+                    if (double.IsNaN(BackGroundProbability[1]) || double.IsInfinity(BackGroundProbability[1]))
+                        BackGroundProbability[1] = 0;
                     BackGroundProbability[2] = MultivariateNormalGaussian(Sample, BackgroundEMmean3, BackgroundEMCovariance3);
                     BackGroundProbability[2] *= BWeights[2];
+                    if (double.IsNaN(BackGroundProbability[2]) || double.IsInfinity(BackGroundProbability[2]))
+                        BackGroundProbability[2] = 0;
                     #endregion
 
                     MyWindow.ForegroundProbability[i, j] = (ForeGroundProbability[0] + ForeGroundProbability[1] + ForeGroundProbability[2]) /
                         (ForeGroundProbability[0] + ForeGroundProbability[1] + ForeGroundProbability[2] +
                         BackGroundProbability[0] + BackGroundProbability[1] + BackGroundProbability[2]);
-
-                    Sample[0] = MyWindow.WindowFrame.doubleRedPixels[ForegroundPoints[j].X, ForegroundPoints[j].Y];
-                    Sample[1] = MyWindow.WindowFrame.doubleGreenPixels[ForegroundPoints[j].X, ForegroundPoints[j].Y];
-                    Sample[2] = MyWindow.WindowFrame.doubleBluePixels[ForegroundPoints[j].X, ForegroundPoints[j].Y];
+                    if (MyWindow.ForegroundProbability[i, j] < 0.5)
+                        TempCalssify[i, j] = 0;
+                    else
+                        TempCalssify[i, j] = 255;
+                    //Sample[0] = MyWindow.WindowFrame.doubleRedPixels[ForegroundPoints[j].X, ForegroundPoints[j].Y];
+                    //Sample[1] = MyWindow.WindowFrame.doubleGreenPixels[ForegroundPoints[j].X, ForegroundPoints[j].Y];
+                    //Sample[2] = MyWindow.WindowFrame.doubleBluePixels[ForegroundPoints[j].X, ForegroundPoints[j].Y];
                     #region EM
-                    ForeGroundProbability[0] = MultivariateNormalGaussian(Sample, ForegroundEMmean1, ForegroundEMCovariance1);
-                    ForeGroundProbability[0] *= FWeights[0];
-                    ForeGroundProbability[1] = MultivariateNormalGaussian(Sample, ForegroundEMmean2, ForegroundEMCovariance2);
-                    ForeGroundProbability[1] *= FWeights[1];
-                    ForeGroundProbability[2] = MultivariateNormalGaussian(Sample, ForegroundEMmean3, ForegroundEMCovariance3);
-                    ForeGroundProbability[2] *= FWeights[2];
+                    //ForeGroundProbability[0] = MultivariateNormalGaussian(Sample, ForegroundEMmean1, ForegroundEMCovariance1);
+                    //ForeGroundProbability[0] *= FWeights[0];
+                    //if (double.IsNaN(ForeGroundProbability[0]) || double.IsInfinity(ForeGroundProbability[0]))
+                    //    ForeGroundProbability[0] = 0;
+                    //ForeGroundProbability[1] = MultivariateNormalGaussian(Sample, ForegroundEMmean2, ForegroundEMCovariance2);
+                    //ForeGroundProbability[1] *= FWeights[1];
+                    //if (double.IsNaN(ForeGroundProbability[1]) || double.IsInfinity(ForeGroundProbability[1]))
+                    //    ForeGroundProbability[1] = 0;
+                    //ForeGroundProbability[2] = MultivariateNormalGaussian(Sample, ForegroundEMmean3, ForegroundEMCovariance3);
+                    //ForeGroundProbability[2] *= FWeights[2];
+                    //if (double.IsNaN(ForeGroundProbability[2]) || double.IsInfinity(ForeGroundProbability[2]))
+                    //    ForeGroundProbability[2] = 0;
 
-                    BackGroundProbability[0] = MultivariateNormalGaussian(Sample, BackgroundEMmean1, BackgroundEMCovariance1);
-                    BackGroundProbability[0] *= BWeights[0];
-                    BackGroundProbability[1] = MultivariateNormalGaussian(Sample, BackgroundEMmean2, BackgroundEMCovariance2);
-                    BackGroundProbability[1] *= BWeights[1];
-                    BackGroundProbability[2] = MultivariateNormalGaussian(Sample, BackgroundEMmean3, BackgroundEMCovariance3);
-                    BackGroundProbability[2] *= BWeights[2];
+                    //BackGroundProbability[0] = MultivariateNormalGaussian(Sample, BackgroundEMmean1, BackgroundEMCovariance1);
+                    //BackGroundProbability[0] *= BWeights[0];
+                    //if (double.IsNaN(BackGroundProbability[0]) || double.IsInfinity(BackGroundProbability[0]))
+                    //    BackGroundProbability[0] = 0;
+                    //BackGroundProbability[1] = MultivariateNormalGaussian(Sample, BackgroundEMmean2, BackgroundEMCovariance2);
+                    //BackGroundProbability[1] *= BWeights[1];
+                    //if (double.IsNaN(BackGroundProbability[1]) || double.IsInfinity(BackGroundProbability[1]))
+                    //    BackGroundProbability[1] = 0;
+                    //BackGroundProbability[2] = MultivariateNormalGaussian(Sample, BackgroundEMmean3, BackgroundEMCovariance3);
+                    //BackGroundProbability[2] *= BWeights[2];
+                    //if (double.IsNaN(BackGroundProbability[2]) || double.IsInfinity(BackGroundProbability[2]))
+                    //    BackGroundProbability[2] = 0;
                     #endregion
 
-                    MyWindow.ForegroundProbability[i, j] = (ForeGroundProbability[0] + ForeGroundProbability[1] + ForeGroundProbability[2]) /
-                        (ForeGroundProbability[0] + ForeGroundProbability[1] + ForeGroundProbability[2] +
-                        BackGroundProbability[0] + BackGroundProbability[1] + BackGroundProbability[2]);
+                    //MyWindow.ForegroundProbability[i, j] = (ForeGroundProbability[0] + ForeGroundProbability[1] + ForeGroundProbability[2]) /
+                    //    (ForeGroundProbability[0] + ForeGroundProbability[1] + ForeGroundProbability[2] +
+                    //    BackGroundProbability[0] + BackGroundProbability[1] + BackGroundProbability[2]);
                     //if (MyWindow.ForegroundProbability[i, j] * 100 > 50)
                     //    MyWindow.ForegroundProbability[i, j] = 255;
                     //else
                     //    MyWindow.ForegroundProbability[i, j] = 0;
                 }
             }
-            int x;
+            #region Test Saving Boundary Image
+            Bitmap NewImage = new Bitmap(width, height);
+            BitmapData bmpData = NewImage.LockBits(new Rectangle(0, 0, width, height), System.Drawing.Imaging.ImageLockMode.ReadWrite, NewImage.PixelFormat);
+            unsafe
+            {
+                byte* p = (byte*)bmpData.Scan0;
+                int space = bmpData.Stride - width * 3;
+                for (int i = 0; i < height; i++)
+                {
+                    for (int j = 0; j < width; j++)
+                    {
+                        p[0] = TempCalssify[i, j];
+                        p[1] = TempCalssify[i, j];
+                        p[2] = TempCalssify[i, j];
+                        p += 3;
+                    }
+                    p += space;
+                }
+            }
+            NewImage.UnlockBits(bmpData);
+            string Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Classifier.bmp";
+            NewImage.Save(Pw, ImageFormat.Bmp); 
+            #endregion
             #region Fc
 
             #endregion
@@ -229,9 +280,9 @@ namespace VeditorGP
             OldSigma2 = ForegroundKmeanCovarinace2;
             OldSigma3 = ForegroundKmeanCovarinace3;
             FWeights = new double[3];
-            FWeights[0] = 1.0 / 3.0;
-            FWeights[1] = 1.0 / 3.0;
-            FWeights[2] = 1.0 / 3.0;
+            TempWeights[0] = 1.0 / 3.0;
+            TempWeights[1] = 1.0 / 3.0;
+            TempWeights[2] = 1.0 / 3.0;
             int ForegroundCount = ForegroundPoints.Count;
             double SummationComponent1 = 0.0, SummationComponent2 = 0.0, SummationComponent3 = 0.0;
             double Prior1, Prior2, Prior3;
@@ -248,9 +299,9 @@ namespace VeditorGP
                 Sample[0] = MyWindow.WindowFrame.doubleRedPixels[ForegroundPoints[i].X, ForegroundPoints[i].Y];
                 Sample[1] = MyWindow.WindowFrame.doubleGreenPixels[ForegroundPoints[i].X, ForegroundPoints[i].Y];
                 Sample[2] = MyWindow.WindowFrame.doubleBluePixels[ForegroundPoints[i].X, ForegroundPoints[i].Y];
-                Prior1 = PriorProbability(0, Sample, OldMu1, OldMu2, OldMu3, OldSigma1, OldSigma2, OldSigma3, FWeights);
-                Prior2 = PriorProbability(1, Sample, OldMu1, OldMu2, OldMu3, OldSigma1, OldSigma2, OldSigma3, FWeights);
-                Prior3 = PriorProbability(2, Sample, OldMu1, OldMu2, OldMu3, OldSigma1, OldSigma2, OldSigma3, FWeights);
+                Prior1 = PriorProbability(0, Sample, OldMu1, OldMu2, OldMu3, OldSigma1, OldSigma2, OldSigma3, TempWeights);
+                Prior2 = PriorProbability(1, Sample, OldMu1, OldMu2, OldMu3, OldSigma1, OldSigma2, OldSigma3, TempWeights);
+                Prior3 = PriorProbability(2, Sample, OldMu1, OldMu2, OldMu3, OldSigma1, OldSigma2, OldSigma3, TempWeights);
                 SummationComponent1 += Prior1;
                 SummationComponent2 += Prior2;
                 SummationComponent3 += Prior3;
@@ -283,9 +334,9 @@ namespace VeditorGP
                 ForegroundEMCovariance3[2, 2] += (Prior3 * Math.Pow(Sample[2], 2)); 
                 #endregion
             }
-            TempWeights[0] = SummationComponent1 / ForegroundCount;
-            TempWeights[1] = SummationComponent2 / ForegroundCount;
-            TempWeights[2] = SummationComponent3 / ForegroundCount;
+            FWeights[0] = SummationComponent1 / ForegroundCount;
+            FWeights[1] = SummationComponent2 / ForegroundCount;
+            FWeights[2] = SummationComponent3 / ForegroundCount;
 
             #region Mu
             ForegroundEMmean1[0] /= SummationComponent1;
@@ -326,15 +377,33 @@ namespace VeditorGP
             
             #endregion
             #region iterations
-            while (Distance(OldMu1, ForegroundEMmean1) > 0.001 || Distance(OldMu2, ForegroundEMmean2) > 0.001 || Distance(OldMu3, ForegroundEMmean3) > 0.001)
+            int x = 0;
+            //Distance(OldMu1, ForegroundEMmean1) > 0.01 || Distance(OldMu2, ForegroundEMmean2) > 0.01 || Distance(OldMu3, ForegroundEMmean3) > 0.01
+            while (x > 5)
             {
-                OldMu1 = ForegroundEMmean1;
-                OldMu2 = ForegroundEMmean2;
-                OldMu3 = ForegroundEMmean3;
-                FWeights = TempWeights;
-                OldSigma1 = ForegroundEMCovariance1;
-                OldSigma2 = ForegroundEMCovariance2;
-                OldSigma3 = ForegroundEMCovariance3;
+                x++;
+                //if (Distance(TempWeights, FWeights) < 0.0001)
+                //    break;
+                TempWeights = new double[3];
+                FWeights.CopyTo(TempWeights, 0);
+                OldMu1 = new double[3];
+                OldMu2 = new double[3];
+                OldMu3 = new double[3];
+                OldSigma1 = new double[3, 3];
+                OldSigma2 = new double[3, 3];
+                OldSigma3 = new double[3, 3];
+
+                ForegroundEMmean1.CopyTo(OldMu1,0);
+                ForegroundEMmean2.CopyTo(OldMu2, 0);
+                ForegroundEMmean3.CopyTo(OldMu3, 0);
+                for (int i = 0; i < 3; i++)
+                    for (int j = 0; j < 3; j++)
+                    {
+                        OldSigma1[i, j] = ForegroundEMCovariance1[i, j];
+                        OldSigma2[i, j] = ForegroundEMCovariance2[i, j];
+                        OldSigma3[i, j] = ForegroundEMCovariance3[i, j];
+                    }
+
                 ForegroundEMmean1 = new double[3];
                 ForegroundEMmean2 = new double[3];
                 ForegroundEMmean3 = new double[3];
@@ -349,25 +418,15 @@ namespace VeditorGP
                     Sample[0] = MyWindow.WindowFrame.doubleRedPixels[ForegroundPoints[i].X, ForegroundPoints[i].Y];
                     Sample[1] = MyWindow.WindowFrame.doubleGreenPixels[ForegroundPoints[i].X, ForegroundPoints[i].Y];
                     Sample[2] = MyWindow.WindowFrame.doubleBluePixels[ForegroundPoints[i].X, ForegroundPoints[i].Y];
-                    Prior1 = PriorProbability(0, Sample, OldMu1, OldMu2, OldMu3, OldSigma1, OldSigma2, OldSigma3, FWeights);
-                    int x;
-                    if(Prior1 == double.NaN)
-                        x = 0;
-                    Prior2 = PriorProbability(1, Sample, OldMu1, OldMu2, OldMu3, OldSigma1, OldSigma2, OldSigma3, FWeights);
-                    if (Prior2 == double.NaN)
-                        x = 0;
-                    Prior3 = PriorProbability(2, Sample, OldMu1, OldMu2, OldMu3, OldSigma1, OldSigma2, OldSigma3, FWeights);
-                    if (Prior3 == double.NaN)
-                        x = 0;
+                    Prior1 = PriorProbability(0, Sample, OldMu1, OldMu2, OldMu3, OldSigma1, OldSigma2, OldSigma3, TempWeights);
+                    Prior2 = PriorProbability(1, Sample, OldMu1, OldMu2, OldMu3, OldSigma1, OldSigma2, OldSigma3, TempWeights);
+                    Prior3 = PriorProbability(2, Sample, OldMu1, OldMu2, OldMu3, OldSigma1, OldSigma2, OldSigma3, TempWeights);
+
                     SummationComponent1 += Prior1;
-                    if (SummationComponent1 == double.NaN)
-                        x = 0;
                     SummationComponent2 += Prior2;
-                    if (SummationComponent2 == double.NaN)
-                        x = 0;
                     SummationComponent3 += Prior3;
-                    if (SummationComponent3 == double.NaN)
-                        x = 0;
+                    if (double.IsNaN(SummationComponent1) || double.IsNaN(SummationComponent2) || double.IsNaN(SummationComponent3))
+                        break;
                     #region Mu
                     ForegroundEMmean1[0] += (Prior1 * Sample[0]);
                     ForegroundEMmean1[1] += (Prior1 * Sample[1]);
@@ -396,10 +455,24 @@ namespace VeditorGP
                     ForegroundEMCovariance3[2, 2] += (Prior3 * Math.Pow(Sample[2], 2));
                     #endregion
                 }
-                TempWeights[0] = SummationComponent1 / ForegroundCount;
-                TempWeights[1] = SummationComponent2 / ForegroundCount;
-                TempWeights[2] = SummationComponent3 / ForegroundCount;
-
+                if (double.IsNaN(SummationComponent1) || double.IsNaN(SummationComponent2) || double.IsNaN(SummationComponent3))
+                {
+                    OldMu1.CopyTo(ForegroundEMmean1, 0);
+                    OldMu2.CopyTo(ForegroundEMmean2, 0);
+                    OldMu3.CopyTo(ForegroundEMmean3, 0);
+                    for (int i = 0; i < 3; i++)
+                        for (int j = 0; j < 3; j++)
+                        {
+                            ForegroundEMCovariance1[i, j] = OldSigma1[i, j];
+                            ForegroundEMCovariance2[i, j] = OldSigma2[i, j];
+                            ForegroundEMCovariance3[i, j] = OldSigma3[i, j];
+                        }
+                    TempWeights.CopyTo(FWeights, 0);
+                    break;
+                }
+                FWeights[0] = SummationComponent1 / ForegroundCount;
+                FWeights[1] = SummationComponent2 / ForegroundCount;
+                FWeights[2] = SummationComponent3 / ForegroundCount;
                 #region Mu
                 ForegroundEMmean1[0] /= SummationComponent1;
                 ForegroundEMmean1[1] /= SummationComponent1;
@@ -452,9 +525,9 @@ namespace VeditorGP
             OldSigma2 = BackgroundKmeanCovarinace2;
             OldSigma3 = BackgroundKmeanCovarinace3;
             BWeights = new double[3];
-            BWeights[0] = 1.0 / 3.0;
-            BWeights[1] = 1.0 / 3.0;
-            BWeights[2] = 1.0 / 3.0;
+            TempWeights[0] = 1.0 / 3.0;
+            TempWeights[1] = 1.0 / 3.0;
+            TempWeights[2] = 1.0 / 3.0;
             int BackgroundCount = BackgroundPoints.Count;
             double SummationComponent1 = 0.0, SummationComponent2 = 0.0, SummationComponent3 = 0.0;
             double Prior1, Prior2, Prior3;
@@ -471,9 +544,9 @@ namespace VeditorGP
                 Sample[0] = MyWindow.WindowFrame.doubleRedPixels[BackgroundPoints[i].X, BackgroundPoints[i].Y];
                 Sample[1] = MyWindow.WindowFrame.doubleGreenPixels[BackgroundPoints[i].X, BackgroundPoints[i].Y];
                 Sample[2] = MyWindow.WindowFrame.doubleBluePixels[BackgroundPoints[i].X, BackgroundPoints[i].Y];
-                Prior1 = PriorProbability(0, Sample, OldMu1, OldMu2, OldMu3, OldSigma1, OldSigma2, OldSigma3, BWeights);
-                Prior2 = PriorProbability(1, Sample, OldMu1, OldMu2, OldMu3, OldSigma1, OldSigma2, OldSigma3, BWeights);
-                Prior3 = PriorProbability(2, Sample, OldMu1, OldMu2, OldMu3, OldSigma1, OldSigma2, OldSigma3, BWeights);
+                Prior1 = PriorProbability(0, Sample, OldMu1, OldMu2, OldMu3, OldSigma1, OldSigma2, OldSigma3, TempWeights);
+                Prior2 = PriorProbability(1, Sample, OldMu1, OldMu2, OldMu3, OldSigma1, OldSigma2, OldSigma3, TempWeights);
+                Prior3 = PriorProbability(2, Sample, OldMu1, OldMu2, OldMu3, OldSigma1, OldSigma2, OldSigma3, TempWeights);
                 SummationComponent1 += Prior1;
                 SummationComponent2 += Prior2;
                 SummationComponent3 += Prior3;
@@ -506,9 +579,9 @@ namespace VeditorGP
                 BackgroundEMCovariance3[2, 2] += (Prior3 * Math.Pow(Sample[2], 2));
                 #endregion
             }
-            TempWeights[0] = SummationComponent1 / BackgroundCount;
-            TempWeights[1] = SummationComponent2 / BackgroundCount;
-            TempWeights[2] = SummationComponent3 / BackgroundCount;
+            BWeights[0] = SummationComponent1 / BackgroundCount;
+            BWeights[1] = SummationComponent2 / BackgroundCount;
+            BWeights[2] = SummationComponent3 / BackgroundCount;
 
             #region Mu
             BackgroundEMmean1[0] /= SummationComponent1;
@@ -549,12 +622,15 @@ namespace VeditorGP
 
             #endregion
             #region iterations
+            int x = 0;
+            //Distance(OldMu1, BackgroundEMmean1) > 0.001 || Distance(OldMu2, BackgroundEMmean2) > 0.001 || Distance(OldMu3, BackgroundEMmean3) > 0.001
             while (Distance(OldMu1, BackgroundEMmean1) > 0.001 || Distance(OldMu2, BackgroundEMmean2) > 0.001 || Distance(OldMu3, BackgroundEMmean3) > 0.001)
             {
+                x++;
                 OldMu1 = BackgroundEMmean1;
                 OldMu2 = BackgroundEMmean2;
                 OldMu3 = BackgroundEMmean3;
-                BWeights = TempWeights;
+                TempWeights = BWeights;
                 OldSigma1 = BackgroundEMCovariance1;
                 OldSigma2 = BackgroundEMCovariance2;
                 OldSigma3 = BackgroundEMCovariance3;
@@ -572,13 +648,14 @@ namespace VeditorGP
                     Sample[0] = MyWindow.WindowFrame.doubleRedPixels[BackgroundPoints[i].X, BackgroundPoints[i].Y];
                     Sample[1] = MyWindow.WindowFrame.doubleGreenPixels[BackgroundPoints[i].X, BackgroundPoints[i].Y];
                     Sample[2] = MyWindow.WindowFrame.doubleBluePixels[BackgroundPoints[i].X, BackgroundPoints[i].Y];
-                    Prior1 = PriorProbability(0, Sample, OldMu1, OldMu2, OldMu3, OldSigma1, OldSigma2, OldSigma3, BWeights);
-                    Prior2 = PriorProbability(1, Sample, OldMu1, OldMu2, OldMu3, OldSigma1, OldSigma2, OldSigma3, BWeights);
-                    Prior3 = PriorProbability(2, Sample, OldMu1, OldMu2, OldMu3, OldSigma1, OldSigma2, OldSigma3, BWeights);
+                    Prior1 = PriorProbability(0, Sample, OldMu1, OldMu2, OldMu3, OldSigma1, OldSigma2, OldSigma3, TempWeights);
+                    Prior2 = PriorProbability(1, Sample, OldMu1, OldMu2, OldMu3, OldSigma1, OldSigma2, OldSigma3, TempWeights);
+                    Prior3 = PriorProbability(2, Sample, OldMu1, OldMu2, OldMu3, OldSigma1, OldSigma2, OldSigma3, TempWeights);
                     SummationComponent1 += Prior1;
                     SummationComponent2 += Prior2;
                     SummationComponent3 += Prior3;
-
+                    if (double.IsNaN(SummationComponent1) || double.IsNaN(SummationComponent2) || double.IsNaN(SummationComponent3))
+                        break;
                     #region Mu
                     BackgroundEMmean1[0] += (Prior1 * Sample[0]);
                     BackgroundEMmean1[1] += (Prior1 * Sample[1]);
@@ -607,9 +684,20 @@ namespace VeditorGP
                     BackgroundEMCovariance3[2, 2] += (Prior3 * Math.Pow(Sample[2], 2));
                     #endregion
                 }
-                TempWeights[0] = SummationComponent1 / BackgroundCount;
-                TempWeights[1] = SummationComponent2 / BackgroundCount;
-                TempWeights[2] = SummationComponent3 / BackgroundCount;
+                if (double.IsNaN(SummationComponent1) || double.IsNaN(SummationComponent2) || double.IsNaN(SummationComponent3))
+                {
+                    BackgroundEMmean1 = OldMu1;
+                    BackgroundEMmean2 = OldMu2;
+                    BackgroundEMmean3 = OldMu3;
+                    BWeights = TempWeights;
+                    BackgroundEMCovariance1 = OldSigma1;
+                    BackgroundEMCovariance2 = OldSigma2;
+                    BackgroundEMCovariance3 = OldSigma3;
+                    break;
+                }
+                BWeights[0] = SummationComponent1 / BackgroundCount;
+                BWeights[1] = SummationComponent2 / BackgroundCount;
+                BWeights[2] = SummationComponent3 / BackgroundCount;
 
                 #region Mu
                 BackgroundEMmean1[0] /= SummationComponent1;
@@ -655,23 +743,23 @@ namespace VeditorGP
             double result = 0.0, Temp = 0.0;
             if (ComponentNumber == 0)
             {
-                Temp = Weights[ComponentNumber] * MultivariateNormalGaussian(TestVector, Mu1, Sigma1);
+                Temp = Weights[0] * MultivariateNormalGaussian(TestVector, Mu1, Sigma1);
                 result += Temp;
-                result += Weights[1] * MultivariateNormalGaussian(TestVector, Mu2, Sigma2);
-                result += Weights[2] * MultivariateNormalGaussian(TestVector, Mu3, Sigma3);
+                result += (Weights[1] * MultivariateNormalGaussian(TestVector, Mu2, Sigma2));
+                result += (Weights[2] * MultivariateNormalGaussian(TestVector, Mu3, Sigma3));
             }
             else if (ComponentNumber == 1)
             {
-                Temp = Weights[ComponentNumber] * MultivariateNormalGaussian(TestVector, Mu2, Sigma2);
-                result += Weights[0] * MultivariateNormalGaussian(TestVector, Mu1, Sigma1);
+                Temp = Weights[1] * MultivariateNormalGaussian(TestVector, Mu2, Sigma2);
+                result += (Weights[0] * MultivariateNormalGaussian(TestVector, Mu1, Sigma1));
                 result += Temp;
-                result += Weights[2] * MultivariateNormalGaussian(TestVector, Mu3, Sigma3);
+                result += (Weights[2] * MultivariateNormalGaussian(TestVector, Mu3, Sigma3));
             }
             else if (ComponentNumber == 2)
             {
-                Temp = Weights[ComponentNumber] * MultivariateNormalGaussian(TestVector, Mu3, Sigma3);
-                result += Weights[0] * MultivariateNormalGaussian(TestVector, Mu1, Sigma1);
-                result += Weights[1] * MultivariateNormalGaussian(TestVector, Mu2, Sigma2);
+                Temp = Weights[2] * MultivariateNormalGaussian(TestVector, Mu3, Sigma3);
+                result += (Weights[0] * MultivariateNormalGaussian(TestVector, Mu1, Sigma1));
+                result += (Weights[1] * MultivariateNormalGaussian(TestVector, Mu2, Sigma2));
                 result += Temp;
             }
             Temp /= result;

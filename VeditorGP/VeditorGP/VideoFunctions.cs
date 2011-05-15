@@ -13,15 +13,16 @@ namespace VeditorGP
     class VideoFunctions
     {
         #region Variables and Constructor
-        Frame CurrentFrame, PreviousFrame;
+        Frame CurrentFrame, PreviousFrame, TempCurrentFrame;
         public double FramePerSecond;
         public Frame InitialSegmentationBinaryFrame, InitialFrame, InitialContourFrame, FirstFrame;
         int WindowWidth = 30, WindowHeight = 30, WindowSize = 900;
-        static Capture Video , DrMostafaVideo;
+        static Capture Video, DrMostafaVideo;
         public List<Point> ConnectedContour;
         SURF SurfObject;
         OurOpticalFlow OpticalFlowObject;
         Bitmap SurfResult;
+        SURFTracker.MatchedSURFFeature[] SURFMatchedFeatchers;
         string VideoPath;
         public VideoFunctions()
         {
@@ -144,11 +145,12 @@ namespace VeditorGP
         void GetSurfPoints()
         {
             SurfObject = new SURF();
-            SurfResult = SurfObject.GetSIFTpoints(PreviousFrame, CurrentFrame);
+            SURFMatchedFeatchers = SurfObject.GetSIFTpoints(PreviousFrame, CurrentFrame);
         }
         void GetOpticalFlow()
         {
             OpticalFlowObject = new OurOpticalFlow();
+            OpticalFlowObject.OpticalFlowWorker(PreviousFrame, CurrentFrame, SURFMatchedFeatchers);
         }
         #endregion
 
