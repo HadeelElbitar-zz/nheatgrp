@@ -6,23 +6,26 @@ using System.Drawing;
 using Emgu.CV.Structure;
 using Emgu.CV;
 using Emgu.CV.UI;
+using openCV;
+using Emgu.CV.CvEnum;
 
 namespace VeditorGP
 {
     class SURF
     {
         public SURF() { }
-        public SURFTracker.MatchedSURFFeature[] GetSIFTpoints(Frame CurrentFrame, Frame NextFrame)
+        public Image<Gray, Byte> GetSIFTpoints(Frame CurrentFrame, Frame NextFrame)
         {
+            int flags = (int)INTER.CV_INTER_LINEAR + (int)WARP.CV_WARP_FILL_OUTLIERS;
             MCvSURFParams surfParam = new MCvSURFParams(500, false);
             Image<Gray, Byte> modelImage = CurrentFrame.EmguRgbImage.Convert<Gray, Byte>();
             SURFFeature[] modelFeatures = modelImage.ExtractSURF(ref surfParam);
             Image<Gray, Byte> observedImage = NextFrame.EmguRgbImage.Convert<Gray, Byte>();
+            Image<Gray, Byte> WarpedFrame = new Image<Gray, byte>(modelImage.Size);
             SURFFeature[] imageFeatures = observedImage.ExtractSURF(ref surfParam);
             SURFTracker tracker = new SURFTracker(modelFeatures);
             SURFTracker.MatchedSURFFeature[] matchedFeatures = tracker.MatchFeature(imageFeatures, 2, 20);
             matchedFeatures = SURFTracker.VoteForUniqueness(matchedFeatures, 0.8);
-            matchedFeatures = SURFTracker.VoteForSizeAndOrientation(matchedFeatures, 1.5, 20);
             HomographyMatrix homography = SURFTracker.GetHomographyMatrixFromMatchedFeatures(matchedFeatures); // mesh fhma de bt3t eah!
             #region draw lines between the matched features
 
@@ -57,8 +60,9 @@ namespace VeditorGP
             //      res.DrawPolyline(Array.ConvertAll<PointF, Point>(pts, Point.Round), true, new Gray(255.0), 5);
             //  }
             #endregion   Bitmap NewPic = null;
-            //  Bitmap NewPic = res.ToBitmap(res.Width, res.Height);
-            return matchedFeatures;
+            // warping 
+            CvInvoke.cvWarpPerspective(modelImage, WarpedFrame, homography, flags, new MCvScalar(0));
+            return WarpedFrame;
         }
     }
 }

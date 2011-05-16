@@ -25,8 +25,48 @@ namespace VeditorGP
             cvlib.CvFillConvexPoly(ref image, ref pts[0], pts.Count(), cvlib.CV_RGB(255, 255, 255), cvlib.CV_AA, 0);
             Frame frame = new Frame();
             frame.InitializeFrame(frame.BmpImage = (Bitmap)(image));
-
-
+            for (int i = 0; i < frame.height; i++)
+            {
+                for (int j = 0; j < frame.width; j++)
+                {
+                    if (frame.byteBluePixels[i, j] > 200)
+                    {
+                        frame.byteBluePixels[i, j] = 255;
+                        frame.byteRedPixels[i, j] = 255;
+                        frame.byteGreenPixels[i, j] = 255;
+                        frame.doubleBluePixels[i, j] = 255;
+                        frame.doubleRedPixels[i, j] = 255;
+                        frame.doubleGreenPixels[i, j] = 255;
+                    }
+                    else if (frame.byteRedPixels[i, j] > 200)
+                    {
+                        frame.byteBluePixels[i, j] = 255;
+                        frame.byteRedPixels[i, j] = 255;
+                        frame.byteGreenPixels[i, j] = 255;
+                        frame.doubleBluePixels[i, j] = 255;
+                        frame.doubleRedPixels[i, j] = 255;
+                        frame.doubleGreenPixels[i, j] = 255;
+                    }
+                    else if (frame.byteGreenPixels[i, j] > 200)
+                    {
+                        frame.byteBluePixels[i, j] = 255;
+                        frame.byteRedPixels[i, j] = 255;
+                        frame.byteGreenPixels[i, j] = 255;
+                        frame.doubleBluePixels[i, j] = 255;
+                        frame.doubleRedPixels[i, j] = 255;
+                        frame.doubleGreenPixels[i, j] = 255;
+                    }
+                    else
+                    {
+                        frame.byteBluePixels[i, j] = 0;
+                        frame.byteRedPixels[i, j] = 0;
+                        frame.byteGreenPixels[i, j] = 0;
+                        frame.doubleBluePixels[i, j] = 0;
+                        frame.doubleRedPixels[i, j] = 0;
+                        frame.doubleGreenPixels[i, j] = 0;
+                    }
+                }
+            }
             //Bitmap Test = (Bitmap)image;
             //string Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Binary.bmp";
             //Test.Save(Pw, ImageFormat.Bmp);
