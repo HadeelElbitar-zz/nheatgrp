@@ -75,7 +75,8 @@ namespace VeditorGP
             for (int i = Center_Y - N, c = 0; i < ColoredFrame.height && i < (Center_Y + N) && c < WindowFrame.height; i++, c++)
             {
                 if (i < 0) i = 0;
-                for (int j = Center_X - M, k = 0; j < ColoredFrame.width && j < (Center_X + M) && k < WindowFrame.width; j++, k++)
+                //&& k < WindowFrame.width
+                for (int j = Center_X - M, k = 0; j < ColoredFrame.width && j < (Center_X + M) ; j++, k++)
                 {
                     if (j < 0) j = 0;
                     WindowFrame.byteRedPixels[c, k] = ColoredFrame.byteRedPixels[i, j];
@@ -106,10 +107,16 @@ namespace VeditorGP
             }
             WindowFrame.BmpImage = new Bitmap(WindowFrame.width, WindowFrame.height);
             BitmapData bmpData = WindowFrame.BmpImage.LockBits(new Rectangle(0, 0, WindowFrame.width, WindowFrame.height), System.Drawing.Imaging.ImageLockMode.ReadWrite, WindowFrame.BmpImage.PixelFormat);
+
+            WindowBinaryMask.BmpImage = new Bitmap(WindowFrame.width, WindowFrame.height);
+            BitmapData BinarybmpData = WindowBinaryMask.BmpImage.LockBits(new Rectangle(0, 0, WindowBinaryMask.width, WindowBinaryMask.height), System.Drawing.Imaging.ImageLockMode.ReadWrite, WindowBinaryMask.BmpImage.PixelFormat);
             unsafe
             {
                 byte* p = (byte*)bmpData.Scan0;
                 int space = bmpData.Stride - WindowFrame.width * 3;
+
+                byte* Binaryp = (byte*)BinarybmpData.Scan0;
+                int Binaryspace = BinarybmpData.Stride - WindowBinaryMask.width * 3;
                 for (int i = 0; i < WindowFrame.height; i++)
                 {
                     for (int j = 0; j < WindowFrame.width; j++)
@@ -118,22 +125,28 @@ namespace VeditorGP
                         p[1] = WindowFrame.byteGreenPixels[i, j];
                         p[2] = WindowFrame.byteRedPixels[i, j];
                         p += 3;
+
+                        Binaryp[0] = WindowBinaryMask.byteBluePixels[i, j];
+                        Binaryp[1] = WindowBinaryMask.byteGreenPixels[i, j];
+                        Binaryp[2] = WindowBinaryMask.byteRedPixels[i, j];
+                        Binaryp += 3;
                     }
                     p += space;
+                    Binaryp += Binaryspace;
                 }
             }
             WindowFrame.BmpImage.UnlockBits(bmpData);
-
+            WindowBinaryMask.BmpImage.UnlockBits(BinarybmpData);
             WindowFrame.EmguRgbImage = new Image<Bgr, byte>(WindowFrame.BmpImage);
             WindowFrame.EmguLabImage = WindowFrame.EmguRgbImage.Convert<Lab, byte>();
             WindowFrame.IplImageRGB = (IplImage)cvtools.ConvertPtrToStructure(WindowFrame.EmguRgbImage.Ptr, typeof(IplImage));
             WindowFrame.IplImageLab = (IplImage)cvtools.ConvertPtrToStructure(WindowFrame.EmguLabImage.Ptr, typeof(IplImage));
 
-            //string Nw = "FrameTest" + Counter.ToString() + ".bmp";
-            //Counter++;
-            //string Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\" + Nw;
+            string Nw = "FrameTest" + Counter.ToString() + ".bmp";
+            Counter++;
+            string Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\" + Nw;
 
-            //WindowFrame.BmpImage.Save(Pw, ImageFormat.Bmp);
+            WindowBinaryMask.BmpImage.Save(Pw, ImageFormat.Bmp);
             WindowClassifier = new Classifier(this);
         }
         public void CalculateModels()

@@ -21,8 +21,7 @@ namespace VeditorGP
         public List<Point> ConnectedContour;
         SURF SurfObject;
         OurOpticalFlow OpticalFlowObject;
-        Bitmap SurfResult;
-        SURFTracker.MatchedSURFFeature[] SURFMatchedFeatchers;
+        Image<Gray, Byte> WarpedFrame;
         string VideoPath;
         public VideoFunctions()
         {
@@ -145,12 +144,13 @@ namespace VeditorGP
         void GetSurfPoints()
         {
             SurfObject = new SURF();
-            SURFMatchedFeatchers = SurfObject.GetSIFTpoints(PreviousFrame, CurrentFrame);
+            WarpedFrame = new Image<Gray, byte>(CurrentFrame.BmpImage.Size);
+            WarpedFrame = SurfObject.GetSIFTpoints(PreviousFrame, CurrentFrame);
         }
         void GetOpticalFlow()
         {
             OpticalFlowObject = new OurOpticalFlow();
-            OpticalFlowObject.OpticalFlowWorker(PreviousFrame, CurrentFrame, SURFMatchedFeatchers);
+            OpticalFlowObject.OpticalFlowWorker(PreviousFrame, WarpedFrame);
         }
         #endregion
 
