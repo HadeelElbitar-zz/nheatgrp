@@ -12,15 +12,18 @@ namespace VeditorGP
 {
     class Window
     {
+        #region Variables
         public int Center_X, Center_Y, WindowSize;
         public Frame WindowFrame, WindowBinaryMask, WindowContour;
         public Classifier WindowClassifier;
         public double ColorConfidence;
         public double[,] ForegroundProbability, WeightingFunction, ShapeConfidence;
         public List<Point> WindowContourPoints;
-        static int Counter = 0;
+        static int Counter = 0; 
+        #endregion
         public Window(int width, int height, Frame ColoredFrame, Frame BinaryMask, Point CenterPoint, Frame ContourFrame)
         {
+            #region Initialization of Variables
             WindowContourPoints = new List<Point>();
             WindowFrame = new Frame();
             WindowFrame.height = height;
@@ -42,8 +45,10 @@ namespace VeditorGP
 
             WindowSize = WindowFrame.width * WindowFrame.height;
             Center_X = CenterPoint.X;
-            Center_Y = CenterPoint.Y;
+            Center_Y = CenterPoint.Y; 
+            #endregion
 
+            #region Initialization of Arrays
             WindowFrame.byteRedPixels = new byte[WindowFrame.height, WindowFrame.width];
             WindowFrame.byteGreenPixels = new byte[WindowFrame.height, WindowFrame.width];
             WindowFrame.byteBluePixels = new byte[WindowFrame.height, WindowFrame.width];
@@ -55,7 +60,7 @@ namespace VeditorGP
             WindowContour.byteRedPixels = new byte[WindowContour.height, WindowContour.width];
             WindowContour.byteGreenPixels = new byte[WindowContour.height, WindowContour.width];
             WindowContour.byteBluePixels = new byte[WindowContour.height, WindowContour.width];
-            
+
             WindowContour.doubleRedPixels = new double[WindowFrame.height, WindowContour.width];
             WindowContour.doubleGreenPixels = new double[WindowFrame.height, WindowContour.width];
             WindowContour.doubleBluePixels = new double[WindowFrame.height, WindowContour.width];
@@ -66,87 +71,67 @@ namespace VeditorGP
 
             WindowBinaryMask.doubleRedPixels = new double[WindowBinaryMask.height, WindowBinaryMask.width];
             WindowBinaryMask.doubleGreenPixels = new double[WindowBinaryMask.height, WindowBinaryMask.width];
-            WindowBinaryMask.doubleBluePixels = new double[WindowBinaryMask.height, WindowBinaryMask.width];
-
-            
-            //AfterCalcPointClass = new int[WinFrame.height, WinFrame.width];
+            WindowBinaryMask.doubleBluePixels = new double[WindowBinaryMask.height, WindowBinaryMask.width]; 
+            #endregion
 
             int M = (WindowFrame.width - 1) / 2, N = (WindowFrame.height - 1) / 2;
-            for (int i = Center_Y - N, c = 0; i < ColoredFrame.height && i < (Center_Y + N) && c < WindowFrame.height; i++, c++)
+            for (int i = (Center_Y - N), c = 0; i < ColoredFrame.height && i <= (Center_Y + N); i++, c++)
             {
                 if (i < 0) i = 0;
-                //&& k < WindowFrame.width
-                for (int j = Center_X - M, k = 0; j < ColoredFrame.width && j < (Center_X + M) ; j++, k++)
+                for (int j = (Center_X - M), k = 0; j < ColoredFrame.width && j <= (Center_X + M) ; j++, k++)
                 {
                     if (j < 0) j = 0;
+                    #region Fill Colored Frame
                     WindowFrame.byteRedPixels[c, k] = ColoredFrame.byteRedPixels[i, j];
                     WindowFrame.byteGreenPixels[c, k] = ColoredFrame.byteGreenPixels[i, j];
                     WindowFrame.byteBluePixels[c, k] = ColoredFrame.byteBluePixels[i, j];
+                    WindowFrame.doubleRedPixels[c, k] = ColoredFrame.doubleRedPixels[i, j];
+                    WindowFrame.doubleGreenPixels[c, k] = ColoredFrame.doubleGreenPixels[i, j];
+                    WindowFrame.doubleBluePixels[c, k] = ColoredFrame.doubleBluePixels[i, j]; 
+                    #endregion
 
+                    #region Fill Binary Mask
                     WindowBinaryMask.byteRedPixels[c, k] = BinaryMask.byteRedPixels[i, j];
                     WindowBinaryMask.byteGreenPixels[c, k] = BinaryMask.byteGreenPixels[i, j];
                     WindowBinaryMask.byteBluePixels[c, k] = BinaryMask.byteBluePixels[i, j];
+                    WindowBinaryMask.doubleRedPixels[c, k] = BinaryMask.doubleRedPixels[i, j];
+                    WindowBinaryMask.doubleGreenPixels[c, k] = BinaryMask.doubleGreenPixels[i, j];
+                    WindowBinaryMask.doubleBluePixels[c, k] = BinaryMask.doubleBluePixels[i, j]; 
+                    #endregion
 
+                    #region Fill Window Contour
                     WindowContour.byteRedPixels[c, k] = ContourFrame.byteRedPixels[i, j];
                     WindowContour.byteGreenPixels[c, k] = ContourFrame.byteGreenPixels[i, j];
                     WindowContour.byteBluePixels[c, k] = ContourFrame.byteBluePixels[i, j];
-
                     WindowContour.doubleRedPixels[c, k] = ContourFrame.doubleRedPixels[i, j];
                     WindowContour.doubleGreenPixels[c, k] = ContourFrame.doubleGreenPixels[i, j];
                     WindowContour.doubleBluePixels[c, k] = ContourFrame.doubleBluePixels[i, j];
                     if (WindowContour.byteRedPixels[c, k] == 255 || WindowContour.byteGreenPixels[c, k] == 255 || WindowContour.byteBluePixels[c, k] == 255)
-                        WindowContourPoints.Add(new Point(k, c));
-                    WindowFrame.doubleRedPixels[c, k] = ColoredFrame.doubleRedPixels[i, j];
-                    WindowFrame.doubleGreenPixels[c, k] = ColoredFrame.doubleGreenPixels[i, j];
-                    WindowFrame.doubleBluePixels[c, k] = ColoredFrame.doubleBluePixels[i, j];
-
-                    WindowBinaryMask.doubleRedPixels[c, k] = BinaryMask.doubleRedPixels[i, j];
-                    WindowBinaryMask.doubleGreenPixels[c, k] = BinaryMask.doubleGreenPixels[i, j];
-                    WindowBinaryMask.doubleBluePixels[c, k] = BinaryMask.doubleBluePixels[i, j];
+                        WindowContourPoints.Add(new Point(k, c)); 
+                    #endregion
                 }
             }
-            WindowFrame.BmpImage = new Bitmap(WindowFrame.width, WindowFrame.height);
-            BitmapData bmpData = WindowFrame.BmpImage.LockBits(new Rectangle(0, 0, WindowFrame.width, WindowFrame.height), System.Drawing.Imaging.ImageLockMode.ReadWrite, WindowFrame.BmpImage.PixelFormat);
+            WindowFrame.InitializeWindowFrame();
+            WindowBinaryMask.InitializeWindowFrame();
+            WindowContour.InitializeWindowFrame();
 
-            WindowBinaryMask.BmpImage = new Bitmap(WindowFrame.width, WindowFrame.height);
-            BitmapData BinarybmpData = WindowBinaryMask.BmpImage.LockBits(new Rectangle(0, 0, WindowBinaryMask.width, WindowBinaryMask.height), System.Drawing.Imaging.ImageLockMode.ReadWrite, WindowBinaryMask.BmpImage.PixelFormat);
-            unsafe
-            {
-                byte* p = (byte*)bmpData.Scan0;
-                int space = bmpData.Stride - WindowFrame.width * 3;
-
-                byte* Binaryp = (byte*)BinarybmpData.Scan0;
-                int Binaryspace = BinarybmpData.Stride - WindowBinaryMask.width * 3;
-                for (int i = 0; i < WindowFrame.height; i++)
-                {
-                    for (int j = 0; j < WindowFrame.width; j++)
-                    {
-                        p[0] = WindowFrame.byteBluePixels[i, j];
-                        p[1] = WindowFrame.byteGreenPixels[i, j];
-                        p[2] = WindowFrame.byteRedPixels[i, j];
-                        p += 3;
-
-                        Binaryp[0] = WindowBinaryMask.byteBluePixels[i, j];
-                        Binaryp[1] = WindowBinaryMask.byteGreenPixels[i, j];
-                        Binaryp[2] = WindowBinaryMask.byteRedPixels[i, j];
-                        Binaryp += 3;
-                    }
-                    p += space;
-                    Binaryp += Binaryspace;
-                }
-            }
-            WindowFrame.BmpImage.UnlockBits(bmpData);
-            WindowBinaryMask.BmpImage.UnlockBits(BinarybmpData);
-            WindowFrame.EmguRgbImage = new Image<Bgr, byte>(WindowFrame.BmpImage);
-            WindowFrame.EmguLabImage = WindowFrame.EmguRgbImage.Convert<Lab, byte>();
-            WindowFrame.IplImageRGB = (IplImage)cvtools.ConvertPtrToStructure(WindowFrame.EmguRgbImage.Ptr, typeof(IplImage));
-            WindowFrame.IplImageLab = (IplImage)cvtools.ConvertPtrToStructure(WindowFrame.EmguLabImage.Ptr, typeof(IplImage));
-
-            string Nw = "FrameTest" + Counter.ToString() + ".bmp";
-            Counter++;
+            #region Test Saving Window Frames
+            string Nw = "Window Frame " + Counter.ToString() + ".bmp";
+            //Counter++;
             string Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\" + Nw;
+            WindowFrame.BmpImage.Save(Pw, ImageFormat.Bmp);
 
+            Nw = "Window Binary Mask " + Counter.ToString() + ".bmp";
+            //Counter++;
+            Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\" + Nw;
             WindowBinaryMask.BmpImage.Save(Pw, ImageFormat.Bmp);
+
+            Nw = "Window Contour " + Counter.ToString() + ".bmp";
+            Counter++;
+            Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\" + Nw;
+            WindowContour.BmpImage.Save(Pw, ImageFormat.Bmp); 
+            #endregion
+
             WindowClassifier = new Classifier(this);
         }
         public void CalculateModels()

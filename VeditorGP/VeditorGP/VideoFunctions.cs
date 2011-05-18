@@ -14,6 +14,7 @@ namespace VeditorGP
     {
         #region Variables and Constructor
         Frame CurrentFrame, PreviousFrame, TempCurrentFrame;
+        public List<Point> Upper, Lower;
         public double FramePerSecond;
         public Frame InitialSegmentationBinaryFrame, InitialFrame, InitialContourFrame, FirstFrame;
         int WindowWidth = 30, WindowHeight = 30, WindowSize = 900;
@@ -25,7 +26,8 @@ namespace VeditorGP
         string VideoPath;
         public VideoFunctions()
         {
-
+            Upper = new List<Point>();
+            Lower = new List<Point>();
         }
         #endregion
 
@@ -96,26 +98,39 @@ namespace VeditorGP
         public void SetInitialWindowsArroundContour()
         {
             InitialFrame.FrameWindows = new List<Window>();
-            InitialFrame.FrameWindows.Add(new Window(WindowWidth, WindowHeight, InitialFrame, InitialSegmentationBinaryFrame, ConnectedContour[0], InitialContourFrame));
-            int newIndex = 0, index = 0, length = ConnectedContour.Count;
-            double Distance, Temp;
-            int LoopCounter = 1, count = ConnectedContour.Count; // WindowCount = ConnectedContour.Count / (WindowSize - OverLappingArea);
-            Distance = 0;
-            for (int i = LoopCounter; i < ConnectedContour.Count; i++)
-                for (int j = 0; j < ConnectedContour.Count; j++)
+            InitialFrame.FrameWindows.Add(new Window(WindowWidth, WindowHeight, InitialFrame, InitialSegmentationBinaryFrame, Upper[1], InitialContourFrame));
+            int index = 1;// count = Upper.Count;
+            double Distance = 0;
+            for (int i = 2; i < Upper.Count - 1; i++)
+            {
+                Distance = Math.Sqrt(Math.Pow((Upper[i].X - Upper[index].X), 2) + Math.Pow((Upper[i].Y - Upper[index].Y), 2));
+                if (Math.Floor(Distance) > 20)
                 {
-                    Temp = Distance;
-                    Distance = Math.Sqrt(Math.Pow((ConnectedContour[j].X - ConnectedContour[index].X), 2) + Math.Pow((ConnectedContour[j].Y - ConnectedContour[index].Y), 2));
-                    if (Math.Floor(Distance) == 20)
-                    {
-                        newIndex = ConnectedContour.IndexOf(ConnectedContour[j]);
-                        ConnectedContour.Remove(ConnectedContour[j]);
-                        LoopCounter = ++j;
-                        InitialFrame.FrameWindows.Add(new Window(WindowWidth, WindowHeight, InitialFrame, InitialSegmentationBinaryFrame, ConnectedContour[newIndex], InitialContourFrame));
-                        index = newIndex;
-                        break;
-                    }
+                    Upper.RemoveAt(i);
+                    i--;
                 }
+                if (Math.Floor(Distance) == 20)
+                {
+                    InitialFrame.FrameWindows.Add(new Window(WindowWidth, WindowHeight, InitialFrame, InitialSegmentationBinaryFrame, new Point(Upper[i].X, Upper[i].Y), InitialContourFrame));
+                    index = i;
+                }
+            }
+            index = Lower.Count - 2;
+            InitialFrame.FrameWindows.Add(new Window(WindowWidth, WindowHeight, InitialFrame, InitialSegmentationBinaryFrame, Lower[index], InitialContourFrame));
+            for (int i = index - 1; i > 0; i--)
+            {
+                Distance = Math.Sqrt(Math.Pow((Lower[i].X - Lower[index].X), 2) + Math.Pow((Lower[i].Y - Lower[index].Y), 2));
+                if (Math.Floor(Distance) > 20)
+                {
+                    Lower.RemoveAt(i);
+                    i++;
+                }
+                if (Math.Floor(Distance) == 20)
+                {
+                    InitialFrame.FrameWindows.Add(new Window(WindowWidth, WindowHeight, InitialFrame, InitialSegmentationBinaryFrame, new Point(Lower[i].X, Lower[i].Y), InitialContourFrame));
+                    index = i;
+                }
+            }
         }
         public void TrainClassifiers()
         {

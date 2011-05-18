@@ -42,6 +42,7 @@ namespace VeditorGP
             BackgroundKmean();
             OurForegroundEM();
             OurBackgroundEM();
+            
             OurGMM(); //P(x)
         }
         void OurGMM()
