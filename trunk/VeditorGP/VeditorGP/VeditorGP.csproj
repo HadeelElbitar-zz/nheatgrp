@@ -87,8 +87,10 @@
     <Compile Include="Classifier.cs" />
     <Compile Include="ContourFunctions.cs" />
     <Compile Include="Frame.cs" />
+    <Compile Include="GrahamHull.cs" />
     <Compile Include="OurOpticalFlow.cs" />
     <Compile Include="SURF.cs" />
+    <Compile Include="Vector2.cs" />
     <Compile Include="VeditorMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
