@@ -34,6 +34,10 @@ namespace VeditorGP
         {
             OpenVideo();
         }
+        private void openToolStripButton_Click(object sender, EventArgs e)
+        {
+            OpenVideo();
+        }
         void OpenVideo()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -43,10 +47,6 @@ namespace VeditorGP
             VideoFunctionsObject = new VideoFunctions();
             CurrentDisplayedFrame = VideoFunctionsObject.OpenVideo(FileName);
             FrameBox.Image = CurrentDisplayedFrame.BmpImage;
-        }
-        private void openToolStripButton_Click(object sender, EventArgs e)
-        {
-            OpenVideo();
         }
         #endregion
 
@@ -108,6 +108,7 @@ namespace VeditorGP
             VideoFunctionsObject.SetInitialWindowsArroundContour();
             VideoFunctionsObject.TrainClassifiers();
             VideoFunctionsObject.PropagateFrame();
+
             MessageBox.Show("Training Finished!");
             //}
             //catch
@@ -231,6 +232,12 @@ namespace VeditorGP
             Bitmap EmptyImage = new Bitmap(FrameBox.Image.Width, FrameBox.Image.Height);
             FrameBox.Image = EmptyImage;
         }
-        #endregion
+        #endregion#
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutBox aboutBox = new AboutBox();
+            aboutBox.Show();
+        }
     }
 }

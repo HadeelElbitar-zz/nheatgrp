@@ -18,21 +18,29 @@ namespace VeditorGP
         public ContourFunctions() { }
 
         #region Mask Frame and Contour
-        public Frame GetBlackAndWhiteContour(CvPoint[] pts, Bitmap BmpImage)
+        public Frame GetBlackAndWhiteContour(CvPoint[] Points, Bitmap BmpImage)
         {
             int width = BmpImage.Width;
             int height = BmpImage.Height;
+
             IplImage image = cvlib.ToIplImage((Bitmap)BmpImage, true);
             cvlib.CvSetZero(ref image);
-            cvlib.CvFillConvexPoly(ref image, ref pts[0], pts.Count(), cvlib.CV_RGB(255, 255, 255), cvlib.CV_AA, 0);
+
+            GCHandle Handel;
+            IntPtr PointsPtr = cvtools.ConvertStructureToPtr(Points, out Handel);
+            cvlib.CvFillPoly(ref image, ref PointsPtr, new int[] { Points.Count() }, 1, cvlib.CV_RGB(255, 255, 255), cvlib.CV_AA, 0);
+
+            //cvlib.CvFillConvexPoly(ref image, ref pts[0], pts.Count(), cvlib.CV_RGB(255, 255, 255), cvlib.CV_AA, 0);
             Frame frame = new Frame();
             frame.InitializeFrame(frame.BmpImage = (Bitmap)(image));
             frame.ThresholdBinary();
+
             #region Test Saving Binary Image
-            //Bitmap Test = (Bitmap)image;
-            //string Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Binary.bmp";
-            //Test.Save(Pw, ImageFormat.Bmp); 
+            Bitmap Test = (Bitmap)image;
+            string Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Binary.bmp";
+            Test.Save(Pw, ImageFormat.Bmp);
             #endregion
+
             return frame;
         }
         public List<Point> GetConnectedContour(Frame BinaryFrame, Frame NewImage)
@@ -75,7 +83,7 @@ namespace VeditorGP
             for (int i = 0; i < length2; i++)
                 for (int j = 0; j < length; j++)
                     if (NewImage.byteBluePixels[i, j] != 0)
-                        CountorVector.Add(new Vector2F((float)j, (float)i)); 
+                        CountorVector.Add(new Vector2F((float)j, (float)i));
             #endregion
 
             #region Sort Points Clock Wise
@@ -89,7 +97,7 @@ namespace VeditorGP
             //    if (!Contour.Contains(new Point((int)CountorVector[i].X, (int)CountorVector[i].Y)))
             //        Contour.Add(new Point((int)CountorVector[i].X, (int)CountorVector[i].Y));
             #endregion
-            
+
             #region Test Saving Boundary Image
             //Bitmap Test = NewImage.BmpImage;
             //string Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Boundary.bmp";

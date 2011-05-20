@@ -19,8 +19,9 @@ namespace VeditorGP
         public double ColorConfidence;
         public double[,] ForegroundProbability, WeightingFunction, ShapeConfidence;
         public List<Point> WindowContourPoints;
-        static int Counter = 0; 
+        static int Counter = 0;
         #endregion
+
         public Window(int width, int height, Frame ColoredFrame, Frame BinaryMask, Point CenterPoint, Frame ContourFrame)
         {
             #region Initialization of Variables
@@ -45,7 +46,7 @@ namespace VeditorGP
 
             WindowSize = WindowFrame.width * WindowFrame.height;
             Center_X = CenterPoint.X;
-            Center_Y = CenterPoint.Y; 
+            Center_Y = CenterPoint.Y;
             #endregion
 
             #region Initialization of Arrays
@@ -71,23 +72,24 @@ namespace VeditorGP
 
             WindowBinaryMask.doubleRedPixels = new double[WindowBinaryMask.height, WindowBinaryMask.width];
             WindowBinaryMask.doubleGreenPixels = new double[WindowBinaryMask.height, WindowBinaryMask.width];
-            WindowBinaryMask.doubleBluePixels = new double[WindowBinaryMask.height, WindowBinaryMask.width]; 
+            WindowBinaryMask.doubleBluePixels = new double[WindowBinaryMask.height, WindowBinaryMask.width];
             #endregion
 
             int M = (WindowFrame.width - 1) / 2, N = (WindowFrame.height - 1) / 2;
             for (int i = (Center_Y - N), c = 0; i < ColoredFrame.height && i <= (Center_Y + N); i++, c++)
             {
                 if (i < 0) i = 0;
-                for (int j = (Center_X - M), k = 0; j < ColoredFrame.width && j <= (Center_X + M) ; j++, k++)
+                for (int j = (Center_X - M), k = 0; j < ColoredFrame.width && j <= (Center_X + M); j++, k++)
                 {
                     if (j < 0) j = 0;
+
                     #region Fill Colored Frame
                     WindowFrame.byteRedPixels[c, k] = ColoredFrame.byteRedPixels[i, j];
                     WindowFrame.byteGreenPixels[c, k] = ColoredFrame.byteGreenPixels[i, j];
                     WindowFrame.byteBluePixels[c, k] = ColoredFrame.byteBluePixels[i, j];
                     WindowFrame.doubleRedPixels[c, k] = ColoredFrame.doubleRedPixels[i, j];
                     WindowFrame.doubleGreenPixels[c, k] = ColoredFrame.doubleGreenPixels[i, j];
-                    WindowFrame.doubleBluePixels[c, k] = ColoredFrame.doubleBluePixels[i, j]; 
+                    WindowFrame.doubleBluePixels[c, k] = ColoredFrame.doubleBluePixels[i, j];
                     #endregion
 
                     #region Fill Binary Mask
@@ -96,7 +98,7 @@ namespace VeditorGP
                     WindowBinaryMask.byteBluePixels[c, k] = BinaryMask.byteBluePixels[i, j];
                     WindowBinaryMask.doubleRedPixels[c, k] = BinaryMask.doubleRedPixels[i, j];
                     WindowBinaryMask.doubleGreenPixels[c, k] = BinaryMask.doubleGreenPixels[i, j];
-                    WindowBinaryMask.doubleBluePixels[c, k] = BinaryMask.doubleBluePixels[i, j]; 
+                    WindowBinaryMask.doubleBluePixels[c, k] = BinaryMask.doubleBluePixels[i, j];
                     #endregion
 
                     #region Fill Window Contour
@@ -107,7 +109,7 @@ namespace VeditorGP
                     WindowContour.doubleGreenPixels[c, k] = ContourFrame.doubleGreenPixels[i, j];
                     WindowContour.doubleBluePixels[c, k] = ContourFrame.doubleBluePixels[i, j];
                     if (WindowContour.byteRedPixels[c, k] == 255 || WindowContour.byteGreenPixels[c, k] == 255 || WindowContour.byteBluePixels[c, k] == 255)
-                        WindowContourPoints.Add(new Point(k, c)); 
+                        WindowContourPoints.Add(new Point(k, c));
                     #endregion
                 }
             }
@@ -129,7 +131,7 @@ namespace VeditorGP
             Nw = "Window Contour " + Counter.ToString() + ".bmp";
             Counter++;
             Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\" + Nw;
-            WindowContour.BmpImage.Save(Pw, ImageFormat.Bmp); 
+            WindowContour.BmpImage.Save(Pw, ImageFormat.Bmp);
             #endregion
 
             WindowClassifier = new Classifier(this);
@@ -171,6 +173,74 @@ namespace VeditorGP
                 }
             ColorConfidence = Summation / WeightsSummation;
             ColorConfidence = 1 - ColorConfidence;
+        }
+        public void UpdateModels()
+        {
+            #region Variables
+            int width = WindowFrame.width, height = WindowFrame.height, PointCount = WindowContourPoints.Count;
+            double Distance = double.MaxValue;
+            double SigmaCSquare = 202500.0;
+            double CutOff = 0.85, SigmaMin = 2, SigmaMax = height * width, r = 2;
+            double FGThreshold = 0.75, BGThreshold = 0.25; 
+            #endregion
+
+            WindowClassifier.ForegroundPoints.Clear();
+            WindowClassifier.BackgroundPoints.Clear();
+
+            #region Shape Confidence
+            ShapeConfidence = new double[height, width];
+            for (int i = 0; i < height; i++)
+            {
+                for (int j = 0; j < width; j++)
+                {
+                    foreach (Point item in WindowContourPoints)
+                    {
+                        double Temp = Math.Sqrt(Math.Pow((item.X - i), 2) + Math.Pow((item.Y - j), 2));
+                        if (Temp < Distance)
+                            Distance = Temp;
+                    }
+
+                    double NegativeDistanceSquare = (-1 * Math.Pow(Distance, 2));
+                    double SigmaS = SigmaMin;
+                    if (ColorConfidence > CutOff && ColorConfidence <= 1)
+                    {
+                        double a = (SigmaMax - SigmaMin) / (Math.Pow((1 - CutOff), r));
+                        SigmaS = SigmaMin + (a * Math.Pow(ColorConfidence - CutOff, r));
+                    }
+                    ShapeConfidence[i, j] = 1 - Math.Exp(NegativeDistanceSquare / (Math.Pow(SigmaS, 2)));
+                    if (ShapeConfidence[i, j] > FGThreshold) WindowClassifier.ForegroundPoints.Add(new Point(i, j));
+                    else if (ShapeConfidence[i, j] < BGThreshold) WindowClassifier.BackgroundPoints.Add(new Point(i, j));
+
+                    WeightingFunction[i, j] = Math.Exp(NegativeDistanceSquare / SigmaCSquare);
+                }
+            }
+            #endregion
+
+            WindowClassifier.OurGMM();
+
+
+            //classify according to new models and see which one will be used next
+            //if PcU has more foreground we will use McH, otherwise use McU
+
+            bool MCU = true;
+
+            #region Color Confidence
+            if (MCU)// If Updated Color Model is useed, update the color confidence
+            {
+                double SegmentationLabel = 0, Summation = 0.0, WeightsSummation = 0.0;
+                for (int i = 0; i < height; i++)
+                {
+                    for (int j = 0; j < width; j++)
+                    {
+                        if (WindowBinaryMask.byteRedPixels[i, j] == 255)
+                            SegmentationLabel = 1;
+                        Summation += (Math.Abs(SegmentationLabel - ForegroundProbability[i, j]) * WeightingFunction[i, j]);
+                        WeightsSummation += WeightingFunction[i, j];
+                    }
+                }
+                ColorConfidence = 1 - (Summation / WeightsSummation);
+            } 
+            #endregion
         }
     }
 }

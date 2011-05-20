@@ -22,7 +22,7 @@ namespace VeditorGP
             MyWindow = _Window;
         }
         Window MyWindow;
-        List<Point> ForegroundPoints, BackgroundPoints;
+        public List<Point> ForegroundPoints, BackgroundPoints;
         double TINY = 0.0000000001;
         double[] FWeights, BWeights;
         double[] ForegroundKmean1, ForegroundKmean2, ForegroundKmean3, BackgroundKmean1, BackgroundKmean2, BackgroundKmean3;
@@ -45,7 +45,7 @@ namespace VeditorGP
             
             OurGMM(); //P(x)
         }
-        void OurGMM()
+        public void OurGMM()
         {
             double[] Sample = new double[3];
             int width = MyWindow.WindowFrame.width, height = MyWindow.WindowFrame.height;
@@ -60,6 +60,7 @@ namespace VeditorGP
                     Sample[0] = MyWindow.WindowFrame.doubleRedPixels[i, j];
                     Sample[1] = MyWindow.WindowFrame.doubleGreenPixels[i, j];
                     Sample[2] = MyWindow.WindowFrame.doubleBluePixels[i, j];
+
                     #region EM
                     if (FTrain1)
                     {
@@ -92,6 +93,7 @@ namespace VeditorGP
                         BackGroundProbability[2] *= BWeights[2];
                     }
                     #endregion
+
                     MyWindow.ForegroundProbability[i, j] = (ForeGroundProbability[0] + ForeGroundProbability[1] + ForeGroundProbability[2]) /
                         (ForeGroundProbability[0] + ForeGroundProbability[1] + ForeGroundProbability[2] +
                         BackGroundProbability[0] + BackGroundProbability[1] + BackGroundProbability[2]);
@@ -124,6 +126,7 @@ namespace VeditorGP
             string Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Classifier.bmp";
             NewImage.Save(Pw, ImageFormat.Bmp);
             #endregion
+
             #region Fc
 
             #endregion
@@ -409,6 +412,7 @@ namespace VeditorGP
                 #endregion
             }
             #endregion
+
             if (ForegroundEMCovariance1[0, 0] == 0 || double.IsNaN(ForegroundEMCovariance1[0, 0]) || ForegroundEMCovariance1[1, 1] == 0 || ForegroundEMCovariance1[2, 2] == 0)
             {
                 FTrain1 = false;
@@ -617,6 +621,7 @@ namespace VeditorGP
                 #endregion
             }
             #endregion
+
             if (BackgroundEMCovariance1[0, 0] == 0 || double.IsNaN(BackgroundEMCovariance1[0, 0]) || BackgroundEMCovariance1[1, 1] == 0 || BackgroundEMCovariance1[2, 2] == 0)
             {
                 BTrain1 = false;

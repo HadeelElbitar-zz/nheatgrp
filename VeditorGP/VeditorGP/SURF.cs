@@ -27,6 +27,7 @@ namespace VeditorGP
             SURFTracker.MatchedSURFFeature[] matchedFeatures = tracker.MatchFeature(imageFeatures, 2, 20);
             matchedFeatures = SURFTracker.VoteForUniqueness(matchedFeatures, 0.8);
             HomographyMatrix homography = SURFTracker.GetHomographyMatrixFromMatchedFeatures(matchedFeatures); // mesh fhma de bt3t eah!
+
             #region draw lines between the matched features
 
             //int goodMatchCount = 0, x;
@@ -45,6 +46,7 @@ namespace VeditorGP
             //}
 
             #endregion
+
             #region draw the project region on the image
             //  if (homography != null)
             //  {  //draw a rectangle along the projected model
@@ -60,6 +62,7 @@ namespace VeditorGP
             //      res.DrawPolyline(Array.ConvertAll<PointF, Point>(pts, Point.Round), true, new Gray(255.0), 5);
             //  }
             #endregion   Bitmap NewPic = null;
+
             // warping 
             CvInvoke.cvWarpPerspective(modelImage, WarpedFrame, homography, flags, new MCvScalar(0));
             return WarpedFrame;
