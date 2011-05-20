@@ -16,6 +16,7 @@ namespace VeditorGP
         public Image<Bgr, Byte> ActualFrame { get; set; }
         public Image<Gray, Byte> ActualGrayFrame { get; set; }
         #endregion
+
         public OurOpticalFlow() { }
         public void OpticalFlowWorker(Frame _CurrentFrame, Image<Gray, Byte> WarpedFrame)
         {
