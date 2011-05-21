@@ -109,6 +109,10 @@ namespace VeditorGP
             VideoFunctionsObject.TrainClassifiers();
             VideoFunctionsObject.PropagateFrame();
 
+
+
+
+
             MessageBox.Show("Training Finished!");
             //}
             //catch

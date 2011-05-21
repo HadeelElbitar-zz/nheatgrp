@@ -27,11 +27,11 @@ namespace VeditorGP
         double[] FWeights, BWeights;
         double[] ForegroundKmean1, ForegroundKmean2, ForegroundKmean3, BackgroundKmean1, BackgroundKmean2, BackgroundKmean3;
         double[,] BackgroundKmeanCovarinace1, BackgroundKmeanCovarinace2, BackgroundKmeanCovarinace3,
-             ForegroundKmeanCovarinace1, ForegroundKmeanCovarinace2, ForegroundKmeanCovarinace3
-             , BackgroundEMCovariance1, BackgroundEMCovariance2, BackgroundEMCovariance3
-             , ForegroundEMCovariance1, ForegroundEMCovariance2, ForegroundEMCovariance3;
-        double[] BackgroundEMmean1, BackgroundEMmean2, BackgroundEMmean3, ForegroundEMmean1, ForegroundEMmean2, ForegroundEMmean3
-            , ForeGroundProbability, BackGroundProbability;
+             ForegroundKmeanCovarinace1, ForegroundKmeanCovarinace2, ForegroundKmeanCovarinace3;
+        static double[,] BackgroundEMCovariance1, BackgroundEMCovariance2, BackgroundEMCovariance3,
+            ForegroundEMCovariance1, ForegroundEMCovariance2, ForegroundEMCovariance3;
+        static double[] BackgroundEMmean1, BackgroundEMmean2, BackgroundEMmean3, ForegroundEMmean1, ForegroundEMmean2, ForegroundEMmean3;
+        double[] ForeGroundProbability, BackGroundProbability;
         #endregion
 
         #region Training Step
@@ -42,14 +42,14 @@ namespace VeditorGP
             BackgroundKmean();
             OurForegroundEM();
             OurBackgroundEM();
-            
-            OurGMM(); //P(x)
+
+            OurGMM(); //Pc(x)
         }
-        public void OurGMM()
+        public byte[,] OurGMM()
         {
             double[] Sample = new double[3];
             int width = MyWindow.WindowFrame.width, height = MyWindow.WindowFrame.height;
-            byte[,] TempCalssify = new byte[height, width];
+            byte[,] TempClassify = new byte[height, width];
             MyWindow.ForegroundProbability = new double[height, width];
             for (int i = 0; i < height; i++)
             {
@@ -98,9 +98,10 @@ namespace VeditorGP
                         (ForeGroundProbability[0] + ForeGroundProbability[1] + ForeGroundProbability[2] +
                         BackGroundProbability[0] + BackGroundProbability[1] + BackGroundProbability[2]);
                     if (MyWindow.ForegroundProbability[i, j] < 0.5)
-                        TempCalssify[i, j] = 0;
+                        TempClassify[i, j] = 0;
+        
                     else
-                        TempCalssify[i, j] = 255;
+                        TempClassify[i, j] = 255;
                 }
             }
             #region Test Saving Boundary Image
@@ -114,9 +115,9 @@ namespace VeditorGP
                 {
                     for (int j = 0; j < width; j++)
                     {
-                        p[0] = TempCalssify[i, j];
-                        p[1] = TempCalssify[i, j];
-                        p[2] = TempCalssify[i, j];
+                        p[0] = TempClassify[i, j];
+                        p[1] = TempClassify[i, j];
+                        p[2] = TempClassify[i, j];
                         p += 3;
                     }
                     p += space;
@@ -128,8 +129,9 @@ namespace VeditorGP
             #endregion
 
             #region Fc
-
             #endregion
+
+            return TempClassify;
         }
         double MultivariateNormalGaussian(double[] X, double[] Mu, double[,] Sigma)
         {
