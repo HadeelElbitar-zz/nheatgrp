@@ -178,3 +178,6 @@ C:\My Files\FCIS\Seniors\GP\Source Code\GraduationProject\GraduationProject\bin\
 C:\My Files\FCIS\Seniors\GP\Source Code\GraduationProject\GraduationProject\bin\Debug\Accord.Math.dll
 C:\My Files\FCIS\Seniors\GP\Source Code\GraduationProject\GraduationProject\bin\Debug\Accord.Statistics.dll
 C:\My Files\FCIS\Seniors\GP\Source Code\GraduationProject\GraduationProject\bin\Debug\AForge.Math.dll
+C:\My Files\FCIS\Seniors\GP\Source\GraduationProject\GraduationProject\bin\Debug\GraduationProject.exe.config
+C:\My Files\FCIS\Seniors\GP\Source\GraduationProject\GraduationProject\obj\x86\Debug\GraduationProject.exe
+C:\My Files\FCIS\Seniors\GP\Source\GraduationProject\GraduationProject\obj\x86\Debug\GraduationProject.pdb
