@@ -59,19 +59,5 @@ namespace VeditorGP.Properties {
                 resourceCulture = value;
             }
         }
-        
-        internal static System.Drawing.Bitmap Veditor {
-            get {
-                object obj = ResourceManager.GetObject("Veditor", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap Veditor1 {
-            get {
-                object obj = ResourceManager.GetObject("Veditor1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
     }
 }
