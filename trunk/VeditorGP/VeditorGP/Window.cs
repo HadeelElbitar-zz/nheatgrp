@@ -15,7 +15,7 @@ namespace VeditorGP
         #region Variables
         public int Center_X, Center_Y, WindowSize;
         public Frame WindowFrame, WindowBinaryMask, WindowContour;
-        public Classifier WindowClassifier;
+        public ClassifierV2 WindowClassifier;
         public double ColorConfidence;
         public double[,] ForegroundProbability, WeightingFunction, ShapeConfidence;
         public List<Point> WindowContourPoints;
@@ -135,7 +135,7 @@ namespace VeditorGP
             WindowContour.BmpImage.Save(Pw, ImageFormat.Bmp);
             #endregion
 
-            WindowClassifier = new Classifier(this);
+            WindowClassifier = new ClassifierV2(this);
         }
         #endregion
 
