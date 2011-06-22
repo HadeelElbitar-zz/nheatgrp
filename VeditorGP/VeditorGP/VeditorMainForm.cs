@@ -108,11 +108,6 @@ namespace VeditorGP
             VideoFunctionsObject.SetInitialWindowsArroundContour();
             VideoFunctionsObject.TrainClassifiers();
             VideoFunctionsObject.PropagateFrame();
-
-
-
-
-
             MessageBox.Show("Training Finished!");
             //}
             //catch

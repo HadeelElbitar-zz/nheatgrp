@@ -91,6 +91,7 @@
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Classifier.cs" />
+    <Compile Include="ClassifierV2.cs" />
     <Compile Include="ContourFunctions.cs" />
     <Compile Include="Frame.cs" />
     <Compile Include="GrahamHull.cs" />
