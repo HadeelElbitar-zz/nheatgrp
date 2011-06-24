@@ -16,7 +16,6 @@ namespace VeditorGP
         public int Center_X, Center_Y, WindowSize;
         public Frame WindowFrame, WindowBinaryMask, WindowContour;
         public Classifier WindowClassifier;
-        //public YaRab WindowClassifier;
         public double ColorConfidence;
         public double[,] ForegroundProbability, WeightingFunction, ShapeConfidence;
         public List<Point> WindowContourPoints;
@@ -136,7 +135,6 @@ namespace VeditorGP
             WindowContour.BmpImage.Save(Pw, ImageFormat.Bmp);
             #endregion
 
-            //WindowClassifier = new YaRab(this);
             WindowClassifier = new Classifier(this);
         }
         #endregion
@@ -204,8 +202,6 @@ namespace VeditorGP
 
             WindowClassifier.ForegroundPoints.Clear();
             WindowClassifier.BackgroundPoints.Clear();
-           // WindowClassifier.DividedPoints[1].Clear();
-            //WindowClassifier.DividedPoints[0].Clear();
             CalculateShapeConfidence(height, width, SigmaCSquare);
 
             //classify according to new models and see which one will be used next
@@ -276,8 +272,6 @@ namespace VeditorGP
                     ShapeConfidence[i, j] = 1 - Math.Exp(NegativeDistanceSquare / (Math.Pow(SigmaS, 2)));
                     if (ShapeConfidence[i, j] > FGThreshold) WindowClassifier.ForegroundPoints.Add(new Point(i, j));
                     else if (ShapeConfidence[i, j] < BGThreshold) WindowClassifier.BackgroundPoints.Add(new Point(i, j));
-                    //if (ShapeConfidence[i, j] > FGThreshold) WindowClassifier.DividedPoints[1].Add(new Point(i, j));
-                    //else if (ShapeConfidence[i, j] < BGThreshold) WindowClassifier.DividedPoints[0].Add(new Point(i, j));
                     WeightingFunction[i, j] = Math.Exp(NegativeDistanceSquare / SigmaCSquare);
                 }
             }
