@@ -23,6 +23,7 @@ namespace VeditorGP
         SURF SurfObject;
         OurOpticalFlow OpticalFlowObject;
         Image<Gray, Byte> WarpedFrame;
+        Image<Gray, Single> FlowX, FlowY;
         string VideoPath;
         public VideoFunctions()
         {
@@ -134,9 +135,11 @@ namespace VeditorGP
         }
         public void TrainClassifiers()
         {
+            CurrentFrame = InitialFrame;
             foreach (Window item in InitialFrame.FrameWindows)
             {
                 item.WindowClassifier.Train();
+                item.WindowClassifier.OurGMM();
                 item.CalculateModels();
             }
         }
@@ -155,6 +158,23 @@ namespace VeditorGP
             GetNextFrame();
             GetSurfPoints();
             GetOpticalFlow();
+            WarpWindows();
+            ClassifyNewFrame();
+        }
+        void ClassifyNewFrame()
+        {
+            foreach (Window item in CurrentFrame.FrameWindows)
+            {
+                item.WindowClassifier.OurGMM();
+                //item.CalculateModels();
+            }
+        }
+        void WarpWindows()
+        {
+            //hena na2es el averging
+            CurrentFrame.FrameWindows = new List<Window>();
+            foreach (Window item in PreviousFrame.FrameWindows)
+                CurrentFrame.FrameWindows.Add(new Window(new Point(item.Center_X + int.Parse(FlowX.Data[item.Center_Y, item.Center_X, 0].ToString()), item.Center_Y + int.Parse(FlowY.Data[item.Center_Y, item.Center_X, 0].ToString())), CurrentFrame, item));
         }
         void GetSurfPoints()
         {
@@ -165,7 +185,9 @@ namespace VeditorGP
         void GetOpticalFlow()
         {
             OpticalFlowObject = new OurOpticalFlow();
-            OpticalFlowObject.OpticalFlowWorker(PreviousFrame, WarpedFrame);
+            List<Image<Gray, Single>> Result = OpticalFlowObject.OpticalFlowWorker(PreviousFrame, WarpedFrame);
+            FlowX = Result[0];
+            FlowY = Result[1];
         }
         #endregion
 

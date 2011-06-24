@@ -24,28 +24,17 @@ namespace VeditorGP
         }
         Window MyWindow;
         public List<Point> ForegroundPoints, BackgroundPoints;
-        double TINY = 0.0000000001;
         double[] FWeights, BWeights;
         double[] ForegroundKmean1, ForegroundKmean2, ForegroundKmean3, BackgroundKmean1, BackgroundKmean2, BackgroundKmean3;
         double[,] BackgroundKmeanCovarinace1, BackgroundKmeanCovarinace2, BackgroundKmeanCovarinace3,
              ForegroundKmeanCovarinace1, ForegroundKmeanCovarinace2, ForegroundKmeanCovarinace3;
-        static double[,] BackgroundEMCovariance1, BackgroundEMCovariance2, BackgroundEMCovariance3,
+        double[,] BackgroundEMCovariance1, BackgroundEMCovariance2, BackgroundEMCovariance3,
             ForegroundEMCovariance1, ForegroundEMCovariance2, ForegroundEMCovariance3;
-        static double[] BackgroundEMmean1, BackgroundEMmean2, BackgroundEMmean3, ForegroundEMmean1, ForegroundEMmean2, ForegroundEMmean3;
+        double[] BackgroundEMmean1, BackgroundEMmean2, BackgroundEMmean3, ForegroundEMmean1, ForegroundEMmean2, ForegroundEMmean3;
         double[] ForeGroundProbability, BackGroundProbability;
         #endregion
 
-        #region Training Step
-        public void Train()
-        {
-            DividData();
-            ForegroundKmean();
-            BackgroundKmean();
-            OurForegroundEM();
-            OurBackgroundEM();
-
-            OurGMM(); //Pc(x)
-        }
+        #region Classify
         public byte[,] OurGMM()
         {
             double[] Sample = new double[3];
@@ -134,6 +123,18 @@ namespace VeditorGP
             #endregion
 
             return TempClassify;
+        }
+        #endregion
+
+        #region Training Step
+        public void Train()
+        {
+            DividData();
+            ForegroundKmean();
+            BackgroundKmean();
+            OurForegroundEM();
+            OurBackgroundEM();
+            //OurGMM(); //Pc(x)
         }
         double MultivariateNormalGaussian(double[] X, double[] Mu, double[,] Sigma)
         {

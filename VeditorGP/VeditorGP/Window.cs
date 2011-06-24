@@ -119,64 +119,24 @@ namespace VeditorGP
             WindowContour.InitializeWindowFrame();
 
             #region Test Saving Window Frames
-            string Nw = "Window Frame " + Counter.ToString() + ".bmp";
-            //Counter++;
-            string Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\" + Nw;
-            WindowFrame.BmpImage.Save(Pw, ImageFormat.Bmp);
+            //string Nw = "Window Frame " + Counter.ToString() + ".bmp";
+            ////Counter++;
+            //string Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\" + Nw;
+            //WindowFrame.BmpImage.Save(Pw, ImageFormat.Bmp);
+            //Nw = "Window Binary Mask " + Counter.ToString() + ".bmp";
+            ////Counter++;
+            //Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\" + Nw;
+            //WindowBinaryMask.BmpImage.Save(Pw, ImageFormat.Bmp);
 
-            Nw = "Window Binary Mask " + Counter.ToString() + ".bmp";
+            //Nw = "Window Contour " + Counter.ToString() + ".bmp";
             //Counter++;
-            Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\" + Nw;
-            WindowBinaryMask.BmpImage.Save(Pw, ImageFormat.Bmp);
-
-            Nw = "Window Contour " + Counter.ToString() + ".bmp";
-            Counter++;
-            Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\" + Nw;
-            WindowContour.BmpImage.Save(Pw, ImageFormat.Bmp);
+            //Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\" + Nw;
+            //WindowContour.BmpImage.Save(Pw, ImageFormat.Bmp);
             #endregion
 
             WindowClassifier = new Classifier(this);
         }
         #endregion
-
-        //public void CalculateModels()
-        //{
-        //    int width = WindowFrame.width, height = WindowFrame.height, PointCount = WindowContourPoints.Count;
-        //    double SegmentationLabel = 0, Summation = 0.0, WeightsSummation = 0.0, SigmaCSquare = 202500.0;//sigma square
-        //    double SigmaS = 0.01;
-        //    double Distance = double.MaxValue, Temp, inResult, ShapeTemp;
-        //    WeightingFunction = new double[height, width];
-        //    ShapeConfidence = new double[height, width];
-        //    for (int i = 0; i < height; i++)
-        //    {
-        //        for (int j = 0; j < width; j++)
-        //        {
-        //            foreach (Point item in WindowContourPoints)
-        //            {
-        //                Temp = Math.Sqrt(Math.Pow((item.X - i), 2) + Math.Pow((item.Y - j), 2));
-        //                if (Temp < Distance)
-        //                    Distance = Temp;
-        //            }
-        //            inResult = Math.Pow(Distance, 2);
-        //            inResult = -1 * inResult;
-        //            ShapeTemp = Math.Pow(SigmaS, 2);
-        //            ShapeTemp = inResult / ShapeTemp;
-        //            ShapeConfidence[i, j] = 1 - Math.Exp(ShapeTemp);
-        //            inResult /= SigmaCSquare;
-        //            WeightingFunction[i, j] = Math.Exp(inResult);
-        //        }
-        //    }
-        //    for (int i = 0; i < height; i++)
-        //        for (int j = 0; j < width; j++)
-        //        {
-        //            if (WindowBinaryMask.byteRedPixels[i, j] == 255)
-        //                SegmentationLabel = 1;
-        //            Summation += (Math.Abs(SegmentationLabel - ForegroundProbability[i, j]) * WeightingFunction[i, j]);
-        //            WeightsSummation += WeightingFunction[i, j];
-        //        }
-        //    ColorConfidence = Summation / WeightsSummation;
-        //    ColorConfidence = 1 - ColorConfidence;
-        //}
 
         #region Calculate models for initial frame and other frames
         public void CalculateModels()//Calculate models for initial frame
@@ -291,6 +251,53 @@ namespace VeditorGP
                 }
             }
             ColorConfidence = 1 - (Summation / WeightsSummation);
+        }
+        #endregion
+
+        #region Update Window Centers
+        public Window(Point NewCenter, Frame NewFrame, Window HistoryObject)
+        {
+            #region Initialization
+            Center_X = NewCenter.X;
+            Center_Y = NewCenter.Y;
+            WindowClassifier = HistoryObject.WindowClassifier;
+            WindowFrame = new Frame();
+            WindowFrame.height = 30;
+            WindowFrame.width = 30;
+            if ((30 % 2) == 0) WindowFrame.width++;
+            if ((30 % 2) == 0) WindowFrame.height++;
+            WindowSize = WindowFrame.width * WindowFrame.height;
+            WindowFrame.byteRedPixels = new byte[WindowFrame.height, WindowFrame.width];
+            WindowFrame.byteGreenPixels = new byte[WindowFrame.height, WindowFrame.width];
+            WindowFrame.byteBluePixels = new byte[WindowFrame.height, WindowFrame.width];
+            WindowFrame.doubleRedPixels = new double[WindowFrame.height, WindowFrame.width];
+            WindowFrame.doubleGreenPixels = new double[WindowFrame.height, WindowFrame.width];
+            WindowFrame.doubleBluePixels = new double[WindowFrame.height, WindowFrame.width]; 
+            #endregion
+            int M = (WindowFrame.width - 1) / 2, N = (WindowFrame.height - 1) / 2;
+            for (int i = (Center_Y - N), c = 0; i < NewFrame.height && i <= (Center_Y + N); i++, c++)
+            {
+                if (i < 0) i = 0;
+                for (int j = (Center_X - M), k = 0; j < NewFrame.width && j <= (Center_X + M); j++, k++)
+                {
+                    if (j < 0) j = 0;
+                    #region Fill Colored Frame
+                    WindowFrame.byteRedPixels[c, k] = NewFrame.byteRedPixels[i, j];
+                    WindowFrame.byteGreenPixels[c, k] = NewFrame.byteGreenPixels[i, j];
+                    WindowFrame.byteBluePixels[c, k] = NewFrame.byteBluePixels[i, j];
+                    WindowFrame.doubleRedPixels[c, k] = NewFrame.doubleRedPixels[i, j];
+                    WindowFrame.doubleGreenPixels[c, k] = NewFrame.doubleGreenPixels[i, j];
+                    WindowFrame.doubleBluePixels[c, k] = NewFrame.doubleBluePixels[i, j];
+                    #endregion
+                }
+            }
+            WindowFrame.InitializeWindowFrame();
+            #region Test Saving Window Frames
+            string Nw = "Window Frame " + Counter.ToString() + ".bmp";
+            Counter++;
+            string Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\" + Nw;
+            WindowFrame.BmpImage.Save(Pw, ImageFormat.Bmp);
+            #endregion
         }
         #endregion
 
