@@ -40,6 +40,7 @@ namespace VeditorGP
             DividData();
             ForegroundKmeanRGBLAB();
             BackgroundKmeanRGBLAB();
+    
             OurForegroundEM();
             OurBackgroundEM();
             OurGMM(); //Pc(x)
@@ -312,12 +313,12 @@ namespace VeditorGP
                     for (int i = 0; i < ForegroundCount; i++)
                     {
                         Sample = new double[6];
-                        Sample[0] = MyWindow.WindowFrame.doubleRedPixels[ForegroundPoints[i].X, ForegroundPoints[i].Y];
-                        Sample[1] = MyWindow.WindowFrame.doubleGreenPixels[ForegroundPoints[i].X, ForegroundPoints[i].Y];
-                        Sample[2] = MyWindow.WindowFrame.doubleBluePixels[ForegroundPoints[i].X, ForegroundPoints[i].Y];
-                        Sample[3] = LAB[ForegroundPoints[i].X, ForegroundPoints[i].Y, 0];
-                        Sample[4] = LAB[ForegroundPoints[i].X, ForegroundPoints[i].Y, 1];
-                        Sample[5] = LAB[ForegroundPoints[i].X, ForegroundPoints[i].Y, 2];
+                        Sample[0] = MyWindow.WindowFrame.doubleRedPixels[ForegroundPoints[i].Y, ForegroundPoints[i].X];
+                        Sample[1] = MyWindow.WindowFrame.doubleGreenPixels[ForegroundPoints[i].Y, ForegroundPoints[i].X];
+                        Sample[2] = MyWindow.WindowFrame.doubleBluePixels[ForegroundPoints[i].Y, ForegroundPoints[i].X];
+                        Sample[3] = LAB[ForegroundPoints[i].Y, ForegroundPoints[i].X, 0];
+                        Sample[4] = LAB[ForegroundPoints[i].Y, ForegroundPoints[i].X, 1];
+                        Sample[5] = LAB[ForegroundPoints[i].Y, ForegroundPoints[i].X, 2];
                         Prior1 = PriorProbability(0, Sample, OldMu1, OldMu2, OldMu3, OldSigma1, OldSigma2, OldSigma3, TempWeights);
                         SummationComponent1 += Prior1;
                         ForegroundEMmean1[0] += (Prior1 * Sample[0]);
@@ -338,12 +339,12 @@ namespace VeditorGP
                     for (int i = 0; i < ForegroundCount; i++)
                     {
                         Sample = new double[6];
-                        Sample[0] = MyWindow.WindowFrame.doubleRedPixels[ForegroundPoints[i].X, ForegroundPoints[i].Y];
-                        Sample[1] = MyWindow.WindowFrame.doubleGreenPixels[ForegroundPoints[i].X, ForegroundPoints[i].Y];
-                        Sample[2] = MyWindow.WindowFrame.doubleBluePixels[ForegroundPoints[i].X, ForegroundPoints[i].Y];
-                        Sample[3] = LAB[ForegroundPoints[i].X, ForegroundPoints[i].Y, 0];
-                        Sample[4] = LAB[ForegroundPoints[i].X, ForegroundPoints[i].Y, 1];
-                        Sample[5] = LAB[ForegroundPoints[i].X, ForegroundPoints[i].Y, 2];
+                        Sample[0] = MyWindow.WindowFrame.doubleRedPixels[ForegroundPoints[i].Y, ForegroundPoints[i].X];
+                        Sample[1] = MyWindow.WindowFrame.doubleGreenPixels[ForegroundPoints[i].Y, ForegroundPoints[i].X];
+                        Sample[2] = MyWindow.WindowFrame.doubleBluePixels[ForegroundPoints[i].Y, ForegroundPoints[i].X];
+                        Sample[3] = LAB[ForegroundPoints[i].Y, ForegroundPoints[i].X, 0];
+                        Sample[4] = LAB[ForegroundPoints[i].Y, ForegroundPoints[i].X, 1];
+                        Sample[5] = LAB[ForegroundPoints[i].Y, ForegroundPoints[i].X, 2];
                         Prior1 = PriorProbability(0, Sample, OldMu1, OldMu2, OldMu3, OldSigma1, OldSigma2, OldSigma3, TempWeights);
                         ForegroundEMCovariance1[0, 0] += (Prior1 * Math.Pow((Sample[0] - ForegroundEMmean1[0]), 2));
                         ForegroundEMCovariance1[1, 1] += (Prior1 * Math.Pow((Sample[1] - ForegroundEMmean1[1]), 2));
@@ -367,12 +368,12 @@ namespace VeditorGP
                     for (int i = 0; i < ForegroundCount; i++)
                     {
                         Sample = new double[6];
-                        Sample[0] = MyWindow.WindowFrame.doubleRedPixels[ForegroundPoints[i].X, ForegroundPoints[i].Y];
-                        Sample[1] = MyWindow.WindowFrame.doubleGreenPixels[ForegroundPoints[i].X, ForegroundPoints[i].Y];
-                        Sample[2] = MyWindow.WindowFrame.doubleBluePixels[ForegroundPoints[i].X, ForegroundPoints[i].Y];
-                        Sample[3] = LAB[ForegroundPoints[i].X, ForegroundPoints[i].Y, 0];
-                        Sample[4] = LAB[ForegroundPoints[i].X, ForegroundPoints[i].Y, 1];
-                        Sample[5] = LAB[ForegroundPoints[i].X, ForegroundPoints[i].Y, 2];
+                        Sample[0] = MyWindow.WindowFrame.doubleRedPixels[ForegroundPoints[i].Y, ForegroundPoints[i].X];
+                        Sample[1] = MyWindow.WindowFrame.doubleGreenPixels[ForegroundPoints[i].Y, ForegroundPoints[i].X];
+                        Sample[2] = MyWindow.WindowFrame.doubleBluePixels[ForegroundPoints[i].Y, ForegroundPoints[i].X];
+                        Sample[3] = LAB[ForegroundPoints[i].Y, ForegroundPoints[i].X, 0];
+                        Sample[4] = LAB[ForegroundPoints[i].Y, ForegroundPoints[i].X, 1];
+                        Sample[5] = LAB[ForegroundPoints[i].Y, ForegroundPoints[i].X, 2];
                         Prior2 = PriorProbability(1, Sample, OldMu1, OldMu2, OldMu3, OldSigma1, OldSigma2, OldSigma3, TempWeights);
                         SummationComponent2 += Prior2;
                         ForegroundEMmean2[0] += (Prior2 * Sample[0]);
@@ -393,12 +394,12 @@ namespace VeditorGP
                     for (int i = 0; i < ForegroundCount; i++)
                     {
                         Sample = new double[6];
-                        Sample[0] = MyWindow.WindowFrame.doubleRedPixels[ForegroundPoints[i].X, ForegroundPoints[i].Y];
-                        Sample[1] = MyWindow.WindowFrame.doubleGreenPixels[ForegroundPoints[i].X, ForegroundPoints[i].Y];
-                        Sample[2] = MyWindow.WindowFrame.doubleBluePixels[ForegroundPoints[i].X, ForegroundPoints[i].Y];
-                        Sample[3] = LAB[ForegroundPoints[i].X, ForegroundPoints[i].Y, 0];
-                        Sample[4] = LAB[ForegroundPoints[i].X, ForegroundPoints[i].Y, 1];
-                        Sample[5] = LAB[ForegroundPoints[i].X, ForegroundPoints[i].Y, 2];
+                        Sample[0] = MyWindow.WindowFrame.doubleRedPixels[ForegroundPoints[i].Y, ForegroundPoints[i].X];
+                        Sample[1] = MyWindow.WindowFrame.doubleGreenPixels[ForegroundPoints[i].Y, ForegroundPoints[i].X];
+                        Sample[2] = MyWindow.WindowFrame.doubleBluePixels[ForegroundPoints[i].Y, ForegroundPoints[i].X];
+                        Sample[3] = LAB[ForegroundPoints[i].Y, ForegroundPoints[i].X, 0];
+                        Sample[4] = LAB[ForegroundPoints[i].Y, ForegroundPoints[i].X, 1];
+                        Sample[5] = LAB[ForegroundPoints[i].Y, ForegroundPoints[i].X, 2];
                         Prior2 = PriorProbability(1, Sample, OldMu1, OldMu2, OldMu3, OldSigma1, OldSigma2, OldSigma3, TempWeights);
                         ForegroundEMCovariance2[0, 0] += (Prior2 * Math.Pow((Sample[0] - ForegroundEMmean2[0]), 2));
                         ForegroundEMCovariance2[1, 1] += (Prior2 * Math.Pow((Sample[1] - ForegroundEMmean2[1]), 2));
@@ -422,12 +423,12 @@ namespace VeditorGP
                     for (int i = 0; i < ForegroundCount; i++)
                     {
                         Sample = new double[6];
-                        Sample[0] = MyWindow.WindowFrame.doubleRedPixels[ForegroundPoints[i].X, ForegroundPoints[i].Y];
-                        Sample[1] = MyWindow.WindowFrame.doubleGreenPixels[ForegroundPoints[i].X, ForegroundPoints[i].Y];
-                        Sample[2] = MyWindow.WindowFrame.doubleBluePixels[ForegroundPoints[i].X, ForegroundPoints[i].Y];
-                        Sample[3] = LAB[ForegroundPoints[i].X, ForegroundPoints[i].Y, 0];
-                        Sample[4] = LAB[ForegroundPoints[i].X, ForegroundPoints[i].Y, 1];
-                        Sample[5] = LAB[ForegroundPoints[i].X, ForegroundPoints[i].Y, 2];
+                        Sample[0] = MyWindow.WindowFrame.doubleRedPixels[ForegroundPoints[i].Y, ForegroundPoints[i].X];
+                        Sample[1] = MyWindow.WindowFrame.doubleGreenPixels[ForegroundPoints[i].Y, ForegroundPoints[i].X];
+                        Sample[2] = MyWindow.WindowFrame.doubleBluePixels[ForegroundPoints[i].Y, ForegroundPoints[i].X];
+                        Sample[3] = LAB[ForegroundPoints[i].Y, ForegroundPoints[i].X, 0];
+                        Sample[4] = LAB[ForegroundPoints[i].Y, ForegroundPoints[i].X, 1];
+                        Sample[5] = LAB[ForegroundPoints[i].Y, ForegroundPoints[i].X, 2];
                         Prior3 = PriorProbability(2, Sample, OldMu1, OldMu2, OldMu3, OldSigma1, OldSigma2, OldSigma3, TempWeights);
                         SummationComponent3 += Prior3;
                         ForegroundEMmean3[0] += (Prior3 * Sample[0]);
@@ -448,12 +449,12 @@ namespace VeditorGP
                     for (int i = 0; i < ForegroundCount; i++)
                     {
                         Sample = new double[6];
-                        Sample[0] = MyWindow.WindowFrame.doubleRedPixels[ForegroundPoints[i].X, ForegroundPoints[i].Y];
-                        Sample[1] = MyWindow.WindowFrame.doubleGreenPixels[ForegroundPoints[i].X, ForegroundPoints[i].Y];
-                        Sample[2] = MyWindow.WindowFrame.doubleBluePixels[ForegroundPoints[i].X, ForegroundPoints[i].Y];
-                        Sample[3] = LAB[ForegroundPoints[i].X, ForegroundPoints[i].Y, 0];
-                        Sample[4] = LAB[ForegroundPoints[i].X, ForegroundPoints[i].Y, 1];
-                        Sample[5] = LAB[ForegroundPoints[i].X, ForegroundPoints[i].Y, 2];
+                        Sample[0] = MyWindow.WindowFrame.doubleRedPixels[ForegroundPoints[i].Y, ForegroundPoints[i].X];
+                        Sample[1] = MyWindow.WindowFrame.doubleGreenPixels[ForegroundPoints[i].Y, ForegroundPoints[i].X];
+                        Sample[2] = MyWindow.WindowFrame.doubleBluePixels[ForegroundPoints[i].Y, ForegroundPoints[i].X];
+                        Sample[3] = LAB[ForegroundPoints[i].Y, ForegroundPoints[i].X, 0];
+                        Sample[4] = LAB[ForegroundPoints[i].Y, ForegroundPoints[i].X, 1];
+                        Sample[5] = LAB[ForegroundPoints[i].Y, ForegroundPoints[i].X, 2];
                         Prior3 = PriorProbability(2, Sample, OldMu1, OldMu2, OldMu3, OldSigma1, OldSigma2, OldSigma3, TempWeights);
                         ForegroundEMCovariance3[0, 0] += (Prior3 * Math.Pow((Sample[0] - ForegroundEMmean3[0]), 2));
                         ForegroundEMCovariance3[1, 1] += (Prior3 * Math.Pow((Sample[1] - ForegroundEMmean3[1]), 2));
@@ -582,12 +583,12 @@ namespace VeditorGP
                     for (int i = 0; i < BackgroundCount; i++)
                     {
                         Sample = new double[6];
-                        Sample[0] = MyWindow.WindowFrame.doubleRedPixels[BackgroundPoints[i].X, BackgroundPoints[i].Y];
-                        Sample[1] = MyWindow.WindowFrame.doubleGreenPixels[BackgroundPoints[i].X, BackgroundPoints[i].Y];
-                        Sample[2] = MyWindow.WindowFrame.doubleBluePixels[BackgroundPoints[i].X, BackgroundPoints[i].Y];
-                        Sample[3] = LAB[BackgroundPoints[i].X, BackgroundPoints[i].Y, 0];
-                        Sample[4] = LAB[BackgroundPoints[i].X, BackgroundPoints[i].Y, 1];
-                        Sample[5] = LAB[BackgroundPoints[i].X, BackgroundPoints[i].Y, 2];
+                        Sample[0] = MyWindow.WindowFrame.doubleRedPixels[BackgroundPoints[i].Y, BackgroundPoints[i].X];
+                        Sample[1] = MyWindow.WindowFrame.doubleGreenPixels[BackgroundPoints[i].Y, BackgroundPoints[i].X];
+                        Sample[2] = MyWindow.WindowFrame.doubleBluePixels[BackgroundPoints[i].Y, BackgroundPoints[i].X];
+                        Sample[3] = LAB[BackgroundPoints[i].Y, BackgroundPoints[i].X, 0];
+                        Sample[4] = LAB[BackgroundPoints[i].Y, BackgroundPoints[i].X, 1];
+                        Sample[5] = LAB[BackgroundPoints[i].Y, BackgroundPoints[i].X, 2];
                         Prior1 = BPriorProbability(0, Sample, OldMu1, OldMu2, OldMu3, OldSigma1, OldSigma2, OldSigma3, TempWeights);
                         SummationComponent1 += Prior1;
                         BackgroundEMmean1[0] += (Prior1 * Sample[0]);
@@ -608,12 +609,12 @@ namespace VeditorGP
                     for (int i = 0; i < BackgroundCount; i++)
                     {
                         Sample = new double[6];
-                        Sample[0] = MyWindow.WindowFrame.doubleRedPixels[BackgroundPoints[i].X, BackgroundPoints[i].Y];
-                        Sample[1] = MyWindow.WindowFrame.doubleGreenPixels[BackgroundPoints[i].X, BackgroundPoints[i].Y];
-                        Sample[2] = MyWindow.WindowFrame.doubleBluePixels[BackgroundPoints[i].X, BackgroundPoints[i].Y];
-                        Sample[3] = LAB[BackgroundPoints[i].X, BackgroundPoints[i].Y, 0];
-                        Sample[4] = LAB[BackgroundPoints[i].X, BackgroundPoints[i].Y, 1];
-                        Sample[5] = LAB[BackgroundPoints[i].X, BackgroundPoints[i].Y, 2];
+                        Sample[0] = MyWindow.WindowFrame.doubleRedPixels[BackgroundPoints[i].Y, BackgroundPoints[i].X];
+                        Sample[1] = MyWindow.WindowFrame.doubleGreenPixels[BackgroundPoints[i].Y, BackgroundPoints[i].X];
+                        Sample[2] = MyWindow.WindowFrame.doubleBluePixels[BackgroundPoints[i].Y, BackgroundPoints[i].X];
+                        Sample[3] = LAB[BackgroundPoints[i].Y, BackgroundPoints[i].X, 0];
+                        Sample[4] = LAB[BackgroundPoints[i].Y, BackgroundPoints[i].X, 1];
+                        Sample[5] = LAB[BackgroundPoints[i].Y, BackgroundPoints[i].X, 2];
                         Prior1 = BPriorProbability(0, Sample, OldMu1, OldMu2, OldMu3, OldSigma1, OldSigma2, OldSigma3, TempWeights);
                         BackgroundEMCovariance1[0, 0] += (Prior1 * Math.Pow((Sample[0] - BackgroundEMmean1[0]), 2));
                         BackgroundEMCovariance1[1, 1] += (Prior1 * Math.Pow((Sample[1] - BackgroundEMmean1[1]), 2));
@@ -637,12 +638,12 @@ namespace VeditorGP
                     for (int i = 0; i < BackgroundCount; i++)
                     {
                         Sample = new double[6];
-                        Sample[0] = MyWindow.WindowFrame.doubleRedPixels[BackgroundPoints[i].X, BackgroundPoints[i].Y];
-                        Sample[1] = MyWindow.WindowFrame.doubleGreenPixels[BackgroundPoints[i].X, BackgroundPoints[i].Y];
-                        Sample[2] = MyWindow.WindowFrame.doubleBluePixels[BackgroundPoints[i].X, BackgroundPoints[i].Y];
-                        Sample[3] = LAB[BackgroundPoints[i].X, BackgroundPoints[i].Y, 0];
-                        Sample[4] = LAB[BackgroundPoints[i].X, BackgroundPoints[i].Y, 1];
-                        Sample[5] = LAB[BackgroundPoints[i].X, BackgroundPoints[i].Y, 2];
+                        Sample[0] = MyWindow.WindowFrame.doubleRedPixels[BackgroundPoints[i].Y, BackgroundPoints[i].X];
+                        Sample[1] = MyWindow.WindowFrame.doubleGreenPixels[BackgroundPoints[i].Y, BackgroundPoints[i].X];
+                        Sample[2] = MyWindow.WindowFrame.doubleBluePixels[BackgroundPoints[i].Y, BackgroundPoints[i].X];
+                        Sample[3] = LAB[BackgroundPoints[i].Y, BackgroundPoints[i].X, 0];
+                        Sample[4] = LAB[BackgroundPoints[i].Y, BackgroundPoints[i].X, 1];
+                        Sample[5] = LAB[BackgroundPoints[i].Y, BackgroundPoints[i].X, 2];
                         Prior2 = BPriorProbability(1, Sample, OldMu1, OldMu2, OldMu3, OldSigma1, OldSigma2, OldSigma3, TempWeights);
                         SummationComponent2 += Prior2;
                         BackgroundEMmean2[0] += (Prior2 * Sample[0]);
@@ -663,12 +664,12 @@ namespace VeditorGP
                     for (int i = 0; i < BackgroundCount; i++)
                     {
                         Sample = new double[6];
-                        Sample[0] = MyWindow.WindowFrame.doubleRedPixels[BackgroundPoints[i].X, BackgroundPoints[i].Y];
-                        Sample[1] = MyWindow.WindowFrame.doubleGreenPixels[BackgroundPoints[i].X, BackgroundPoints[i].Y];
-                        Sample[2] = MyWindow.WindowFrame.doubleBluePixels[BackgroundPoints[i].X, BackgroundPoints[i].Y];
-                        Sample[3] = LAB[BackgroundPoints[i].X, BackgroundPoints[i].Y, 0];
-                        Sample[4] = LAB[BackgroundPoints[i].X, BackgroundPoints[i].Y, 1];
-                        Sample[5] = LAB[BackgroundPoints[i].X, BackgroundPoints[i].Y, 2];
+                        Sample[0] = MyWindow.WindowFrame.doubleRedPixels[BackgroundPoints[i].Y, BackgroundPoints[i].X];
+                        Sample[1] = MyWindow.WindowFrame.doubleGreenPixels[BackgroundPoints[i].Y, BackgroundPoints[i].X];
+                        Sample[2] = MyWindow.WindowFrame.doubleBluePixels[BackgroundPoints[i].Y, BackgroundPoints[i].X];
+                        Sample[3] = LAB[BackgroundPoints[i].Y, BackgroundPoints[i].X, 0];
+                        Sample[4] = LAB[BackgroundPoints[i].Y, BackgroundPoints[i].X, 1];
+                        Sample[5] = LAB[BackgroundPoints[i].Y, BackgroundPoints[i].X, 2];
                         Prior2 = BPriorProbability(1, Sample, OldMu1, OldMu2, OldMu3, OldSigma1, OldSigma2, OldSigma3, TempWeights);
                         BackgroundEMCovariance2[0, 0] += (Prior2 * Math.Pow((Sample[0] - BackgroundEMmean2[0]), 2));
                         BackgroundEMCovariance2[1, 1] += (Prior2 * Math.Pow((Sample[1] - BackgroundEMmean2[1]), 2));
@@ -692,12 +693,12 @@ namespace VeditorGP
                     for (int i = 0; i < BackgroundCount; i++)
                     {
                         Sample = new double[6];
-                        Sample[0] = MyWindow.WindowFrame.doubleRedPixels[BackgroundPoints[i].X, BackgroundPoints[i].Y];
-                        Sample[1] = MyWindow.WindowFrame.doubleGreenPixels[BackgroundPoints[i].X, BackgroundPoints[i].Y];
-                        Sample[2] = MyWindow.WindowFrame.doubleBluePixels[BackgroundPoints[i].X, BackgroundPoints[i].Y];
-                        Sample[3] = LAB[BackgroundPoints[i].X, BackgroundPoints[i].Y, 0];
-                        Sample[4] = LAB[BackgroundPoints[i].X, BackgroundPoints[i].Y, 1];
-                        Sample[5] = LAB[BackgroundPoints[i].X, BackgroundPoints[i].Y, 2];
+                        Sample[0] = MyWindow.WindowFrame.doubleRedPixels[BackgroundPoints[i].Y, BackgroundPoints[i].X];
+                        Sample[1] = MyWindow.WindowFrame.doubleGreenPixels[BackgroundPoints[i].Y, BackgroundPoints[i].X];
+                        Sample[2] = MyWindow.WindowFrame.doubleBluePixels[BackgroundPoints[i].Y, BackgroundPoints[i].X];
+                        Sample[3] = LAB[BackgroundPoints[i].Y, BackgroundPoints[i].X, 0];
+                        Sample[4] = LAB[BackgroundPoints[i].Y, BackgroundPoints[i].X, 1];
+                        Sample[5] = LAB[BackgroundPoints[i].Y, BackgroundPoints[i].X, 2];
                         Prior3 = BPriorProbability(2, Sample, OldMu1, OldMu2, OldMu3, OldSigma1, OldSigma2, OldSigma3, TempWeights);
                         SummationComponent3 += Prior3;
                         BackgroundEMmean3[0] += (Prior3 * Sample[0]);
@@ -718,12 +719,12 @@ namespace VeditorGP
                     for (int i = 0; i < BackgroundCount; i++)
                     {
                         Sample = new double[6];
-                        Sample[0] = MyWindow.WindowFrame.doubleRedPixels[BackgroundPoints[i].X, BackgroundPoints[i].Y];
-                        Sample[1] = MyWindow.WindowFrame.doubleGreenPixels[BackgroundPoints[i].X, BackgroundPoints[i].Y];
-                        Sample[2] = MyWindow.WindowFrame.doubleBluePixels[BackgroundPoints[i].X, BackgroundPoints[i].Y];
-                        Sample[3] = LAB[BackgroundPoints[i].X, BackgroundPoints[i].Y, 0];
-                        Sample[4] = LAB[BackgroundPoints[i].X, BackgroundPoints[i].Y, 1];
-                        Sample[5] = LAB[BackgroundPoints[i].X, BackgroundPoints[i].Y, 2];
+                        Sample[0] = MyWindow.WindowFrame.doubleRedPixels[BackgroundPoints[i].Y, BackgroundPoints[i].X];
+                        Sample[1] = MyWindow.WindowFrame.doubleGreenPixels[BackgroundPoints[i].Y, BackgroundPoints[i].X];
+                        Sample[2] = MyWindow.WindowFrame.doubleBluePixels[BackgroundPoints[i].Y, BackgroundPoints[i].X];
+                        Sample[3] = LAB[BackgroundPoints[i].Y, BackgroundPoints[i].X, 0];
+                        Sample[4] = LAB[BackgroundPoints[i].Y, BackgroundPoints[i].X, 1];
+                        Sample[5] = LAB[BackgroundPoints[i].Y, BackgroundPoints[i].X, 2];
                         Prior3 = BPriorProbability(2, Sample, OldMu1, OldMu2, OldMu3, OldSigma1, OldSigma2, OldSigma3, TempWeights);
                         BackgroundEMCovariance3[0, 0] += (Prior3 * Math.Pow((Sample[0] - BackgroundEMmean3[0]), 2));
                         BackgroundEMCovariance3[1, 1] += (Prior3 * Math.Pow((Sample[1] - BackgroundEMmean3[1]), 2));
@@ -844,12 +845,12 @@ namespace VeditorGP
             {
                 int i = rand.Next(0, BackGroundLength);
                 double[] temp = new double[6];
-                temp[0] = MyWindow.WindowFrame.doubleRedPixels[BackgroundPoints[i].X, BackgroundPoints[i].Y];
-                temp[1] = MyWindow.WindowFrame.doubleGreenPixels[BackgroundPoints[i].X, BackgroundPoints[i].Y];
-                temp[2] = MyWindow.WindowFrame.doubleBluePixels[BackgroundPoints[i].X, BackgroundPoints[i].Y];
-                temp[3] = LAB[BackgroundPoints[i].X, BackgroundPoints[i].Y, 0];
-                temp[4] = LAB[BackgroundPoints[i].X, BackgroundPoints[i].Y, 1];
-                temp[5] = LAB[BackgroundPoints[i].X, BackgroundPoints[i].Y, 2];
+                temp[0] = MyWindow.WindowFrame.doubleRedPixels[BackgroundPoints[i].Y, BackgroundPoints[i].X];
+                temp[1] = MyWindow.WindowFrame.doubleGreenPixels[BackgroundPoints[i].Y, BackgroundPoints[i].X];
+                temp[2] = MyWindow.WindowFrame.doubleBluePixels[BackgroundPoints[i].Y, BackgroundPoints[i].X];
+                temp[3] = LAB[BackgroundPoints[i].Y, BackgroundPoints[i].X, 0];
+                temp[4] = LAB[BackgroundPoints[i].Y, BackgroundPoints[i].X, 1];
+                temp[5] = LAB[BackgroundPoints[i].Y, BackgroundPoints[i].X, 2];
                 centroids.Add(temp);
             }
             while (true)
@@ -862,12 +863,12 @@ namespace VeditorGP
                 {
                     int i = rand.Next(0, BackGroundLength);
                     double[] temp = new double[6];
-                    temp[0] = MyWindow.WindowFrame.doubleRedPixels[BackgroundPoints[i].X, BackgroundPoints[i].Y];
-                    temp[1] = MyWindow.WindowFrame.doubleGreenPixels[BackgroundPoints[i].X, BackgroundPoints[i].Y];
-                    temp[2] = MyWindow.WindowFrame.doubleBluePixels[BackgroundPoints[i].X, BackgroundPoints[i].Y];
-                    temp[3] = LAB[BackgroundPoints[i].X, BackgroundPoints[i].Y, 0];
-                    temp[4] = LAB[BackgroundPoints[i].X, BackgroundPoints[i].Y, 1];
-                    temp[5] = LAB[BackgroundPoints[i].X, BackgroundPoints[i].Y, 2];
+                    temp[0] = MyWindow.WindowFrame.doubleRedPixels[BackgroundPoints[i].Y, BackgroundPoints[i].X];
+                    temp[1] = MyWindow.WindowFrame.doubleGreenPixels[BackgroundPoints[i].Y, BackgroundPoints[i].X];
+                    temp[2] = MyWindow.WindowFrame.doubleBluePixels[BackgroundPoints[i].Y, BackgroundPoints[i].X];
+                    temp[3] = LAB[BackgroundPoints[i].Y, BackgroundPoints[i].X, 0];
+                    temp[4] = LAB[BackgroundPoints[i].Y, BackgroundPoints[i].X, 1];
+                    temp[5] = LAB[BackgroundPoints[i].Y, BackgroundPoints[i].X, 2];
                     centroids.Add(temp);
                 }
             }
@@ -883,12 +884,12 @@ namespace VeditorGP
                 for (int i = 0; i < BackGroundLength; i++)
                 {
                     double[] DataVector = new double[6];
-                    DataVector[0] = MyWindow.WindowFrame.doubleRedPixels[BackgroundPoints[i].X, BackgroundPoints[i].Y];
-                    DataVector[1] = MyWindow.WindowFrame.doubleGreenPixels[BackgroundPoints[i].X, BackgroundPoints[i].Y];
-                    DataVector[2] = MyWindow.WindowFrame.doubleBluePixels[BackgroundPoints[i].X, BackgroundPoints[i].Y];
-                    DataVector[3] = LAB[BackgroundPoints[i].X, BackgroundPoints[i].Y, 0];
-                    DataVector[4] = LAB[BackgroundPoints[i].X, BackgroundPoints[i].Y, 1];
-                    DataVector[5] = LAB[BackgroundPoints[i].X, BackgroundPoints[i].Y, 2];
+                    DataVector[0] = MyWindow.WindowFrame.doubleRedPixels[BackgroundPoints[i].Y, BackgroundPoints[i].X];
+                    DataVector[1] = MyWindow.WindowFrame.doubleGreenPixels[BackgroundPoints[i].Y, BackgroundPoints[i].X];
+                    DataVector[2] = MyWindow.WindowFrame.doubleBluePixels[BackgroundPoints[i].Y, BackgroundPoints[i].X];
+                    DataVector[3] = LAB[BackgroundPoints[i].Y, BackgroundPoints[i].X, 0];
+                    DataVector[4] = LAB[BackgroundPoints[i].Y, BackgroundPoints[i].X, 1];
+                    DataVector[5] = LAB[BackgroundPoints[i].Y, BackgroundPoints[i].X, 2];
                     double Distance1 = DistanceLAB(DataVector, centroids[0]);
                     double Distance2 = DistanceLAB(DataVector, centroids[1]);
                     double Distance3 = DistanceLAB(DataVector, centroids[2]);
@@ -946,12 +947,12 @@ namespace VeditorGP
             {
                 int i = rand.Next(0, ForeGroundLength);
                 double[] temp = new double[6];
-                temp[0] = MyWindow.WindowFrame.doubleRedPixels[ForegroundPoints[i].X, ForegroundPoints[i].Y];
-                temp[1] = MyWindow.WindowFrame.doubleGreenPixels[ForegroundPoints[i].X, ForegroundPoints[i].Y];
-                temp[2] = MyWindow.WindowFrame.doubleBluePixels[ForegroundPoints[i].X, ForegroundPoints[i].Y];
-                temp[3] = LAB[ForegroundPoints[i].X, ForegroundPoints[i].Y, 0];
-                temp[4] = LAB[ForegroundPoints[i].X, ForegroundPoints[i].Y, 1];
-                temp[5] = LAB[ForegroundPoints[i].X, ForegroundPoints[i].Y, 2];
+                temp[0] = MyWindow.WindowFrame.doubleRedPixels[ForegroundPoints[i].Y, ForegroundPoints[i].X];
+                temp[1] = MyWindow.WindowFrame.doubleGreenPixels[ForegroundPoints[i].Y, ForegroundPoints[i].X];
+                temp[2] = MyWindow.WindowFrame.doubleBluePixels[ForegroundPoints[i].Y, ForegroundPoints[i].X];
+                temp[3] = LAB[ForegroundPoints[i].Y, ForegroundPoints[i].X, 0];
+                temp[4] = LAB[ForegroundPoints[i].Y, ForegroundPoints[i].X, 1];
+                temp[5] = LAB[ForegroundPoints[i].Y, ForegroundPoints[i].X, 2];
                 centroids.Add(temp);
             }
             while (true)
@@ -964,12 +965,12 @@ namespace VeditorGP
                 {
                     int i = rand.Next(0, ForeGroundLength);
                     double[] temp = new double[6];
-                    temp[0] = MyWindow.WindowFrame.doubleRedPixels[ForegroundPoints[i].X, ForegroundPoints[i].Y];
-                    temp[1] = MyWindow.WindowFrame.doubleGreenPixels[ForegroundPoints[i].X, ForegroundPoints[i].Y];
-                    temp[2] = MyWindow.WindowFrame.doubleBluePixels[ForegroundPoints[i].X, ForegroundPoints[i].Y];
-                    temp[3] = LAB[ForegroundPoints[i].X, ForegroundPoints[i].Y, 0];
-                    temp[4] = LAB[ForegroundPoints[i].X, ForegroundPoints[i].Y, 1];
-                    temp[5] = LAB[ForegroundPoints[i].X, ForegroundPoints[i].Y, 2];
+                    temp[0] = MyWindow.WindowFrame.doubleRedPixels[ForegroundPoints[i].Y, ForegroundPoints[i].X];
+                    temp[1] = MyWindow.WindowFrame.doubleGreenPixels[ForegroundPoints[i].Y, ForegroundPoints[i].X];
+                    temp[2] = MyWindow.WindowFrame.doubleBluePixels[ForegroundPoints[i].Y, ForegroundPoints[i].X];
+                    temp[3] = LAB[ForegroundPoints[i].Y, ForegroundPoints[i].X, 0];
+                    temp[4] = LAB[ForegroundPoints[i].Y, ForegroundPoints[i].X, 1];
+                    temp[5] = LAB[ForegroundPoints[i].Y, ForegroundPoints[i].X, 2];
                     centroids.Add(temp);
                 }
             }
@@ -985,12 +986,12 @@ namespace VeditorGP
                 for (int i = 0; i < ForeGroundLength; i++)
                 {
                     double[] DataVector = new double[6];
-                    DataVector[0] = MyWindow.WindowFrame.doubleRedPixels[ForegroundPoints[i].X, ForegroundPoints[i].Y];
-                    DataVector[1] = MyWindow.WindowFrame.doubleGreenPixels[ForegroundPoints[i].X, ForegroundPoints[i].Y];
-                    DataVector[2] = MyWindow.WindowFrame.doubleBluePixels[ForegroundPoints[i].X, ForegroundPoints[i].Y];
-                    DataVector[3] = LAB[ForegroundPoints[i].X, ForegroundPoints[i].Y, 0];
-                    DataVector[4] = LAB[ForegroundPoints[i].X, ForegroundPoints[i].Y, 1];
-                    DataVector[5] = LAB[ForegroundPoints[i].X, ForegroundPoints[i].Y, 2];
+                    DataVector[0] = MyWindow.WindowFrame.doubleRedPixels[ForegroundPoints[i].Y, ForegroundPoints[i].X];
+                    DataVector[1] = MyWindow.WindowFrame.doubleGreenPixels[ForegroundPoints[i].Y, ForegroundPoints[i].X];
+                    DataVector[2] = MyWindow.WindowFrame.doubleBluePixels[ForegroundPoints[i].Y, ForegroundPoints[i].X];
+                    DataVector[3] = LAB[ForegroundPoints[i].Y, ForegroundPoints[i].X, 0];
+                    DataVector[4] = LAB[ForegroundPoints[i].Y, ForegroundPoints[i].X, 1];
+                    DataVector[5] = LAB[ForegroundPoints[i].Y, ForegroundPoints[i].X, 2];
                     double Distance1 = DistanceLAB(DataVector, centroids[0]);
                     double Distance2 = DistanceLAB(DataVector, centroids[1]);
                     double Distance3 = DistanceLAB(DataVector, centroids[2]);
@@ -1044,12 +1045,12 @@ namespace VeditorGP
                 length = ForegroundPoints.Count;
                 for (int i = 0; i < length; i++)
                 {
-                    ReadMean += Math.Pow((MyWindow.WindowFrame.doubleRedPixels[ForegroundPoints[i].X, ForegroundPoints[i].Y] - _MeanMatrix[0]), 2);
-                    GreenMean += Math.Pow((MyWindow.WindowFrame.doubleGreenPixels[ForegroundPoints[i].X, ForegroundPoints[i].Y] - _MeanMatrix[1]), 2);
-                    BlueMean += Math.Pow((MyWindow.WindowFrame.doubleBluePixels[ForegroundPoints[i].X, ForegroundPoints[i].Y] - _MeanMatrix[2]), 2);
-                    Lmean += Math.Pow((LAB[ForegroundPoints[i].X, ForegroundPoints[i].Y, 0] - _MeanMatrix[3]), 2);
-                    Amean += Math.Pow((LAB[ForegroundPoints[i].X, ForegroundPoints[i].Y, 1] - _MeanMatrix[4]), 2);
-                    Bmean += Math.Pow((LAB[ForegroundPoints[i].X, ForegroundPoints[i].Y, 2] - _MeanMatrix[5]), 2);
+                    ReadMean += Math.Pow((MyWindow.WindowFrame.doubleRedPixels[ForegroundPoints[i].Y, ForegroundPoints[i].X] - _MeanMatrix[0]), 2);
+                    GreenMean += Math.Pow((MyWindow.WindowFrame.doubleGreenPixels[ForegroundPoints[i].Y, ForegroundPoints[i].X] - _MeanMatrix[1]), 2);
+                    BlueMean += Math.Pow((MyWindow.WindowFrame.doubleBluePixels[ForegroundPoints[i].Y, ForegroundPoints[i].X] - _MeanMatrix[2]), 2);
+                    Lmean += Math.Pow((LAB[ForegroundPoints[i].Y, ForegroundPoints[i].X, 0] - _MeanMatrix[3]), 2);
+                    Amean += Math.Pow((LAB[ForegroundPoints[i].Y, ForegroundPoints[i].X, 1] - _MeanMatrix[4]), 2);
+                    Bmean += Math.Pow((LAB[ForegroundPoints[i].Y, ForegroundPoints[i].X, 2] - _MeanMatrix[5]), 2);
                 }
             }
             else
@@ -1057,12 +1058,12 @@ namespace VeditorGP
                 length = BackgroundPoints.Count;
                 for (int i = 0; i < length; i++)
                 {
-                    ReadMean += Math.Pow((MyWindow.WindowFrame.doubleRedPixels[BackgroundPoints[i].X, BackgroundPoints[i].Y] - _MeanMatrix[0]), 2);
-                    GreenMean += Math.Pow((MyWindow.WindowFrame.doubleGreenPixels[BackgroundPoints[i].X, BackgroundPoints[i].Y] - _MeanMatrix[1]), 2);
-                    BlueMean += Math.Pow((MyWindow.WindowFrame.doubleBluePixels[BackgroundPoints[i].X, BackgroundPoints[i].Y] - _MeanMatrix[2]), 2);
-                    Lmean += Math.Pow((LAB[BackgroundPoints[i].X, BackgroundPoints[i].Y, 0] - _MeanMatrix[3]), 2);
-                    Amean += Math.Pow((LAB[BackgroundPoints[i].X, BackgroundPoints[i].Y, 1] - _MeanMatrix[4]), 2);
-                    Bmean += Math.Pow((LAB[BackgroundPoints[i].X, BackgroundPoints[i].Y, 2] - _MeanMatrix[5]), 2);
+                    ReadMean += Math.Pow((MyWindow.WindowFrame.doubleRedPixels[BackgroundPoints[i].Y, BackgroundPoints[i].X] - _MeanMatrix[0]), 2);
+                    GreenMean += Math.Pow((MyWindow.WindowFrame.doubleGreenPixels[BackgroundPoints[i].Y, BackgroundPoints[i].X] - _MeanMatrix[1]), 2);
+                    BlueMean += Math.Pow((MyWindow.WindowFrame.doubleBluePixels[BackgroundPoints[i].Y, BackgroundPoints[i].X] - _MeanMatrix[2]), 2);
+                    Lmean += Math.Pow((LAB[BackgroundPoints[i].Y, BackgroundPoints[i].X, 0] - _MeanMatrix[3]), 2);
+                    Amean += Math.Pow((LAB[BackgroundPoints[i].Y, BackgroundPoints[i].X, 1] - _MeanMatrix[4]), 2);
+                    Bmean += Math.Pow((LAB[BackgroundPoints[i].Y, BackgroundPoints[i].X, 2] - _MeanMatrix[5]), 2);
                 }
             }
             CovarianceMatrix[0, 0] = ReadMean / length;

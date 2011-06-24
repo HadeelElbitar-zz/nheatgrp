@@ -15,6 +15,7 @@ namespace VeditorGP
     class Classifier
     {
         #region Variables and constructors
+        static int Counter = 0;
         bool FTrain1 = true, FTrain2 = true, FTrain3 = true;
         bool BTrain1 = true, BTrain2 = true, BTrain3 = true;
         public Classifier(Window _Window)
@@ -99,7 +100,7 @@ namespace VeditorGP
                         BackGroundProbability[0] + BackGroundProbability[1] + BackGroundProbability[2]);
                     if (MyWindow.ForegroundProbability[i, j] < 0.5)
                         TempClassify[i, j] = 0;
-        
+
                     else
                         TempClassify[i, j] = 255;
                 }
@@ -124,7 +125,8 @@ namespace VeditorGP
                 }
             }
             NewImage.UnlockBits(bmpData);
-            string Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Classifier.bmp";
+            string Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Classifier " + Counter + ".bmp";
+            Counter++;
             NewImage.Save(Pw, ImageFormat.Bmp);
             #endregion
 
@@ -929,9 +931,9 @@ namespace VeditorGP
                 for (int j = 0; j < Height; j++)
                 {
                     if (MyWindow.WindowBinaryMask.byteRedPixels[i, j] == 0)
-                        BackgroundPoints.Add(new Point(j, i));
+                        BackgroundPoints.Add(new Point(i, j));
                     else
-                        ForegroundPoints.Add(new Point(j, i));
+                        ForegroundPoints.Add(new Point(i, j));
                 }
         }
         #endregion
