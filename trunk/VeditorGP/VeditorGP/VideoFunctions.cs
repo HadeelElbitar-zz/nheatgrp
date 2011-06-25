@@ -139,9 +139,10 @@ namespace VeditorGP
             foreach (Window item in InitialFrame.FrameWindows)
             {
                 item.WindowClassifier.Train();
-                item.WindowClassifier.OurGMM();
+                item.ClassificationMask = item.WindowClassifier.OurGMM();
                 item.CalculateModels();
             }
+            GenerateCutOutFrame(InitialFrame);
         }
         #endregion
 
@@ -158,15 +159,17 @@ namespace VeditorGP
             GetNextFrame();
             GetSurfPoints();
             GetOpticalFlow();
-            WarpWindows();
+            WarpWindows();// Update Shape Model.
             ClassifyNewFrame();
+            GenerateCutOutFrame(CurrentFrame);
         }
         void ClassifyNewFrame()
         {
+            int i = -1;
             foreach (Window item in CurrentFrame.FrameWindows)
             {
-                item.WindowClassifier.OurGMM();
-                //item.CalculateModels();
+                item.UpdatedBinaryFrame = item.WindowClassifier.OurGMM(); //P(x)
+                item.CalculateModels(PreviousFrame.FrameWindows[++i]);
             }
         }
         void WarpWindows()
@@ -174,7 +177,7 @@ namespace VeditorGP
             //hena na2es el averging
             CurrentFrame.FrameWindows = new List<Window>();
             foreach (Window item in PreviousFrame.FrameWindows)
-                CurrentFrame.FrameWindows.Add(new Window(new Point(item.Center_X + int.Parse(FlowX.Data[item.Center_Y, item.Center_X, 0].ToString()), item.Center_Y + int.Parse(FlowY.Data[item.Center_Y, item.Center_X, 0].ToString())), CurrentFrame, item));
+                CurrentFrame.FrameWindows.Add(new Window(new Point(item.Center_X + int.Parse(FlowX.Data[item.Center_Y, item.Center_X, 0].ToString()), item.Center_Y + int.Parse(FlowY.Data[item.Center_Y, item.Center_X, 0].ToString())), CurrentFrame, item, FlowX, FlowY));
         }
         void GetSurfPoints()
         {
@@ -204,6 +207,64 @@ namespace VeditorGP
             IplImage TempFrame = (IplImage)cvtools.ConvertPtrToStructure(Frame.Ptr, typeof(IplImage));
             Result = (Bitmap)TempFrame;
             return Result;
+        }
+        #endregion
+
+        #region Generate New Video Frames
+        void GenerateCutOutFrame(Frame OldFrame)
+        {
+            #region Initializations
+            Frame NewFrame = new Frame();
+            NewFrame.width = OldFrame.width;
+            NewFrame.height = OldFrame.height;
+            NewFrame.byteRedPixels = new byte[NewFrame.height, NewFrame.width];
+            NewFrame.byteGreenPixels = new byte[NewFrame.height, NewFrame.width];
+            NewFrame.byteBluePixels = new byte[NewFrame.height, NewFrame.width]; 
+            #endregion
+            #region Loop
+            foreach (Window item in OldFrame.FrameWindows)
+            {
+                int XIndex;
+                int YIndex;
+                for (int i = 0; i < 31; i++)
+                    for (int j = 0; j < 31; j++)
+                        if (item.ClassificationMask[i, j] == 255)
+                        {
+                            
+                            XIndex = (item.Center_X - 15) + i;
+                            YIndex = (item.Center_Y - 15) + j;
+                            if (XIndex < NewFrame.width && YIndex < NewFrame.height)
+                            {
+                                NewFrame.byteRedPixels[YIndex, XIndex] = OldFrame.byteRedPixels[YIndex, XIndex];
+                                NewFrame.byteGreenPixels[YIndex, XIndex] = OldFrame.byteGreenPixels[YIndex, XIndex];
+                                NewFrame.byteBluePixels[YIndex, XIndex] = OldFrame.byteBluePixels[YIndex, XIndex];
+                            }
+                        }
+            } 
+            #endregion
+            #region Test Saving Boundary Image
+            Bitmap NewImage = new Bitmap(NewFrame.width, NewFrame.height);
+            BitmapData bmpData = NewImage.LockBits(new Rectangle(0, 0, NewFrame.width, NewFrame.height), System.Drawing.Imaging.ImageLockMode.ReadWrite, NewImage.PixelFormat);
+            unsafe
+            {
+                byte* p = (byte*)bmpData.Scan0;
+                int space = bmpData.Stride - NewFrame.width * 3;
+                for (int i = 0; i < NewFrame.height; i++)
+                {
+                    for (int j = 0; j < NewFrame.width; j++)
+                    {
+                        p[0] = NewFrame.byteBluePixels[i, j];
+                        p[1] = NewFrame.byteGreenPixels[i, j];
+                        p[2] = NewFrame.byteRedPixels[i, j];
+                        p += 3;
+                    }
+                    p += space;
+                }
+            }
+            NewImage.UnlockBits(bmpData);
+            string Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Cut Out Image.bmp";
+            NewImage.Save(Pw, ImageFormat.Bmp);
+            #endregion
         }
         #endregion
     }
