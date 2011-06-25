@@ -22,7 +22,6 @@ namespace VeditorGP
         public double[,] doubleRedPixels;
         public double[,] doubleGreenPixels;
         public double[,] doubleBluePixels;
-        
         public IplImage IplImageLab, IplImageRGB;
         public Image<Lab, byte> EmguLabImage;
         public Image<Bgr, byte> EmguRgbImage;
