@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing;
+using System.Windows.Forms;
 using openCV;
 using Emgu.CV;
 using Emgu.CV.Structure;
@@ -86,7 +87,6 @@ namespace VeditorGP
                 for (int j = (Center_X - M), k = 0; j < ColoredFrame.width && j <= (Center_X + M); j++, k++)
                 {
                     if (j < 0) j = 0;
-
                     #region Fill Colored Frame
                     WindowFrame.byteRedPixels[c, k] = ColoredFrame.byteRedPixels[i, j];
                     WindowFrame.byteGreenPixels[c, k] = ColoredFrame.byteGreenPixels[i, j];

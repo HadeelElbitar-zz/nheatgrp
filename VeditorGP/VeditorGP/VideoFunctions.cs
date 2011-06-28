@@ -7,7 +7,7 @@ using openCV;
 using System.Drawing;
 using Emgu.CV.Structure;
 using System.Drawing.Imaging;
-
+using System.Windows.Forms;
 namespace VeditorGP
 {
     class VideoFunctions
@@ -99,6 +99,7 @@ namespace VeditorGP
         public void SetInitialWindowsArroundContour()
         {
             InitialFrame.FrameWindows = new List<Window>();
+            InitialFrame.FrameWindows.Add(new Window(WindowWidth, WindowHeight, InitialFrame, InitialSegmentationBinaryFrame, Upper[0], InitialContourFrame));
             InitialFrame.FrameWindows.Add(new Window(WindowWidth, WindowHeight, InitialFrame, InitialSegmentationBinaryFrame, Upper[1], InitialContourFrame));
             int index = 1;// count = Upper.Count;
             double Distance = 0;
@@ -116,9 +117,11 @@ namespace VeditorGP
                     index = i;
                 }
             }
-            index = Lower.Count - 2;
+            index = Lower.Count - 3;
+            InitialFrame.FrameWindows.Add(new Window(WindowWidth, WindowHeight, InitialFrame, InitialSegmentationBinaryFrame, Lower[(index+1)], InitialContourFrame));
+            InitialFrame.FrameWindows.Add(new Window(WindowWidth, WindowHeight, InitialFrame, InitialSegmentationBinaryFrame, Lower[(index + 2)], InitialContourFrame));
             InitialFrame.FrameWindows.Add(new Window(WindowWidth, WindowHeight, InitialFrame, InitialSegmentationBinaryFrame, Lower[index], InitialContourFrame));
-            for (int i = index - 1; i > 0; i--)
+            for (int i = index-1 ; i > 0; i--)
             {
                 Distance = Math.Sqrt(Math.Pow((Lower[i].X - Lower[index].X), 2) + Math.Pow((Lower[i].Y - Lower[index].Y), 2));
                 if (Math.Floor(Distance) > 20)
@@ -224,37 +227,19 @@ namespace VeditorGP
             #region Loop
             foreach (Window item in OldFrame.FrameWindows)
             {
-                //int XIndex;
-                //int YIndex;
-                //for (int i = 0; i < 31; i++)
-                //    for (int j = 0; j < 31; j++)
-                //    {
-                //        //   if (item.ClassificationMask[j, i] == 255)
-                //        //    {
-
-                //        XIndex = (item.Center_X - 15) + i;
-                //        YIndex = (item.Center_Y - 15) + j;
-                //        if (XIndex < NewFrame.width && YIndex < NewFrame.height)
-                //        {
-                //            NewFrame.byteRedPixels[YIndex, XIndex] = item.ClassificationMask[j, i];
-                //            NewFrame.byteGreenPixels[YIndex, XIndex] = item.ClassificationMask[j, i];
-                //            NewFrame.byteBluePixels[YIndex, XIndex] = item.ClassificationMask[j, i];
-                //            //NewFrame.byteRedPixels[YIndex, XIndex] = OldFrame.byteRedPixels[YIndex, XIndex];
-                //            //NewFrame.byteGreenPixels[YIndex, XIndex] = OldFrame.byteGreenPixels[YIndex, XIndex];
-                //            //NewFrame.byteBluePixels[YIndex, XIndex] = OldFrame.byteBluePixels[YIndex, XIndex];
-                //        }
-                //        //  }
-                //    }
                 int M = (item.WindowFrame.width - 1) / 2, N = (item.WindowFrame.height - 1) / 2;
                 for (int i = (item.Center_Y - M), c = 0; i <= (item.Center_Y + M); i++, c++)
                   {
-                  //    if (i < 0) i = 0;
+                     if (i < 0) i = 0;
                       for (int j = (item.Center_X - N), k = 0; j <= (item.Center_X + N); j++, k++)
                       {
-                       //   if (j < 0) j = 0;
-                          NewFrame.byteRedPixels[i, j] = item.ClassificationMask[c, k];
-                          NewFrame.byteGreenPixels[i, j] = item.ClassificationMask[c, k];
-                          NewFrame.byteBluePixels[i, j] = item.ClassificationMask[c, k];
+                          if (j < 0) j = 0;
+                          if ( item.ClassificationMask[c,k] == 255) 
+                          {
+                              NewFrame.byteRedPixels[i, j] = 255;// OldFrame.byteRedPixels[i, j];
+                              NewFrame.byteGreenPixels[i, j] = 255;// OldFrame.byteGreenPixels[i, j];
+                              NewFrame.byteBluePixels[i, j] = 255;// OldFrame.byteBluePixels[i, j];
+                          }
                       }
                   }
             } 
