@@ -126,11 +126,10 @@ namespace VeditorGP
             //Counter++;
             string Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\" + Nw;
             WindowFrame.BmpImage.Save(Pw, ImageFormat.Bmp);
-            Nw = "Window Binary Mask " + Counter.ToString() + ".bmp";
-            Counter++;
+            //Nw = "Window Binary Mask " + Counter.ToString() + ".bmp";
             //Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\" + Nw;
             //WindowBinaryMask.BmpImage.Save(Pw, ImageFormat.Bmp);
-
+            Counter++;
             //Nw = "Window Contour " + Counter.ToString() + ".bmp";
             //Counter++;
             //Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\" + Nw;

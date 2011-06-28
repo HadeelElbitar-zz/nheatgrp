@@ -55,8 +55,6 @@ C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\obj\x86\Debug\ResGen
 C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\obj\x86\Debug\VeditorGP.exe
 C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\obj\x86\Debug\VeditorGP.pdb
 E:\Projects\GP\VeditorGP\VeditorGP\obj\x86\Debug\VeditorGP.AboutBox.resources
-C:\My Files\FCIS\Seniors\GP\Source\VeditorGP\VeditorGP\obj\x86\Debug\VeditorGP.exe
-C:\My Files\FCIS\Seniors\GP\Source\VeditorGP\VeditorGP\obj\x86\Debug\VeditorGP.pdb
 C:\My Files\FCIS\Seniors\GP\Source\VeditorGP\VeditorGP\bin\Debug\VeditorGP.exe
 C:\My Files\FCIS\Seniors\GP\Source\VeditorGP\VeditorGP\bin\Debug\VeditorGP.pdb
 C:\My Files\FCIS\Seniors\GP\Source\VeditorGP\VeditorGP\bin\Debug\Accord.Core.dll
@@ -81,7 +79,7 @@ C:\My Files\FCIS\Seniors\GP\Source\VeditorGP\VeditorGP\obj\x86\Debug\ResolveAsse
 C:\My Files\FCIS\Seniors\GP\Source\VeditorGP\VeditorGP\obj\x86\Debug\VeditorGP.AboutBox.resources
 C:\My Files\FCIS\Seniors\GP\Source\VeditorGP\VeditorGP\obj\x86\Debug\VeditorGP.Properties.Resources.resources
 C:\My Files\FCIS\Seniors\GP\Source\VeditorGP\VeditorGP\obj\x86\Debug\VeditorGP.VeditorMainForm.resources
-C:\My Files\FCIS\Seniors\GP\Source\VeditorGP\VeditorGP\obj\x86\Debug\GenerateResource-ResGen.read.1.tlog
 C:\My Files\FCIS\Seniors\GP\Source\VeditorGP\VeditorGP\obj\x86\Debug\ResGen.read.1.tlog
-C:\My Files\FCIS\Seniors\GP\Source\VeditorGP\VeditorGP\obj\x86\Debug\GenerateResource-ResGen.write.1.tlog
 C:\My Files\FCIS\Seniors\GP\Source\VeditorGP\VeditorGP\obj\x86\Debug\ResGen.write.1.tlog
+C:\My Files\FCIS\Seniors\GP\Source\VeditorGP\VeditorGP\obj\x86\Debug\VeditorGP.exe
+C:\My Files\FCIS\Seniors\GP\Source\VeditorGP\VeditorGP\obj\x86\Debug\VeditorGP.pdb

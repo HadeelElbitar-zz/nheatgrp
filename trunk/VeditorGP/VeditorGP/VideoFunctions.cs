@@ -224,22 +224,39 @@ namespace VeditorGP
             #region Loop
             foreach (Window item in OldFrame.FrameWindows)
             {
-                int XIndex;
-                int YIndex;
-                for (int i = 0; i < 31; i++)
-                    for (int j = 0; j < 31; j++)
-                        if (item.ClassificationMask[i, j] == 255)
-                        {
-                            
-                            XIndex = (item.Center_X - 15) + i;
-                            YIndex = (item.Center_Y - 15) + j;
-                            if (XIndex < NewFrame.width && YIndex < NewFrame.height)
-                            {
-                                NewFrame.byteRedPixels[YIndex, XIndex] = OldFrame.byteRedPixels[YIndex, XIndex];
-                                NewFrame.byteGreenPixels[YIndex, XIndex] = OldFrame.byteGreenPixels[YIndex, XIndex];
-                                NewFrame.byteBluePixels[YIndex, XIndex] = OldFrame.byteBluePixels[YIndex, XIndex];
-                            }
-                        }
+                //int XIndex;
+                //int YIndex;
+                //for (int i = 0; i < 31; i++)
+                //    for (int j = 0; j < 31; j++)
+                //    {
+                //        //   if (item.ClassificationMask[j, i] == 255)
+                //        //    {
+
+                //        XIndex = (item.Center_X - 15) + i;
+                //        YIndex = (item.Center_Y - 15) + j;
+                //        if (XIndex < NewFrame.width && YIndex < NewFrame.height)
+                //        {
+                //            NewFrame.byteRedPixels[YIndex, XIndex] = item.ClassificationMask[j, i];
+                //            NewFrame.byteGreenPixels[YIndex, XIndex] = item.ClassificationMask[j, i];
+                //            NewFrame.byteBluePixels[YIndex, XIndex] = item.ClassificationMask[j, i];
+                //            //NewFrame.byteRedPixels[YIndex, XIndex] = OldFrame.byteRedPixels[YIndex, XIndex];
+                //            //NewFrame.byteGreenPixels[YIndex, XIndex] = OldFrame.byteGreenPixels[YIndex, XIndex];
+                //            //NewFrame.byteBluePixels[YIndex, XIndex] = OldFrame.byteBluePixels[YIndex, XIndex];
+                //        }
+                //        //  }
+                //    }
+                int M = (item.WindowFrame.width - 1) / 2, N = (item.WindowFrame.height - 1) / 2;
+                for (int i = (item.Center_Y - M), c = 0; i <= (item.Center_Y + M); i++, c++)
+                  {
+                  //    if (i < 0) i = 0;
+                      for (int j = (item.Center_X - N), k = 0; j <= (item.Center_X + N); j++, k++)
+                      {
+                       //   if (j < 0) j = 0;
+                          NewFrame.byteRedPixels[i, j] = item.ClassificationMask[c, k];
+                          NewFrame.byteGreenPixels[i, j] = item.ClassificationMask[c, k];
+                          NewFrame.byteBluePixels[i, j] = item.ClassificationMask[c, k];
+                      }
+                  }
             } 
             #endregion
             #region Test Saving Boundary Image

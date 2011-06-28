@@ -767,7 +767,7 @@
             this.TestVideoTabPage.Padding = new System.Windows.Forms.Padding(3);
             this.TestVideoTabPage.Size = new System.Drawing.Size(958, 581);
             this.TestVideoTabPage.TabIndex = 2;
-            this.TestVideoTabPage.Text = "Test Video";
+            this.TestVideoTabPage.Text = "Output Video";
             this.TestVideoTabPage.UseVisualStyleBackColor = true;
             // 
             // MovieGroupBox
