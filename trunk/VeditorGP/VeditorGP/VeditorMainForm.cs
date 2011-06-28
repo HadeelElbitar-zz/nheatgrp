@@ -103,6 +103,7 @@ namespace VeditorGP
                 ContourFunctionsObject = new ContourFunctions();
                 Bitmap Temp = (Bitmap)FrameBox.Image;
                 VideoFunctionsObject.InitialSegmentationBinaryFrame = ContourFunctionsObject.GetBlackAndWhiteContour(ContourPositions.ToArray(), Temp);
+                FBox.Image = VideoFunctionsObject.InitialSegmentationBinaryFrame.BmpImage;
                 VideoFunctionsObject.ConnectedContour = ContourFunctionsObject.GetConnectedContour(VideoFunctionsObject.InitialSegmentationBinaryFrame, VideoFunctionsObject.InitialContourFrame = new Frame());
                 ContourFunctionsObject.GetUpperAndLowerContour(ref VideoFunctionsObject.Upper, ref VideoFunctionsObject.Lower);
                 VideoFunctionsObject.SetInitialWindowsArroundContour();
