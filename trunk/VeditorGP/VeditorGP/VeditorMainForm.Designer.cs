@@ -802,6 +802,7 @@
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.menuStrip);
             this.Controls.Add(this.SegmentationToolsGroupBox);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "VeditorMainForm";
             this.Text = "Veditor";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
