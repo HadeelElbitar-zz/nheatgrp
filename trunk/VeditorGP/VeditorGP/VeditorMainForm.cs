@@ -97,23 +97,23 @@ namespace VeditorGP
         }
         void CutObject()
         {
-            //try
-            //{
-            FrameState = 0;
-            ContourFunctionsObject = new ContourFunctions();
-            Bitmap Temp = (Bitmap)FrameBox.Image;
-            VideoFunctionsObject.InitialSegmentationBinaryFrame = ContourFunctionsObject.GetBlackAndWhiteContour(ContourPositions.ToArray(), Temp);
-            VideoFunctionsObject.ConnectedContour = ContourFunctionsObject.GetConnectedContour(VideoFunctionsObject.InitialSegmentationBinaryFrame, VideoFunctionsObject.InitialContourFrame = new Frame());
-            ContourFunctionsObject.GetUpperAndLowerContour(ref VideoFunctionsObject.Upper, ref VideoFunctionsObject.Lower);
-            VideoFunctionsObject.SetInitialWindowsArroundContour();
-            VideoFunctionsObject.TrainClassifiers();
-            VideoFunctionsObject.PropagateFrame();
-            MessageBox.Show("Training Finished!");
-            //}
-            //catch
-            //{
-            //    MessageBox.Show("Please Import a video first!");
-            //}
+            try
+            {
+                FrameState = 0;
+                ContourFunctionsObject = new ContourFunctions();
+                Bitmap Temp = (Bitmap)FrameBox.Image;
+                VideoFunctionsObject.InitialSegmentationBinaryFrame = ContourFunctionsObject.GetBlackAndWhiteContour(ContourPositions.ToArray(), Temp);
+                VideoFunctionsObject.ConnectedContour = ContourFunctionsObject.GetConnectedContour(VideoFunctionsObject.InitialSegmentationBinaryFrame, VideoFunctionsObject.InitialContourFrame = new Frame());
+                ContourFunctionsObject.GetUpperAndLowerContour(ref VideoFunctionsObject.Upper, ref VideoFunctionsObject.Lower);
+                VideoFunctionsObject.SetInitialWindowsArroundContour();
+                VideoFunctionsObject.TrainClassifiers();
+                // VideoFunctionsObject.PropagateFrame();
+                // MessageBox.Show("Training Finished!");
+            }
+            catch
+            {
+                //    messagebox.show("please import a video first!");
+            }
         }
         #endregion
 
@@ -210,7 +210,7 @@ namespace VeditorGP
                 MyTimer.Elapsed += new System.Timers.ElapsedEventHandler(MyTimer_Elapsed);
                 MyTimer.Interval = VideoFunctionsObject.FramePerSecond;
                 MyTimer.Enabled = true;
-                PlayMood = true; 
+                PlayMood = true;
             }
         }
 
