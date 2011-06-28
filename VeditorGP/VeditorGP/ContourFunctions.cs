@@ -36,9 +36,9 @@ namespace VeditorGP
             frame.ThresholdBinary();
 
             #region Test Saving Binary Image
-            //Bitmap Test = (Bitmap)image;
-            //string Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Binary.bmp";
-            //Test.Save(Pw, ImageFormat.Bmp);
+            Bitmap Test = (Bitmap)image;
+            string Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Binary.bmp";
+            Test.Save(Pw, ImageFormat.Bmp);
             #endregion
 
             return frame;

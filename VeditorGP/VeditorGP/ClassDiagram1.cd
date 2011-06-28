@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="VeditorGP.Classifier">
+    <Position X="22.75" Y="0.5" Width="2.5" />
+    <Members>
+      <Field Name="BackgroundEMCovariance2" Hidden="true" />
+      <Field Name="BackgroundEMCovariance3" Hidden="true" />
+      <Field Name="BackgroundEMmean2" Hidden="true" />
+      <Field Name="BackgroundEMmean3" Hidden="true" />
+      <Field Name="BackgroundKmean2" Hidden="true" />
+      <Field Name="BackgroundKmean3" Hidden="true" />
+      <Field Name="BackgroundKmeanCovarinace2" Hidden="true" />
+      <Field Name="BackgroundKmeanCovarinace3" Hidden="true" />
+      <Field Name="BTrain1" Hidden="true" />
+      <Field Name="BTrain2" Hidden="true" />
+      <Field Name="ForegroundEMCovariance2" Hidden="true" />
+      <Field Name="ForegroundEMCovariance3" Hidden="true" />
+      <Field Name="ForegroundEMmean2" Hidden="true" />
+      <Field Name="ForegroundEMmean3" Hidden="true" />
+      <Field Name="ForegroundKmean2" Hidden="true" />
+      <Field Name="ForegroundKmean3" Hidden="true" />
+      <Field Name="ForegroundKmeanCovarinace2" Hidden="true" />
+      <Field Name="ForegroundKmeanCovarinace3" Hidden="true" />
+      <Field Name="FTrain2" Hidden="true" />
+      <Field Name="FTrain3" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>MAUoDgBAgAIAOGBAWwwAACQgARAK+wBJAAAAEFkEIAA=</HashCode>
+      <FileName>Classifier.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VeditorGP.ContourFunctions" Collapsed="true">
+    <Position X="12" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAABAAAAAAAAIAAAQAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>ContourFunctions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VeditorGP.Frame" Collapsed="true">
+    <Position X="7.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAMBwAJQEAQAxAAAAAAAAQAAAAAAIAEAAAAAAAA=</HashCode>
+      <FileName>Frame.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VeditorGP.GrahamHull" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAQBAABAAAAAAQAAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>GrahamHull.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VeditorGP.OurOpticalFlow" Collapsed="true">
+    <Position X="5.5" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAABAEAAAAAA=</HashCode>
+      <FileName>OurOpticalFlow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VeditorGP.SURF" Collapsed="true">
+    <Position X="21" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SURF.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VeditorGP.Vector2F" Collapsed="true">
+    <Position X="9.75" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAABAgAcAMAAAAAAAAAAAACAAAAAAEAYBA=</HashCode>
+      <FileName>Vector2.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VeditorGP.VeditorMainForm">
+    <Position X="14.5" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>oJCgRv0hhCEIAACcyoCyyYdyLEFmoMgBCmwAZjtQUEc=</HashCode>
+      <FileName>VeditorMainForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VeditorGP.VideoFunctions" Collapsed="true">
+    <Position X="2.75" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>BAOAoACAABACACAQAAQAoAYAAwAEQQAgBAIFGAAAQBg=</HashCode>
+      <FileName>VideoFunctions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VeditorGP.Window" Collapsed="true">
+    <Position X="17.5" Y="0.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AACBIAAAAUAAAAABBAQAAAAAARCACABEIAAcCAAAAdA=</HashCode>
+      <FileName>Window.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
