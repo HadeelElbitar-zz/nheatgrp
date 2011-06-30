@@ -24,7 +24,7 @@ namespace VeditorGP
                 if (determinate(minX, points[i], maxX) >= 0)
                     Upper.Add(points[i]);
             for (int i = points.Count - 1; i >= 0; i--)
-                if (determinate(minX, points[i], maxX) <= 0)
+                if (determinate(minX, points[i], maxX) < 0)
                     Lower.Add(points[i]);
             convexHull.AddRange(Upper);
             convexHull.AddRange(Lower);

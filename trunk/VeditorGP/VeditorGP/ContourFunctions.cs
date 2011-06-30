@@ -36,9 +36,9 @@ namespace VeditorGP
             frame.ThresholdBinary();
 
             #region Test Saving Binary Image
-            Bitmap Test = (Bitmap)image;
-            string Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Binary.bmp";
-            Test.Save(Pw, ImageFormat.Bmp);
+            //Bitmap Test = (Bitmap)image;
+            //string Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Binary.bmp";
+            //Test.Save(Pw, ImageFormat.Bmp);
             #endregion
 
             return frame;
@@ -79,11 +79,44 @@ namespace VeditorGP
 
             #region Get Points from Image
             int length = NewImage.width, length2 = NewImage.height;
-
             for (int i = 0; i < length2; i++)
                 for (int j = 0; j < length; j++)
                     if (NewImage.byteBluePixels[i, j] != 0)
                         CountorVector.Add(new Vector2F((float)j, (float)i));
+            #endregion
+
+            #region Test Saving Contour Vector Points
+            //Bitmap ContourImage = new Bitmap(NewImage.width, NewImage.height);
+            //byte[,] byteRedPixels = new byte[NewImage.height, NewImage.width];
+            //byte[,] byteGreenPixels = new byte[NewImage.height, NewImage.width];
+            //byte[,] byteBluePixels = new byte[NewImage.height, NewImage.width];
+            //for (int i = 0; i < CountorVector.Count; i++)
+            //{
+            //   // ContourImage.SetPixel((int)CountorVector[i].X, (int)CountorVector[i].Y, Color.White);
+            //    byteRedPixels[(int)CountorVector[i].X, (int)CountorVector[i].Y] = 255;
+            //    byteGreenPixels[(int)CountorVector[i].X, (int)CountorVector[i].Y] = 255;
+            //    byteBluePixels[(int)CountorVector[i].X, (int)CountorVector[i].Y] = 255;
+            //}
+            //BitmapData bmpData = ContourImage.LockBits(new Rectangle(0, 0, ContourImage.Width, ContourImage.Height), System.Drawing.Imaging.ImageLockMode.ReadWrite, ContourImage.PixelFormat);
+            //unsafe
+            //{
+            //    byte* p = (byte*)bmpData.Scan0;
+            //    int space = bmpData.Stride - NewImage.width * 3;
+            //    for (int i = 0; i < ContourImage.Height; i++)
+            //    {
+            //        for (int j = 0; j < ContourImage.Width; j++)
+            //        {
+            //            p[0] = byteBluePixels[i, j];
+            //            p[1] = byteGreenPixels[i, j];
+            //            p[2] = byteRedPixels[i, j];
+            //            p += 3;
+            //        }
+            //        p += space;
+            //    }
+            //}
+            //ContourImage.UnlockBits(bmpData);
+            //string Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\contourVector.bmp";
+            //ContourImage.Save(Pw, ImageFormat.Bmp);
             #endregion
 
             #region Sort Points Clock Wise
@@ -98,9 +131,21 @@ namespace VeditorGP
             //        Contour.Add(new Point((int)CountorVector[i].X, (int)CountorVector[i].Y));
             #endregion
 
+            #region Test Saving Sorted Contour Vector Points
+            //Bitmap ContourImage = new Bitmap(NewImage.width, NewImage.height);
+            //Bitmap ContourImageLower = new Bitmap(NewImage.width, NewImage.height);
+            //for (int i = 0; i < Upper.Count; i++)
+            //    ContourImage.SetPixel((int)Upper[i].X, (int)Upper[i].Y, Color.White);
+            //for (int i = 0; i < Lower.Count; i++)
+            //    ContourImageLower.SetPixel((int)Lower[i].X, (int)Lower[i].Y, Color.White);
+            //string Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Sorted Contour Vector Upper.bmp";
+            //ContourImage.Save(Pw, ImageFormat.Bmp);
+            //Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Sorted Contour Vector Lower.bmp";
+            //ContourImageLower.Save(Pw, ImageFormat.Bmp);
+            #endregion
             #region Test Saving Boundary Image
             //Bitmap Test = NewImage.BmpImage;
-            //string Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Boundary.bmp";
+            //Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Boundary.bmp";
             //Test.Save(Pw, ImageFormat.Bmp);
             #endregion
             return Contour;

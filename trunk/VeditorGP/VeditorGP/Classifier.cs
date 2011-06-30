@@ -22,7 +22,7 @@ namespace VeditorGP
         {
             MyWindow = _Window;
         }
-        Window MyWindow;
+        public Window MyWindow;
         public List<Point> ForegroundPoints, BackgroundPoints;
         double[] FWeights, BWeights;
         double[] ForegroundKmean1, ForegroundKmean2, ForegroundKmean3, BackgroundKmean1, BackgroundKmean2, BackgroundKmean3;
@@ -94,34 +94,15 @@ namespace VeditorGP
                         TempClassify[i, j] = 255;
                 }
             }
-            #region Test Saving Boundary Image
-            Bitmap NewImage = new Bitmap(width, height);
-            BitmapData bmpData = NewImage.LockBits(new Rectangle(0, 0, width, height), System.Drawing.Imaging.ImageLockMode.ReadWrite, NewImage.PixelFormat);
-            unsafe
-            {
-                byte* p = (byte*)bmpData.Scan0;
-                int space = bmpData.Stride - width * 3;
-                for (int i = 0; i < height; i++)
-                {
-                    for (int j = 0; j < width; j++)
-                    {
-                        p[0] = TempClassify[i, j];
-                        p[1] = TempClassify[i, j];
-                        p[2] = TempClassify[i, j];
-                        p += 3;
-                    }
-                    p += space;
-                }
-            }
-            NewImage.UnlockBits(bmpData);
-            string Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Classifier " + Counter + ".bmp";
-            Counter++;
-            NewImage.Save(Pw, ImageFormat.Bmp);
+            #region Test Saving Classified Image
+            //Bitmap NewImage = new Bitmap(width, height);
+            //for (int i = 0; i < height; i++)
+            //    for (int j = 0; j < width; j++)
+            //        NewImage.SetPixel(j, i, Color.FromArgb(TempClassify[i, j], TempClassify[i, j], TempClassify[i, j]));
+            //string Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Classifier " + Counter + ".bmp";
+            //Counter++;
+            //NewImage.Save(Pw, ImageFormat.Bmp);
             #endregion
-
-            #region Fc
-            #endregion
-
             return TempClassify;
         }
         #endregion
