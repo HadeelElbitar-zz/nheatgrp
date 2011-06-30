@@ -20,7 +20,7 @@ namespace VeditorGP
         public double ColorConfidence;
         public double[,] ForegroundProbability, WeightingFunction, ShapeConfidence;
         public List<Point> WindowContourPoints;
-        static int Counter = 0;
+        static int Counter = 0, IntegrationCounter = 0;
         double SigmaS;
         public byte[,] UpdatedBinaryFrame, ClassificationMask;
         double[,] IntegratedForegroundProbability,AveragedForegroundProbability;
@@ -122,14 +122,14 @@ namespace VeditorGP
             WindowContour.InitializeWindowFrame();
 
             #region Test Saving Window Frames
-            string Nw = "Window Frame " + Counter.ToString() + ".bmp";
-            //Counter++;
-            string Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\" + Nw;
-            WindowFrame.BmpImage.Save(Pw, ImageFormat.Bmp);
+            //string Nw = "Window Frame " + Counter.ToString() + ".bmp";
+            ////Counter++;
+            //string Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\" + Nw;
+            //WindowFrame.BmpImage.Save(Pw, ImageFormat.Bmp);
             //Nw = "Window Binary Mask " + Counter.ToString() + ".bmp";
             //Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\" + Nw;
             //WindowBinaryMask.BmpImage.Save(Pw, ImageFormat.Bmp);
-            Counter++;
+            //Counter++;
             //Nw = "Window Contour " + Counter.ToString() + ".bmp";
             //Counter++;
             //Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\" + Nw;
@@ -149,6 +149,7 @@ namespace VeditorGP
             WeightingFunction = new double[height, width];
             ShapeConfidence = new double[height, width];
             #endregion
+            CalculateWeightFunction(height, width, SigmaCSquare);
             CalculateColorConfidence(height, width);
             CalculateSigmaS(height, width);
             CalculateInitialShapeConfidence(height, width, SigmaCSquare);
@@ -157,7 +158,10 @@ namespace VeditorGP
         public void CalculateModels(Window HistoryWindow)//Calculate models for other frames
         {
             #region Initializations
+            double SigmaCSquare = 202500.0;
             int width = WindowFrame.width, height = WindowFrame.height;
+            WeightingFunction = new double[height, width];
+            ShapeConfidence = new double[height, width];
             #endregion
 
             #region Count foreground points in History and Updated Franes
@@ -175,7 +179,12 @@ namespace VeditorGP
 
             #region Use history or updated frame
             if ((UpdatedForegroundPoints - HistoryForegroundPoints) <= 80)//if PcU has more foreground use McH, otherwise use McU
+            {
+                CalculateWeightFunction(height, width, SigmaCSquare);
                 CalculateColorConfidence(height, width);// If Updated Color Model is used, update the color confidence
+                CalculateSigmaS(height, width);
+                CalculateShapeConfidence(height, width, SigmaCSquare);
+            }
             else //Use McH
             {
                 ColorConfidence = HistoryWindow.ColorConfidence;
@@ -193,6 +202,24 @@ namespace VeditorGP
         #endregion
 
         #region Shape and Color Confidence Calculations
+        void CalculateWeightFunction(int height, int width, double SigmaCSquare)
+        {
+            for (int i = 0; i < height; i++)
+            {
+                for (int j = 0; j < width; j++)
+                {
+                    double Distance = double.MaxValue;
+                    foreach (Point item in WindowContourPoints)
+                    {
+                        double Temp = Math.Sqrt(Math.Pow((item.X - i), 2) + Math.Pow((item.Y - j), 2));
+                        if (Temp < Distance)
+                            Distance = Temp;
+                    }
+                    double NegativeDistanceSquare = (-1 * Math.Pow(Distance, 2));
+                    WeightingFunction[i, j] = Math.Exp(NegativeDistanceSquare / SigmaCSquare);
+                }
+            }
+        }
         void CalculateInitialShapeConfidence(int height, int width, double SigmaCSquare)
         {
             for (int i = 0; i < height; i++)
@@ -205,11 +232,10 @@ namespace VeditorGP
                         double Temp = Math.Sqrt(Math.Pow((item.X - i), 2) + Math.Pow((item.Y - j), 2));
                         if (Temp < Distance)
                             Distance = Temp;
-
                     }
                     double NegativeDistanceSquare = (-1 * Math.Pow(Distance, 2));
                     ShapeConfidence[i, j] = 1 - Math.Exp(NegativeDistanceSquare / Math.Pow(SigmaS, 2));
-                    WeightingFunction[i, j] = Math.Exp(NegativeDistanceSquare / SigmaCSquare);
+                    //WeightingFunction[i, j] = Math.Exp(NegativeDistanceSquare / SigmaCSquare);
                 }
             }
         }
@@ -231,7 +257,6 @@ namespace VeditorGP
                     ShapeConfidence[i, j] = 1 - Math.Exp(NegativeDistanceSquare / (Math.Pow(SigmaS, 2)));
                     if (ShapeConfidence[i, j] > FGThreshold) WindowClassifier.ForegroundPoints.Add(new Point(i, j));
                     else if (ShapeConfidence[i, j] < BGThreshold) WindowClassifier.BackgroundPoints.Add(new Point(i, j));
-                    WeightingFunction[i, j] = Math.Exp(NegativeDistanceSquare / SigmaCSquare);
                 }
             }
         }
@@ -268,6 +293,7 @@ namespace VeditorGP
         public Window(Point NewCenter, Frame NewFrame, Window HistoryObject, Image<Gray, Single> FlowX, Image<Gray, Single> FlowY)
         {
             #region Initialization
+            WindowContourPoints = new List<Point>();
             int XIndex, YIndex;
             Center_X = NewCenter.X;
             Center_Y = NewCenter.Y;
@@ -277,6 +303,19 @@ namespace VeditorGP
             WindowFrame.width = 30;
             if ((30 % 2) == 0) WindowFrame.width++;
             if ((30 % 2) == 0) WindowFrame.height++;
+
+            WindowBinaryMask = new Frame();
+            WindowBinaryMask.height = WindowFrame.height;
+            WindowBinaryMask.width = WindowFrame.width;
+            if (WindowFrame.width % 2 == 0) WindowBinaryMask.width++;
+            if (WindowFrame.height % 2 == 0) WindowBinaryMask.height++;
+
+            WindowContour = new Frame();
+            WindowContour.height = WindowFrame.height;
+            WindowContour.width = WindowFrame.width;
+            if (WindowFrame.width % 2 == 0) WindowContour.width++;
+            if (WindowFrame.height % 2 == 0) WindowContour.height++;
+
             WindowSize = WindowFrame.width * WindowFrame.height;
 
             WindowFrame.byteRedPixels = new byte[WindowFrame.height, WindowFrame.width];
@@ -308,8 +347,8 @@ namespace VeditorGP
             for (int i = 0; i < 31; i++)
                 for (int j = 0; j < 31; j++)
                 {
-                    XIndex = i + int.Parse(FlowX.Data[i, j, 0].ToString());
-                    YIndex = j + int.Parse(FlowY.Data[i, j, 0].ToString());
+                    XIndex = i + (int)(float.Parse(FlowX.Data[i, j, 0].ToString()));
+                    YIndex = j + (int)(float.Parse(FlowY.Data[i, j, 0].ToString()));
                     #region Fill Binary Mask
                     WindowBinaryMask.byteRedPixels[XIndex, YIndex] = HistoryObject.WindowBinaryMask.byteRedPixels[i, j];
                     WindowBinaryMask.byteGreenPixels[XIndex, YIndex] = HistoryObject.WindowBinaryMask.byteGreenPixels[i, j];
@@ -356,10 +395,10 @@ namespace VeditorGP
             #endregion
 
             #region Test Saving Window Frames
-            string Nw = "Window Frame " + Counter.ToString() + ".bmp";
-            Counter++;
-            string Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\" + Nw;
-            WindowFrame.BmpImage.Save(Pw, ImageFormat.Bmp);
+            //string Nw = "Window Frame " + Counter.ToString() + ".bmp";
+            //Counter++;
+            //string Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\" + Nw;
+            //WindowFrame.BmpImage.Save(Pw, ImageFormat.Bmp);
             #endregion
         }
         #endregion
@@ -372,6 +411,7 @@ namespace VeditorGP
             //Window Foreground Probability =  fs(x) * L t+1(x) + (1- fs(x)* Pc(x))
             //The point may exist in overlapped windows
             int width = WindowFrame.width, height = WindowFrame.height;
+            byte[,] TempClassify = new byte[height, width];
             IntegratedForegroundProbability = new double[height, width];
             for (int i = 0; i < height; i++)
                 for (int j = 0; j < width; j++)
@@ -380,7 +420,21 @@ namespace VeditorGP
                     if (WindowBinaryMask.byteRedPixels[i, j] == 255 || WindowBinaryMask.byteBluePixels[i, j] == 255 || WindowBinaryMask.byteGreenPixels[i, j] == 255)
                         SegmentationLabel = 1;
                     IntegratedForegroundProbability[i, j] = (ShapeConfidence[i, j] * SegmentationLabel) + ((1 - ShapeConfidence[i, j]) * ForegroundProbability[i, j]);
+                    if (IntegratedForegroundProbability[i, j] < 0.5)
+                        TempClassify[i, j] = 0;
+                    else
+                        TempClassify[i, j] = 255;
                 }
+            ClassificationMask = TempClassify;
+            #region Test Saving Classified Image
+            Bitmap NewImage = new Bitmap(width, height);
+            for (int i = 0; i < height; i++)
+                for (int j = 0; j < width; j++)
+                    NewImage.SetPixel(j, i, Color.FromArgb(TempClassify[i, j], TempClassify[i, j], TempClassify[i, j]));
+            string Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Integrated Classifier" + IntegrationCounter + ".bmp";
+            IntegrationCounter++;
+            NewImage.Save(Pw, ImageFormat.Bmp);
+            #endregion
         } 
         #endregion
     }

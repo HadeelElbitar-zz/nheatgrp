@@ -97,8 +97,8 @@ namespace VeditorGP
         }
         void CutObject()
         {
-            try
-            {
+            //try
+            //{
                 FrameState = 0;
                 ContourFunctionsObject = new ContourFunctions();
                 Bitmap Temp = (Bitmap)FrameBox.Image;
@@ -108,13 +108,13 @@ namespace VeditorGP
                 ContourFunctionsObject.GetUpperAndLowerContour(ref VideoFunctionsObject.Upper, ref VideoFunctionsObject.Lower);
                 VideoFunctionsObject.SetInitialWindowsArroundContour();
                 VideoFunctionsObject.TrainClassifiers();
-                // VideoFunctionsObject.PropagateFrame();
+                VideoFunctionsObject.PropagateFrame();
                 // MessageBox.Show("Training Finished!");
-            }
-            catch
-            {
-                //    messagebox.show("please import a video first!");
-            }
+            //}
+            //catch
+            //{
+            //    //    messagebox.show("please import a video first!");
+            //}
         }
         #endregion
 

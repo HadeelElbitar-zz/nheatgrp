@@ -58,24 +58,9 @@ namespace VeditorGP
         public void InitializeWindowFrame()
         {
             BmpImage = new Bitmap(width, height);
-            BitmapData bmpData = BmpImage.LockBits(new Rectangle(0, 0, width, height), System.Drawing.Imaging.ImageLockMode.ReadWrite, BmpImage.PixelFormat);
-            unsafe
-            {
-                byte* p = (byte*)bmpData.Scan0;
-                int space = bmpData.Stride - width * 3;
-                for (int i = 0; i < height; i++)
-                {
-                    for (int j = 0; j < width; j++)
-                    {
-                        p[0] = byteBluePixels[i, j];
-                        p[1] = byteGreenPixels[i, j];
-                        p[2] = byteRedPixels[i, j];
-                        p += 3;
-                    }
-                    p += space;
-                }
-            }
-            BmpImage.UnlockBits(bmpData);
+            for (int i = 0; i < height; i++)
+                for (int j = 0; j < width; j++)
+                    BmpImage.SetPixel(j, i, Color.FromArgb(byteRedPixels[i, j], byteGreenPixels[i, j], byteBluePixels[i, j]));
             EmguRgbImage = new Image<Bgr, byte>(BmpImage);
             EmguLabImage = EmguRgbImage.Convert<Lab, byte>();
             IplImageRGB = (IplImage)cvtools.ConvertPtrToStructure(EmguRgbImage.Ptr, typeof(IplImage));
