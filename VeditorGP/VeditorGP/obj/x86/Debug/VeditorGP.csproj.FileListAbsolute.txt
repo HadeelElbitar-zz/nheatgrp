@@ -57,19 +57,6 @@ C:\My Files\FCIS\Seniors\GP\Source Code\VeditorGP\VeditorGP\obj\x86\Debug\Vedito
 E:\Projects\GP\VeditorGP\VeditorGP\obj\x86\Debug\VeditorGP.AboutBox.resources
 C:\My Files\FCIS\Seniors\GP\Source\VeditorGP\VeditorGP\bin\Debug\Veditor.exe
 C:\My Files\FCIS\Seniors\GP\Source\VeditorGP\VeditorGP\bin\Debug\Veditor.pdb
-C:\My Files\FCIS\Seniors\GP\Source\VeditorGP\VeditorGP\bin\Debug\Accord.Core.dll
-C:\My Files\FCIS\Seniors\GP\Source\VeditorGP\VeditorGP\bin\Debug\Accord.MachineLearning.dll
-C:\My Files\FCIS\Seniors\GP\Source\VeditorGP\VeditorGP\bin\Debug\Accord.Math.dll
-C:\My Files\FCIS\Seniors\GP\Source\VeditorGP\VeditorGP\bin\Debug\Accord.Statistics.dll
-C:\My Files\FCIS\Seniors\GP\Source\VeditorGP\VeditorGP\bin\Debug\AForge.Math.dll
-C:\My Files\FCIS\Seniors\GP\Source\VeditorGP\VeditorGP\bin\Debug\Emgu.CV.DebuggerVisualizers.dll
-C:\My Files\FCIS\Seniors\GP\Source\VeditorGP\VeditorGP\bin\Debug\Emgu.CV.dll
-C:\My Files\FCIS\Seniors\GP\Source\VeditorGP\VeditorGP\bin\Debug\Emgu.CV.ML.dll
-C:\My Files\FCIS\Seniors\GP\Source\VeditorGP\VeditorGP\bin\Debug\Emgu.CV.UI.dll
-C:\My Files\FCIS\Seniors\GP\Source\VeditorGP\VeditorGP\bin\Debug\Emgu.Util.dll
-C:\My Files\FCIS\Seniors\GP\Source\VeditorGP\VeditorGP\bin\Debug\openCV.dll
-C:\My Files\FCIS\Seniors\GP\Source\VeditorGP\VeditorGP\bin\Debug\ZedGraph.dll
-C:\My Files\FCIS\Seniors\GP\Source\VeditorGP\VeditorGP\bin\Debug\zlib.net.dll
 C:\My Files\FCIS\Seniors\GP\Source\VeditorGP\VeditorGP\bin\Debug\Emgu.CV.xml
 C:\My Files\FCIS\Seniors\GP\Source\VeditorGP\VeditorGP\bin\Debug\Emgu.CV.ML.xml
 C:\My Files\FCIS\Seniors\GP\Source\VeditorGP\VeditorGP\bin\Debug\Emgu.CV.UI.xml
