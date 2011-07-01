@@ -1,0 +1,15 @@
+C:\Users\Noran\Documents\Educational\FCIS\TA\GPs\ReVideoShop\Coding\frames to video code [roject\aviFileWrapperDemo_src\AviFile\bin\Debug\AviFile.dll
+C:\Users\Noran\Documents\Educational\FCIS\TA\GPs\ReVideoShop\Coding\frames to video code [roject\aviFileWrapperDemo_src\AviFile\bin\Debug\AviFile.pdb
+C:\Users\Noran\Documents\Educational\FCIS\TA\GPs\ReVideoShop\Coding\frames to video code [roject\aviFileWrapperDemo_src\AviFile\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Noran\Documents\Educational\FCIS\TA\GPs\ReVideoShop\Coding\frames to video code [roject\aviFileWrapperDemo_src\AviFile\obj\Debug\AviFile.dll
+C:\Users\Noran\Documents\Educational\FCIS\TA\GPs\ReVideoShop\Coding\frames to video code [roject\aviFileWrapperDemo_src\AviFile\obj\Debug\AviFile.pdb
+C:\Users\Noran\Documents\Visual Studio 2008\Projects\videoFromFrames\AviFile\bin\Debug\AviFile.dll
+C:\Users\Noran\Documents\Visual Studio 2008\Projects\videoFromFrames\AviFile\bin\Debug\AviFile.pdb
+C:\Users\Noran\Documents\Visual Studio 2008\Projects\videoFromFrames\AviFile\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Noran\Documents\Visual Studio 2008\Projects\videoFromFrames\AviFile\obj\Debug\AviFile.dll
+C:\Users\Noran\Documents\Visual Studio 2008\Projects\videoFromFrames\AviFile\obj\Debug\AviFile.pdb
+C:\My Files\FCIS\Seniors\GP\Source\AviFile\bin\Debug\AviFile.dll
+C:\My Files\FCIS\Seniors\GP\Source\AviFile\bin\Debug\AviFile.pdb
+C:\My Files\FCIS\Seniors\GP\Source\AviFile\obj\Debug\ResolveAssemblyReference.cache
+C:\My Files\FCIS\Seniors\GP\Source\AviFile\obj\Debug\AviFile.dll
+C:\My Files\FCIS\Seniors\GP\Source\AviFile\obj\Debug\AviFile.pdb

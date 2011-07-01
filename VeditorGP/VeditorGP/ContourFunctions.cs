@@ -36,9 +36,9 @@ namespace VeditorGP
             frame.ThresholdBinary();
 
             #region Test Saving Binary Image
-            //Bitmap Test = (Bitmap)image;
-            //string Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Binary.bmp";
-            //Test.Save(Pw, ImageFormat.Bmp);
+            Bitmap Test = (Bitmap)image;
+            string Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Initial Frame Binary Image.bmp";
+            Test.Save(Pw, ImageFormat.Bmp);
             #endregion
 
             return frame;
@@ -132,21 +132,21 @@ namespace VeditorGP
             #endregion
 
             #region Test Saving Sorted Contour Vector Points
-            //Bitmap ContourImage = new Bitmap(NewImage.width, NewImage.height);
-            //Bitmap ContourImageLower = new Bitmap(NewImage.width, NewImage.height);
-            //for (int i = 0; i < Upper.Count; i++)
-            //    ContourImage.SetPixel((int)Upper[i].X, (int)Upper[i].Y, Color.White);
-            //for (int i = 0; i < Lower.Count; i++)
-            //    ContourImageLower.SetPixel((int)Lower[i].X, (int)Lower[i].Y, Color.White);
-            //string Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Sorted Contour Vector Upper.bmp";
-            //ContourImage.Save(Pw, ImageFormat.Bmp);
-            //Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Sorted Contour Vector Lower.bmp";
-            //ContourImageLower.Save(Pw, ImageFormat.Bmp);
+            Bitmap ContourImage = new Bitmap(NewImage.width, NewImage.height);
+            Bitmap ContourImageLower = new Bitmap(NewImage.width, NewImage.height);
+            for (int i = 0; i < Upper.Count; i++)
+                ContourImage.SetPixel((int)Upper[i].X, (int)Upper[i].Y, Color.White);
+            for (int i = 0; i < Lower.Count; i++)
+                ContourImageLower.SetPixel((int)Lower[i].X, (int)Lower[i].Y, Color.White);
+            string Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Sorted Contour Upper.bmp";
+            ContourImage.Save(Pw, ImageFormat.Bmp);
+            Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Sorted Contour Lower.bmp";
+            ContourImageLower.Save(Pw, ImageFormat.Bmp);
             #endregion
             #region Test Saving Boundary Image
-            //Bitmap Test = NewImage.BmpImage;
-            //Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Boundary.bmp";
-            //Test.Save(Pw, ImageFormat.Bmp);
+            Bitmap Test = NewImage.BmpImage;
+            Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Initial Contour Image.bmp";
+            Test.Save(Pw, ImageFormat.Bmp);
             #endregion
             return Contour;
         }
