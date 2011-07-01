@@ -14,7 +14,8 @@ namespace VeditorGP
     class Window
     {
         #region Variables
-        public int Center_X, Center_Y, WindowSize;
+        public float Center_X, Center_Y;
+        public int WindowSize;
         public Frame WindowFrame, WindowBinaryMask, WindowContour;
         public Classifier WindowClassifier;
         public double ColorConfidence;
@@ -23,7 +24,7 @@ namespace VeditorGP
         static int Counter = 0, IntegrationCounter = 0;
         double SigmaS;
         public byte[,] UpdatedBinaryFrame, ClassificationMask;
-        double[,] IntegratedForegroundProbability,AveragedForegroundProbability;
+        double[,] IntegratedForegroundProbability, AveragedForegroundProbability;
         #endregion
 
         #region Constructor
@@ -81,10 +82,10 @@ namespace VeditorGP
             #endregion
 
             int M = (WindowFrame.width - 1) / 2, N = (WindowFrame.height - 1) / 2;
-            for (int i = (Center_Y - N), c = 0; i < ColoredFrame.height && i <= (Center_Y + N); i++, c++)
+            for (int i = ((int)Center_Y - N), c = 0; i < ColoredFrame.height && i <= (Center_Y + N); i++, c++)
             {
                 if (i < 0) i = 0;
-                for (int j = (Center_X - M), k = 0; j < ColoredFrame.width && j <= (Center_X + M); j++, k++)
+                for (int j = ((int)Center_X - M), k = 0; j < ColoredFrame.width && j <= (Center_X + M); j++, k++)
                 {
                     if (j < 0) j = 0;
                     #region Fill Colored Frame
@@ -174,7 +175,7 @@ namespace VeditorGP
             for (int i = 0; i < height; i++)
                 for (int j = 0; j < width; j++)
                     if (UpdatedBinaryFrame[i, j] == 255)
-                        UpdatedForegroundPoints++; 
+                        UpdatedForegroundPoints++;
             #endregion
 
             #region Use history or updated frame
@@ -290,7 +291,7 @@ namespace VeditorGP
         #endregion
 
         #region Update Window Centers
-        public Window(Point NewCenter, Frame NewFrame, Window HistoryObject, Image<Gray, Single> FlowX, Image<Gray, Single> FlowY)
+        public Window(PointF NewCenter, Frame NewFrame, Window HistoryObject, Image<Gray, Single> FlowX, Image<Gray, Single> FlowY)
         {
             #region Initialization
             WindowContourPoints = new List<Point>();
@@ -349,6 +350,10 @@ namespace VeditorGP
                 {
                     XIndex = i + (int)(float.Parse(FlowX.Data[i, j, 0].ToString()));
                     YIndex = j + (int)(float.Parse(FlowY.Data[i, j, 0].ToString()));
+                    if (XIndex < 0) XIndex = 0;
+                    if (YIndex < 0) YIndex = 0;
+                    if (XIndex > 30) XIndex = 30;
+                    if (YIndex > 30) YIndex = 30;
                     #region Fill Binary Mask
                     WindowBinaryMask.byteRedPixels[XIndex, YIndex] = HistoryObject.WindowBinaryMask.byteRedPixels[i, j];
                     WindowBinaryMask.byteGreenPixels[XIndex, YIndex] = HistoryObject.WindowBinaryMask.byteGreenPixels[i, j];
@@ -373,10 +378,10 @@ namespace VeditorGP
 
             #region Fill Frame Data
             int M = (WindowFrame.width - 1) / 2, N = (WindowFrame.height - 1) / 2;
-            for (int i = (Center_Y - N), c = 0; i < NewFrame.height && i <= (Center_Y + N); i++, c++)
+            for (int i = ((int)Center_Y - N), c = 0; i < NewFrame.height && i <= (Center_Y + N); i++, c++)
             {
                 if (i < 0) i = 0;
-                for (int j = (Center_X - M), k = 0; j < NewFrame.width && j <= (Center_X + M); j++, k++)
+                for (int j = ((int)Center_X - M), k = 0; j < NewFrame.width && j <= (Center_X + M); j++, k++)
                 {
                     if (j < 0) j = 0;
                     #region Fill Colored Frame
@@ -427,15 +432,15 @@ namespace VeditorGP
                 }
             ClassificationMask = TempClassify;
             #region Test Saving Classified Image
-            Bitmap NewImage = new Bitmap(width, height);
-            for (int i = 0; i < height; i++)
-                for (int j = 0; j < width; j++)
-                    NewImage.SetPixel(j, i, Color.FromArgb(TempClassify[i, j], TempClassify[i, j], TempClassify[i, j]));
-            string Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Integrated Classifier" + IntegrationCounter + ".bmp";
-            IntegrationCounter++;
-            NewImage.Save(Pw, ImageFormat.Bmp);
+            //Bitmap NewImage = new Bitmap(width, height);
+            //for (int i = 0; i < height; i++)
+            //    for (int j = 0; j < width; j++)
+            //        NewImage.SetPixel(j, i, Color.FromArgb(TempClassify[i, j], TempClassify[i, j], TempClassify[i, j]));
+            //string Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Integrated Models Classification" + IntegrationCounter + ".bmp";
+            //IntegrationCounter++;
+            //NewImage.Save(Pw, ImageFormat.Bmp);
             #endregion
-        } 
+        }
         #endregion
     }
 }

@@ -71,6 +71,10 @@
             this.TestVideoTabPage = new System.Windows.Forms.TabPage();
             this.MovieGroupBox = new System.Windows.Forms.GroupBox();
             this.FBox = new System.Windows.Forms.PictureBox();
+            this.ShowWindowCheckBox = new System.Windows.Forms.CheckBox();
+            this.PauseNewBTN = new System.Windows.Forms.Button();
+            this.StopNewBTN = new System.Windows.Forms.Button();
+            this.PlayNewBTN = new System.Windows.Forms.Button();
             this.SegmentationToolsGroupBox.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
@@ -206,7 +210,7 @@
             this.toolBarToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolBarToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.toolBarToolStripMenuItem.Name = "toolBarToolStripMenuItem";
-            this.toolBarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.toolBarToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.toolBarToolStripMenuItem.Text = "&Toolbar";
             // 
             // statusBarToolStripMenuItem
@@ -217,7 +221,7 @@
             this.statusBarToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.statusBarToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.statusBarToolStripMenuItem.Name = "statusBarToolStripMenuItem";
-            this.statusBarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.statusBarToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.statusBarToolStripMenuItem.Text = "&Status Bar";
             // 
             // helpMenu
@@ -233,7 +237,7 @@
             this.aboutToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
             this.aboutToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.aboutToolStripMenuItem.Text = "&About Veditor!";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -385,7 +389,7 @@
             this.ViewFramesTabPage.Location = new System.Drawing.Point(4, 22);
             this.ViewFramesTabPage.Name = "ViewFramesTabPage";
             this.ViewFramesTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.ViewFramesTabPage.Size = new System.Drawing.Size(958, 536);
+            this.ViewFramesTabPage.Size = new System.Drawing.Size(958, 568);
             this.ViewFramesTabPage.TabIndex = 1;
             this.ViewFramesTabPage.Text = "View Frames";
             // 
@@ -489,11 +493,14 @@
             // TestVideoTabPage
             // 
             this.TestVideoTabPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.TestVideoTabPage.Controls.Add(this.PauseNewBTN);
+            this.TestVideoTabPage.Controls.Add(this.StopNewBTN);
+            this.TestVideoTabPage.Controls.Add(this.PlayNewBTN);
             this.TestVideoTabPage.Controls.Add(this.MovieGroupBox);
             this.TestVideoTabPage.Location = new System.Drawing.Point(4, 22);
             this.TestVideoTabPage.Name = "TestVideoTabPage";
             this.TestVideoTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.TestVideoTabPage.Size = new System.Drawing.Size(958, 536);
+            this.TestVideoTabPage.Size = new System.Drawing.Size(958, 568);
             this.TestVideoTabPage.TabIndex = 2;
             this.TestVideoTabPage.Text = "Output Video";
             // 
@@ -520,6 +527,47 @@
             this.FBox.TabIndex = 0;
             this.FBox.TabStop = false;
             // 
+            // ShowWindowCheckBox
+            // 
+            this.ShowWindowCheckBox.AutoSize = true;
+            this.ShowWindowCheckBox.ForeColor = System.Drawing.Color.White;
+            this.ShowWindowCheckBox.Location = new System.Drawing.Point(13, 147);
+            this.ShowWindowCheckBox.Name = "ShowWindowCheckBox";
+            this.ShowWindowCheckBox.Size = new System.Drawing.Size(98, 17);
+            this.ShowWindowCheckBox.TabIndex = 19;
+            this.ShowWindowCheckBox.Text = "Show Windows";
+            this.ShowWindowCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // PauseNewBTN
+            // 
+            this.PauseNewBTN.Location = new System.Drawing.Point(115, 324);
+            this.PauseNewBTN.Name = "PauseNewBTN";
+            this.PauseNewBTN.Size = new System.Drawing.Size(75, 23);
+            this.PauseNewBTN.TabIndex = 18;
+            this.PauseNewBTN.Text = "Pause";
+            this.PauseNewBTN.UseVisualStyleBackColor = true;
+            this.PauseNewBTN.Click += new System.EventHandler(this.PauseNewBTN_Click);
+            // 
+            // StopNewBTN
+            // 
+            this.StopNewBTN.Location = new System.Drawing.Point(196, 324);
+            this.StopNewBTN.Name = "StopNewBTN";
+            this.StopNewBTN.Size = new System.Drawing.Size(75, 23);
+            this.StopNewBTN.TabIndex = 17;
+            this.StopNewBTN.Text = "Stop";
+            this.StopNewBTN.UseVisualStyleBackColor = true;
+            this.StopNewBTN.Click += new System.EventHandler(this.StopNewBTN_Click);
+            // 
+            // PlayNewBTN
+            // 
+            this.PlayNewBTN.Location = new System.Drawing.Point(34, 324);
+            this.PlayNewBTN.Name = "PlayNewBTN";
+            this.PlayNewBTN.Size = new System.Drawing.Size(75, 23);
+            this.PlayNewBTN.TabIndex = 16;
+            this.PlayNewBTN.Text = "Play";
+            this.PlayNewBTN.UseVisualStyleBackColor = true;
+            this.PlayNewBTN.Click += new System.EventHandler(this.PlayNewBTN_Click);
+            // 
             // VeditorMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -528,6 +576,7 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
             this.ClientSize = new System.Drawing.Size(1154, 658);
+            this.Controls.Add(this.ShowWindowCheckBox);
             this.Controls.Add(this.VideoTabControl);
             this.Controls.Add(this.toolStrip);
             this.Controls.Add(this.menuStrip);
@@ -595,7 +644,6 @@
         private System.Windows.Forms.Button StopBTN;
         private System.Windows.Forms.Button PlayBTN;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.PictureBox FrameBox;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button DrMostafaPreviousBTN;
         private System.Windows.Forms.Button DrMostafaNextBTN;
@@ -605,6 +653,11 @@
         private System.Windows.Forms.PictureBox DrMostafaPicBox5;
         private System.Windows.Forms.PictureBox DrMostafaPicBox2;
         private System.Windows.Forms.PictureBox DrMostafaPicBox4;
+        public System.Windows.Forms.PictureBox FrameBox;
+        public System.Windows.Forms.CheckBox ShowWindowCheckBox;
+        private System.Windows.Forms.Button PauseNewBTN;
+        private System.Windows.Forms.Button StopNewBTN;
+        private System.Windows.Forms.Button PlayNewBTN;
     }
 }
 

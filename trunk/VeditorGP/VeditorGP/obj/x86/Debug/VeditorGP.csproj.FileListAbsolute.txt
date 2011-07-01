@@ -83,3 +83,5 @@ C:\My Files\FCIS\Seniors\GP\Source\VeditorGP\VeditorGP\obj\x86\Debug\ResGen.read
 C:\My Files\FCIS\Seniors\GP\Source\VeditorGP\VeditorGP\obj\x86\Debug\ResGen.write.1.tlog
 C:\My Files\FCIS\Seniors\GP\Source\VeditorGP\VeditorGP\obj\x86\Debug\Veditor.exe
 C:\My Files\FCIS\Seniors\GP\Source\VeditorGP\VeditorGP\obj\x86\Debug\Veditor.pdb
+C:\My Files\FCIS\Seniors\GP\Source\VeditorGP\VeditorGP\bin\Debug\AviFile.dll
+C:\My Files\FCIS\Seniors\GP\Source\VeditorGP\VeditorGP\bin\Debug\AviFile.pdb

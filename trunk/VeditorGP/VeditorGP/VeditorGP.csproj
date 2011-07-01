@@ -93,8 +93,10 @@
     <Compile Include="AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="AbstractFloodFiller.cs" />
     <Compile Include="Classifier.cs" />
     <Compile Include="ContourFunctions.cs" />
+    <Compile Include="FloodFiller.cs" />
     <Compile Include="Frame.cs" />
     <Compile Include="GrahamHull.cs" />
     <Compile Include="OurOpticalFlow.cs" />
@@ -142,6 +144,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="logo.ico" />
+    <Content Include="NewVideoFramesFile.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\AviFile\AviFile.csproj">
+      <Project>{ABB32A29-AF50-47FA-B243-5FD75A5ABA54}</Project>
+      <Name>AviFile</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
