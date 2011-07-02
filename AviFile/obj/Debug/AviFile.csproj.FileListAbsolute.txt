@@ -13,3 +13,8 @@ C:\My Files\FCIS\Seniors\GP\Source\AviFile\bin\Debug\AviFile.pdb
 C:\My Files\FCIS\Seniors\GP\Source\AviFile\obj\Debug\ResolveAssemblyReference.cache
 C:\My Files\FCIS\Seniors\GP\Source\AviFile\obj\Debug\AviFile.dll
 C:\My Files\FCIS\Seniors\GP\Source\AviFile\obj\Debug\AviFile.pdb
+E:\Projects\GP\AviFile\bin\Debug\AviFile.dll
+E:\Projects\GP\AviFile\bin\Debug\AviFile.pdb
+E:\Projects\GP\AviFile\obj\Debug\ResolveAssemblyReference.cache
+E:\Projects\GP\AviFile\obj\Debug\AviFile.dll
+E:\Projects\GP\AviFile\obj\Debug\AviFile.pdb
