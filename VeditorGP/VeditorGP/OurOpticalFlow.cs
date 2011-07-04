@@ -7,6 +7,8 @@ using Emgu.CV.Structure;
 using System.Drawing;
 using openCV;
 using System.Drawing.Imaging;
+using Mapack;
+using Sid;
 
 namespace VeditorGP
 {
@@ -15,17 +17,38 @@ namespace VeditorGP
         #region Variables
         public Image<Bgr, Byte> ActualFrame { get; set; }
         public Image<Gray, Byte> ActualGrayFrame { get; set; }
+        Class1 OFWAv2;
+        public OurOpticalFlow() { }
         #endregion
 
-        #region Get Optical Flow
-        public OurOpticalFlow() { }
+        #region Get Optical Flow  
         public List<Image<Gray, Single>> OpticalFlowWorker(Frame _CurrentFrame, Image<Gray, Byte> WarpedFrame)
         {
             ActualFrame = _CurrentFrame.EmguRgbImage;
             ActualGrayFrame = ActualFrame.Convert<Gray, Byte>();
+            Size winSize = new Size(15, 15);
             Image<Gray, Single> flowx = new Image<Gray, float>(ActualGrayFrame.Size);
             Image<Gray, Single> flowy = new Image<Gray, float>(ActualGrayFrame.Size);
-            OpticalFlow.LK(ActualGrayFrame, WarpedFrame, new Size(15, 15), flowx, flowy);
+            OpticalFlow.LK(WarpedFrame, ActualGrayFrame, winSize, flowx, flowy);
+
+            int vectorFieldX = (int)Math.Round((double)_CurrentFrame.width / winSize.Width);
+            int vectorFieldY = (int)Math.Round((double)_CurrentFrame.height / winSize.Height);
+
+            PointF[][] vectorField = new PointF[vectorFieldX][];
+            for (int i = 0; i < vectorFieldX; i++)
+            {
+                vectorField[i] = new PointF[vectorFieldY];
+
+                for (int j = 0; j < vectorFieldY; j++)
+                {
+                    Gray velx_gray = flowx[j * winSize.Width, i * winSize.Width];
+                    float velx_float = (float)velx_gray.Intensity;
+                    Gray vely_gray = flowy[j * winSize.Height, i * winSize.Height];
+                    float vely_float = (float)vely_gray.Intensity;
+                    vectorField[i][j] = new PointF(velx_float, vely_float);
+                }
+            }
+
             List<Image<Gray, Single>> Flow = new List<Image<Gray, Single>>();
             Flow.Add(flowx);
             Flow.Add(flowy);
@@ -77,6 +100,14 @@ namespace VeditorGP
             //    }
             //}
             #endregion
+        }
+        #endregion
+
+        #region New Optical Flow
+        public void getOpticalFlowWAv2(Frame _CurrentFrame, Image<Gray, Byte> WarpedFrame)
+        {
+            OFWAv2 = new Class1();
+            OFWAv2.Simple(_CurrentFrame, WarpedFrame);
         }
         #endregion
     }

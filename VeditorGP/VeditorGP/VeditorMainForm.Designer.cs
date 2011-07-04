@@ -60,28 +60,28 @@
             this.PlayBTN = new System.Windows.Forms.Button();
             this.PauseBTN = new System.Windows.Forms.Button();
             this.ViewFramesTabPage = new System.Windows.Forms.TabPage();
-            this.DrMostafaPreviousBTN = new System.Windows.Forms.Button();
-            this.DrMostafaNextBTN = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.DrMostafaPicBox6 = new System.Windows.Forms.PictureBox();
-            this.DrMostafaPicBox3 = new System.Windows.Forms.PictureBox();
-            this.DrMostafaPicBox5 = new System.Windows.Forms.PictureBox();
+            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.DrMostafaPicBox2 = new System.Windows.Forms.PictureBox();
-            this.DrMostafaPicBox4 = new System.Windows.Forms.PictureBox();
+            this.DrMostafaPicBox6 = new System.Windows.Forms.PictureBox();
             this.DrMostafaPicBox1 = new System.Windows.Forms.PictureBox();
+            this.DrMostafaPicBox5 = new System.Windows.Forms.PictureBox();
+            this.DrMostafaPicBox3 = new System.Windows.Forms.PictureBox();
+            this.DrMostafaPicBox4 = new System.Windows.Forms.PictureBox();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.DrMostafaNextBTN = new System.Windows.Forms.Button();
+            this.DrMostafaPreviousBTN = new System.Windows.Forms.Button();
             this.TestVideoTabPage = new System.Windows.Forms.TabPage();
-            this.PauseNewBTN = new System.Windows.Forms.Button();
-            this.StopNewBTN = new System.Windows.Forms.Button();
-            this.PlayNewBTN = new System.Windows.Forms.Button();
+            this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.MovieGroupBox = new System.Windows.Forms.GroupBox();
             this.FBox = new System.Windows.Forms.PictureBox();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.StopNewBTN = new System.Windows.Forms.Button();
+            this.PlayNewBTN = new System.Windows.Forms.Button();
+            this.PauseNewBTN = new System.Windows.Forms.Button();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.ShowWindowCheckBox = new System.Windows.Forms.CheckBox();
-            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.splitContainer4 = new System.Windows.Forms.SplitContainer();
-            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.SegmentationToolsGroupBox.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
@@ -95,27 +95,27 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.ViewFramesTabPage.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DrMostafaPicBox6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DrMostafaPicBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DrMostafaPicBox5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DrMostafaPicBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DrMostafaPicBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DrMostafaPicBox1)).BeginInit();
-            this.TestVideoTabPage.SuspendLayout();
-            this.MovieGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.FBox)).BeginInit();
-            this.splitContainer2.Panel1.SuspendLayout();
-            this.splitContainer2.Panel2.SuspendLayout();
-            this.splitContainer2.SuspendLayout();
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DrMostafaPicBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DrMostafaPicBox6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DrMostafaPicBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DrMostafaPicBox5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DrMostafaPicBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DrMostafaPicBox4)).BeginInit();
+            this.tableLayoutPanel2.SuspendLayout();
+            this.TestVideoTabPage.SuspendLayout();
             this.splitContainer4.Panel1.SuspendLayout();
             this.splitContainer4.Panel2.SuspendLayout();
             this.splitContainer4.SuspendLayout();
+            this.MovieGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.FBox)).BeginInit();
             this.tableLayoutPanel4.SuspendLayout();
+            this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
             this.SuspendLayout();
             // 
             // SegmentationToolsGroupBox
@@ -218,6 +218,7 @@
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // viewMenu
             // 
@@ -237,6 +238,7 @@
             this.toolBarToolStripMenuItem.Name = "toolBarToolStripMenuItem";
             this.toolBarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.toolBarToolStripMenuItem.Text = "&Toolbar";
+            this.toolBarToolStripMenuItem.Click += new System.EventHandler(this.toolBarToolStripMenuItem_Click);
             // 
             // helpMenu
             // 
@@ -251,7 +253,7 @@
             this.aboutToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(0)))), ((int)(((byte)(70)))));
             this.aboutToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.aboutToolStripMenuItem.Text = "&About Veditor!";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -444,30 +446,6 @@
             this.ViewFramesTabPage.TabIndex = 1;
             this.ViewFramesTabPage.Text = "View Frames";
             // 
-            // DrMostafaPreviousBTN
-            // 
-            this.DrMostafaPreviousBTN.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DrMostafaPreviousBTN.Enabled = false;
-            this.DrMostafaPreviousBTN.ForeColor = System.Drawing.Color.Black;
-            this.DrMostafaPreviousBTN.Location = new System.Drawing.Point(5, 5);
-            this.DrMostafaPreviousBTN.Name = "DrMostafaPreviousBTN";
-            this.DrMostafaPreviousBTN.Size = new System.Drawing.Size(473, 61);
-            this.DrMostafaPreviousBTN.TabIndex = 2;
-            this.DrMostafaPreviousBTN.Text = "Previous";
-            this.DrMostafaPreviousBTN.UseVisualStyleBackColor = true;
-            // 
-            // DrMostafaNextBTN
-            // 
-            this.DrMostafaNextBTN.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DrMostafaNextBTN.ForeColor = System.Drawing.Color.Black;
-            this.DrMostafaNextBTN.Location = new System.Drawing.Point(486, 5);
-            this.DrMostafaNextBTN.Name = "DrMostafaNextBTN";
-            this.DrMostafaNextBTN.Size = new System.Drawing.Size(474, 61);
-            this.DrMostafaNextBTN.TabIndex = 1;
-            this.DrMostafaNextBTN.Text = "Next";
-            this.DrMostafaNextBTN.UseVisualStyleBackColor = true;
-            this.DrMostafaNextBTN.Click += new System.EventHandler(this.DrMostafaNextBTN_Click);
-            // 
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(160)))), ((int)(((byte)(130)))));
@@ -481,60 +459,68 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Frames";
             // 
-            // DrMostafaPicBox6
+            // splitContainer3
             // 
-            this.DrMostafaPicBox6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.DrMostafaPicBox6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DrMostafaPicBox6.Location = new System.Drawing.Point(645, 242);
-            this.DrMostafaPicBox6.Name = "DrMostafaPicBox6";
-            this.DrMostafaPicBox6.Size = new System.Drawing.Size(315, 230);
-            this.DrMostafaPicBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.DrMostafaPicBox6.TabIndex = 5;
-            this.DrMostafaPicBox6.TabStop = false;
+            this.splitContainer3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer3.Location = new System.Drawing.Point(3, 16);
+            this.splitContainer3.Name = "splitContainer3";
+            this.splitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
-            // DrMostafaPicBox3
+            // splitContainer3.Panel1
             // 
-            this.DrMostafaPicBox3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.DrMostafaPicBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DrMostafaPicBox3.Location = new System.Drawing.Point(645, 5);
-            this.DrMostafaPicBox3.Name = "DrMostafaPicBox3";
-            this.DrMostafaPicBox3.Size = new System.Drawing.Size(315, 229);
-            this.DrMostafaPicBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.DrMostafaPicBox3.TabIndex = 4;
-            this.DrMostafaPicBox3.TabStop = false;
+            this.splitContainer3.Panel1.Controls.Add(this.tableLayoutPanel3);
             // 
-            // DrMostafaPicBox5
+            // splitContainer3.Panel2
             // 
-            this.DrMostafaPicBox5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.DrMostafaPicBox5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DrMostafaPicBox5.Location = new System.Drawing.Point(325, 242);
-            this.DrMostafaPicBox5.Name = "DrMostafaPicBox5";
-            this.DrMostafaPicBox5.Size = new System.Drawing.Size(312, 230);
-            this.DrMostafaPicBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.DrMostafaPicBox5.TabIndex = 3;
-            this.DrMostafaPicBox5.TabStop = false;
+            this.splitContainer3.Panel2.Controls.Add(this.tableLayoutPanel2);
+            this.splitContainer3.Size = new System.Drawing.Size(967, 556);
+            this.splitContainer3.SplitterDistance = 479;
+            this.splitContainer3.TabIndex = 3;
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Inset;
+            this.tableLayoutPanel3.ColumnCount = 3;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel3.Controls.Add(this.DrMostafaPicBox2, 1, 0);
+            this.tableLayoutPanel3.Controls.Add(this.DrMostafaPicBox6, 2, 1);
+            this.tableLayoutPanel3.Controls.Add(this.DrMostafaPicBox1, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.DrMostafaPicBox5, 1, 1);
+            this.tableLayoutPanel3.Controls.Add(this.DrMostafaPicBox3, 2, 0);
+            this.tableLayoutPanel3.Controls.Add(this.DrMostafaPicBox4, 0, 1);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 2;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(965, 477);
+            this.tableLayoutPanel3.TabIndex = 21;
             // 
             // DrMostafaPicBox2
             // 
             this.DrMostafaPicBox2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.DrMostafaPicBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DrMostafaPicBox2.Location = new System.Drawing.Point(325, 5);
+            this.DrMostafaPicBox2.Location = new System.Drawing.Point(326, 5);
             this.DrMostafaPicBox2.Name = "DrMostafaPicBox2";
-            this.DrMostafaPicBox2.Size = new System.Drawing.Size(312, 229);
+            this.DrMostafaPicBox2.Size = new System.Drawing.Size(313, 229);
             this.DrMostafaPicBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.DrMostafaPicBox2.TabIndex = 2;
             this.DrMostafaPicBox2.TabStop = false;
             // 
-            // DrMostafaPicBox4
+            // DrMostafaPicBox6
             // 
-            this.DrMostafaPicBox4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.DrMostafaPicBox4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DrMostafaPicBox4.Location = new System.Drawing.Point(5, 242);
-            this.DrMostafaPicBox4.Name = "DrMostafaPicBox4";
-            this.DrMostafaPicBox4.Size = new System.Drawing.Size(312, 230);
-            this.DrMostafaPicBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.DrMostafaPicBox4.TabIndex = 1;
-            this.DrMostafaPicBox4.TabStop = false;
+            this.DrMostafaPicBox6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.DrMostafaPicBox6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DrMostafaPicBox6.Location = new System.Drawing.Point(647, 242);
+            this.DrMostafaPicBox6.Name = "DrMostafaPicBox6";
+            this.DrMostafaPicBox6.Size = new System.Drawing.Size(313, 230);
+            this.DrMostafaPicBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.DrMostafaPicBox6.TabIndex = 5;
+            this.DrMostafaPicBox6.TabStop = false;
             // 
             // DrMostafaPicBox1
             // 
@@ -542,10 +528,83 @@
             this.DrMostafaPicBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DrMostafaPicBox1.Location = new System.Drawing.Point(5, 5);
             this.DrMostafaPicBox1.Name = "DrMostafaPicBox1";
-            this.DrMostafaPicBox1.Size = new System.Drawing.Size(312, 229);
+            this.DrMostafaPicBox1.Size = new System.Drawing.Size(313, 229);
             this.DrMostafaPicBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.DrMostafaPicBox1.TabIndex = 0;
             this.DrMostafaPicBox1.TabStop = false;
+            // 
+            // DrMostafaPicBox5
+            // 
+            this.DrMostafaPicBox5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.DrMostafaPicBox5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DrMostafaPicBox5.Location = new System.Drawing.Point(326, 242);
+            this.DrMostafaPicBox5.Name = "DrMostafaPicBox5";
+            this.DrMostafaPicBox5.Size = new System.Drawing.Size(313, 230);
+            this.DrMostafaPicBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.DrMostafaPicBox5.TabIndex = 3;
+            this.DrMostafaPicBox5.TabStop = false;
+            // 
+            // DrMostafaPicBox3
+            // 
+            this.DrMostafaPicBox3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.DrMostafaPicBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DrMostafaPicBox3.Location = new System.Drawing.Point(647, 5);
+            this.DrMostafaPicBox3.Name = "DrMostafaPicBox3";
+            this.DrMostafaPicBox3.Size = new System.Drawing.Size(313, 229);
+            this.DrMostafaPicBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.DrMostafaPicBox3.TabIndex = 4;
+            this.DrMostafaPicBox3.TabStop = false;
+            // 
+            // DrMostafaPicBox4
+            // 
+            this.DrMostafaPicBox4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.DrMostafaPicBox4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DrMostafaPicBox4.Location = new System.Drawing.Point(5, 242);
+            this.DrMostafaPicBox4.Name = "DrMostafaPicBox4";
+            this.DrMostafaPicBox4.Size = new System.Drawing.Size(313, 230);
+            this.DrMostafaPicBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.DrMostafaPicBox4.TabIndex = 1;
+            this.DrMostafaPicBox4.TabStop = false;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Inset;
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Controls.Add(this.DrMostafaNextBTN, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.DrMostafaPreviousBTN, 0, 0);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 1;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(965, 71);
+            this.tableLayoutPanel2.TabIndex = 0;
+            // 
+            // DrMostafaNextBTN
+            // 
+            this.DrMostafaNextBTN.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DrMostafaNextBTN.ForeColor = System.Drawing.Color.Black;
+            this.DrMostafaNextBTN.Location = new System.Drawing.Point(486, 5);
+            this.DrMostafaNextBTN.Name = "DrMostafaNextBTN";
+            this.DrMostafaNextBTN.Size = new System.Drawing.Size(474, 61);
+            this.DrMostafaNextBTN.TabIndex = 1;
+            this.DrMostafaNextBTN.Text = "Next";
+            this.DrMostafaNextBTN.UseVisualStyleBackColor = true;
+            this.DrMostafaNextBTN.Click += new System.EventHandler(this.DrMostafaNextBTN_Click);
+            // 
+            // DrMostafaPreviousBTN
+            // 
+            this.DrMostafaPreviousBTN.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DrMostafaPreviousBTN.Enabled = false;
+            this.DrMostafaPreviousBTN.ForeColor = System.Drawing.Color.Black;
+            this.DrMostafaPreviousBTN.Location = new System.Drawing.Point(5, 5);
+            this.DrMostafaPreviousBTN.Name = "DrMostafaPreviousBTN";
+            this.DrMostafaPreviousBTN.Size = new System.Drawing.Size(473, 61);
+            this.DrMostafaPreviousBTN.TabIndex = 2;
+            this.DrMostafaPreviousBTN.Text = "Previous";
+            this.DrMostafaPreviousBTN.UseVisualStyleBackColor = true;
             // 
             // TestVideoTabPage
             // 
@@ -558,38 +617,24 @@
             this.TestVideoTabPage.TabIndex = 2;
             this.TestVideoTabPage.Text = "Output Video";
             // 
-            // PauseNewBTN
+            // splitContainer4
             // 
-            this.PauseNewBTN.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PauseNewBTN.Location = new System.Drawing.Point(327, 5);
-            this.PauseNewBTN.Name = "PauseNewBTN";
-            this.PauseNewBTN.Size = new System.Drawing.Size(314, 55);
-            this.PauseNewBTN.TabIndex = 18;
-            this.PauseNewBTN.Text = "Pause";
-            this.PauseNewBTN.UseVisualStyleBackColor = true;
-            this.PauseNewBTN.Click += new System.EventHandler(this.PauseNewBTN_Click);
+            this.splitContainer4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.splitContainer4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer4.Location = new System.Drawing.Point(3, 3);
+            this.splitContainer4.Name = "splitContainer4";
+            this.splitContainer4.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
-            // StopNewBTN
+            // splitContainer4.Panel1
             // 
-            this.StopNewBTN.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.StopNewBTN.Location = new System.Drawing.Point(649, 5);
-            this.StopNewBTN.Name = "StopNewBTN";
-            this.StopNewBTN.Size = new System.Drawing.Size(317, 55);
-            this.StopNewBTN.TabIndex = 17;
-            this.StopNewBTN.Text = "Stop";
-            this.StopNewBTN.UseVisualStyleBackColor = true;
-            this.StopNewBTN.Click += new System.EventHandler(this.StopNewBTN_Click);
+            this.splitContainer4.Panel1.Controls.Add(this.MovieGroupBox);
             // 
-            // PlayNewBTN
+            // splitContainer4.Panel2
             // 
-            this.PlayNewBTN.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PlayNewBTN.Location = new System.Drawing.Point(5, 5);
-            this.PlayNewBTN.Name = "PlayNewBTN";
-            this.PlayNewBTN.Size = new System.Drawing.Size(314, 55);
-            this.PlayNewBTN.TabIndex = 16;
-            this.PlayNewBTN.Text = "Play";
-            this.PlayNewBTN.UseVisualStyleBackColor = true;
-            this.PlayNewBTN.Click += new System.EventHandler(this.PlayNewBTN_Click);
+            this.splitContainer4.Panel2.Controls.Add(this.tableLayoutPanel4);
+            this.splitContainer4.Size = new System.Drawing.Size(973, 575);
+            this.splitContainer4.SplitterDistance = 504;
+            this.splitContainer4.TabIndex = 19;
             // 
             // MovieGroupBox
             // 
@@ -615,6 +660,57 @@
             this.FBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.FBox.TabIndex = 0;
             this.FBox.TabStop = false;
+            // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Inset;
+            this.tableLayoutPanel4.ColumnCount = 3;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel4.Controls.Add(this.StopNewBTN, 2, 0);
+            this.tableLayoutPanel4.Controls.Add(this.PlayNewBTN, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.PauseNewBTN, 1, 0);
+            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 1;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(971, 65);
+            this.tableLayoutPanel4.TabIndex = 0;
+            // 
+            // StopNewBTN
+            // 
+            this.StopNewBTN.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.StopNewBTN.Location = new System.Drawing.Point(651, 5);
+            this.StopNewBTN.Name = "StopNewBTN";
+            this.StopNewBTN.Size = new System.Drawing.Size(315, 55);
+            this.StopNewBTN.TabIndex = 17;
+            this.StopNewBTN.Text = "Stop";
+            this.StopNewBTN.UseVisualStyleBackColor = true;
+            this.StopNewBTN.Click += new System.EventHandler(this.StopNewBTN_Click);
+            // 
+            // PlayNewBTN
+            // 
+            this.PlayNewBTN.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PlayNewBTN.Location = new System.Drawing.Point(5, 5);
+            this.PlayNewBTN.Name = "PlayNewBTN";
+            this.PlayNewBTN.Size = new System.Drawing.Size(315, 55);
+            this.PlayNewBTN.TabIndex = 16;
+            this.PlayNewBTN.Text = "Play";
+            this.PlayNewBTN.UseVisualStyleBackColor = true;
+            this.PlayNewBTN.Click += new System.EventHandler(this.PlayNewBTN_Click);
+            // 
+            // PauseNewBTN
+            // 
+            this.PauseNewBTN.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PauseNewBTN.Location = new System.Drawing.Point(328, 5);
+            this.PauseNewBTN.Name = "PauseNewBTN";
+            this.PauseNewBTN.Size = new System.Drawing.Size(315, 55);
+            this.PauseNewBTN.TabIndex = 18;
+            this.PauseNewBTN.Text = "Pause";
+            this.PauseNewBTN.UseVisualStyleBackColor = true;
+            this.PauseNewBTN.Click += new System.EventHandler(this.PauseNewBTN_Click);
             // 
             // splitContainer2
             // 
@@ -647,100 +743,6 @@
             this.ShowWindowCheckBox.Text = "Show Windows";
             this.ShowWindowCheckBox.UseVisualStyleBackColor = true;
             // 
-            // splitContainer3
-            // 
-            this.splitContainer3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer3.Location = new System.Drawing.Point(3, 16);
-            this.splitContainer3.Name = "splitContainer3";
-            this.splitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer3.Panel1
-            // 
-            this.splitContainer3.Panel1.Controls.Add(this.tableLayoutPanel3);
-            // 
-            // splitContainer3.Panel2
-            // 
-            this.splitContainer3.Panel2.Controls.Add(this.tableLayoutPanel2);
-            this.splitContainer3.Size = new System.Drawing.Size(967, 556);
-            this.splitContainer3.SplitterDistance = 479;
-            this.splitContainer3.TabIndex = 3;
-            // 
-            // tableLayoutPanel2
-            // 
-            this.tableLayoutPanel2.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Inset;
-            this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Controls.Add(this.DrMostafaNextBTN, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.DrMostafaPreviousBTN, 0, 0);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 1;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(965, 71);
-            this.tableLayoutPanel2.TabIndex = 0;
-            // 
-            // tableLayoutPanel3
-            // 
-            this.tableLayoutPanel3.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Inset;
-            this.tableLayoutPanel3.ColumnCount = 3;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel3.Controls.Add(this.DrMostafaPicBox2, 1, 0);
-            this.tableLayoutPanel3.Controls.Add(this.DrMostafaPicBox6, 2, 1);
-            this.tableLayoutPanel3.Controls.Add(this.DrMostafaPicBox1, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.DrMostafaPicBox5, 1, 1);
-            this.tableLayoutPanel3.Controls.Add(this.DrMostafaPicBox3, 2, 0);
-            this.tableLayoutPanel3.Controls.Add(this.DrMostafaPicBox4, 0, 1);
-            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 2;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(965, 477);
-            this.tableLayoutPanel3.TabIndex = 21;
-            // 
-            // splitContainer4
-            // 
-            this.splitContainer4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.splitContainer4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer4.Location = new System.Drawing.Point(3, 3);
-            this.splitContainer4.Name = "splitContainer4";
-            this.splitContainer4.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer4.Panel1
-            // 
-            this.splitContainer4.Panel1.Controls.Add(this.MovieGroupBox);
-            // 
-            // splitContainer4.Panel2
-            // 
-            this.splitContainer4.Panel2.Controls.Add(this.tableLayoutPanel4);
-            this.splitContainer4.Size = new System.Drawing.Size(973, 575);
-            this.splitContainer4.SplitterDistance = 504;
-            this.splitContainer4.TabIndex = 19;
-            // 
-            // tableLayoutPanel4
-            // 
-            this.tableLayoutPanel4.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Inset;
-            this.tableLayoutPanel4.ColumnCount = 3;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel4.Controls.Add(this.StopNewBTN, 2, 0);
-            this.tableLayoutPanel4.Controls.Add(this.PlayNewBTN, 0, 0);
-            this.tableLayoutPanel4.Controls.Add(this.PauseNewBTN, 1, 0);
-            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 1;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(971, 65);
-            this.tableLayoutPanel4.TabIndex = 0;
-            // 
             // VeditorMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -772,29 +774,29 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.ViewFramesTabPage.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.DrMostafaPicBox6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DrMostafaPicBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DrMostafaPicBox5)).EndInit();
+            this.splitContainer3.Panel1.ResumeLayout(false);
+            this.splitContainer3.Panel2.ResumeLayout(false);
+            this.splitContainer3.ResumeLayout(false);
+            this.tableLayoutPanel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DrMostafaPicBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DrMostafaPicBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DrMostafaPicBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DrMostafaPicBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DrMostafaPicBox5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DrMostafaPicBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DrMostafaPicBox4)).EndInit();
+            this.tableLayoutPanel2.ResumeLayout(false);
             this.TestVideoTabPage.ResumeLayout(false);
+            this.splitContainer4.Panel1.ResumeLayout(false);
+            this.splitContainer4.Panel2.ResumeLayout(false);
+            this.splitContainer4.ResumeLayout(false);
             this.MovieGroupBox.ResumeLayout(false);
             this.MovieGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.FBox)).EndInit();
+            this.tableLayoutPanel4.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel1.PerformLayout();
             this.splitContainer2.Panel2.ResumeLayout(false);
             this.splitContainer2.ResumeLayout(false);
-            this.splitContainer3.Panel1.ResumeLayout(false);
-            this.splitContainer3.Panel2.ResumeLayout(false);
-            this.splitContainer3.ResumeLayout(false);
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel3.ResumeLayout(false);
-            this.splitContainer4.Panel1.ResumeLayout(false);
-            this.splitContainer4.Panel2.ResumeLayout(false);
-            this.splitContainer4.ResumeLayout(false);
-            this.tableLayoutPanel4.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

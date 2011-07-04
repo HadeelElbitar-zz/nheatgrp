@@ -61,3 +61,5 @@ E:\Projects\GP\VeditorGP\VeditorGP\bin\Debug\Veditor.exe
 E:\Projects\GP\VeditorGP\VeditorGP\bin\Debug\Veditor.pdb
 E:\Projects\GP\VeditorGP\VeditorGP\bin\Debug\AviFile.dll
 E:\Projects\GP\VeditorGP\VeditorGP\bin\Debug\AviFile.pdb
+C:\My Files\FCIS\Seniors\GP\Source\VeditorGP\VeditorGP\obj\x86\Debug\GenerateResource-ResGen.read.1.tlog
+C:\My Files\FCIS\Seniors\GP\Source\VeditorGP\VeditorGP\obj\x86\Debug\GenerateResource-ResGen.write.1.tlog

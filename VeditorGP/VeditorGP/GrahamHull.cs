@@ -11,12 +11,12 @@ namespace VeditorGP
         List<Vector2F> Upper;
         List<Vector2F> Lower;
         List<Vector2F> convexHull;
+        static public Vector2F maxX, minX;
         public void Compute(List<Vector2F> points, ref List<Vector2F> UpperPoints, ref List<Vector2F> LowerPoints)
         {
             Upper = new List<Vector2F>();
             Lower = new List<Vector2F>();
             convexHull = new List<Vector2F>();
-            Vector2F maxX, minX;
             maxX = new Vector2F();
             minX = new Vector2F();
             Sort(points, ref maxX, ref minX);
