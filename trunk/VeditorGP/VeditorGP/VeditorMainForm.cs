@@ -20,7 +20,7 @@ namespace VeditorGP
         List<CvPoint> ContourPositions;
         Frame CurrentDisplayedFrame, NewCurrentDisplayedFrame;
         System.Timers.Timer MyTimer, NewTimer;
-        bool PlayMood = true, NewPlayMode = true;
+        bool PlayMood = true, NewPlayMode = true, HideStip = false;
         string FileName = "";
 
         public VeditorMainForm()
@@ -285,6 +285,25 @@ namespace VeditorGP
         } 
         #endregion
 
+        #region Tools Options
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
 
+        private void toolBarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!HideStip)
+            {
+                toolStrip.Hide();
+                HideStip = true;
+            }
+            else
+            {
+                toolStrip.Show();
+                HideStip = false;
+            }
+        } 
+        #endregion
     }
 }

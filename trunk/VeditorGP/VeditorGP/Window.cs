@@ -298,6 +298,8 @@ namespace VeditorGP
             int XIndex, YIndex;
             Center_X = NewCenter.X;
             Center_Y = NewCenter.Y;
+            if (Center_X < 0) Center_X = 0;
+            if (Center_Y < 0) Center_Y = 0;
             WindowClassifier = HistoryObject.WindowClassifier;
             WindowFrame = new Frame();
             WindowFrame.height = 30;
@@ -378,12 +380,16 @@ namespace VeditorGP
 
             #region Fill Frame Data
             int M = (WindowFrame.width - 1) / 2, N = (WindowFrame.height - 1) / 2;
-            for (int i = ((int)Center_Y - N), c = 0; i < NewFrame.height && i <= (Center_Y + N); i++, c++)
+            for (int i = ((int)Center_Y - N), c = 0; i < NewFrame.height && i <= (Center_Y + N) && c < 31; i++, c++)
             {
                 if (i < 0) i = 0;
-                for (int j = ((int)Center_X - M), k = 0; j < NewFrame.width && j <= (Center_X + M); j++, k++)
+                for (int j = ((int)Center_X - M), k = 0; j < NewFrame.width && j <= (Center_X + M) && k < 31; j++, k++)
                 {
                     if (j < 0) j = 0;
+                    if (j >= NewFrame.width)
+                        j = (NewFrame.width - 1);
+                    if (i >= NewFrame.height)
+                        i = (NewFrame.height - 1);
                     #region Fill Colored Frame
                     WindowFrame.byteRedPixels[c, k] = NewFrame.byteRedPixels[i, j];
                     WindowFrame.byteGreenPixels[c, k] = NewFrame.byteGreenPixels[i, j];

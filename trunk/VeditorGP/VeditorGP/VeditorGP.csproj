@@ -67,6 +67,14 @@
     <Reference Include="Emgu.Util">
       <HintPath>..\..\Emgu.CV.x86.BinaryOnly-2.0.0.0-alpha\Emgu.CV.Binary-2.0.0.0\Emgu.Util.dll</HintPath>
     </Reference>
+    <Reference Include="fft, Version=1.0.2772.17776, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\fft.dll</HintPath>
+    </Reference>
+    <Reference Include="mapack, Version=2.0.0.0, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\mapack.dll</HintPath>
+    </Reference>
     <Reference Include="openCV">
       <HintPath>..\..\GraduationProject\GraduationProject\bin\Debug\openCV.dll</HintPath>
     </Reference>
@@ -96,6 +104,7 @@
     <Compile Include="AbstractFloodFiller.cs" />
     <Compile Include="Classifier.cs" />
     <Compile Include="ContourFunctions.cs" />
+    <Compile Include="examples.cs" />
     <Compile Include="FloodFiller.cs" />
     <Compile Include="Frame.cs" />
     <Compile Include="GrahamHull.cs" />
@@ -111,6 +120,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VideoFunctions.cs" />
+    <Compile Include="WAv2.cs" />
     <Compile Include="Window.cs" />
     <EmbeddedResource Include="AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>

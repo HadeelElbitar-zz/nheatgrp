@@ -16,6 +16,7 @@ namespace VeditorGP
     class VideoFunctions
     {
         #region Variables and Constructor
+        public PointF InObejctPoint;
         Frame CurrentFrame, PreviousFrame;
         public List<Point> Upper, Lower;
         public double FramePerSecond;
@@ -118,6 +119,7 @@ namespace VeditorGP
         #region Initialize Winodws and Train Classifiers
         public void SetInitialWindowsArroundContour()
         {
+            InObejctPoint = new PointF();
             InitialFrame.FrameWindows = new List<Window>();
             InitialFrame.FrameWindows.Add(new Window(WindowWidth, WindowHeight, InitialFrame, InitialSegmentationBinaryFrame, Upper[0], InitialContourFrame));
             //  InitialFrame.FrameWindows.Add(new Window(WindowWidth, WindowHeight, InitialFrame, InitialSegmentationBinaryFrame, Upper[1], InitialContourFrame));
@@ -163,6 +165,9 @@ namespace VeditorGP
                     break;
             }
             CurrentFrame = InitialFrame;
+
+            InObejctPoint.X = (GrahamHull.maxX.X + GrahamHull.minX.X) / 2;
+            InObejctPoint.Y = (GrahamHull.maxX.Y + GrahamHull.minX.Y) / 2;
         }
         public void TrainClassifiers()
         {
@@ -212,8 +217,37 @@ namespace VeditorGP
         {
             //hena na2es el averging
             CurrentFrame.FrameWindows = new List<Window>();
+            int Iindex=0, Jindex=0;
             foreach (Window item in PreviousFrame.FrameWindows)
-                CurrentFrame.FrameWindows.Add(new Window(new PointF((float)item.Center_X + (float.Parse(FlowX.Data[(int)item.Center_Y, (int)item.Center_X, 0].ToString())), (float)item.Center_Y + (float.Parse(FlowY.Data[(int)item.Center_Y, (int)item.Center_X, 0].ToString()))), CurrentFrame, item, FlowX, FlowY));
+            {
+                if ((int)item.Center_X >= CurrentFrame.width && (int)item.Center_Y >= CurrentFrame.height)
+                {
+                    Iindex = (int)(float.Parse(FlowX.Data[CurrentFrame.height - 1, CurrentFrame.width - 1, 0].ToString()));
+                    Jindex = (int)(float.Parse(FlowY.Data[CurrentFrame.height - 1, CurrentFrame.width - 1, 0].ToString()));
+                }
+                else if ((int)item.Center_Y >= CurrentFrame.height)
+                {
+                    Iindex = (int)(float.Parse(FlowX.Data[CurrentFrame.height - 1, (int)item.Center_X, 0].ToString()));
+                    Jindex = (int)(float.Parse(FlowY.Data[CurrentFrame.height - 1, (int)item.Center_X, 0].ToString()));
+                }
+                else if ((int)item.Center_X >= CurrentFrame.width)
+                {
+                    Jindex = (int)(float.Parse(FlowY.Data[(int)item.Center_Y, CurrentFrame.width - 1, 0].ToString()));
+                    Iindex = (int)(float.Parse(FlowX.Data[(int)item.Center_Y, CurrentFrame.width - 1, 0].ToString()));
+                }
+                else if ((int)item.Center_X < CurrentFrame.width && (int)item.Center_Y < CurrentFrame.height)
+                {
+                    Iindex = (int)(float.Parse(FlowX.Data[(int)item.Center_Y, (int)item.Center_X, 0].ToString()));
+                    Jindex = (int)(float.Parse(FlowY.Data[(int)item.Center_Y, (int)item.Center_X, 0].ToString()));
+                }
+                if (Iindex >= CurrentFrame.height) Iindex = CurrentFrame.height - 1;
+                if (Iindex < 0) Iindex = 0;
+                if (Jindex >= CurrentFrame.width) Jindex = CurrentFrame.width - 1;
+                if (Jindex < 0) Jindex = 0;
+                CurrentFrame.FrameWindows.Add(new Window(new PointF((float)item.Center_X + Iindex, (float)item.Center_Y + Jindex), CurrentFrame, item, FlowX, FlowY));
+            }
+            InObejctPoint.X = InObejctPoint.X + (float.Parse(FlowX.Data[(int)InObejctPoint.Y, (int)InObejctPoint.X, 0].ToString()));
+            InObejctPoint.Y = InObejctPoint.Y + (float.Parse(FlowX.Data[(int)InObejctPoint.Y, (int)InObejctPoint.X, 0].ToString()));
         }
         void GetSurfPoints()
         {
@@ -224,8 +258,25 @@ namespace VeditorGP
         void GetOpticalFlow()
         {
             OpticalFlowObject = new OurOpticalFlow();
-            //OpticalFlowObject.ComputeDenseOpticalFlow(PreviousFrame, WarpedFrame);
-            List<Image<Gray, Single>> Result = OpticalFlowObject.OpticalFlowWorker(PreviousFrame, WarpedFrame);
+            List<Image<Gray, Single>> Result = OpticalFlowObject.OpticalFlowWorker(CurrentFrame, WarpedFrame);
+            int Iindex, Jindex;
+            for (int k = 0; k < 50; k++)
+            {
+                FlowX = Result[0];
+                FlowY = Result[1];
+                for (int i = 0; i < CurrentFrame.height; i++)
+                    for (int j = 0; j < CurrentFrame.width; j++)
+                    {
+                        Iindex = i + (int)(float.Parse(FlowX.Data[i, j, 0].ToString()));
+                        if (Iindex >= CurrentFrame.height) Iindex = CurrentFrame.height - 1;
+                        if (Iindex < 0) Iindex = 0;
+                        Jindex = j + (int)(float.Parse(FlowY.Data[i, j, 0].ToString()));
+                        if (Jindex >= CurrentFrame.width) Jindex = CurrentFrame.width - 1;
+                        if (Jindex < 0) Jindex = 0;
+                        WarpedFrame.Data[Iindex, Jindex, 0] = WarpedFrame.Data[i, j, 0];
+                    }
+                Result = OpticalFlowObject.OpticalFlowWorker(CurrentFrame, WarpedFrame);
+            }
             FlowX = Result[0];
             FlowY = Result[1];
         }
@@ -265,38 +316,44 @@ namespace VeditorGP
             foreach (Window item in OldFrame.FrameWindows)
             {
                 int M = (item.WindowFrame.width - 1) / 2, N = (item.WindowFrame.height - 1) / 2;
-                for (int i = ((int)item.Center_Y - M), c = 0; i <= (item.Center_Y + M); i++, c++)
+                for (int i = ((int)item.Center_Y - M), c = 0; i <= (item.Center_Y + M) && c < 31; i++, c++)
                 {
                     if (i < 0) i = 0;
-                    for (int j = ((int)item.Center_X - N), k = 0; j <= (item.Center_X + N); j++, k++)
+                    for (int j = ((int)item.Center_X - N), k = 0; j <= (item.Center_X + N) && k < 31; j++, k++)
                     {
                         if (j < 0) j = 0;
                         if (item.ClassificationMask[c, k] == 255)
                         {
+                            if (j >= NewFrame.width)
+                                j = (NewFrame.width - 1);
+                            if (i >= NewFrame.height)
+                                i = (NewFrame.height - 1);
                             NewImage.SetPixel(j, i, Color.FromArgb(item.WindowFrame.byteRedPixels[c, k], item.WindowFrame.byteGreenPixels[c, k], item.WindowFrame.byteBluePixels[c, k]));
                             NewImageBinary.SetPixel(j, i, Color.White);
                         }
                     }
                 }
+
             }
             #endregion
 
             #region Fill Binary Mask
             FloodFiller flood = new FloodFiller();
-            flood.FloodFill(ref NewImageBinary, new Point(116, 110));
+            //flood.FloodFill(ref NewImageBinary, new Point((int)InObejctPoint.X, (int)InObejctPoint.Y));
             #endregion
 
             #region Anding
-            for (int i = 0; i < NewFrame.height; i++)
-                for (int j = 0; j < NewFrame.width; j++)
-                    NewImage.SetPixel(j, i, Color.FromArgb(OldFrame.byteRedPixels[i, j] & (byte)(NewImageBinary.GetPixel(j, i).R),
-                        OldFrame.byteGreenPixels[i, j] & (byte)(NewImageBinary.GetPixel(j, i).G),
-                        OldFrame.byteBluePixels[i, j] & (byte)(NewImageBinary.GetPixel(j, i).B)));
+            //for (int i = 0; i < NewFrame.height; i++)
+            //    for (int j = 0; j < NewFrame.width; j++)
+            //        NewImage.SetPixel(j, i, Color.FromArgb(OldFrame.byteRedPixels[i, j] & (byte)(NewImageBinary.GetPixel(j, i).R),
+            //            OldFrame.byteGreenPixels[i, j] & (byte)(NewImageBinary.GetPixel(j, i).G),
+            //            OldFrame.byteBluePixels[i, j] & (byte)(NewImageBinary.GetPixel(j, i).B)));
             #endregion
 
             #region Test Saving Boundary Image
+            NewImage.SetPixel((int)InObejctPoint.Y, (int)InObejctPoint.X, Color.HotPink);
             string Pw;
-            Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Filled Colored Windows Integration " + CutOutFrameCount + ".bmp";
+            Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Colored Windows Integration " + CutOutFrameCount + ".bmp";
             NewImage.Save(Pw, ImageFormat.Bmp);
             StreamWriter SWrite = new StreamWriter(NewVideoFilePath, true);
             SWrite.WriteLine(Pw);
