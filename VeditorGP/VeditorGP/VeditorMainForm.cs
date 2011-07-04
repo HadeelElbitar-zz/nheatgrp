@@ -95,17 +95,16 @@ namespace VeditorGP
         {
             CutObject();
             LoadNewVideo();
-            MessageBox.Show("Finished!");
+            //MessageBox.Show("Finished!");
         }
         void CutObject()
         {
-            //try
-            //{
+            try
+            {
                 FrameState = 0;
                 ContourFunctionsObject = new ContourFunctions();
                 Bitmap Temp = (Bitmap)FrameBox.Image;
                 VideoFunctionsObject.InitialSegmentationBinaryFrame = ContourFunctionsObject.GetBlackAndWhiteContour(ContourPositions.ToArray(), Temp);
-                //FBox.Image = VideoFunctionsObject.InitialSegmentationBinaryFrame.BmpImage;
                 VideoFunctionsObject.ConnectedContour = ContourFunctionsObject.GetConnectedContour(VideoFunctionsObject.InitialSegmentationBinaryFrame, VideoFunctionsObject.InitialContourFrame = new Frame());
                 ContourFunctionsObject.GetUpperAndLowerContour(ref VideoFunctionsObject.Upper, ref VideoFunctionsObject.Lower);
                 VideoFunctionsObject.SetInitialWindowsArroundContour();
@@ -113,12 +112,8 @@ namespace VeditorGP
                     VideoFunctionsObject.ShowWin(FrameBox);
                 VideoFunctionsObject.TrainClassifiers();
                 VideoFunctionsObject.PropagateFrame(ShowWindowCheckBox.Checked, FrameBox);
-                // MessageBox.Show("Training Finished!");
-            //}
-            //catch
-            //{
-            //    //    messagebox.show("please import a video first!");
-            //}
+            }
+            catch { }
         }
         void LoadNewVideo()
         {

@@ -69,9 +69,7 @@
             this.DrMostafaPicBox5 = new System.Windows.Forms.PictureBox();
             this.DrMostafaPicBox3 = new System.Windows.Forms.PictureBox();
             this.DrMostafaPicBox4 = new System.Windows.Forms.PictureBox();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.DrMostafaNextBTN = new System.Windows.Forms.Button();
-            this.DrMostafaPreviousBTN = new System.Windows.Forms.Button();
             this.TestVideoTabPage = new System.Windows.Forms.TabPage();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.MovieGroupBox = new System.Windows.Forms.GroupBox();
@@ -105,7 +103,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.DrMostafaPicBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DrMostafaPicBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DrMostafaPicBox4)).BeginInit();
-            this.tableLayoutPanel2.SuspendLayout();
             this.TestVideoTabPage.SuspendLayout();
             this.splitContainer4.Panel1.SuspendLayout();
             this.splitContainer4.Panel2.SuspendLayout();
@@ -236,7 +233,7 @@
             this.toolBarToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolBarToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.toolBarToolStripMenuItem.Name = "toolBarToolStripMenuItem";
-            this.toolBarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.toolBarToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             this.toolBarToolStripMenuItem.Text = "&Toolbar";
             this.toolBarToolStripMenuItem.Click += new System.EventHandler(this.toolBarToolStripMenuItem_Click);
             // 
@@ -473,7 +470,7 @@
             // 
             // splitContainer3.Panel2
             // 
-            this.splitContainer3.Panel2.Controls.Add(this.tableLayoutPanel2);
+            this.splitContainer3.Panel2.Controls.Add(this.DrMostafaNextBTN);
             this.splitContainer3.Size = new System.Drawing.Size(967, 556);
             this.splitContainer3.SplitterDistance = 479;
             this.splitContainer3.TabIndex = 3;
@@ -566,45 +563,17 @@
             this.DrMostafaPicBox4.TabIndex = 1;
             this.DrMostafaPicBox4.TabStop = false;
             // 
-            // tableLayoutPanel2
-            // 
-            this.tableLayoutPanel2.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Inset;
-            this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Controls.Add(this.DrMostafaNextBTN, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.DrMostafaPreviousBTN, 0, 0);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 1;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(965, 71);
-            this.tableLayoutPanel2.TabIndex = 0;
-            // 
             // DrMostafaNextBTN
             // 
             this.DrMostafaNextBTN.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DrMostafaNextBTN.ForeColor = System.Drawing.Color.Black;
-            this.DrMostafaNextBTN.Location = new System.Drawing.Point(486, 5);
+            this.DrMostafaNextBTN.Location = new System.Drawing.Point(0, 0);
             this.DrMostafaNextBTN.Name = "DrMostafaNextBTN";
-            this.DrMostafaNextBTN.Size = new System.Drawing.Size(474, 61);
+            this.DrMostafaNextBTN.Size = new System.Drawing.Size(965, 71);
             this.DrMostafaNextBTN.TabIndex = 1;
             this.DrMostafaNextBTN.Text = "Next";
             this.DrMostafaNextBTN.UseVisualStyleBackColor = true;
             this.DrMostafaNextBTN.Click += new System.EventHandler(this.DrMostafaNextBTN_Click);
-            // 
-            // DrMostafaPreviousBTN
-            // 
-            this.DrMostafaPreviousBTN.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DrMostafaPreviousBTN.Enabled = false;
-            this.DrMostafaPreviousBTN.ForeColor = System.Drawing.Color.Black;
-            this.DrMostafaPreviousBTN.Location = new System.Drawing.Point(5, 5);
-            this.DrMostafaPreviousBTN.Name = "DrMostafaPreviousBTN";
-            this.DrMostafaPreviousBTN.Size = new System.Drawing.Size(473, 61);
-            this.DrMostafaPreviousBTN.TabIndex = 2;
-            this.DrMostafaPreviousBTN.Text = "Previous";
-            this.DrMostafaPreviousBTN.UseVisualStyleBackColor = true;
             // 
             // TestVideoTabPage
             // 
@@ -784,7 +753,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.DrMostafaPicBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DrMostafaPicBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DrMostafaPicBox4)).EndInit();
-            this.tableLayoutPanel2.ResumeLayout(false);
             this.TestVideoTabPage.ResumeLayout(false);
             this.splitContainer4.Panel1.ResumeLayout(false);
             this.splitContainer4.Panel2.ResumeLayout(false);
@@ -834,7 +802,6 @@
         private System.Windows.Forms.Button PlayBTN;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button DrMostafaPreviousBTN;
         private System.Windows.Forms.Button DrMostafaNextBTN;
         private System.Windows.Forms.PictureBox DrMostafaPicBox1;
         private System.Windows.Forms.PictureBox DrMostafaPicBox6;
@@ -853,7 +820,6 @@
         private System.Windows.Forms.Button CutObjectBTN;
         private System.Windows.Forms.SplitContainer splitContainer3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.SplitContainer splitContainer4;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
     }
