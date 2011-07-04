@@ -64,7 +64,7 @@ namespace VeditorGP
             #endregion   Bitmap NewPic = null;
 
             // warping 
-             CvInvoke.cvWarpPerspective(modelImage, WarpedFrame, homography, flags, new MCvScalar(0));
+            CvInvoke.cvWarpPerspective(modelImage, WarpedFrame, homography, flags, new MCvScalar(0));
             return WarpedFrame;
         }
     }

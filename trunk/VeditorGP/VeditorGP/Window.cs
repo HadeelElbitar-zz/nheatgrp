@@ -130,7 +130,7 @@ namespace VeditorGP
             //Nw = "Window Binary Mask " + Counter.ToString() + ".bmp";
             //Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\" + Nw;
             //WindowBinaryMask.BmpImage.Save(Pw, ImageFormat.Bmp);
-            //Counter++;
+            ////Counter++;
             //Nw = "Window Contour " + Counter.ToString() + ".bmp";
             //Counter++;
             //Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\" + Nw;
@@ -224,7 +224,6 @@ namespace VeditorGP
         void CalculateInitialShapeConfidence(int height, int width, double SigmaCSquare)
         {
             for (int i = 0; i < height; i++)
-            {
                 for (int j = 0; j < width; j++)
                 {
                     double Distance = double.MaxValue;
@@ -236,15 +235,12 @@ namespace VeditorGP
                     }
                     double NegativeDistanceSquare = (-1 * Math.Pow(Distance, 2));
                     ShapeConfidence[i, j] = 1 - Math.Exp(NegativeDistanceSquare / Math.Pow(SigmaS, 2));
-                    //WeightingFunction[i, j] = Math.Exp(NegativeDistanceSquare / SigmaCSquare);
                 }
-            }
         }
         void CalculateShapeConfidence(int height, int width, double SigmaCSquare)
         {
             double FGThreshold = 0.75, BGThreshold = 0.25;
             for (int i = 0; i < height; i++)
-            {
                 for (int j = 0; j < width; j++)
                 {
                     double Distance = double.MaxValue;
@@ -259,7 +255,6 @@ namespace VeditorGP
                     if (ShapeConfidence[i, j] > FGThreshold) WindowClassifier.ForegroundPoints.Add(new Point(i, j));
                     else if (ShapeConfidence[i, j] < BGThreshold) WindowClassifier.BackgroundPoints.Add(new Point(i, j));
                 }
-            }
         }
         void CalculateColorConfidence(int height, int width)
         {
@@ -406,7 +401,7 @@ namespace VeditorGP
             #endregion
 
             #region Test Saving Window Frames
-            //string Nw = "Window Frame " + Counter.ToString() + ".bmp";
+            //string Nw = "Propagated Window Frame " + Counter.ToString() + ".bmp";
             //Counter++;
             //string Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\" + Nw;
             //WindowFrame.BmpImage.Save(Pw, ImageFormat.Bmp);
@@ -442,7 +437,7 @@ namespace VeditorGP
             //for (int i = 0; i < height; i++)
             //    for (int j = 0; j < width; j++)
             //        NewImage.SetPixel(j, i, Color.FromArgb(TempClassify[i, j], TempClassify[i, j], TempClassify[i, j]));
-            //string Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Integrated Models Classification" + IntegrationCounter + ".bmp";
+            //string Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Integrated Models Classification " + IntegrationCounter + ".bmp";
             //IntegrationCounter++;
             //NewImage.Save(Pw, ImageFormat.Bmp);
             #endregion

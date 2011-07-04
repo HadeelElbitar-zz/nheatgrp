@@ -135,7 +135,7 @@ namespace VeditorGP
                 //    //index = i;
                 //    i--;
                 //}
-                if (Math.Floor(Distance) >= 10)
+                if (Math.Floor(Distance) >= 20)
                 {
                     InitialFrame.FrameWindows.Add(new Window(WindowWidth, WindowHeight, InitialFrame, InitialSegmentationBinaryFrame, new Point(Upper[i].X, Upper[i].Y), InitialContourFrame));
                     index = i;
@@ -156,7 +156,7 @@ namespace VeditorGP
                 //      i++;
                 //    //index = i;
                 //}
-                if (Math.Floor(Distance) >= 10)
+                if (Math.Floor(Distance) >= 20)
                 {
                     InitialFrame.FrameWindows.Add(new Window(WindowWidth, WindowHeight, InitialFrame, InitialSegmentationBinaryFrame, new Point(Lower[i].X, Lower[i].Y), InitialContourFrame));
                     index = i;
@@ -215,31 +215,36 @@ namespace VeditorGP
         }
         void WarpWindows()
         {
-            //hena na2es el averging
             CurrentFrame.FrameWindows = new List<Window>();
-            int Iindex=0, Jindex=0;
+            int Iindex = 0, Jindex = 0, Counter = 0;
             foreach (Window item in PreviousFrame.FrameWindows)
             {
-                if ((int)item.Center_X >= CurrentFrame.width && (int)item.Center_Y >= CurrentFrame.height)
-                {
-                    Iindex = (int)(float.Parse(FlowX.Data[CurrentFrame.height - 1, CurrentFrame.width - 1, 0].ToString()));
-                    Jindex = (int)(float.Parse(FlowY.Data[CurrentFrame.height - 1, CurrentFrame.width - 1, 0].ToString()));
-                }
-                else if ((int)item.Center_Y >= CurrentFrame.height)
-                {
-                    Iindex = (int)(float.Parse(FlowX.Data[CurrentFrame.height - 1, (int)item.Center_X, 0].ToString()));
-                    Jindex = (int)(float.Parse(FlowY.Data[CurrentFrame.height - 1, (int)item.Center_X, 0].ToString()));
-                }
-                else if ((int)item.Center_X >= CurrentFrame.width)
-                {
-                    Jindex = (int)(float.Parse(FlowY.Data[(int)item.Center_Y, CurrentFrame.width - 1, 0].ToString()));
-                    Iindex = (int)(float.Parse(FlowX.Data[(int)item.Center_Y, CurrentFrame.width - 1, 0].ToString()));
-                }
-                else if ((int)item.Center_X < CurrentFrame.width && (int)item.Center_Y < CurrentFrame.height)
-                {
-                    Iindex = (int)(float.Parse(FlowX.Data[(int)item.Center_Y, (int)item.Center_X, 0].ToString()));
-                    Jindex = (int)(float.Parse(FlowY.Data[(int)item.Center_Y, (int)item.Center_X, 0].ToString()));
-                }
+                float TempX = 0, TempY = 0;
+                for (int i = -1; i < 2; i++)
+                    for (int j = -1; j < 2; j++)
+                    {
+                        Iindex = (int)item.Center_Y + i;
+                        Jindex = (int)item.Center_X + j;
+                        if ((int)Iindex >= CurrentFrame.width && (int)Jindex >= CurrentFrame.height)
+                        {
+                            Iindex = CurrentFrame.height - 1;
+                            Jindex = CurrentFrame.width - 1;
+                        }
+                        else if ((int)Iindex >= CurrentFrame.height)
+                            Iindex = CurrentFrame.height - 1;
+                        else if ((int)Jindex >= CurrentFrame.width)
+                            Jindex = CurrentFrame.width - 1;
+                        if (item.ClassificationMask[i + 1, j + 1] == 255)
+                        {
+                            TempX += float.Parse(FlowX.Data[Iindex, Jindex, 0].ToString());
+                            TempY += float.Parse(FlowY.Data[Iindex, Jindex, 0].ToString());
+                            Counter++;
+                        }
+                    }
+                TempX /= Counter;
+                TempY /= Counter;
+                Iindex = (int)TempX;
+                Jindex = (int)TempY;
                 if (Iindex >= CurrentFrame.height) Iindex = CurrentFrame.height - 1;
                 if (Iindex < 0) Iindex = 0;
                 if (Jindex >= CurrentFrame.width) Jindex = CurrentFrame.width - 1;
@@ -302,6 +307,7 @@ namespace VeditorGP
         void GenerateCutOutFrame(Frame OldFrame)
         {
             #region Initializations
+            string Pw;
             Frame NewFrame = new Frame();
             NewFrame.width = OldFrame.width;
             NewFrame.height = OldFrame.height;
@@ -337,23 +343,24 @@ namespace VeditorGP
             }
             #endregion
 
-            #region Fill Binary Mask
+            #region Save Binary Mask and Fill it
+            //Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Binary Windows Integration " + CutOutFrameCount + ".bmp";
+            //NewImageBinary.Save(Pw, ImageFormat.Bmp);
             FloodFiller flood = new FloodFiller();
-            //flood.FloodFill(ref NewImageBinary, new Point((int)InObejctPoint.X, (int)InObejctPoint.Y));
+            flood.FloodFill(ref NewImageBinary, new Point((int)InObejctPoint.X, (int)InObejctPoint.Y));
             #endregion
 
             #region Anding
-            //for (int i = 0; i < NewFrame.height; i++)
-            //    for (int j = 0; j < NewFrame.width; j++)
-            //        NewImage.SetPixel(j, i, Color.FromArgb(OldFrame.byteRedPixels[i, j] & (byte)(NewImageBinary.GetPixel(j, i).R),
-            //            OldFrame.byteGreenPixels[i, j] & (byte)(NewImageBinary.GetPixel(j, i).G),
-            //            OldFrame.byteBluePixels[i, j] & (byte)(NewImageBinary.GetPixel(j, i).B)));
+            for (int i = 0; i < NewFrame.height; i++)
+                for (int j = 0; j < NewFrame.width; j++)
+                    NewImage.SetPixel(j, i, Color.FromArgb(OldFrame.byteRedPixels[i, j] & (byte)(NewImageBinary.GetPixel(j, i).R),
+                        OldFrame.byteGreenPixels[i, j] & (byte)(NewImageBinary.GetPixel(j, i).G),
+                        OldFrame.byteBluePixels[i, j] & (byte)(NewImageBinary.GetPixel(j, i).B)));
             #endregion
 
             #region Test Saving Boundary Image
             NewImage.SetPixel((int)InObejctPoint.Y, (int)InObejctPoint.X, Color.HotPink);
-            string Pw;
-            Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Colored Windows Integration " + CutOutFrameCount + ".bmp";
+            Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Filled Windows Integration " + CutOutFrameCount + ".bmp";
             NewImage.Save(Pw, ImageFormat.Bmp);
             StreamWriter SWrite = new StreamWriter(NewVideoFilePath, true);
             SWrite.WriteLine(Pw);
