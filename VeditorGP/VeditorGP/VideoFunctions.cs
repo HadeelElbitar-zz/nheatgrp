@@ -217,6 +217,7 @@ namespace VeditorGP
         {
             CurrentFrame.FrameWindows = new List<Window>();
             int Iindex = 0, Jindex = 0, Counter = 0;
+            #region Update Window Centers
             foreach (Window item in PreviousFrame.FrameWindows)
             {
                 float TempX = 0, TempY = 0;
@@ -250,9 +251,34 @@ namespace VeditorGP
                 if (Jindex >= CurrentFrame.width) Jindex = CurrentFrame.width - 1;
                 if (Jindex < 0) Jindex = 0;
                 CurrentFrame.FrameWindows.Add(new Window(new PointF((float)item.Center_X + Iindex, (float)item.Center_Y + Jindex), CurrentFrame, item, FlowX, FlowY));
-            }
-            InObejctPoint.X = InObejctPoint.X + (float.Parse(FlowX.Data[(int)InObejctPoint.Y, (int)InObejctPoint.X, 0].ToString()));
-            InObejctPoint.Y = InObejctPoint.Y + (float.Parse(FlowX.Data[(int)InObejctPoint.Y, (int)InObejctPoint.X, 0].ToString()));
+            } 
+            #endregion
+            float Temp1 = 0, Temp2 = 0;
+            for (int i = -1; i < 2; i++)
+                for (int j = -1; j < 2; j++)
+                {
+                    Iindex = (int)InObejctPoint.Y + i;
+                    Jindex = (int)InObejctPoint.X + j;
+                    if ((int)Iindex >= CurrentFrame.width && (int)Jindex >= CurrentFrame.height)
+                    {
+                        Iindex = CurrentFrame.height - 1;
+                        Jindex = CurrentFrame.width - 1;
+                    }
+                    else if ((int)Iindex >= CurrentFrame.height)
+                        Iindex = CurrentFrame.height - 1;
+                    else if ((int)Jindex >= CurrentFrame.width)
+                        Jindex = CurrentFrame.width - 1;
+                    if (CurrentFrame.byteRedPixels[i + 1, j + 1] == 255 || CurrentFrame.byteBluePixels[i + 1, j + 1] == 255 || CurrentFrame.byteGreenPixels[i + 1, j + 1] == 255)
+                    {
+                        Temp1 += float.Parse(FlowX.Data[Iindex, Jindex, 0].ToString());
+                        Temp2 += float.Parse(FlowY.Data[Iindex, Jindex, 0].ToString());
+                        Counter++;
+                    }
+                }
+            Temp1 /= Counter;
+            Temp2 /= Counter;
+            InObejctPoint.X = InObejctPoint.X + (float.Parse(FlowX.Data[(int)Temp1, (int)Temp2, 0].ToString()));
+            InObejctPoint.Y = InObejctPoint.Y + (float.Parse(FlowX.Data[(int)Temp1, (int)Temp2, 0].ToString()));
         }
         void GetSurfPoints()
         {
@@ -375,7 +401,7 @@ namespace VeditorGP
         #region Show Windows
         public void ShowWin(PictureBox FrameBox)
         {
-            Pen myPen = new System.Drawing.Pen(System.Drawing.Color.RoyalBlue);
+            Pen myPen = new System.Drawing.Pen(System.Drawing.Color.Yellow);
             Graphics formGraphics = FrameBox.CreateGraphics();
             foreach (Window w in CurrentFrame.FrameWindows)
             {
