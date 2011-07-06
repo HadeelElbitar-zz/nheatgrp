@@ -94,7 +94,7 @@ namespace VeditorGP
         private void CutObjectBTN_Click(object sender, EventArgs e)
         {
             CutObject();
-            LoadNewVideo();
+          //  LoadNewVideo();
             //MessageBox.Show("Finished!");
         }
         void CutObject()
@@ -110,8 +110,8 @@ namespace VeditorGP
                 VideoFunctionsObject.SetInitialWindowsArroundContour();
                 if (ShowWindowCheckBox.Checked)
                     VideoFunctionsObject.ShowWin(FrameBox);
-                VideoFunctionsObject.TrainClassifiers();
-                VideoFunctionsObject.PropagateFrame(ShowWindowCheckBox.Checked, FrameBox);
+               // VideoFunctionsObject.TrainClassifiers();
+               // VideoFunctionsObject.PropagateFrame(ShowWindowCheckBox.Checked, FrameBox);
             }
             catch { }
         }

@@ -253,32 +253,34 @@ namespace VeditorGP
                 CurrentFrame.FrameWindows.Add(new Window(new PointF((float)item.Center_X + Iindex, (float)item.Center_Y + Jindex), CurrentFrame, item, FlowX, FlowY));
             } 
             #endregion
-            float Temp1 = 0, Temp2 = 0;
-            for (int i = -1; i < 2; i++)
-                for (int j = -1; j < 2; j++)
-                {
-                    Iindex = (int)InObejctPoint.Y + i;
-                    Jindex = (int)InObejctPoint.X + j;
-                    if ((int)Iindex >= CurrentFrame.width && (int)Jindex >= CurrentFrame.height)
-                    {
-                        Iindex = CurrentFrame.height - 1;
-                        Jindex = CurrentFrame.width - 1;
-                    }
-                    else if ((int)Iindex >= CurrentFrame.height)
-                        Iindex = CurrentFrame.height - 1;
-                    else if ((int)Jindex >= CurrentFrame.width)
-                        Jindex = CurrentFrame.width - 1;
-                    if (CurrentFrame.byteRedPixels[i + 1, j + 1] == 255 || CurrentFrame.byteBluePixels[i + 1, j + 1] == 255 || CurrentFrame.byteGreenPixels[i + 1, j + 1] == 255)
-                    {
-                        Temp1 += float.Parse(FlowX.Data[Iindex, Jindex, 0].ToString());
-                        Temp2 += float.Parse(FlowY.Data[Iindex, Jindex, 0].ToString());
-                        Counter++;
-                    }
-                }
-            Temp1 /= Counter;
-            Temp2 /= Counter;
-            InObejctPoint.X = InObejctPoint.X + (float.Parse(FlowX.Data[(int)Temp1, (int)Temp2, 0].ToString()));
-            InObejctPoint.Y = InObejctPoint.Y + (float.Parse(FlowX.Data[(int)Temp1, (int)Temp2, 0].ToString()));
+            #region Update Filling Point
+            //float Temp1 = 0, Temp2 = 0;
+            //for (int i = -1; i < 2; i++)
+            //    for (int j = -1; j < 2; j++)
+            //    {
+            //        Iindex = (int)InObejctPoint.Y + i;
+            //        Jindex = (int)InObejctPoint.X + j;
+            //        if ((int)Iindex >= CurrentFrame.width && (int)Jindex >= CurrentFrame.height)
+            //        {
+            //            Iindex = CurrentFrame.height - 1;
+            //            Jindex = CurrentFrame.width - 1;
+            //        }
+            //        else if ((int)Iindex >= CurrentFrame.height)
+            //            Iindex = CurrentFrame.height - 1;
+            //        else if ((int)Jindex >= CurrentFrame.width)
+            //            Jindex = CurrentFrame.width - 1;
+            //        if (CurrentFrame.byteRedPixels[i + 1, j + 1] == 255 || CurrentFrame.byteBluePixels[i + 1, j + 1] == 255 || CurrentFrame.byteGreenPixels[i + 1, j + 1] == 255)
+            //        {
+            //            Temp1 += float.Parse(FlowX.Data[Iindex, Jindex, 0].ToString());
+            //            Temp2 += float.Parse(FlowY.Data[Iindex, Jindex, 0].ToString());
+            //            Counter++;
+            //        }
+            //    }
+            //Temp1 /= Counter;
+            //Temp2 /= Counter;
+            //InObejctPoint.X = InObejctPoint.X + (float.Parse(FlowX.Data[(int)Temp1, (int)Temp2, 0].ToString()));
+            //InObejctPoint.Y = InObejctPoint.Y + (float.Parse(FlowX.Data[(int)Temp1, (int)Temp2, 0].ToString())); 
+            #endregion
         }
         void GetSurfPoints()
         {
@@ -373,7 +375,7 @@ namespace VeditorGP
             //Pw = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Binary Windows Integration " + CutOutFrameCount + ".bmp";
             //NewImageBinary.Save(Pw, ImageFormat.Bmp);
             FloodFiller flood = new FloodFiller();
-            flood.FloodFill(ref NewImageBinary, new Point((int)InObejctPoint.X, (int)InObejctPoint.Y));
+            flood.FloodFill(ref NewImageBinary, new Point(118, 120));
             #endregion
 
             #region Anding
